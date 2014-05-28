@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using System.Windows.Media;
-using Core;
 using NCubeSolver.Plugins.Display.OpenGL.Animation;
 using NCubeSolver.Plugins.Display.OpenGL.Models.Primitives;
+using NCubeSolvers.Core;
 using OpenTK;
 
 namespace NCubeSolver.Plugins.Display.OpenGL.Models

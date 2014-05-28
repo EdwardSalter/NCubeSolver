@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Core;
 using NCubeSolver.Core;
 using NCubeSolver.Core.UnitTestHelpers;
 using NCubeSolver.Plugins.Solvers.Size3;
+using NCubeSolvers.Core;
 using NUnit.Framework;
 
 namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3

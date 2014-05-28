@@ -1,6 +1,6 @@
-﻿using Core.Extensions;
+﻿using NCubeSolvers.Core.Extensions;
 
-namespace Core
+namespace NCubeSolvers.Core
 {
     public static class ArrayRotater
     {

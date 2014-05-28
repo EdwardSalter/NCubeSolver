@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Core;
-using Core.Plugins;
+using NCubeSolvers.Core;
+using NCubeSolvers.Core.Plugins;
 
 namespace NCubeSolver.Plugins.Solvers
 {

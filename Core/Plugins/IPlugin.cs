@@ -1,4 +1,4 @@
-namespace Core.Plugins
+namespace NCubeSolvers.Core.Plugins
 {
     public interface IPlugin
     {

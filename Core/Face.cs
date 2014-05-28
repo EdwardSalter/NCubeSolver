@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using Core.Extensions;
+using NCubeSolvers.Core.Extensions;
 
-namespace Core
+namespace NCubeSolvers.Core
 {
     public class Face<T>
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Core;
+using NCubeSolvers.Core;
 using NUnit.Framework;
 
 namespace NCubeSolver.Core.UnitTests

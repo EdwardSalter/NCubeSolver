@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Core
+namespace NCubeSolvers.Core
 {
     public interface IRotatable
     {

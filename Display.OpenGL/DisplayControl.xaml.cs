@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using Core;
-using Core.Extensions;
-using Core.Plugins;
+using NCubeSolvers.Core;
+using NCubeSolvers.Core.Extensions;
+using NCubeSolvers.Core.Plugins;
 using OpenTK;
 using SharpGL.Enumerations;
 using SharpGL.SceneGraph;

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Core;
-using Core.Extensions;
 using NCubeSolver.Plugins.Display.OpenGL.Models;
+using NCubeSolvers.Core;
+using NCubeSolvers.Core.Extensions;
 using OpenTK;
 
 namespace NCubeSolver.Plugins.Display.OpenGL.Animation

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Core;
+using NCubeSolvers.Core;
 
 namespace NCubeSolver.Plugins.Solvers
 {

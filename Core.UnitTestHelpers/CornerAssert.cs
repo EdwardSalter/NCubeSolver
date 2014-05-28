@@ -1,4 +1,4 @@
-using Core;
+using NCubeSolvers.Core;
 using NUnit.Framework;
 
 namespace NCubeSolver.Core.UnitTestHelpers

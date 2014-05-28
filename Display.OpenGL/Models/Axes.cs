@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
-using Core.Extensions;
 using NCubeSolver.Plugins.Display.OpenGL.Models.Primitives;
+using NCubeSolvers.Core.Extensions;
 using OpenTK;
 using SharpGL.VertexBuffers;
 

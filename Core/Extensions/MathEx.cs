@@ -1,6 +1,6 @@
 using System;
 
-namespace Core.Extensions
+namespace NCubeSolvers.Core.Extensions
 {
     public class MathEx
     {

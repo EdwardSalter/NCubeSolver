@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Core;
-using Core.Plugins;
+using NCubeSolvers.Core;
+using NCubeSolvers.Core.Plugins;
 
 namespace NCubeSolver.Plugins.ConfigurationGenerators
 {

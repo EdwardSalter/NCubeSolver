@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Media;
-using Core.Extensions;
+using NCubeSolvers.Core.Extensions;
 using SharpGL.VertexBuffers;
 
 namespace NCubeSolver.Plugins.Display.OpenGL.Models.Primitives

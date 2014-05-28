@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Core;
 using NCubeSolver.Core;
 using NCubeSolver.Plugins.ConfigurationGenerators;
+using NCubeSolvers.Core;
 
 namespace NCubeSolver.Plugins.Solvers.IntegrationTests
 {

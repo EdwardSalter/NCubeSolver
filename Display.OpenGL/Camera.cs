@@ -1,4 +1,4 @@
-﻿using Core.Extensions;
+﻿using NCubeSolvers.Core.Extensions;
 using OpenTK;
 
 namespace NCubeSolver.Plugins.Display.OpenGL

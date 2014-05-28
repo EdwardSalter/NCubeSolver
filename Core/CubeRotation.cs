@@ -1,4 +1,4 @@
-﻿namespace Core
+﻿namespace NCubeSolvers.Core
 {
     public class CubeRotation : RotationBase
     {

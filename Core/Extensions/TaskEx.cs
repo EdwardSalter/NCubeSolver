@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Core.Extensions
+namespace NCubeSolvers.Core.Extensions
 {
     public static class TaskEx
     {

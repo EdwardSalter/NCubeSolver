@@ -4,7 +4,7 @@ using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
 using System.Linq;
-using Core.Plugins;
+using NCubeSolvers.Core.Plugins;
 
 namespace NCubeSolver.Runner
 {

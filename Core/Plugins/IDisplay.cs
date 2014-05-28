@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 
-namespace Core.Plugins
+namespace NCubeSolvers.Core.Plugins
 {
     [InheritedExport]
     public interface IDisplay : IRotatable, IPlugin

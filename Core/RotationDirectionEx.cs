@@ -1,4 +1,4 @@
-﻿namespace Core
+﻿namespace NCubeSolvers.Core
 {
     public static class RotationDirectionEx
     {

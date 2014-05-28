@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Core;
+using NCubeSolvers.Core;
 
 namespace NCubeSolver.Plugins.Solvers.Size3
 {

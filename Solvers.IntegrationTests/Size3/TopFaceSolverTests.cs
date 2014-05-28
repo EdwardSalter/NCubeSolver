@@ -1,7 +1,7 @@
-﻿using Core;
-using NCubeSolver.Core;
+﻿using NCubeSolver.Core;
 using NCubeSolver.Core.UnitTestHelpers;
 using NCubeSolver.Plugins.Solvers.Size3;
+using NCubeSolvers.Core;
 using NUnit.Framework;
 
 namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size3

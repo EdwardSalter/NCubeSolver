@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
 using System.Linq;
-using Core;
-using Core.Plugins;
 using NCubeSolver.Runner.Properties;
+using NCubeSolvers.Core;
+using NCubeSolvers.Core.Plugins;
 
 namespace NCubeSolver.Runner
 {

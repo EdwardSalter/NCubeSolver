@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using Core;
 using NCubeSolver.Plugins.Display.OpenGL.Animation;
 using NCubeSolver.Plugins.Display.OpenGL.Models;
+using NCubeSolvers.Core;
 
 namespace NCubeSolver.Plugins.Display.OpenGL
 {

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core;
 using NCubeSolver.Core;
+using NCubeSolvers.Core;
 using NUnit.Framework;
 
 namespace NCubeSolver.Plugins.Solvers.IntegrationTests

@@ -1,6 +1,6 @@
 using System;
 
-namespace Core
+namespace NCubeSolvers.Core
 {
     public class InvalidCubeConfigurationException : Exception
     {

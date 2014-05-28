@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Core.Plugins;
+using NCubeSolvers.Core.Plugins;
 
 namespace NCubeSolver.Plugins.Celebrators
 {

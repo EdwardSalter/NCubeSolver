@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 
-namespace Core.Plugins
+namespace NCubeSolvers.Core.Plugins
 {
     [InheritedExport]
     public interface ICelebrator : IPlugin

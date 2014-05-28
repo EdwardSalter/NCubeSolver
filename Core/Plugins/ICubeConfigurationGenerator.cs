@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 
-namespace Core.Plugins
+namespace NCubeSolvers.Core.Plugins
 {
     [InheritedExport]
     public interface ICubeConfigurationGenerator : IPlugin

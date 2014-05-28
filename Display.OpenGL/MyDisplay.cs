@@ -2,8 +2,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Threading;
-using Core;
-using Core.Plugins;
+using NCubeSolvers.Core;
+using NCubeSolvers.Core.Plugins;
 
 namespace NCubeSolver.Plugins.Display.OpenGL
 {

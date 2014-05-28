@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Core.Extensions;
+using NCubeSolvers.Core.Extensions;
 
-namespace Core
+namespace NCubeSolvers.Core
 {
     public class CubeConfiguration<T> : IRotatable
     {
