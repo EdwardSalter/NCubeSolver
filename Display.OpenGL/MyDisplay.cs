@@ -5,7 +5,7 @@ using System.Windows.Threading;
 using Core;
 using Core.Plugins;
 
-namespace Display.OpenGL
+namespace NCubeSolver.Plugins.Display.OpenGL
 {
     class MyDisplay : IDisplay
     {

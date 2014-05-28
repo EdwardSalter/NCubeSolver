@@ -1,6 +1,7 @@
-﻿using NUnit.Framework;
+﻿using Core;
+using NUnit.Framework;
 
-namespace Core.UnitTests
+namespace NCubeSolver.Core.UnitTests
 {
     [TestFixture]
     public class ArrayRotaterTests

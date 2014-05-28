@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
-using ConfigurationGenerators;
 using Core;
+using NCubeSolver.Core;
+using NCubeSolver.Plugins.ConfigurationGenerators;
 
-namespace Solvers.IntegrationTests
+namespace NCubeSolver.Plugins.Solvers.IntegrationTests
 {
     public class ConfigurationGenerator
     {

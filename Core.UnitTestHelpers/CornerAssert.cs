@@ -1,6 +1,7 @@
+using Core;
 using NUnit.Framework;
 
-namespace Core.UnitTestHelpers
+namespace NCubeSolver.Core.UnitTestHelpers
 {
     public static class CornerAssert
     {

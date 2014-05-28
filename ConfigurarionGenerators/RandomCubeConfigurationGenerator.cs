@@ -2,7 +2,7 @@
 using Core;
 using Core.Plugins;
 
-namespace ConfigurationGenerators
+namespace NCubeSolver.Plugins.ConfigurationGenerators
 {
     public class RandomCubeConfigurationGenerator : ICubeConfigurationGenerator
     {

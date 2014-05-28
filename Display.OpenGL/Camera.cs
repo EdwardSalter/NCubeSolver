@@ -1,8 +1,7 @@
-﻿using Core;
-using Core.Extensions;
+﻿using Core.Extensions;
 using OpenTK;
 
-namespace Display.OpenGL
+namespace NCubeSolver.Plugins.Display.OpenGL
 {
     class Camera
     {

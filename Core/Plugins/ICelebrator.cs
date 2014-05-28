@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Core.Plugins
 {
-    [InheritedExport(typeof(ICelebrator))]
+    [InheritedExport]
     public interface ICelebrator : IPlugin
     {
         Task Celebrate();

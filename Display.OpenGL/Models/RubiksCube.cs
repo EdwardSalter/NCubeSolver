@@ -2,11 +2,11 @@
 using System.Text;
 using System.Windows.Media;
 using Core;
-using Display.OpenGL.Animation;
-using Display.OpenGL.Models.Primitives;
+using NCubeSolver.Plugins.Display.OpenGL.Animation;
+using NCubeSolver.Plugins.Display.OpenGL.Models.Primitives;
 using OpenTK;
 
-namespace Display.OpenGL.Models
+namespace NCubeSolver.Plugins.Display.OpenGL.Models
 {
     internal class RubiksCube : IModel
     {

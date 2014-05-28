@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Core;
 using Core.Plugins;
 
-namespace Solvers.Size2
+namespace NCubeSolver.Plugins.Solvers.Size2
 {
     public class Solver : ISolver
     {

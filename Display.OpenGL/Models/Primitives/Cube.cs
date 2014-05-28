@@ -5,7 +5,7 @@ using System.Windows.Media;
 using Core;
 using SharpGL.VertexBuffers;
 
-namespace Display.OpenGL.Models.Primitives
+namespace NCubeSolver.Plugins.Display.OpenGL.Models.Primitives
 {
     class Cube : IModel
     {

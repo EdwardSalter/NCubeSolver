@@ -2,11 +2,11 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using Celebrators;
-using ConfigurationGenerators;
 using Core;
+using NCubeSolver.Plugins.Celebrators;
+using NCubeSolver.Plugins.ConfigurationGenerators;
+using NCubeSolver.Plugins.Solvers.Size3;
 using NCubeSolver.Screensaver.Properties;
-using Solvers.Size3;
 
 namespace NCubeSolver.Screensaver
 {

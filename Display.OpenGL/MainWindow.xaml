@@ -1,7 +1,7 @@
-﻿<Window x:Class="Display.OpenGL.MainWindow"
+﻿<Window x:Class="NCubeSolver.Plugins.Display.OpenGL.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:openGl="clr-namespace:Display.OpenGL"
+        xmlns:openGl="clr-namespace:NCubeSolver.Plugins.Display.OpenGL"
         Title="MainWindow" Height="600" Width="800"
         WindowStartupLocation="CenterScreen" Icon="Icon.ico">
     <Grid>

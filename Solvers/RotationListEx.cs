@@ -2,7 +2,7 @@
 using System.Linq;
 using Core;
 
-namespace Solvers
+namespace NCubeSolver.Plugins.Solvers
 {
     static class RotationListEx
     {

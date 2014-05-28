@@ -1,10 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Core;
-using Display.OpenGL.Animation;
-using Display.OpenGL.Models;
-using GL = SharpGL.OpenGL;
+using NCubeSolver.Plugins.Display.OpenGL.Animation;
+using NCubeSolver.Plugins.Display.OpenGL.Models;
 
-namespace Display.OpenGL
+namespace NCubeSolver.Plugins.Display.OpenGL
 {
     public class Scene : IModel
     {
@@ -31,14 +30,14 @@ namespace Display.OpenGL
             ShowAxes = true;
         }
 
-        public void GenerateGeometry(GL gl)
+        public void GenerateGeometry(SharpGL.OpenGL gl)
         {
             m_axes.GenerateGeometry(gl);
             RubiksCube.GenerateGeometry(gl);
             m_cubeAnimator.Setup();
         }
 
-        public void Render(GL gl, ShaderWrapper shader)
+        public void Render(SharpGL.OpenGL gl, ShaderWrapper shader)
         {
             if (ShowAxes)
                 m_axes.Render(gl, shader);
@@ -57,7 +56,7 @@ namespace Display.OpenGL
             m_cubeAnimator.HighlightAnimating = !m_cubeAnimator.HighlightAnimating;
         }
 
-        public void RegenerateRubiksCube(GL gl)
+        public void RegenerateRubiksCube(SharpGL.OpenGL gl)
         {
             if (!m_regenerateRubiksCube) return;
             m_regenerateRubiksCube = false;

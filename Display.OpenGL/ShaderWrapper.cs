@@ -1,15 +1,15 @@
-﻿using OpenTK;
+﻿using NCubeSolver.Plugins.Display.OpenGL.Extensions;
+using OpenTK;
 using SharpGL.Shaders;
-using GL = SharpGL.OpenGL;
 
-namespace Display.OpenGL
+namespace NCubeSolver.Plugins.Display.OpenGL
 {
     public class ShaderWrapper
     {
         private readonly ShaderProgram m_shaderProgram;
-        private readonly GL m_gl;
+        private readonly SharpGL.OpenGL m_gl;
 
-        public ShaderWrapper(ShaderProgram shaderProgram, GL gl)
+        public ShaderWrapper(ShaderProgram shaderProgram, SharpGL.OpenGL gl)
         {
             m_gl = gl;
             m_shaderProgram = shaderProgram;

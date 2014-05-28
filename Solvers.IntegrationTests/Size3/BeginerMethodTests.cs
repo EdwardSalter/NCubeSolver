@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Linq;
 using Core;
-using Core.UnitTestHelpers;
+using NCubeSolver.Core;
+using NCubeSolver.Core.UnitTestHelpers;
+using NCubeSolver.Plugins.Solvers.Size3;
 using NUnit.Framework;
-using Solvers.Size3;
 
-namespace Solvers.IntegrationTests.Size3
+namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size3
 {
     [TestFixture]
     [Category("FullSolve")]

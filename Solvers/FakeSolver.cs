@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Core;
 using Core.Plugins;
 
-namespace Solvers
+namespace NCubeSolver.Plugins.Solvers
 {
     public class FakeSolver : ISolver
     {

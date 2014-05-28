@@ -1,6 +1,6 @@
 ﻿using OpenTK;
 
-namespace Display.OpenGL.Extensions
+namespace NCubeSolver.Plugins.Display.OpenGL.Extensions
 {
     static class QuaternionEx
     {

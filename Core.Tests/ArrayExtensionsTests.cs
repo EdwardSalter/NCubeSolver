@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
+using Core;
 using NUnit.Framework;
 
-namespace Core.UnitTests
+namespace NCubeSolver.Core.UnitTests
 {
     [TestFixture]
     public class ArrayExtensionsTests

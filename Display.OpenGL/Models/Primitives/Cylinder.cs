@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Media;
-using Core;
 using Core.Extensions;
 using SharpGL.VertexBuffers;
 
-namespace Display.OpenGL.Models.Primitives
+namespace NCubeSolver.Plugins.Display.OpenGL.Models.Primitives
 {
     class Cylinder : IModel
     {

@@ -1,7 +1,7 @@
-﻿using Display.OpenGL.Models;
+﻿using NCubeSolver.Plugins.Display.OpenGL.Models;
 using OpenTK;
 
-namespace Display.OpenGL.Animation
+namespace NCubeSolver.Plugins.Display.OpenGL.Animation
 {
     class CubieAnimator
     {

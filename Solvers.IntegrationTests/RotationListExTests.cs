@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Core;
+using NCubeSolver.Core;
 using NUnit.Framework;
 
-namespace Solvers.IntegrationTests
+namespace NCubeSolver.Plugins.Solvers.IntegrationTests
 {
     [TestFixture]
     public class RotationListExTests

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Core;
 using Core.Extensions;
-using Display.OpenGL.Models;
+using NCubeSolver.Plugins.Display.OpenGL.Models;
 using OpenTK;
 
-namespace Display.OpenGL.Animation
+namespace NCubeSolver.Plugins.Display.OpenGL.Animation
 {
     class RubiksCubeAnimator : IRotatable
     {

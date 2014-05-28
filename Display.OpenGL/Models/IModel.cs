@@ -1,4 +1,4 @@
-namespace Display.OpenGL.Models
+namespace NCubeSolver.Plugins.Display.OpenGL.Models
 {
     internal interface IModel
     {

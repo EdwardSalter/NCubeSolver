@@ -53,12 +53,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Extensions\ConfigurationGenerators.dll.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Extensions\Display.OpenGL.dll.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -74,81 +68,19 @@
     <Content Include="..\Icon.ico">
       <Link>Icon.ico</Link>
     </Content>
-    <Content Include="Extensions\Celebrators.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Extensions\Celebrators.pdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Extensions\ConfigurationGenerators.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Extensions\ConfigurationGenerators.pdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Extensions\Core.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Extensions\Core.pdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Extensions\Display.OpenGL.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Extensions\Display.OpenGL.pdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Extensions\OpenTK.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Extensions\SharpGL.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Extensions\SharpGL.pdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Extensions\SharpGL.SceneGraph.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Extensions\SharpGL.SceneGraph.pdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Extensions\SharpGL.SceneGraph.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Extensions\SharpGL.WPF.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Extensions\SharpGL.WPF.pdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Extensions\SharpGL.WPF.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Extensions\SharpGL.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Extensions\Solvers.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Extensions\Solvers.pdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>sleep 2
-
-REM copy $(SolutionDir)Display.OpenGL\$(OutDir)Display.OpenGL.dll $(ProjectDir)Extensions
-copy $(SolutionDir)Display.OpenGL\$(OutDir)* $(ProjectDir)Extensions
-
-REM copy $(SolutionDir)ConfigurarionGenerators\$(OutDir)ConfigurationGenerators.dll $(ProjectDir)Extensions
-copy $(SolutionDir)ConfigurarionGenerators\$(OutDir)* $(ProjectDir)Extensions
-
-REM copy $(SolutionDir)Solvers\$(OutDir)Solvers.dll $(ProjectDir)Extensions
-copy $(SolutionDir)Solvers\$(OutDir)* $(ProjectDir)Extensions
-
-copy $(SolutionDir)Celebrators\$(OutDir)* $(ProjectDir)Extensions</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>if not exist $(TargetDir)Extensions mkdir $(TargetDir)Extensions
+copy $(SolutionDir)Display.OpenGL\$(OutDir)* $(TargetDir)Extensions
+copy $(SolutionDir)ConfigurarionGenerators\$(OutDir)* $(TargetDir)Extensions
+copy $(SolutionDir)Solvers\$(OutDir)* $(TargetDir)Extensions
+copy $(SolutionDir)Celebrators\$(OutDir)* $(TargetDir)Extensions</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

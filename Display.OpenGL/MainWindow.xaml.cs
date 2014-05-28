@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace Display.OpenGL
+﻿namespace NCubeSolver.Plugins.Display.OpenGL
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

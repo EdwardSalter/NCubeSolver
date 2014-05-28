@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core;
 
-namespace Solvers.Size3
+namespace NCubeSolver.Plugins.Solvers.Size3
 {
     class TopCrossSolver : IPartialSolver
     {

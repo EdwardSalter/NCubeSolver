@@ -1,11 +1,10 @@
 ﻿using System.Windows.Media;
-using Core;
 using Core.Extensions;
-using Display.OpenGL.Models.Primitives;
+using NCubeSolver.Plugins.Display.OpenGL.Models.Primitives;
 using OpenTK;
 using SharpGL.VertexBuffers;
 
-namespace Display.OpenGL.Models
+namespace NCubeSolver.Plugins.Display.OpenGL.Models
 {
     class Axes : IModel
     {

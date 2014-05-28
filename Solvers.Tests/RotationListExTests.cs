@@ -2,9 +2,10 @@
 
 using System.Collections.Generic;
 using Core;
+using NCubeSolver.Core;
 using NUnit.Framework;
 
-namespace Solvers.UnitTests
+namespace NCubeSolver.Plugins.Solvers.UnitTests
 {
     [TestFixture]
     public class RotationListExTests

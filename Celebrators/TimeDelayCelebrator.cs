@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Core.Plugins;
 
-namespace Celebrators
+namespace NCubeSolver.Plugins.Celebrators
 {
     public class TimeDelayCelebrator : ICelebrator
     {

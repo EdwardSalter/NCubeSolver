@@ -1,8 +1,8 @@
-﻿using Display.OpenGL.Extensions;
-using Display.OpenGL.Models.Primitives;
+﻿using NCubeSolver.Plugins.Display.OpenGL.Extensions;
+using NCubeSolver.Plugins.Display.OpenGL.Models.Primitives;
 using OpenTK;
 
-namespace Display.OpenGL.Models
+namespace NCubeSolver.Plugins.Display.OpenGL.Models
 {
     class Cubie
     {

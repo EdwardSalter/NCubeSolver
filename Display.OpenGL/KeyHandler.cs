@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 
-namespace Display.OpenGL
+namespace NCubeSolver.Plugins.Display.OpenGL
 {
     class KeyHandler
     {

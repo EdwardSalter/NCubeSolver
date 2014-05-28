@@ -1,7 +1,8 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Reflection;
 
-namespace Display.OpenGL
+namespace NCubeSolver.Plugins.Display.OpenGL
 {
     public static class ManifestResourceLoader
     {
@@ -14,7 +15,9 @@ namespace Display.OpenGL
         {
             var executingAssembly = Assembly.GetExecutingAssembly();
             var pathToDots = textFileName.Replace("\\", ".");
-            var location = string.Format("{0}.{1}", executingAssembly.GetName().Name, pathToDots);
+
+            var location = executingAssembly.GetManifestResourceNames().First(name => name.EndsWith(pathToDots));
+
 
             using (var stream = executingAssembly.GetManifestResourceStream(location))
             {

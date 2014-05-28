@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using NUnit.Framework;
 
-namespace Solvers.IntegrationTests
+namespace NCubeSolver.Plugins.Solvers.IntegrationTests
 {
     static class TestRunner
     {

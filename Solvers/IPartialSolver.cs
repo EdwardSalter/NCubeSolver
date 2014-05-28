@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Core;
 
-namespace Solvers
+namespace NCubeSolver.Plugins.Solvers
 {
     public interface IPartialSolver
     {

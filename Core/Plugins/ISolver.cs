@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Core.Plugins
 {
-    [InheritedExport(typeof(ISolver))]
+    [InheritedExport]
     public interface ISolver : IPlugin
     {
         Task<IEnumerable<IRotation>> Solve(CubeConfiguration<FaceColour> configuration);

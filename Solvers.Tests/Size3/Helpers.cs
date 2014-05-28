@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using Core;
-using Solvers.Size3;
+using NCubeSolver.Core;
+using NCubeSolver.Plugins.Solvers.Size3;
 
-namespace Solvers.UnitTests.Size3
+namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
 {
     public class Helpers
     {

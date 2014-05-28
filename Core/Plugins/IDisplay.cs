@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Core.Plugins
 {
-    [InheritedExport(typeof(IDisplay))]
+    [InheritedExport]
     public interface IDisplay : IRotatable, IPlugin
     {
         event EventHandler Closed;

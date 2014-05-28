@@ -6,12 +6,11 @@ using Core;
 using Core.Extensions;
 using Core.Plugins;
 using OpenTK;
-using SharpGL;
 using SharpGL.Enumerations;
 using SharpGL.SceneGraph;
-using ShaderProgram = SharpGL.Shaders.ShaderProgram;
+using SharpGL.Shaders;
 
-namespace Display.OpenGL
+namespace NCubeSolver.Plugins.Display.OpenGL
 {
     /// <summary>
     /// Interaction logic for Display.xaml

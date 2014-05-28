@@ -1,20 +1,25 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using System.ComponentModel;
-using System.Windows.Interop;
-using System.Diagnostics;
+using SharpGL;
 using SharpGL.SceneGraph;
 using SharpGL.Version;
+using SharpGL.WPF;
 
-namespace SharpGL.WPF
+namespace NCubeSolver.Plugins.Display.OpenGL
 {
     /// <summary>
     /// Interaction logic for OpenGLControl.xaml
     /// </summary>
+    /// <remarks>This is a modified version of the file from SharpGL:
+    /// https://github.com/dwmkerr/sharpgl/blob/master/source/SharpGL/Core/SharpGL.WPF/OpenGLControl.xaml.cs
+    /// </remarks>
     public partial class FixedOpenGLControl : UserControl
     {
         /// <summary>
@@ -152,7 +157,7 @@ namespace SharpGL.WPF
                 {
                     case SharpGL.RenderContextType.DIBSection:
                         {
-                            RenderContextProviders.DIBSectionRenderContextProvider provider = gl.RenderContextProvider as RenderContextProviders.DIBSectionRenderContextProvider;
+                            SharpGL.RenderContextProviders.DIBSectionRenderContextProvider provider = gl.RenderContextProvider as SharpGL.RenderContextProviders.DIBSectionRenderContextProvider;
 
                             //  TODO: We have to remove the alpha channel - for some reason it comes out as 0.0 
                             //  meaning the drawing comes out transparent.
@@ -172,7 +177,7 @@ namespace SharpGL.WPF
                         break;
                     case SharpGL.RenderContextType.FBO:
                         {
-                            RenderContextProviders.FBORenderContextProvider provider = gl.RenderContextProvider as RenderContextProviders.FBORenderContextProvider;
+                            SharpGL.RenderContextProviders.FBORenderContextProvider provider = gl.RenderContextProvider as SharpGL.RenderContextProviders.FBORenderContextProvider;
 
                             //  TODO: We have to remove the alpha channel - for some reason it comes out as 0.0 
                             //  meaning the drawing comes out transparent.
@@ -230,7 +235,7 @@ namespace SharpGL.WPF
         /// <summary>
         /// The OpenGL instance.
         /// </summary>
-        private OpenGL gl = new OpenGL();
+        private SharpGL.OpenGL gl = new SharpGL.OpenGL();
 
         /// <summary>
         /// The dispatcher timer.
@@ -314,7 +319,7 @@ namespace SharpGL.WPF
         /// </summary>
         private static readonly DependencyProperty OpenGLVersionProperty =
           DependencyProperty.Register("OpenGLVersion", typeof(OpenGLVersion), typeof(FixedOpenGLControl),
-          new PropertyMetadata(Version.OpenGLVersion.OpenGL2_1));
+          new PropertyMetadata(SharpGL.Version.OpenGLVersion.OpenGL2_1));
 
         /// <summary>
         /// Gets or sets the OpenGL Version requested for the control.
@@ -348,7 +353,7 @@ namespace SharpGL.WPF
         /// <summary>
         /// Gets the OpenGL instance.
         /// </summary>
-        public OpenGL OpenGL
+        public SharpGL.OpenGL OpenGL
         {
             get { return gl; }
         }

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Core;
 
-namespace Solvers.Size3
+namespace NCubeSolver.Plugins.Solvers.Size3
 {
     internal class BottomCrossSolver : IPartialSolver
     {

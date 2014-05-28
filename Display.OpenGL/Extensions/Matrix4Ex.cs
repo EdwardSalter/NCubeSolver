@@ -1,6 +1,6 @@
 ﻿using OpenTK;
 
-namespace Display.OpenGL
+namespace NCubeSolver.Plugins.Display.OpenGL.Extensions
 {
     static class Matrix4Ex
     {
