@@ -4,18 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{387EF864-2A42-4E39-8D1E-49799D881DFF}</ProjectGuid>
+    <ProjectGuid>{693F573A-5BDD-458E-A3D1-9FA3E81FAC2D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NCubeSolver.Plugins.ConfigurationGenerators</RootNamespace>
-    <AssemblyName>Plugin.ConfigurationGenerators</AssemblyName>
+    <RootNamespace>NCubeSolver.Plugins.Solvers</RootNamespace>
+    <AssemblyName>Plugin.Solvers</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <NuGetPackageImportStamp>d1e83a9a</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>17ae1c37</NuGetPackageImportStamp>
     <FodyPath>..\packages\Fody.1.14.0</FodyPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -25,16 +24,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -47,17 +42,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RotationListEx.cs" />
+    <Compile Include="Size2\Solver.cs" />
+    <Compile Include="Size3\BeginerMethod.cs" />
+    <Compile Include="FakeSolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RandomCubeConfigurationGenerator.cs" />
+    <Compile Include="Size3\BottomLayerSolver.cs" />
+    <Compile Include="IPartialSolver.cs" />
+    <Compile Include="Size3\MiddleLayerSolver.cs" />
+    <Compile Include="Size3\BottomCrossSolver.cs" />
+    <Compile Include="Size3\TopCrossSolver.cs" />
+    <Compile Include="Size3\TopFaceSolver.cs" />
+    <Compile Include="Size3\TopLayerSolver.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
+    <ProjectReference Include="..\..\Core\Core.csproj">
       <Project>{A6BBC1FF-5EAF-4690-BDE5-B26CB3947213}</Project>
       <Name>Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

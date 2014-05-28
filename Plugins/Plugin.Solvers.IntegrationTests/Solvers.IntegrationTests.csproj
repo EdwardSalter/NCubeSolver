@@ -4,13 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2058E004-867A-4DB4-BF2F-911AF3043082}</ProjectGuid>
+    <ProjectGuid>{7CB188CE-4C05-426A-B889-DCC41231B81A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NCubeSolver.Plugins.Celebrators</RootNamespace>
-    <AssemblyName>Plugin.Celebrators</AssemblyName>
+    <RootNamespace>NCubeSolver.Plugins.Solvers.IntegrationTests</RootNamespace>
+    <AssemblyName>Plugin.Solvers.IntegrationTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <FodyPath>..\packages\Fody.1.14.0</FodyPath>
+    <NuGetPackageImportStamp>d81077f7</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,17 +32,49 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigurationGenerator.cs" />
+    <Compile Include="RotationListExTests.cs" />
+    <Compile Include="Size3\BeginerMethodTests.cs" />
+    <Compile Include="Size3\TopCrossSolverTests.cs" />
+    <Compile Include="Size3\MiddleLayerSolverTests.cs" />
+    <Compile Include="Size3\BottomLayerSolverTests.cs" />
+    <Compile Include="Size3\BottomCrossSolverTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TimeDelayCelebrator.cs" />
+    <Compile Include="Size3\TopFaceSolverTests.cs" />
+    <Compile Include="Size3\TopLayerSolverTests.cs" />
+    <Compile Include="TestRunner.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Plugin.ConfigurarionGenerators\Plugin.ConfigurationGenerator.csproj">
+      <Project>{387EF864-2A42-4E39-8D1E-49799D881DFF}</Project>
+      <Name>Plugin.ConfigurationGenerator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core.UnitTestHelpers\Core.UnitTestHelpers.csproj">
+      <Project>{49E8CBFA-7EBC-40C3-9A17-8C9E450E7DF8}</Project>
+      <Name>Core.UnitTestHelpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Core.csproj">
       <Project>{A6BBC1FF-5EAF-4690-BDE5-B26CB3947213}</Project>
       <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plugin.Solvers\Plugin.Solvers.csproj">
+      <Project>{693F573A-5BDD-458E-A3D1-9FA3E81FAC2D}</Project>
+      <Name>Plugin.Solvers</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

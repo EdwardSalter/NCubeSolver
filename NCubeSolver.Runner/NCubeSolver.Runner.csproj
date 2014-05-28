@@ -79,11 +79,9 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>if not exist $(TargetDir)Extensions mkdir $(TargetDir)Extensions
-copy $(SolutionDir)Display.OpenGL\$(OutDir)* $(TargetDir)Extensions
-copy $(SolutionDir)ConfigurarionGenerators\$(OutDir)* $(TargetDir)Extensions
-copy $(SolutionDir)Solvers\$(OutDir)* $(TargetDir)Extensions
-copy $(SolutionDir)Celebrators\$(OutDir)* $(TargetDir)Extensions</PostBuildEvent>
+    <PostBuildEvent>SET TargetDir=$(TargetDir)Extensions
+IF NOT EXIST %25TargetDir%25 MKDIR %25TargetDir%25
+FOR /D %25%25i IN ($(SolutionDir)Plugins\Plugin.*) DO COPY %25%25i\$(OutDir)* %25TargetDir%25</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
