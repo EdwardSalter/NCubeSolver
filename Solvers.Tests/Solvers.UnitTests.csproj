@@ -7,8 +7,8 @@
     <ProjectGuid>{FB149009-00F3-4003-90E9-52D5D38B3DD1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Solvers.UnitTests</RootNamespace>
-    <AssemblyName>Solvers.UnitTests</AssemblyName>
+    <RootNamespace>NCubeSolver.Plugins.Solvers.UnitTests</RootNamespace>
+    <AssemblyName>Plugin.Solvers.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

@@ -7,7 +7,7 @@
     <ProjectGuid>{49E8CBFA-7EBC-40C3-9A17-8C9E450E7DF8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Core.UnitTestHelpers</RootNamespace>
+    <RootNamespace>NCubeSolver.Core.UnitTestHelpers</RootNamespace>
     <AssemblyName>Core.UnitTestHelpers</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

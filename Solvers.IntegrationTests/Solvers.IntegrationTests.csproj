@@ -7,8 +7,8 @@
     <ProjectGuid>{7CB188CE-4C05-426A-B889-DCC41231B81A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Solvers.IntegrationTests</RootNamespace>
-    <AssemblyName>Solvers.IntegrationTests</AssemblyName>
+    <RootNamespace>NCubeSolver.Plugins.Solvers.IntegrationTests</RootNamespace>
+    <AssemblyName>Plugin.Solvers.IntegrationTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FodyPath>..\packages\Fody.1.14.0</FodyPath>
