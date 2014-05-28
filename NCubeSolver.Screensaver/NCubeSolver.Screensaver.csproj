@@ -114,25 +114,25 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Celebrators\Celebrators.csproj">
+    <ProjectReference Include="..\Celebrators\Plugin.Celebrators.csproj">
       <Project>{2058E004-867A-4DB4-BF2F-911AF3043082}</Project>
-      <Name>Celebrators</Name>
+      <Name>Plugin.Celebrators</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ConfigurarionGenerators\ConfigurationGenerator.csproj">
+    <ProjectReference Include="..\ConfigurarionGenerators\Plugin.ConfigurationGenerator.csproj">
       <Project>{387ef864-2a42-4e39-8d1e-49799d881dff}</Project>
-      <Name>ConfigurationGenerator</Name>
+      <Name>Plugin.ConfigurationGenerator</Name>
     </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{A6BBC1FF-5EAF-4690-BDE5-B26CB3947213}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Display.OpenGL\Display.OpenGL.csproj">
+    <ProjectReference Include="..\Display.OpenGL\Plugin.Display.OpenGL.csproj">
       <Project>{5be72dc6-7161-4044-9943-edc1d66e0f0d}</Project>
-      <Name>Display.OpenGL</Name>
+      <Name>Plugin.Display.OpenGL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Solvers\Solvers.csproj">
+    <ProjectReference Include="..\Solvers\Plugin.Solvers.csproj">
       <Project>{693f573a-5bdd-458e-a3d1-9fa3e81fac2d}</Project>
-      <Name>Solvers</Name>
+      <Name>Plugin.Solvers</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

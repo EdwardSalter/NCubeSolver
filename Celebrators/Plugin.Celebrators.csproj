@@ -7,8 +7,8 @@
     <ProjectGuid>{2058E004-867A-4DB4-BF2F-911AF3043082}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Celebrators</RootNamespace>
-    <AssemblyName>Celebrators</AssemblyName>
+    <RootNamespace>NCubeSolver.Plugins.Celebrators</RootNamespace>
+    <AssemblyName>Plugin.Celebrators</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

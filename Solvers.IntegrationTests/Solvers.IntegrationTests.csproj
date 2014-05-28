@@ -60,9 +60,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ConfigurarionGenerators\ConfigurationGenerator.csproj">
+    <ProjectReference Include="..\ConfigurarionGenerators\Plugin.ConfigurationGenerator.csproj">
       <Project>{387EF864-2A42-4E39-8D1E-49799D881DFF}</Project>
-      <Name>ConfigurationGenerator</Name>
+      <Name>Plugin.ConfigurationGenerator</Name>
     </ProjectReference>
     <ProjectReference Include="..\Core.UnitTestHelpers\Core.UnitTestHelpers.csproj">
       <Project>{49E8CBFA-7EBC-40C3-9A17-8C9E450E7DF8}</Project>
@@ -72,9 +72,9 @@
       <Project>{A6BBC1FF-5EAF-4690-BDE5-B26CB3947213}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Solvers\Solvers.csproj">
+    <ProjectReference Include="..\Solvers\Plugin.Solvers.csproj">
       <Project>{693F573A-5BDD-458E-A3D1-9FA3E81FAC2D}</Project>
-      <Name>Solvers</Name>
+      <Name>Plugin.Solvers</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

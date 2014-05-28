@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Display.OpenGL", "Display.OpenGL\Display.OpenGL.csproj", "{5BE72DC6-7161-4044-9943-EDC1D66E0F0D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.Display.OpenGL", "Display.OpenGL\Plugin.Display.OpenGL.csproj", "{5BE72DC6-7161-4044-9943-EDC1D66E0F0D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{9106E7DD-D68E-4660-9FD7-4C91C0C91A3F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{9106E7DD-D68E-4660-9FD7-4C91C0C91A3F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{A6BBC1FF-5EAF-4690-BDE5-B26CB3947213}"
 EndProject
@@ -16,9 +16,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NCubeSolver.Screensaver", "NCubeSolver.Screensaver\NCubeSolver.Screensaver.csproj", "{387FE5E3-1E1A-47D8-A407-841BF1265C5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigurationGenerator", "ConfigurarionGenerators\ConfigurationGenerator.csproj", "{387EF864-2A42-4E39-8D1E-49799D881DFF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.ConfigurationGenerator", "ConfigurarionGenerators\Plugin.ConfigurationGenerator.csproj", "{387EF864-2A42-4E39-8D1E-49799D881DFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solvers", "Solvers\Solvers.csproj", "{693F573A-5BDD-458E-A3D1-9FA3E81FAC2D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.Solvers", "Solvers\Plugin.Solvers.csproj", "{693F573A-5BDD-458E-A3D1-9FA3E81FAC2D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solvers.UnitTests", "Solvers.Tests\Solvers.UnitTests.csproj", "{FB149009-00F3-4003-90E9-52D5D38B3DD1}"
 EndProject
@@ -28,7 +28,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.UnitTestHelpers", "Cor
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1840C707-1EB2-4DEA-BF1D-5D72E3DFBF0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Celebrators", "Celebrators\Celebrators.csproj", "{2058E004-867A-4DB4-BF2F-911AF3043082}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.Celebrators", "Celebrators\Plugin.Celebrators.csproj", "{2058E004-867A-4DB4-BF2F-911AF3043082}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.UnitTests", "Core.Tests\Core.UnitTests.csproj", "{C690EFC9-C2DB-4C69-8BDE-4CE1D751FF8E}"
 EndProject
