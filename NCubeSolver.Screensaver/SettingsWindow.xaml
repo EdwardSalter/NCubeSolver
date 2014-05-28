@@ -1,0 +1,13 @@
+﻿<Window x:Class="NCubeSolver.Screensaver.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:properties="clr-namespace:NCubeSolver.Screensaver.Properties"
+        Title="SettingsWindows" Height="300" Width="300">
+    <Grid DataContext="{x:Static properties:Settings.Default}">
+        <Slider HorizontalAlignment="Left" Margin="99,57,0,0" VerticalAlignment="Top" Width="143" Minimum="5" Maximum="50" LargeChange="5" SmallChange="2" Value="{Binding AnimationLength}"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,57,0,0" TextWrapping="Wrap" Text="Speed: " VerticalAlignment="Top"/>
+        <Button Content="Save" IsDefault="True" Click="Save_OnClick" HorizontalAlignment="Left" Margin="207,238,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBlock HorizontalAlignment="Left" Margin="62,57,0,0" TextWrapping="Wrap" Text="Faster" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="247,57,0,0" TextWrapping="Wrap" Text="Slower" VerticalAlignment="Top"/>
+    </Grid>
+</Window>

@@ -1,0 +1,15 @@
+﻿<Window x:Class="NCubeSolver.Screensaver.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:openGl="clr-namespace:Display.OpenGL;assembly=Display.OpenGL"
+        Title="MainWindow" Height="100" Width="100"
+        WindowStyle="None" ResizeMode="NoResize"  
+        WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        MouseMove="MainWindow_OnMouseMove"
+        KeyDown="MainWindow_OnKeyDown"
+        Loaded="MainWindow_OnLoaded"
+        Cursor="{x:Static Cursors.None}">
+    <Grid x:Name="Grid">
+        <openGl:DisplayControl x:Name="DisplayControl" />
+    </Grid>
+</Window>
