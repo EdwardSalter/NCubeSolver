@@ -44,7 +44,7 @@ namespace NCubeSolver.Runner
         {
             var catalogs = new List<ComposablePartCatalog>
             {
-                new DirectoryCatalog("Extensions", "*.dll"),
+                new DirectoryCatalog("Extensions", "Plugin.*.dll"),
             };
             PluginLoader.LoadPlugins(catalogs);
             SetupPlugins();
