@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A6BBC1FF-5EAF-4690-BDE5-B26CB3947213}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Core</RootNamespace>
+    <AssemblyName>Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FodyPath>..\packages\Fody.1.14.0</FodyPath>
+    <NuGetPackageImportStamp>64412d3d</NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ArrayExtensions.cs" />
+    <Compile Include="ArrayRotater.cs" />
+    <Compile Include="Axis.cs" />
+    <Compile Include="CommonActions.cs" />
+    <Compile Include="CubeConfiguration.cs" />
+    <Compile Include="CubeRotations.cs" />
+    <Compile Include="CubeRotation.cs" />
+    <Compile Include="Edge.cs" />
+    <Compile Include="EdgeMethods.cs" />
+    <Compile Include="Face.cs" />
+    <Compile Include="FaceColour.cs" />
+    <Compile Include="FaceExtensions.cs" />
+    <Compile Include="FaceRules.cs" />
+    <Compile Include="FaceType.cs" />
+    <Compile Include="Plugins\ICelebrator.cs" />
+    <Compile Include="Plugins\ICubeConfigurationGenerator.cs" />
+    <Compile Include="Plugins\IDisplay.cs" />
+    <Compile Include="InvalidCubeConfigurationException.cs" />
+    <Compile Include="Plugins\IPlugin.cs" />
+    <Compile Include="IRotatable.cs" />
+    <Compile Include="IRotation.cs" />
+    <Compile Include="Plugins\ISolver.cs" />
+    <Compile Include="Extensions\MathEx.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FaceRotation.cs" />
+    <Compile Include="RandomFactory.cs" />
+    <Compile Include="RotationBase.cs" />
+    <Compile Include="RotationDirection.cs" />
+    <Compile Include="RotationDirectionEx.cs" />
+    <Compile Include="Rotations.cs" />
+    <Compile Include="Extensions\TaskEx.cs" />
+    <Compile Include="SolveFailureException.cs" />
+    <Compile Include="SolveRun.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
