@@ -79,9 +79,12 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>SET TargetDir=$(TargetDir)Extensions
+    <PostBuildEvent>SET TargetDir="$(TargetDir)Extensions"
 IF NOT EXIST %25TargetDir%25 MKDIR %25TargetDir%25
-FOR /D %25%25i IN ($(SolutionDir)Plugins\Plugin.*) DO COPY %25%25i\$(OutDir)* %25TargetDir%25</PostBuildEvent>
+FOR /D %25%25i IN ("$(SolutionDir)Plugins\Plugin.*") DO  (
+    ECHO Copying from "%25%25~i\$(OutDir)*" to %25TargetDir%25
+    COPY "%25%25~i\$(OutDir)*" %25TargetDir%25
+)</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
