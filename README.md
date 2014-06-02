@@ -11,4 +11,4 @@ The other program is a WPF screen saver application that when installed, can be 
 
 ### Screenshots
 
-![3x3x3](doc\3x3x3.png)
+![3x3x3](doc/3x3x3.png)
