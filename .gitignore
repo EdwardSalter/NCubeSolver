@@ -156,4 +156,4 @@ $RECYCLE.BIN/
 .DS_Store
 
 # Solution specifics files
-/packages
+lib/
