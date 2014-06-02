@@ -40,16 +40,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="OpenTK">
-      <HintPath>..\..\packages\OpenTK.1.1.1589.5941\lib\NET40\OpenTK.dll</HintPath>
+      <HintPath>..\..\..\lib\OpenTK.1.1.1589.5941\lib\NET40\OpenTK.dll</HintPath>
     </Reference>
     <Reference Include="SharpGL">
-      <HintPath>..\..\packages\SharpGLCore.2.3.0.1\lib\net40\SharpGL.dll</HintPath>
+      <HintPath>..\..\..\lib\SharpGLCore.2.3.0.1\lib\net40\SharpGL.dll</HintPath>
     </Reference>
     <Reference Include="SharpGL.SceneGraph">
-      <HintPath>..\..\packages\SharpGLCore.2.3.0.1\lib\net40\SharpGL.SceneGraph.dll</HintPath>
+      <HintPath>..\..\..\lib\SharpGLCore.2.3.0.1\lib\net40\SharpGL.SceneGraph.dll</HintPath>
     </Reference>
     <Reference Include="SharpGL.WPF">
-      <HintPath>..\..\packages\SharpGLforWPF.2.3.0.1\lib\net40\SharpGL.WPF.dll</HintPath>
+      <HintPath>..\..\..\lib\SharpGLforWPF.2.3.0.1\lib\net40\SharpGL.WPF.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
