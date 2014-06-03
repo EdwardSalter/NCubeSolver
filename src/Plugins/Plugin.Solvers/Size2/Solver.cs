@@ -1,19 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using NCubeSolvers.Core;
-using NCubeSolvers.Core.Plugins;
 
 namespace NCubeSolver.Plugins.Solvers.Size2
 {
-    public class Solver : ISolver
+    public class Solver : SolverBase
     {
-        // TODO: ENUM OF CUBE TYPES, SET WHICH TYPE THIS IS SOLVING
-        public string PluginName
+        public override string PluginName
         {
             get { return "2x2x2 Beginer Method"; }
         }
 
-        public async Task<IEnumerable<IRotation>> Solve(CubeConfiguration<FaceColour> configuration)
+        public override IEnumerable<int> ForCubeSizes
+        {
+            get { return new[] { 2 }; }
+        }
+
+        public override async Task<IEnumerable<IRotation>> Solve(CubeConfiguration<FaceColour> configuration)
         {
             return null;
         }

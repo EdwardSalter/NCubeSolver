@@ -65,6 +65,9 @@ namespace NCubeSolver.Screensaver
             var configurationGenerator = new RandomCubeConfigurationGenerator();
             var solver = new BeginerMethod();
             var celebrator = new TimeDelayCelebrator(2000);
+
+            // TODO: LOAD ALL SOLVERS + GENERATORS, GENERATE A CONFIG WITH RANDOM SIZE, PICK A SOLVER BASED ON THE CONFIGURATION GIVEN
+
             var run = new SolveRun(configurationGenerator, solver, DisplayControl, celebrator);
 
             while (true)

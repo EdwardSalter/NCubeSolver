@@ -8,5 +8,7 @@ namespace NCubeSolvers.Core.Plugins
     public interface ISolver : IPlugin
     {
         Task<IEnumerable<IRotation>> Solve(CubeConfiguration<FaceColour> configuration);
+
+        IEnumerable<int> ForCubeSizes { get; }
     }
 }

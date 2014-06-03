@@ -76,6 +76,7 @@
     <Compile Include="Size3\MiddleLayerSolverTests.cs" />
     <Compile Include="Size3\BottomCrossSolverTests.cs" />
     <Compile Include="Size3\TopCrossSolverTests.cs" />
+    <Compile Include="SolverBaseTests.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

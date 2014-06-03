@@ -1,20 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using NCubeSolver.Plugins.Solvers.Size3;
 using NCubeSolvers.Core;
-using NCubeSolvers.Core.Plugins;
 
 namespace NCubeSolver.Plugins.Solvers
 {
-    public class FakeSolver : ISolver
+    public class FakeSolver : SolverBase
     {
         private FaceRotation m_lastFaceRotation;
         private CubeRotation m_lastCubeRotation;
-        public string PluginName { get { return "FakeSolver"; } }
+        public override string PluginName { get { return "FakeSolver"; } }
         private readonly Random m_random = RandomFactory.CreateRandom();
 
-        public Task<IEnumerable<IRotation>> Solve(CubeConfiguration<FaceColour> configuration)
+        public override IEnumerable<int> ForCubeSizes
         {
+            get { return new[] { 2, 3 }; }
+        }
+
+        public override Task<IEnumerable<IRotation>> Solve(CubeConfiguration<FaceColour> configuration)
+        {
+            base.Solve(configuration).Wait();
             var solution = new List<IRotation>();
 
             for (int i = 0; i < 40; i++)

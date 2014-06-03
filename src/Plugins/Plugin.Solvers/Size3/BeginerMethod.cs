@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using NCubeSolvers.Core;
-using NCubeSolvers.Core.Plugins;
 
 namespace NCubeSolver.Plugins.Solvers.Size3
 {
-    public class BeginerMethod : ISolver
+    public class BeginerMethod : SolverBase
     {
         private CubeConfiguration<FaceColour> m_configuration;
         private readonly BottomCrossSolver m_bottomCrossSolver = new BottomCrossSolver();
@@ -15,9 +14,15 @@ namespace NCubeSolver.Plugins.Solvers.Size3
         private readonly TopFaceSolver m_topFaceSolver = new TopFaceSolver();
         private readonly TopLayerSolver m_topLayerSolver = new TopLayerSolver();
 
-        // TODO: MAYBE RETURN THINGS IN SECTIONS?
-        public async Task<IEnumerable<IRotation>> Solve(CubeConfiguration<FaceColour> configuration)
+        public override IEnumerable<int> ForCubeSizes
         {
+            get { return new[] { 3 }; }
+        }
+
+        // TODO: MAYBE RETURN THINGS IN SECTIONS?
+        public override async Task<IEnumerable<IRotation>> Solve(CubeConfiguration<FaceColour> configuration)
+        {
+            await base.Solve(configuration);
             m_configuration = configuration;
 
             var solution = new List<IRotation>();
@@ -47,7 +52,7 @@ namespace NCubeSolver.Plugins.Solvers.Size3
             return solution.Condense();
         }
 
-        public string PluginName
+        public override string PluginName
         {
             get { return "BeginerMethod"; }
         }
