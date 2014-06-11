@@ -14,7 +14,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         public async Task Solve_GivenWhiteOnTopLeftFaceMatchingLeftCentre_BottomLeftCentreIsCorrect()
         {
             var solver = new BottomCrossSolver();
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.Left2 });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.Left2 }, 3);
             var solution = new List<IRotation>();
 
             await solver.CheckTopFaceForWhite(configuration, solution);
@@ -26,7 +26,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         public async Task Solve_GivenWhiteOnTopFrontFaceAndMatchingColourOnLeftFace_BottomLeftCentreIsCorrect()
         {
             var solver = new BottomCrossSolver();
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.Left2, Rotations.UpperClockwise });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.Left2, Rotations.UpperClockwise }, 3);
             var solution = new List<IRotation>();
 
             await solver.CheckTopFaceForWhite(configuration, solution);
@@ -38,7 +38,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         public async Task Solve_GivenWhiteOnTopFrontFaceAndMatchingColourOnRightFace_BottomRightCentreIsCorrect()
         {
             var solver = new BottomCrossSolver();
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.Right2, Rotations.UpperClockwise });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.Right2, Rotations.UpperClockwise }, 3);
             var solution = new List<IRotation>();
 
             await solver.CheckTopFaceForWhite(configuration, solution);
@@ -50,7 +50,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         public async Task Solve_GivenWhiteOnFrontTopFaceAndMatchingColourOnRightFace_BottomRightCentreIsCorrect()
         {
             var solver = new BottomCrossSolver();
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.RightClockwise, Rotations.FrontAntiClockwise });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.RightClockwise, Rotations.FrontAntiClockwise }, 3);
             var solution = new List<IRotation>();
 
             await solver.CheckTopLayerForWhite(configuration, solution);
@@ -62,7 +62,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         public async Task Solve_GivenWhiteOnFrontTopFaceAndMatchingColourOnLeftFace_BottomLeftCentreIsCorrect()
         {
             var solver = new BottomCrossSolver();
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.LeftAntiClockwise, Rotations.FrontClockwise });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.LeftAntiClockwise, Rotations.FrontClockwise }, 3);
             var solution = new List<IRotation>();
 
             await solver.CheckTopLayerForWhite(configuration, solution);
@@ -74,7 +74,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         public async Task Solve_GivenWhiteOnFrontTopFaceAndMatchingColourOnBackFace_BottomBackCentreIsCorrect()
         {
             var solver = new BottomCrossSolver();
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.BackClockwise, Rotations.RightAntiClockwise, Rotations.UpperClockwise });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.BackClockwise, Rotations.RightAntiClockwise, Rotations.UpperClockwise }, 3);
             var solution = new List<IRotation>();
 
             await solver.CheckTopLayerForWhite(configuration, solution);
@@ -86,7 +86,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         public async Task Solve_GivenWhiteOnFrontTopFaceAndMatchingColourOnFrontFace_BottomFrontCentreIsCorrect()
         {
             var solver = new BottomCrossSolver();
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.FrontClockwise, Rotations.LeftAntiClockwise, Rotations.UpperAntiClockwise });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.FrontClockwise, Rotations.LeftAntiClockwise, Rotations.UpperAntiClockwise }, 3);
             var solution = new List<IRotation>();
 
             await solver.CheckTopLayerForWhite(configuration, solution);
@@ -98,7 +98,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         public async Task Solve_GivenWhiteOnMiddleRightFaceAndMatchingColourOnLeftFace_BottomLeftCentreIsCorrect()
         {
             var solver = new BottomCrossSolver();
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.LeftAntiClockwise, Rotations.Front2 });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.LeftAntiClockwise, Rotations.Front2 }, 3);
             var solution = new List<IRotation>();
 
             await solver.CheckMiddleLayerForWhite(configuration, solution);
@@ -110,7 +110,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         public async Task Solve_GivenWhiteOnMiddleLeftFaceAndMatchingColourOnRightFace_PlacesWhiteOnToTopLayer()
         {
             var solver = new BottomCrossSolver();
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.RightClockwise, Rotations.Front2 });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.RightClockwise, Rotations.Front2 }, 3);
             var solution = new List<IRotation>();
 
             await solver.CheckMiddleLayerForWhite(configuration, solution);
@@ -122,7 +122,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         public async Task Solve_GivenWhiteOnMiddleLeftFaceAndMatchingColourOnRightFace_PlacesWhiteOnToBottomLayer()
         {
             var solver = new BottomCrossSolver();
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.LeftAntiClockwise});
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.LeftAntiClockwise}, 3);
             var solution = new List<IRotation>();
 
             await solver.CheckMiddleLayerForWhite(configuration, solution);
@@ -134,7 +134,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         public async Task Solve_GivenWhiteInBottomFrontLayerAndJoiningFaceIsOnRight_ExecutesAReverseFrontReverseRightFront()
         {
             var solver = new BottomCrossSolver();
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.RightClockwise, Rotations.FrontClockwise });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.RightClockwise, Rotations.FrontClockwise }, 3);
             var solution = new List<IRotation>();
 
             await solver.CheckBottomLayerForWhite(configuration, solution);
@@ -146,7 +146,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         public async Task Solve_GivenWhiteInBottomFrontLayerAndJoiningFaceIsOnLeft_ExecutesAFrontLeftReverseFront()
         {
             var solver = new BottomCrossSolver();
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.LeftAntiClockwise, Rotations.FrontAntiClockwise });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.LeftAntiClockwise, Rotations.FrontAntiClockwise }, 3);
             var solution = new List<IRotation>();
 
             await solver.CheckBottomLayerForWhite(configuration, solution);

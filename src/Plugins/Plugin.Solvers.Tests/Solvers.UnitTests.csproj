@@ -57,6 +57,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -71,6 +72,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="RotationListExTests.cs" />
+    <Compile Include="Size2\BottomFaceChooserTests.cs" />
     <Compile Include="Size3\BottomLayerSolverTests.cs" />
     <Compile Include="Size3\Helpers.cs" />
     <Compile Include="Size3\MiddleLayerSolverTests.cs" />

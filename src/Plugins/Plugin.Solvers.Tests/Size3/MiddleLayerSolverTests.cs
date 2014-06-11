@@ -14,7 +14,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         [Test]
         public async Task TopLayer_MiddleFrontLeftOnTopFrontCentre_MiddleFrontLeftIsCorrect()
         {
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.FrontClockwise, Rotations.LeftClockwise });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.FrontClockwise, Rotations.LeftClockwise }, 3);
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
@@ -26,7 +26,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         [Test]
         public async Task TopLayer_MiddleFrontRightOnTopFrontCentre_MiddleFrontRightIsCorrect()
         {
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.FrontAntiClockwise });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.FrontAntiClockwise }, 3);
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
@@ -38,7 +38,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         [Test]
         public async Task TopLayer_MiddleBackRightOnTopFrontCentre_MiddleBackRightIsCorrect()
         {
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.RightAntiClockwise, Rotations.UpperClockwise });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.RightAntiClockwise, Rotations.UpperClockwise }, 3);
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
@@ -50,7 +50,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         [Test]
         public async Task TopLayer_MiddleBackLeftOnTopFrontCentre_MiddleBackLeftIsCorrect()
         {
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.LeftClockwise, Rotations.UpperAntiClockwise });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.LeftClockwise, Rotations.UpperAntiClockwise }, 3);
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
@@ -62,7 +62,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         [Test]
         public async Task TopLayer_MiddleBackLeftOnTopFrontCentre_MiddleBackLeftIsCorrect2()
         {
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.BackAntiClockwise, Rotations.Upper2 });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.BackAntiClockwise, Rotations.Upper2 }, 3);
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
@@ -74,7 +74,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         [Test]
         public async Task TopLayer_MiddleFrontLeftOnTopLeftCentre_MiddleFrontLeftIsCorrect()
         {
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.LeftAntiClockwise });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.LeftAntiClockwise }, 3);
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
@@ -86,7 +86,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         [Test]
         public async Task TopLayer_MiddleBackLeftOnTopLeftCentre_MiddleBackLeftIsCorrect()
         {
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.LeftClockwise });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.LeftClockwise }, 3);
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
@@ -98,7 +98,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         [Test]
         public async Task TopLayer_MiddleFrontLeftOnTopLeftCentre_MiddleFrontLeftIsCorrect2()
         {
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.FrontClockwise, Rotations.UpperClockwise });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.FrontClockwise, Rotations.UpperClockwise }, 3);
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
@@ -110,7 +110,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         [Test]
         public async Task TopLayer_MiddleBackLeftOnTopLeftCentre_MiddleBackLeftIsCorrect2()
         {
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.BackAntiClockwise, Rotations.UpperAntiClockwise });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.BackAntiClockwise, Rotations.UpperAntiClockwise }, 3);
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
@@ -122,7 +122,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         [Test]
         public async Task TopLayer_MiddleFrontRightOnTopLeftCentre_MiddleFrontRightIsCorrect()
         {
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.RightClockwise, Rotations.Upper2 });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.RightClockwise, Rotations.Upper2 }, 3);
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
@@ -134,7 +134,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         [Test]
         public async Task TopLayer_MiddleBackLeftOnTopBBackCentre_MiddleBackLeftIsCorrect()
         {
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.BackAntiClockwise });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.BackAntiClockwise }, 3);
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
@@ -146,7 +146,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         [Test]
         public async Task TopLayer_MiddleBackRightOnTopBackCentre_MiddleBackRightIsCorrect()
         {
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.BackClockwise });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.BackClockwise }, 3);
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
@@ -158,7 +158,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         [Test]
         public async Task TopLayer_MiddleFrontBackOnTopBackCentre_MiddleFrontBackIsCorrect2()
         {
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.LeftAntiClockwise, Rotations.UpperClockwise });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.LeftAntiClockwise, Rotations.UpperClockwise }, 3);
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
@@ -170,7 +170,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         [Test]
         public async Task TopLayer_MiddleFrontRightOnTopBackCentre_MiddleFrontRightIsCorrect2()
         {
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.RightClockwise, Rotations.UpperAntiClockwise });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.RightClockwise, Rotations.UpperAntiClockwise }, 3);
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
@@ -182,7 +182,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         [Test]
         public async Task TopLayer_MiddleFrontRightOnTopBackCentre_MiddleFrontRightIsCorrect()
         {
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.FrontAntiClockwise, Rotations.Upper2 });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.FrontAntiClockwise, Rotations.Upper2 }, 3);
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
@@ -194,7 +194,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         [Test]
         public async Task TopLayer_MiddleBackRightOnTopRightCentre_MiddleBackRightIsCorrect()
         {
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.RightAntiClockwise });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.RightAntiClockwise }, 3);
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
@@ -206,7 +206,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         [Test]
         public async Task TopLayer_MiddleFrontRightOnTopRightCentre_MiddleFrontRightIsCorrect()
         {
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.RightClockwise });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.RightClockwise }, 3);
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
@@ -218,7 +218,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         [Test]
         public async Task TopLayer_MiddleBackLeftOnTopRightCentre_MiddleBackLeftIsCorrect()
         {
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.BackAntiClockwise, Rotations.UpperClockwise });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.BackAntiClockwise, Rotations.UpperClockwise }, 3);
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
@@ -230,7 +230,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         [Test]
         public async Task TopLayer_MiddleFrontRightOnTopRightCentre_MiddleFrontRightIsCorrect2()
         {
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.FrontAntiClockwise, Rotations.UpperAntiClockwise });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.FrontAntiClockwise, Rotations.UpperAntiClockwise }, 3);
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
@@ -242,7 +242,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         [Test]
         public async Task TopLayer_MiddleFrontLeftOnTopRightCentre_MiddleFrontLeftIsCorrect()
         {
-            var configuration = Helpers.CreateConfiguration(new[] { Rotations.LeftAntiClockwise, Rotations.Upper2 });
+            var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.LeftAntiClockwise, Rotations.Upper2 }, 3);
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 

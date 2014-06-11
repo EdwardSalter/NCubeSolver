@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="RotationListEx.cs" />
+    <Compile Include="Size2\BottomFaceChooser.cs" />
+    <Compile Include="Size2\FaceColourPair.cs" />
     <Compile Include="Size2\Solver.cs" />
     <Compile Include="Size3\BeginerMethod.cs" />
     <Compile Include="FakeSolver.cs" />
