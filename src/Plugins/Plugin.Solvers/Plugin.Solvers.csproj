@@ -42,8 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IEvenSizedPartialSolver.cs" />
     <Compile Include="RotationListEx.cs" />
     <Compile Include="Size2\BottomFaceChooser.cs" />
+    <Compile Include="Size2\BottomLayerSolver.cs" />
     <Compile Include="Size2\FaceColourPair.cs" />
     <Compile Include="Size2\Solver.cs" />
     <Compile Include="Size3\BeginerMethod.cs" />
