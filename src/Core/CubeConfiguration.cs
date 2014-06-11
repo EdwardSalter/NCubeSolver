@@ -91,9 +91,9 @@ namespace NCubeSolvers.Core
 
         public Task RotateCube(CubeRotation rotation)
         {
-            FaceType[] centralFaces;
             for (int i = 0; i < rotation.Count; i++)
             {
+                FaceType[] centralFaces;
                 switch (rotation.Axis)
                 {
                     case Axis.X:

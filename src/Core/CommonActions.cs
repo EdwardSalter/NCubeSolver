@@ -7,9 +7,8 @@ namespace NCubeSolvers.Core
 {
     public static class CommonActions
     {
-        public static async Task<CubeRotation> PositionOnBottom(CubeConfiguration<FaceColour> config, FaceColour faceColour)
+        public static async Task<CubeRotation> PositionOnBottom(CubeConfiguration<FaceColour> config, FaceType face)
         {
-            var face = FindFaceWithCentreColour(config, faceColour);
             CubeRotation cubeRotation;
 
             switch (face)
@@ -41,8 +40,17 @@ namespace NCubeSolvers.Core
                     throw new Exception("Unknown face");
             }
 
-            await config.RotateCube(cubeRotation);
+            if (cubeRotation != null)
+            {
+                await config.RotateCube(cubeRotation);
+            }
             return cubeRotation;
+        }
+
+        public static async Task<CubeRotation> PositionOnBottom(CubeConfiguration<FaceColour> config, FaceColour faceColour)
+        {
+            var face = FindFaceWithCentreColour(config, faceColour);
+            return await PositionOnBottom(config, face);
         }
 
         public static async Task<CubeRotation> PositionOnFront(CubeConfiguration<FaceColour> config, FaceColour faceColour)

@@ -1,13 +1,14 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using NCubeSolvers.Core;
 
 namespace NCubeSolver.Plugins.Solvers.Size2
 {
     class BottomFaceChooser
     {
+        // TODO: TEST
         internal FaceColourPair ChooseFaceColourForBottom(CubeConfiguration<FaceColour> configuration)
         {
-
             var maxAmountOfColoursSoFar = 0;
             FaceType? chosenFace = null;
             FaceColour? chosenColour = null;
@@ -30,7 +31,10 @@ namespace NCubeSolver.Plugins.Solvers.Size2
             }
             // TODO: DETECT HOW MANY IN CORRECT POS TO EACH OTHER
 
-            return new FaceColourPair{Face = chosenFace.Value, Colour = chosenColour.Value};
+            if (chosenColour == null) throw new Exception("Did not choose a colour");
+            if (chosenFace == null) throw new Exception("Did not choose a face");
+
+            return new FaceColourPair { Face = chosenFace.Value, Colour = chosenColour.Value };
         }
     }
 }
