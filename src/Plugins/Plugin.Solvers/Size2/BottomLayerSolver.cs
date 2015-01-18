@@ -11,6 +11,8 @@ namespace NCubeSolver.Plugins.Solvers.Size2
         {
             var solution = new List<IRotation>();
 
+
+
             return solution;
         }
     }

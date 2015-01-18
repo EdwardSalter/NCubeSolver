@@ -7,11 +7,11 @@ namespace NCubeSolver.Plugins.Solvers.Size2
     public class Solver : SolverBase
     {
         private readonly BottomFaceChooser m_bottomFaceChooser = new BottomFaceChooser();
-        private readonly BottomLayerSolver m_bottomFaceSolver = new BottomLayerSolver();
+        private readonly BottomLayerSolver m_bottomLayerSolver = new BottomLayerSolver();
 
         public override string PluginName
         {
-            get { return "2x2x2 Beginer Method"; }
+            get { return "2x2x2 Beginner Method"; }
         }
 
         public override IEnumerable<int> ForCubeSizes
@@ -32,7 +32,7 @@ namespace NCubeSolver.Plugins.Solvers.Size2
 
             var bottomColour = bottomFaceAndColour.Colour;
 
-            var stepsToSolveBottomFace = await m_bottomFaceSolver.Solve(bottomColour, configuration);
+            var stepsToSolveBottomFace = await m_bottomLayerSolver.Solve(bottomColour, configuration);
             solution.AddRange(stepsToSolveBottomFace);
 
             return solution;

@@ -4,17 +4,20 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7CB188CE-4C05-426A-B889-DCC41231B81A}</ProjectGuid>
+    <ProjectGuid>{FB149009-00F3-4003-90E9-52D5D38B3DD1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NCubeSolver.Plugins.Solvers.IntegrationTests</RootNamespace>
-    <AssemblyName>Plugin.Solvers.IntegrationTests</AssemblyName>
+    <RootNamespace>NCubeSolver.Plugins.Solvers.UnitTests</RootNamespace>
+    <AssemblyName>Plugin.Solvers.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
     <FodyPath>..\packages\Fody.1.14.0</FodyPath>
-    <NuGetPackageImportStamp>d81077f7</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>8846a65e</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,6 +27,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,51 +35,74 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="nunit.framework">
       <HintPath>..\..\..\lib\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigurationGenerator.cs" />
+    <Compile Include="Helpers.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
     <Compile Include="RotationListExTests.cs" />
-    <Compile Include="Size3\BeginerMethodTests.cs" />
-    <Compile Include="Size3\TopCrossSolverTests.cs" />
-    <Compile Include="Size3\MiddleLayerSolverTests.cs" />
+    <Compile Include="Size2\BottomFaceChooserTests.cs" />
     <Compile Include="Size3\BottomLayerSolverTests.cs" />
+    <Compile Include="Size3\Helpers.cs" />
+    <Compile Include="Size3\MiddleLayerSolverTests.cs" />
     <Compile Include="Size3\BottomCrossSolverTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Size3\TopFaceSolverTests.cs" />
-    <Compile Include="Size3\TopLayerSolverTests.cs" />
-    <Compile Include="TestRunner.cs" />
+    <Compile Include="Size3\TopCrossSolverTests.cs" />
+    <Compile Include="SolverBaseTests.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Plugin.ConfigurarionGenerators\Plugin.ConfigurationGenerator.csproj">
-      <Project>{387EF864-2A42-4E39-8D1E-49799D881DFF}</Project>
-      <Name>Plugin.ConfigurationGenerator</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Core.UnitTestHelpers\Core.UnitTestHelpers.csproj">
-      <Project>{49E8CBFA-7EBC-40C3-9A17-8C9E450E7DF8}</Project>
-      <Name>Core.UnitTestHelpers</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Core\Core.csproj">
       <Project>{A6BBC1FF-5EAF-4690-BDE5-B26CB3947213}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Plugin.Solvers\Plugin.Solvers.csproj">
+    <ProjectReference Include="..\..\Plugins\Plugin.Solvers\Plugin.Solvers.csproj">
       <Project>{693F573A-5BDD-458E-A3D1-9FA3E81FAC2D}</Project>
       <Name>Plugin.Solvers</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\Core.UnitTestHelpers\Core.UnitTestHelpers.csproj">
+      <Project>{49e8cbfa-7ebc-40c3-9a17-8c9e450e7df8}</Project>
+      <Name>Core.UnitTestHelpers</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

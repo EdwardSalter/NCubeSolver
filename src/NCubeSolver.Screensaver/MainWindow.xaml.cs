@@ -68,7 +68,7 @@ namespace NCubeSolver.Screensaver
 
             // TODO: LOAD ALL SOLVERS + GENERATORS, GENERATE A CONFIG WITH RANDOM SIZE, PICK A SOLVER BASED ON THE CONFIGURATION GIVEN
 
-            var run = new SolveRun(configurationGenerator, solver, DisplayControl, celebrator);
+            var run = new SolveRun(configurationGenerator, solver, DisplayControl, celebrator, 3);
 
             while (true)
             {

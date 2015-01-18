@@ -14,13 +14,15 @@ namespace NCubeSolvers.Core
         private readonly ICelebrator m_celebrator;
         private CubeConfiguration<FaceColour> m_configuration;
         private int m_currentStep;
+        private readonly int m_cubeSize;
 
-        public SolveRun(ICubeConfigurationGenerator generator, ISolver solver, IDisplay display, ICelebrator celebrator)
+        public SolveRun(ICubeConfigurationGenerator generator, ISolver solver, IDisplay display, ICelebrator celebrator, int cubeSize)
         {
             m_display = display;
             m_celebrator = celebrator;
             m_solver = solver;
             m_generator = generator;
+            m_cubeSize = cubeSize;
         }
 
         public async Task Run()
@@ -29,7 +31,7 @@ namespace NCubeSolvers.Core
             Console.WriteLine("Creating cube configuration");
 
             // TODO: CONFIGURABLE
-            m_configuration = m_generator.GenerateConfiguration(3, 50);
+            m_configuration = m_generator.GenerateConfiguration(m_cubeSize, 50);
             if (m_display != null)
                 await m_display.SetCubeConfiguration(m_configuration);
 

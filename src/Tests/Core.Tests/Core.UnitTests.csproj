@@ -4,15 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{49E8CBFA-7EBC-40C3-9A17-8C9E450E7DF8}</ProjectGuid>
+    <ProjectGuid>{C690EFC9-C2DB-4C69-8BDE-4CE1D751FF8E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NCubeSolver.Core.UnitTestHelpers</RootNamespace>
-    <AssemblyName>Core.UnitTestHelpers</AssemblyName>
+    <RootNamespace>NCubeSolver.Core.UnitTests</RootNamespace>
+    <AssemblyName>Core.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FodyPath>..\packages\Fody.1.14.0</FodyPath>
-    <NuGetPackageImportStamp>93e47680</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>c4753d01</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,19 +37,17 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CornerAssert.cs" />
-    <Compile Include="CubeConfigurationAssert.cs" />
+    <Compile Include="ArrayExtensionsTests.cs" />
+    <Compile Include="ArrayRotaterTests.cs" />
+    <Compile Include="CubeConfigurationTests.cs" />
+    <Compile Include="EdgeMethodsTests.cs" />
+    <Compile Include="FaceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
+    <ProjectReference Include="..\..\Core\Core.csproj">
       <Project>{A6BBC1FF-5EAF-4690-BDE5-B26CB3947213}</Project>
       <Name>Core</Name>
     </ProjectReference>
