@@ -6,6 +6,7 @@ namespace NCubeSolver.Plugins.Display.OpenGL.Models
 {
     class Cubie
     {
+        private readonly Vector3? m_scale;
         public string Id { get; set; }
         public bool Highlighted { get; set; }
         public Cube Cube { get; private set; }
@@ -13,8 +14,9 @@ namespace NCubeSolver.Plugins.Display.OpenGL.Models
         public Quaternion ModelRotation { get; set; }
         public Quaternion WorldRotation { get; set; }
 
-        public Cubie(string id, Cube cube, Vector3 position)
+        public Cubie(string id, Cube cube, Vector3 position, Vector3? scale = null)
         {
+            m_scale = scale;
             Id = id;
             ModelRotation = Quaternion.Identity;
             WorldRotation = Quaternion.Identity;
@@ -30,6 +32,12 @@ namespace NCubeSolver.Plugins.Display.OpenGL.Models
         public Matrix4 GenerateModelMatrix()
         {
             var modelMatrix = Matrix4.Identity;
+
+            // Scaling
+            if (m_scale.HasValue)
+            {
+                modelMatrix *= Matrix4.CreateScale(m_scale.Value);
+            }
 
             // Model rotation
             //TODO: MOVE CONSTANTS

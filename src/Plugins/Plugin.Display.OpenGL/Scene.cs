@@ -32,6 +32,7 @@ namespace NCubeSolver.Plugins.Display.OpenGL
 
         public void GenerateGeometry(SharpGL.OpenGL gl)
         {
+            // TODO: CREATE CORRECT GEOMETRY UPFRONT - MIROR CUBE IS NOT RIGHT
             m_axes.GenerateGeometry(gl);
             RubiksCube.GenerateGeometry(gl);
             m_cubeAnimator.Setup();

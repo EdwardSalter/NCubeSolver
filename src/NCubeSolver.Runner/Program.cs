@@ -24,7 +24,7 @@ namespace NCubeSolver.Runner
         static void Main()
         {
             LoadPlugins();
-            _run = new SolveRun(_configurationGenerator, _solver, _display, _celebrator, 2);
+            _run = new SolveRun(_configurationGenerator, _solver, _display, _celebrator, 3);
 
 
             Console.WriteLine("Initialising display adaptor: {0}", _display.PluginName);
