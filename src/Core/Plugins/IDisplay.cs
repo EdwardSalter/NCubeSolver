@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 
@@ -9,6 +10,6 @@ namespace NCubeSolvers.Core.Plugins
     {
         event EventHandler Closed;
         Task Initialise();
-        Task SetCubeConfiguration(CubeConfiguration<FaceColour> configuration);
+        Task SetCubeConfiguration(CubeConfiguration<FaceColour> configuration, IEnumerable<IRotation> initialRotations);
     }
 }

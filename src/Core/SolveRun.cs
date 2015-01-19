@@ -31,9 +31,11 @@ namespace NCubeSolvers.Core
             Console.WriteLine("Creating cube configuration");
 
             // TODO: CONFIGURABLE
-            m_configuration = m_generator.GenerateConfiguration(m_cubeSize, 50);
+            m_configuration = m_generator.GenerateConfiguration(m_cubeSize, 0);
+            var rotations = m_generator.GenerateRandomRotationList(50).ToList();
             if (m_display != null)
-                await m_display.SetCubeConfiguration(m_configuration);
+                await m_display.SetCubeConfiguration(m_configuration, rotations);
+            CommonActions.ApplyRotations(rotations, m_configuration);
 
             // TODO: PAUSES?
             Console.WriteLine("Solving");

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Threading;
@@ -64,9 +65,9 @@ namespace NCubeSolver.Plugins.Display.OpenGL
             }
         }
 
-        public Task SetCubeConfiguration(CubeConfiguration<FaceColour> configuration)
+        public Task SetCubeConfiguration(CubeConfiguration<FaceColour> configuration, IEnumerable<IRotation> initialRotations)
         {
-            return Scene.SetCubeConfiguration(configuration);
+            return Scene.SetCubeConfiguration(configuration, initialRotations);
         }
 
         public Task Rotate(FaceRotation faceRotation)

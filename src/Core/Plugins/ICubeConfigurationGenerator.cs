@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Composition;
+﻿using System.Collections.Generic;
+using System.ComponentModel.Composition;
 
 namespace NCubeSolvers.Core.Plugins
 {
@@ -6,5 +7,6 @@ namespace NCubeSolvers.Core.Plugins
     public interface ICubeConfigurationGenerator : IPlugin
     {
         CubeConfiguration<FaceColour> GenerateConfiguration(int size, int numberOfRotations);
+        IEnumerable<IRotation> GenerateRandomRotationList(int moves);
     }
 }

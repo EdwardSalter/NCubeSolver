@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using NCubeSolver.Plugins.Display.OpenGL.Animation;
 using NCubeSolver.Plugins.Display.OpenGL.Models;
 using NCubeSolvers.Core;
@@ -68,11 +69,11 @@ namespace NCubeSolver.Plugins.Display.OpenGL
             m_cubeResetTask.SetResult(null);
         }
 
-        public Task SetCubeConfiguration(CubeConfiguration<FaceColour> configuration)
+        public Task SetCubeConfiguration(CubeConfiguration<FaceColour> configuration, IEnumerable<IRotation> initialRotations)
         {
             m_cubeResetTask = new TaskCompletionSource<object>();
             RubiksCube = new RubiksCube(configuration);
-            m_cubeAnimator = new RubiksCubeAnimator(RubiksCube, AnimationLength);
+            m_cubeAnimator = new RubiksCubeAnimator(RubiksCube, AnimationLength, initialRotations);
 
             m_regenerateRubiksCube = true;
 

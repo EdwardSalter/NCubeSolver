@@ -20,6 +20,7 @@ namespace NCubeSolver.Plugins.Display.OpenGL.Animation
         private IRotation m_currentRotation;
         private TaskCompletionSource<object> m_rotationTask;
         private int m_timesRun;
+        private readonly IEnumerable<IRotation> m_initialRotations;
 
         public bool AnimationEnabled { get; set; }
 
@@ -73,10 +74,28 @@ namespace NCubeSolver.Plugins.Display.OpenGL.Animation
             }
         }
 
-        public RubiksCubeAnimator(RubiksCube cube, int animationLength)
+        public RubiksCubeAnimator(RubiksCube cube, int animationLength, IEnumerable<IRotation> initialRotations = null)
         {
+            m_initialRotations = initialRotations;
             m_rubiksCube = cube;
             AnimationLength = animationLength;
+        }
+
+        private void RunInitialRotations(IEnumerable<IRotation> rotations)
+        {
+            foreach (var rotation in rotations)
+            {
+                var faceRotation = rotation as FaceRotation;
+                var cubeRotation = rotation as CubeRotation;
+                if (faceRotation != null)
+                {
+                    Rotate(faceRotation);
+                }
+                if (cubeRotation != null)
+                {
+                    RotateCube(cubeRotation);
+                }
+            }
         }
 
         public void Setup()
@@ -85,6 +104,11 @@ namespace NCubeSolver.Plugins.Display.OpenGL.Animation
             foreach (var cubie in m_rubiksCube.CubeConfiguration.AllItems)
             {
                 m_animators.Add(new CubieAnimator(cubie));
+            }
+
+            if (m_initialRotations != null)
+            {
+                RunInitialRotations(m_initialRotations);
             }
         }
 

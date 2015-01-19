@@ -23,7 +23,7 @@ namespace NCubeSolver.Plugins.ConfigurationGenerators
             return cubeConfiguration;
         }
 
-        public List<IRotation> GenerateRandomRotationList(int moves)
+        public IEnumerable<IRotation> GenerateRandomRotationList(int moves)
         {
             var rotations = new List<IRotation>();
 

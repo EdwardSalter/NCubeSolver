@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -199,9 +200,9 @@ namespace NCubeSolver.Plugins.Display.OpenGL
             return TaskEx.Completed;
         }
 
-        public Task SetCubeConfiguration(CubeConfiguration<FaceColour> configuration)
+        public Task SetCubeConfiguration(CubeConfiguration<FaceColour> configuration, IEnumerable<IRotation> initialRotations)
         {
-            return Scene.SetCubeConfiguration(configuration);
+            return Scene.SetCubeConfiguration(configuration, initialRotations);
         }
 
         public string PluginName
