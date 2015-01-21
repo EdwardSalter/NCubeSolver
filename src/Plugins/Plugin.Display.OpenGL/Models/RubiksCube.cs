@@ -14,6 +14,7 @@ namespace NCubeSolver.Plugins.Display.OpenGL.Models
     {
         private const float CubeSpacing = 0.05f;
         private static readonly Cube HighlightCube = new Cube(Colors.Pink);
+        private static readonly Color InsideColour = Colors.DarkGray;
 
         private readonly List<CubieAnimator> m_animators = new List<CubieAnimator>();
         private readonly Vector3 m_cubieCentre;
@@ -27,6 +28,7 @@ namespace NCubeSolver.Plugins.Display.OpenGL.Models
             {FaceColour.Blue, Colors.Blue},
             {FaceColour.Orange, Colors.Orange}
         };
+
 
         public CubeConfiguration<Cubie> CubeConfiguration { get; private set; }
         public int Size { get; private set; }
@@ -62,7 +64,7 @@ namespace NCubeSolver.Plugins.Display.OpenGL.Models
                     currentPos.X = 0;
                     for (int x = 0; x < Size; x++)
                     {
-                        var cube = new Cube(Colors.Black, false);
+                        var cube = new Cube(InsideColour, false);
                         ColourCubeFromConfiguration(cube, x, y, z);
                         cube.GenerateGeometry(gl);
 

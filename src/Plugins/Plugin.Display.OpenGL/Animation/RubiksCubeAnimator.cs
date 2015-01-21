@@ -83,19 +83,29 @@ namespace NCubeSolver.Plugins.Display.OpenGL.Animation
 
         private void RunInitialRotations(IEnumerable<IRotation> rotations)
         {
+            var tempLength = m_animationLength;
+            m_animationLength = 1;
+            Task t = null;
             foreach (var rotation in rotations)
             {
                 var faceRotation = rotation as FaceRotation;
                 var cubeRotation = rotation as CubeRotation;
                 if (faceRotation != null)
                 {
-                    Rotate(faceRotation);
+                    t = Rotate(faceRotation);
                 }
-                if (cubeRotation != null)
+                else if (cubeRotation != null)
                 {
-                    RotateCube(cubeRotation);
+                    t= RotateCube(cubeRotation);
                 }
+
+                while (AnimationRunning)
+                {
+                    NextFrame();
+                }
+                //t.Wait();
             }
+            m_animationLength = tempLength;
         }
 
         public void Setup()
@@ -112,13 +122,13 @@ namespace NCubeSolver.Plugins.Display.OpenGL.Animation
             }
         }
 
-        public void Animate()
+        public void NextFrame()
         {
             if (!AnimationEnabled) return;
 
             foreach (var animator in CurrentlyRotatingAnimators)
             {
-                animator.Animate();
+                animator.NextFrame();
             }
 
             if (!AnimationRunning)
@@ -127,7 +137,7 @@ namespace NCubeSolver.Plugins.Display.OpenGL.Animation
             }
         }
 
-        public void AnimationFinished()
+        private void AnimationFinished()
         {
             if (m_currentRotation == null) return;
 

@@ -44,7 +44,7 @@ namespace NCubeSolver.Plugins.Display.OpenGL
             if (ShowAxes)
                 m_axes.Render(gl, shader);
 
-            m_cubeAnimator.Animate();
+            m_cubeAnimator.NextFrame();
             RubiksCube.Render(gl, shader);
         }
 

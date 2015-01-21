@@ -27,7 +27,7 @@ namespace NCubeSolver.Plugins.Display.OpenGL.Animation
             m_newRotation = (rotation * Cubie.WorldRotation);
         }
 
-        public void Animate()
+        public void NextFrame()
         {
             if (!IsRunning) return;
 
