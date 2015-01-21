@@ -12,7 +12,7 @@ namespace NCubeSolver.Plugins.Display.OpenGL
         private const int DefaultAnimationLength = 30;
         
         private readonly Axes m_axes = new Axes();
-        internal RubiksCube RubiksCube = new RubiksCube(DefaultCubeSize);
+        internal RubiksCube RubiksCube = new MirrorCube(DefaultCubeSize);
         private RubiksCubeAnimator m_cubeAnimator;
         private bool m_regenerateRubiksCube;
         private TaskCompletionSource<object> m_cubeResetTask;
@@ -72,7 +72,7 @@ namespace NCubeSolver.Plugins.Display.OpenGL
         public Task SetCubeConfiguration(CubeConfiguration<FaceColour> configuration, IEnumerable<IRotation> initialRotations)
         {
             m_cubeResetTask = new TaskCompletionSource<object>();
-            RubiksCube = new RubiksCube(configuration);
+            RubiksCube = new MirrorCube(configuration);
             m_cubeAnimator = new RubiksCubeAnimator(RubiksCube, AnimationLength, initialRotations);
 
             m_regenerateRubiksCube = true;

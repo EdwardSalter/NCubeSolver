@@ -81,6 +81,7 @@
     </Compile>
     <Compile Include="Models\Axes.cs" />
     <Compile Include="Models\Cubie.cs" />
+    <Compile Include="Models\MirrorCube.cs" />
     <Compile Include="Models\Primitives\Cylinder.cs" />
     <Compile Include="Models\IModel.cs" />
     <Compile Include="Models\RubiksCube.cs" />
