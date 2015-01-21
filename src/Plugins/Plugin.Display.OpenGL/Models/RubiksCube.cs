@@ -29,6 +29,8 @@ namespace NCubeSolver.Plugins.Display.OpenGL.Models
             {FaceColour.Orange, Colors.Orange}
         };
 
+        private const bool DrawCubesCentred = false;
+
 
         public CubeConfiguration<Cubie> CubeConfiguration { get; private set; }
         public int Size { get; private set; }
@@ -39,7 +41,11 @@ namespace NCubeSolver.Plugins.Display.OpenGL.Models
             CubeConfiguration = new CubeConfiguration<Cubie>(cubeSize);
 
             float halfSize = (Size + (Size - 1) * CubeSpacing) / 2f;
-            halfSize -= 0.5f;
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalse
+            if (DrawCubesCentred)
+            {
+                halfSize -= 0.5f;
+            }
             m_cubieCentre = new Vector3(-halfSize);
         }
 
@@ -54,7 +60,7 @@ namespace NCubeSolver.Plugins.Display.OpenGL.Models
             HighlightCube.GenerateGeometry(gl);
             var currentPos = Vector3.Zero;
             var size = new Vector3(1);
-            const float scalePerThing = 0.5f;   // TODO: CALCULATE THIS BASED ON CUBE SIZE
+            //const float scalePerThing = 0.5f;   // TODO: CALCULATE THIS BASED ON CUBE SIZE
 
             for (int z = 0; z < Size; z++)
             {
@@ -64,16 +70,14 @@ namespace NCubeSolver.Plugins.Display.OpenGL.Models
                     currentPos.X = 0;
                     for (int x = 0; x < Size; x++)
                     {
-                        var cube = new Cube(InsideColour, false);
+                        var cube = new Cube(InsideColour, DrawCubesCentred);
                         ColourCubeFromConfiguration(cube, x, y, z);
                         cube.GenerateGeometry(gl);
 
-                        size = new Vector3((x + 1) * scalePerThing, (1 + y) * scalePerThing, (1 + z) * scalePerThing);
-                        //size = new Vector3(1);
+                        //size = new Vector3((x + 1) * scalePerThing, (1 + y) * scalePerThing, (1 + z) * scalePerThing);
+                        size = new Vector3(1);
 
                         var position = new Vector3(currentPos);
-                        Debug.WriteLine("Pos: {0}, Scale: {1}", position, size);
-
 
                         position += m_cubieCentre;  // Centre
                         string id = string.Format("{0},{1},{2}", x, y, z);
