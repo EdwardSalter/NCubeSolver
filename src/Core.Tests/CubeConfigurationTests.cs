@@ -1652,6 +1652,1218 @@ namespace NCubeSolver.Core.UnitTests
 
         #endregion
 
+
+
+        #region Layer Tests
+
+        #region SecondLayerFrontClockwise
+
+        [Test]
+        public void RotateSecondLayerFrontClockWise_FrontFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerFrontClockwise);
+
+            var expected = new[,]
+            {
+                {"F", "F", "F"},
+                {"F", "F", "F"},
+                {"D", "D", "D"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Front].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerFrontClockWise_BackFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerFrontClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "B", "B"},
+                {"U", "B", "B"},
+                {"U", "B", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Back].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerFrontClockWise_LeftFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerFrontClockwise);
+
+            var expected = new[,]
+            {
+                {"L", "D", "D"},
+                {"L", "D", "D"},
+                {"L", "B", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Left].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerFrontClockWise_TopFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerFrontClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "U", "F"},
+                {"L", "L", "L"},
+                {"L", "L", "L"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Upper].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerFrontClockWise_RightFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerFrontClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "U", "R"},
+                {"U", "U", "R"},
+                {"F", "F", "R"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Right].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerFrontClockWise_DownFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerFrontClockwise);
+
+            var expected = new[,]
+            {
+                {"R", "R", "R"},
+                {"R", "R", "R"},
+                {"D", "D", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Down].Items);
+        }
+
+        #endregion
+
+        #region SecondLayerFrontAntiClockWise
+
+        [Test]
+        public void RotateSecondLayerFrontAntiClockwise_FrontFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerFrontAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"F", "F", "F"},
+                {"F", "F", "F"},
+                {"D", "D", "D"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Front].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerFrontAntiClockwise_BackFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerFrontAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "B", "B"},
+                {"U", "B", "B"},
+                {"U", "B", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Back].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerFrontAntiClockwise_LeftFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerFrontAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"L", "F", "D"},
+                {"L", "U", "D"},
+                {"L", "U", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Left].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerFrontAntiClockwise_TopFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerFrontAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "U", "F"},
+                {"R", "R", "R"},
+                {"L", "L", "L"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Upper].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerFrontAntiClockwise_RightFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerFrontAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "B", "R"},
+                {"U", "D", "R"},
+                {"F", "D", "R"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Right].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerFrontAntiClockwise_DownFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerFrontAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"R", "R", "R"},
+                {"L", "L", "L"},
+                {"D", "D", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Down].Items);
+        }
+
+        #endregion
+
+        #region SecondLayerBackClockwise
+
+        [Test]
+        public void RotateSecondLayerBackClockWise_FrontFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerBackClockwise);
+
+            var expected = new[,]
+            {
+                {"F", "F", "F"},
+                {"F", "F", "F"},
+                {"D", "D", "D"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Front].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerBackClockWise_BackFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerBackClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "B", "B"},
+                {"U", "B", "B"},
+                {"U", "B", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Back].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerBackClockWise_LeftFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerBackClockwise);
+
+            
+            var expected = new[,]
+            {
+                {"L", "F", "D"},
+                {"L", "U", "D"},
+                {"L", "U", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Left].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerBackClockWise_TopFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerBackClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "U", "F"},
+                {"R", "R", "R"},
+                {"L", "L", "L"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Upper].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerBackClockWise_RightFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerBackClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "B", "R"},
+                {"U", "D", "R"},
+                {"F", "D", "R"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Right].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerBackClockWise_DownFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerBackClockwise);
+
+            var expected = new[,]
+            {
+                {"R", "R", "R"},
+                {"L", "L", "L"},
+                {"D", "D", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Down].Items);
+        }
+
+        #endregion
+
+        #region SecondLayerBackAntiClockWise
+
+        [Test]
+        public void RotateSecondLayerBackAntiClockwise_FrontFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerBackAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"F", "F", "F"},
+                {"F", "F", "F"},
+                {"D", "D", "D"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Front].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerBackAntiClockwise_BackFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerBackAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "B", "B"},
+                {"U", "B", "B"},
+                {"U", "B", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Back].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerBackAntiClockwise_LeftFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerBackAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"L", "D", "D"},
+                {"L", "D", "D"},
+                {"L", "B", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Left].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerBackAntiClockwise_TopFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerBackAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "U", "F"},
+                {"L", "L", "L"},
+                {"L", "L", "L"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Upper].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerBackAntiClockwise_RightFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerBackAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "U", "R"},
+                {"U", "U", "R"},
+                {"F", "F", "R"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Right].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerBackAntiClockwise_DownFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerBackAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"R", "R", "R"},
+                {"R", "R", "R"},
+                {"D", "D", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Down].Items);
+        }
+
+        #endregion
+
+        #region SecondLayerLeftClockwise
+
+        [Test]
+        public void RotateSecondLayerLeftClockWise_FrontFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerLeftClockwise);
+
+            var expected = new[,]
+            {
+                {"F", "U", "F"},
+                {"F", "U", "F"},
+                {"D", "L", "D"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Front].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerLeftClockWise_BackFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerLeftClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "D", "B"},
+                {"U", "D", "B"},
+                {"U", "R", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Back].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerLeftClockWise_LeftFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerLeftClockwise);
+
+
+            var expected = new[,]
+            {
+                {"L", "L", "D"},
+                {"L", "L", "D"},
+                {"L", "L", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Left].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerLeftClockWise_TopFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerLeftClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "B", "F"},
+                {"U", "B", "F"},
+                {"L", "B", "L"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Upper].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerLeftClockWise_RightFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerLeftClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "R", "R"},
+                {"U", "R", "R"},
+                {"F", "R", "R"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Right].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerLeftClockWise_DownFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerLeftClockwise);
+
+            var expected = new[,]
+            {
+                {"R", "F", "R"},
+                {"D", "F", "B"},
+                {"D", "D", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Down].Items);
+        }
+
+        #endregion
+
+        #region SecondLayerLeftAntiClockWise
+
+        [Test]
+        public void RotateSecondLayerLeftAntiClockwise_FrontFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerLeftAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"F", "R", "F"},
+                {"F", "D", "F"},
+                {"D", "D", "D"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Front].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerLeftAntiClockwise_BackFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerLeftAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "L", "B"},
+                {"U", "U", "B"},
+                {"U", "U", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Back].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerLeftAntiClockwise_LeftFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerLeftAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"L", "L", "D"},
+                {"L", "L", "D"},
+                {"L", "L", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Left].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerLeftAntiClockwise_TopFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerLeftAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "F", "F"},
+                {"U", "F", "F"},
+                {"L", "D", "L"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Upper].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerLeftAntiClockwise_RightFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerLeftAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "R", "R"},
+                {"U", "R", "R"},
+                {"F", "R", "R"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Right].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerLeftAntiClockwise_DownFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerLeftAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"R", "B", "R"},
+                {"D", "B", "B"},
+                {"D", "B", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Down].Items);
+        }
+
+        #endregion
+
+        #region SecondLayerRightClockwise
+
+        [Test]
+        public void RotateSecondLayerRightClockWise_FrontFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerRightClockwise);
+
+            var expected = new[,]
+            {
+                {"F", "R", "F"},
+                {"F", "D", "F"},
+                {"D", "D", "D"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Front].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerRightClockWise_BackFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerRightClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "L", "B"},
+                {"U", "U", "B"},
+                {"U", "U", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Back].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerRightClockWise_LeftFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerRightClockwise);
+
+
+            var expected = new[,]
+            {
+                {"L", "L", "D"},
+                {"L", "L", "D"},
+                {"L", "L", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Left].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerRightClockWise_TopFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerRightClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "F", "F"},
+                {"U", "F", "F"},
+                {"L", "D", "L"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Upper].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerRightClockWise_RightFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerRightClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "R", "R"},
+                {"U", "R", "R"},
+                {"F", "R", "R"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Right].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerRightClockWise_DownFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerRightClockwise);
+
+            var expected = new[,]
+            {
+                {"R", "B", "R"},
+                {"D", "B", "B"},
+                {"D", "B", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Down].Items);
+        }
+
+        #endregion
+
+        #region SecondLayerRightAntiClockWise
+
+        [Test]
+        public void RotateSecondLayerRightAntiClockwise_FrontFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerRightAntiClockwise);
+
+            var expected = new[,]
+             {
+                {"F", "U", "F"},
+                {"F", "U", "F"},
+                {"D", "L", "D"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Front].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerRightAntiClockwise_BackFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerRightAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "D", "B"},
+                {"U", "D", "B"},
+                {"U", "R", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Back].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerRightAntiClockwise_LeftFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerRightAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"L", "L", "D"},
+                {"L", "L", "D"},
+                {"L", "L", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Left].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerRightAntiClockwise_TopFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerRightAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "B", "F"},
+                {"U", "B", "F"},
+                {"L", "B", "L"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Upper].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerRightAntiClockwise_RightFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerRightAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "R", "R"},
+                {"U", "R", "R"},
+                {"F", "R", "R"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Right].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerRightAntiClockwise_DownFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerRightAntiClockwise);
+
+            
+            var expected = new[,]
+            {
+                {"R", "F", "R"},
+                {"D", "F", "B"},
+                {"D", "D", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Down].Items);
+        }
+
+        #endregion
+
+        #region SecondLayerUpperClockwise
+
+        [Test]
+        public void RotateSecondLayerUpperClockWise_FrontFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerUpperClockwise);
+
+            var expected = new[,]
+            {
+                {"F", "F", "F"},
+                {"U", "R", "R"},
+                {"D", "D", "D"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Front].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerUpperClockWise_BackFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerUpperClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "B", "B"},
+                {"L", "L", "D"},
+                {"U", "B", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Back].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerUpperClockWise_LeftFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerUpperClockwise);
+
+
+            var expected = new[,]
+            {
+                {"L", "L", "D"},
+                {"F", "F", "F"},
+                {"L", "L", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Left].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerUpperClockWise_TopFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerUpperClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "U", "F"},
+                {"U", "U", "F"},
+                {"L", "L", "L"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Upper].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerUpperClockWise_RightFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerUpperClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "R", "R"},
+                {"U", "B", "B"},
+                {"F", "R", "R"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Right].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerUpperClockWise_DownFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerUpperClockwise);
+
+            var expected = new[,]
+            {
+                {"R", "R", "R"},
+                {"D", "D", "B"},
+                {"D", "D", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Down].Items);
+        }
+
+        #endregion
+
+        #region SecondLayerUpperAntiClockWise
+
+        [Test]
+        public void RotateSecondLayerUpperAntiClockwise_FrontFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerUpperAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"F", "F", "F"},
+                {"L", "L", "D"},
+                {"D", "D", "D"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Front].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerUpperAntiClockwise_BackFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerUpperAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "B", "B"},
+                {"U", "R", "R"},
+                {"U", "B", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Back].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerUpperAntiClockwise_LeftFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerUpperAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"L", "L", "D"},
+                {"U", "B", "B"},
+                {"L", "L", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Left].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerUpperAntiClockwise_TopFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerUpperAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "U", "F"},
+                {"U", "U", "F"},
+                {"L", "L", "L"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Upper].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerUpperAntiClockwise_RightFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerUpperAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "R", "R"},
+                {"F", "F", "F"},
+                {"F", "R", "R"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Right].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerUpperAntiClockwise_DownFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerUpperAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"R", "R", "R"},
+                {"D", "D", "B"},
+                {"D", "D", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Down].Items);
+        }
+
+        #endregion
+
+        #region SecondLayerDownClockwise
+
+        [Test]
+        public void RotateSecondLayerDownClockWise_FrontFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerDownClockwise);
+
+            var expected = new[,]
+            {
+                {"F", "F", "F"},
+                {"L", "L", "D"},
+                {"D", "D", "D"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Front].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerDownClockWise_BackFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerDownClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "B", "B"},
+                {"U", "R", "R"},
+                {"U", "B", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Back].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerDownClockWise_LeftFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerDownClockwise);
+
+            var expected = new[,]
+            {
+                {"L", "L", "D"},
+                {"U", "B", "B"},
+                {"L", "L", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Left].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerDownClockWise_TopFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerDownClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "U", "F"},
+                {"U", "U", "F"},
+                {"L", "L", "L"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Upper].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerDownClockWise_RightFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerDownClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "R", "R"},
+                {"F", "F", "F"},
+                {"F", "R", "R"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Right].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerDownClockWise_DownFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerDownClockwise);
+
+            var expected = new[,]
+            {
+                {"R", "R", "R"},
+                {"D", "D", "B"},
+                {"D", "D", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Down].Items);
+        }
+
+        #endregion
+
+        #region SecondLayerDownAntiClockWise
+
+        [Test]
+        public void RotateSecondLayerDownAntiClockwise_FrontFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerDownAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"F", "F", "F"},
+                {"U", "R", "R"},
+                {"D", "D", "D"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Front].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerDownAntiClockwise_BackFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerDownAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "B", "B"},
+                {"L", "L", "D"},
+                {"U", "B", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Back].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerDownAntiClockwise_LeftFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerDownAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"L", "L", "D"},
+                {"F", "F", "F"},
+                {"L", "L", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Left].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerDownAntiClockwise_TopFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerDownAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "U", "F"},
+                {"U", "U", "F"},
+                {"L", "L", "L"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Upper].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerDownAntiClockwise_RightFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerDownAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"U", "R", "R"},
+                {"U", "B", "B"},
+                {"F", "R", "R"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Right].Items);
+        }
+
+        [Test]
+        public void RotateSecondLayerDownAntiClockwise_DownFaceIsCorrect()
+        {
+            var cube = CreateCubeConfiguration();
+
+            cube.Rotate(Rotations.SecondLayerDownAntiClockwise);
+
+            var expected = new[,]
+            {
+                {"R", "R", "R"},
+                {"D", "D", "B"},
+                {"D", "D", "B"}
+            };
+            CollectionAssert.AreEqual(expected, cube.Faces[FaceType.Down].Items);
+        }
+
+        #endregion
+
+
+        #endregion
+
         #region CubeRotate
 
         [Test]

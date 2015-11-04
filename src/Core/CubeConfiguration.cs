@@ -61,27 +61,30 @@ namespace NCubeSolvers.Core
 
             for (int i = 0; i < rotation.Count; i++)
             {
-                Faces[faceType].Rotate(direction);
+                if (rotation.LayerNumberFromFace == 0)
+                {
+                    Faces[faceType].Rotate(direction);
+                }
 
                 switch (faceType)
                 {
                     case FaceType.Upper:
-                        RotateTop(direction);
+                        RotateTop(direction, rotation.LayerNumberFromFace);
                         break;
                     case FaceType.Down:
-                        RotateBottom(direction);
+                        RotateBottom(direction, rotation.LayerNumberFromFace);
                         break;
                     case FaceType.Left:
-                        RotateLeft(direction);
+                        RotateLeft(direction, rotation.LayerNumberFromFace);
                         break;
                     case FaceType.Right:
-                        RotateRight(direction);
+                        RotateRight(direction, rotation.LayerNumberFromFace);
                         break;
                     case FaceType.Front:
-                        RotateFront(direction);
+                        RotateFront(direction, rotation.LayerNumberFromFace);
                         break;
                     case FaceType.Back:
-                        RotateBack(direction);
+                        RotateBack(direction, rotation.LayerNumberFromFace);
                         break;
                 }
             }
@@ -177,55 +180,55 @@ namespace NCubeSolvers.Core
             Faces[curFace] = new Face<T>(Faces[curFace].Id, items);
         }
 
-        private void RotateBack(RotationDirection direction)
+        private void RotateBack(RotationDirection direction, int layerNumber)
         {
             var faces = new[] { Faces[FaceType.Left], Faces[FaceType.Upper], Faces[FaceType.Right], Faces[FaceType.Down] };
 
             if (direction == RotationDirection.Clockwise)
             {
-                var temp = faces[0].GetEdge(Edge.Left);
-                faces[0].SetEdge(Edge.Left, faces[1].GetEdge(Edge.Top).Reverse().ToArray());
-                faces[1].SetEdge(Edge.Top, faces[2].GetEdge(Edge.Right));
-                faces[2].SetEdge(Edge.Right, faces[3].GetEdge(Edge.Bottom).Reverse().ToArray());
-                faces[3].SetEdge(Edge.Bottom, temp);
+                var temp = faces[0].GetEdge(layerNumber, Edge.Left);
+                faces[0].SetEdge(layerNumber, Edge.Left, faces[1].GetEdge(layerNumber, Edge.Top).Reverse().ToArray());
+                faces[1].SetEdge(layerNumber, Edge.Top, faces[2].GetEdge(layerNumber, Edge.Right));
+                faces[2].SetEdge(layerNumber, Edge.Right, faces[3].GetEdge(layerNumber, Edge.Bottom).Reverse().ToArray());
+                faces[3].SetEdge(layerNumber, Edge.Bottom, temp);
             }
             else
             {
                 faces = faces.Reverse().ToArray();
 
-                var temp = faces[0].GetEdge(Edge.Bottom);
-                faces[0].SetEdge(Edge.Bottom, faces[1].GetEdge(Edge.Right).Reverse().ToArray());
-                faces[1].SetEdge(Edge.Right, faces[2].GetEdge(Edge.Top));
-                faces[2].SetEdge(Edge.Top, faces[3].GetEdge(Edge.Left).Reverse().ToArray());
-                faces[3].SetEdge(Edge.Left, temp);
+                var temp = faces[0].GetEdge(layerNumber, Edge.Bottom);
+                faces[0].SetEdge(layerNumber, Edge.Bottom, faces[1].GetEdge(layerNumber, Edge.Right).Reverse().ToArray());
+                faces[1].SetEdge(layerNumber, Edge.Right, faces[2].GetEdge(layerNumber, Edge.Top));
+                faces[2].SetEdge(layerNumber, Edge.Top, faces[3].GetEdge(layerNumber, Edge.Left).Reverse().ToArray());
+                faces[3].SetEdge(layerNumber, Edge.Left, temp);
             }
         }
 
-        private void RotateFront(RotationDirection direction)
+        private void RotateFront(RotationDirection direction, int layerNumber)
         {
             var faces = new[] { Faces[FaceType.Left], Faces[FaceType.Down], Faces[FaceType.Right], Faces[FaceType.Upper] };
 
             if (direction == RotationDirection.Clockwise)
             {
-                var temp = faces[0].GetEdge(Edge.Right).Reverse().ToArray();
-                faces[0].SetEdge(Edge.Right, faces[1].GetEdge(Edge.Top));
-                faces[1].SetEdge(Edge.Top, faces[2].GetEdge(Edge.Left).Reverse().ToArray());
-                faces[2].SetEdge(Edge.Left, faces[3].GetEdge(Edge.Bottom));
-                faces[3].SetEdge(Edge.Bottom, temp);
+                var temp = faces[0].GetEdge(layerNumber, Edge.Right).Reverse().ToArray();
+                faces[0].SetEdge(layerNumber, Edge.Right, faces[1].GetEdge(layerNumber, Edge.Top));
+                faces[1].SetEdge(layerNumber, Edge.Top, faces[2].GetEdge(layerNumber, Edge.Left).Reverse().ToArray());
+                faces[2].SetEdge(layerNumber, Edge.Left, faces[3].GetEdge(layerNumber, Edge.Bottom));
+                faces[3].SetEdge(layerNumber, Edge.Bottom, temp);
             }
             else
             {
                 faces = faces.Reverse().ToArray();
 
-                var temp = faces[0].GetEdge(Edge.Bottom).Reverse().ToArray();
-                faces[0].SetEdge(Edge.Bottom, faces[1].GetEdge(Edge.Left));
-                faces[1].SetEdge(Edge.Left, faces[2].GetEdge(Edge.Top).Reverse().ToArray());
-                faces[2].SetEdge(Edge.Top, faces[3].GetEdge(Edge.Right));
-                faces[3].SetEdge(Edge.Right, temp);
+                var temp = faces[0].GetEdge(layerNumber, Edge.Bottom).Reverse().ToArray();
+                faces[0].SetEdge(layerNumber, Edge.Bottom, faces[1].GetEdge(layerNumber, Edge.Left));
+                faces[1].SetEdge(layerNumber, Edge.Left, faces[2].GetEdge(layerNumber, Edge.Top).Reverse().ToArray());
+                faces[2].SetEdge(layerNumber, Edge.Top, faces[3].GetEdge(layerNumber, Edge.Right));
+                faces[3].SetEdge(layerNumber, Edge.Right, temp);
             }
         }
 
-        private void RotateLeft(RotationDirection direction)
+        private void RotateLeft(RotationDirection direction, int layerNumber)
         {
             var faces = new[] { Faces[FaceType.Front], Faces[FaceType.Upper], Faces[FaceType.Back], Faces[FaceType.Down] };
 
@@ -238,47 +241,47 @@ namespace NCubeSolvers.Core
                 faces = faces.Reverse().ToArray();
 
                 var reverseEdgeSet = reverseEdge == edge ?
-                    faces[1].GetEdge(reverseEdge)
-                    : faces[1].GetEdge(reverseEdge).Reverse().ToArray();
+                    faces[1].GetEdge(layerNumber, reverseEdge)
+                    : faces[1].GetEdge(layerNumber, reverseEdge).Reverse().ToArray();
                 var reverseEdgeSet2 = reverseEdge == edge ?
-                    faces[2].GetEdge(edge)
-                    : faces[2].GetEdge(edge).Reverse().ToArray();
+                    faces[2].GetEdge(layerNumber, edge)
+                    : faces[2].GetEdge(layerNumber, edge).Reverse().ToArray();
 
-                var temp = faces[0].GetEdge(edge);
-                faces[0].SetEdge(edge, reverseEdgeSet);
-                faces[1].SetEdge(reverseEdge, reverseEdgeSet2);
-                faces[2].SetEdge(edge, faces[3].GetEdge(edge));
-                faces[3].SetEdge(edge, temp);
+                var temp = faces[0].GetEdge(layerNumber, edge);
+                faces[0].SetEdge(layerNumber, edge, reverseEdgeSet);
+                faces[1].SetEdge(layerNumber, reverseEdge, reverseEdgeSet2);
+                faces[2].SetEdge(layerNumber, edge, faces[3].GetEdge(layerNumber, edge));
+                faces[3].SetEdge(layerNumber, edge, temp);
             }
             else
             {
                 var reverseEdgeSet = reverseEdge == edge
-                    ? faces[3].GetEdge(edge)
-                    : faces[3].GetEdge(edge).Reverse().ToArray();
+                    ? faces[3].GetEdge(layerNumber, edge)
+                    : faces[3].GetEdge(layerNumber, edge).Reverse().ToArray();
 
-                var temp = faces[0].GetEdge(edge);
-                faces[0].SetEdge(edge, faces[1].GetEdge(edge));
-                faces[1].SetEdge(edge, faces[2].GetEdge(reverseEdge).Reverse().ToArray());
-                faces[2].SetEdge(reverseEdge, reverseEdgeSet);
-                faces[3].SetEdge(edge, temp);
+                var temp = faces[0].GetEdge(layerNumber, edge);
+                faces[0].SetEdge(layerNumber, edge, faces[1].GetEdge(layerNumber, edge));
+                faces[1].SetEdge(layerNumber, edge, faces[2].GetEdge(layerNumber, reverseEdge).Reverse().ToArray());
+                faces[2].SetEdge(layerNumber, reverseEdge, reverseEdgeSet);
+                faces[3].SetEdge(layerNumber, edge, temp);
             }
         }
 
-        private void RotateBottom(RotationDirection direction)
+        private void RotateBottom(RotationDirection direction, int layerNumber)
         {
             var faces = new[] { Faces[FaceType.Front], Faces[FaceType.Left], Faces[FaceType.Back], Faces[FaceType.Right] };
 
-            RotateFaces(faces, Edge.Bottom, direction);
+            RotateFaces(faces, Edge.Bottom, direction, layerNumber);
         }
 
-        private void RotateTop(RotationDirection direction)
+        private void RotateTop(RotationDirection direction, int layerNumber)
         {
             var faces = new[] { Faces[FaceType.Front], Faces[FaceType.Right], Faces[FaceType.Back], Faces[FaceType.Left] };
 
-            RotateFaces(faces, Edge.Top, direction);
+            RotateFaces(faces, Edge.Top, direction, layerNumber);
         }
 
-        private void RotateRight(RotationDirection direction)
+        private void RotateRight(RotationDirection direction, int layerNumber)
         {
             var faces = new[] { Faces[FaceType.Upper], Faces[FaceType.Front], Faces[FaceType.Down], Faces[FaceType.Back] };
 
@@ -290,29 +293,29 @@ namespace NCubeSolvers.Core
                 faces = faces.Reverse().ToArray();
 
                 var reverseEdgeSet = reverseEdge == edge ?
-                    faces[1].GetEdge(edge)
-                    : faces[1].GetEdge(edge).Reverse().ToArray();
+                    faces[1].GetEdge(layerNumber, edge)
+                    : faces[1].GetEdge(layerNumber, edge).Reverse().ToArray();
 
-                var temp = faces[0].GetEdge(reverseEdge).Reverse().ToArray();
-                faces[0].SetEdge(reverseEdge, reverseEdgeSet);
-                faces[1].SetEdge(edge, faces[2].GetEdge(edge));
-                faces[2].SetEdge(edge, faces[3].GetEdge(edge));
-                faces[3].SetEdge(edge, temp);
+                var temp = faces[0].GetEdge(layerNumber, reverseEdge).Reverse().ToArray();
+                faces[0].SetEdge(layerNumber, reverseEdge, reverseEdgeSet);
+                faces[1].SetEdge(layerNumber, edge, faces[2].GetEdge(layerNumber, edge));
+                faces[2].SetEdge(layerNumber, edge, faces[3].GetEdge(layerNumber, edge));
+                faces[3].SetEdge(layerNumber, edge, temp);
             }
             else
             {
                 var temp = reverseEdge == edge
-                    ? faces[0].GetEdge(edge)
-                    : faces[0].GetEdge(edge).Reverse().ToArray();
+                    ? faces[0].GetEdge(layerNumber, edge)
+                    : faces[0].GetEdge(layerNumber, edge).Reverse().ToArray();
 
-                faces[0].SetEdge(edge, faces[1].GetEdge(edge));
-                faces[1].SetEdge(edge, faces[2].GetEdge(edge));
-                faces[2].SetEdge(edge, faces[3].GetEdge(reverseEdge).Reverse().ToArray());
-                faces[3].SetEdge(reverseEdge, temp);
+                faces[0].SetEdge(layerNumber, edge, faces[1].GetEdge(layerNumber, edge));
+                faces[1].SetEdge(layerNumber, edge, faces[2].GetEdge(layerNumber, edge));
+                faces[2].SetEdge(layerNumber, edge, faces[3].GetEdge(layerNumber, reverseEdge).Reverse().ToArray());
+                faces[3].SetEdge(layerNumber, reverseEdge, temp);
             }
         }
 
-        private static void RotateFaces(IList<Face<T>> faces, Edge edge, RotationDirection direction)
+        private static void RotateFaces(IList<Face<T>> faces, Edge edge, RotationDirection direction, int layerNumber)
         {
             if (faces.Count != 4)
             {
@@ -327,29 +330,29 @@ namespace NCubeSolvers.Core
                 faces = faces.Reverse().ToList();
 
                 var reverseEdgeSet = reverseEdge == edge ?
-                    faces[1].GetEdge(reverseEdge)
-                    : faces[1].GetEdge(reverseEdge).Reverse().ToArray();
+                    faces[1].GetEdge(layerNumber, reverseEdge)
+                    : faces[1].GetEdge(layerNumber, reverseEdge).Reverse().ToArray();
                 var reverseEdgeSet2 = reverseEdge == edge ?
-                    faces[2].GetEdge(edge)
-                    : faces[2].GetEdge(edge).Reverse().ToArray();
+                    faces[2].GetEdge(layerNumber, edge)
+                    : faces[2].GetEdge(layerNumber, edge).Reverse().ToArray();
 
-                var temp = faces[0].GetEdge(edge);
-                faces[0].SetEdge(edge, reverseEdgeSet);
-                faces[1].SetEdge(reverseEdge, reverseEdgeSet2);
-                faces[2].SetEdge(edge, faces[3].GetEdge(edge));
-                faces[3].SetEdge(edge, temp);
+                var temp = faces[0].GetEdge(layerNumber, edge);
+                faces[0].SetEdge(layerNumber, edge, reverseEdgeSet);
+                faces[1].SetEdge(layerNumber, reverseEdge, reverseEdgeSet2);
+                faces[2].SetEdge(layerNumber, edge, faces[3].GetEdge(layerNumber, edge));
+                faces[3].SetEdge(layerNumber, edge, temp);
             }
             else
             {
                 var reverseEdgeSet = reverseEdge == edge
-                    ? faces[3].GetEdge(edge)
-                    : faces[3].GetEdge(edge).Reverse().ToArray();
+                    ? faces[3].GetEdge(layerNumber, edge)
+                    : faces[3].GetEdge(layerNumber, edge).Reverse().ToArray();
 
-                var temp = faces[0].GetEdge(edge);
-                faces[0].SetEdge(edge, faces[1].GetEdge(edge));
-                faces[1].SetEdge(edge, faces[2].GetEdge(reverseEdge));
-                faces[2].SetEdge(reverseEdge, reverseEdgeSet);
-                faces[3].SetEdge(edge, temp);
+                var temp = faces[0].GetEdge(layerNumber, edge);
+                faces[0].SetEdge(layerNumber, edge, faces[1].GetEdge(layerNumber, edge));
+                faces[1].SetEdge(layerNumber, edge, faces[2].GetEdge(layerNumber, reverseEdge));
+                faces[2].SetEdge(layerNumber, reverseEdge, reverseEdgeSet);
+                faces[3].SetEdge(layerNumber, edge, temp);
             }
         }
 

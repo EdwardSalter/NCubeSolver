@@ -1,6 +1,7 @@
 ﻿// 
 
 using System.Collections.Generic;
+using System.Linq;
 using NCubeSolver.Core;
 using NCubeSolvers.Core;
 using NUnit.Framework;
@@ -101,15 +102,44 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests
         }
 
         [Test]
-        public void Condense_FaceRotationsRegressionTest1()
+        public void Condense_GivenTwoLeftClockwiseRotationsOnTheSameLayer_RemovesBothRotationsAndAddsADoubleRotationForThatLayer()
         {
-            var list = new List<IRotation> { Rotations.LeftClockwise, Rotations.UpperClockwise, Rotations.UpperClockwise, Rotations.UpperAntiClockwise, Rotations.UpperAntiClockwise, Rotations.UpperClockwise, Rotations.LeftClockwise };
+            var list = new List<IRotation> { Rotations.SecondLayerLeftClockwise, Rotations.SecondLayerLeftClockwise };
 
             var condensed = list.Condense();
 
-            CollectionAssert.AreEqual(new[] { Rotations.LeftClockwise, Rotations.UpperClockwise, Rotations.LeftClockwise }, condensed);
+            CollectionAssert.AreEqual(new [] { Rotations.SecondLayerLeft2 }, condensed);
         }
 
+        [Test]
+        public void Condense_GivenTwoLeftClockWiseRotationsOnDifferentLayers_RemovesNoRotations()
+        {
+            var list = new List<IRotation> { Rotations.SecondLayerLeftClockwise, Rotations.LeftClockwise };
+
+            var condensed = list.Condense();
+
+            CollectionAssert.AreEqual(list, condensed);
+        }
+
+        [Test]
+        public void Condense_GivenOneLeftClockwiseAndOneLeftAnitClockwiseRotationsOnTheSameLayer_RemovesBothRotations()
+        {
+            var list = new List<IRotation> { Rotations.SecondLayerLeftClockwise, Rotations.SecondLayerLeftAntiClockwise };
+
+            var condensed = list.Condense();
+
+            CollectionAssert.IsEmpty(condensed);
+        }
+
+        [Test]
+        public void Condense_GivenOneLeftClockwiseAndOneLeftAnitClockwiseRotationsOnDifferentLayers_RemovesNoRotations()
+        {
+            var list = new List<IRotation> { Rotations.SecondLayerLeftClockwise, Rotations.LeftAntiClockwise };
+
+            var condensed = list.Condense();
+
+            CollectionAssert.AreEqual(list, condensed);
+        }
 
         #region CubeRotations
 
@@ -212,6 +242,30 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests
             var condensed = list.Condense();
 
             CollectionAssert.AreEqual(new[] { CubeRotations.YClockwise, CubeRotations.XClockwise, CubeRotations.YClockwise }, condensed);
+        }
+
+        #endregion
+
+        #region Regression Tests
+
+        [Test]
+        public void Condense_FaceRotations_RegressionTest1()
+        {
+            var list = new List<IRotation> { Rotations.LeftClockwise, Rotations.UpperClockwise, Rotations.UpperClockwise, Rotations.UpperAntiClockwise, Rotations.UpperAntiClockwise, Rotations.UpperClockwise, Rotations.LeftClockwise };
+
+            var condensed = list.Condense();
+
+            CollectionAssert.AreEqual(new[] { Rotations.LeftClockwise, Rotations.UpperClockwise, Rotations.LeftClockwise }, condensed);
+        }
+
+        [Test]
+        public void Condense_MixedRotations_RegressionTest1()
+        {
+            var list = RotationListEx.ParseInstructionList("l2 y2 y2 y2 D' D' D' D' D D' U' U' l l' U' R R' D D D' D' D' x' x x' x' y2 b2 b2 z U U' U U' U U' f' f D' D' D y' y z2 z2 y' y D2 D2 D2");
+
+            var condensed = list.Condense();
+
+            CollectionAssert.AreEqual(RotationListEx.ParseInstructionList("l2 y2 U D' x2 y2 z D").ToList(), condensed);
         }
 
         #endregion

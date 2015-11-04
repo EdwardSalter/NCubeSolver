@@ -32,14 +32,19 @@ namespace NCubeSolvers.Core
             return AllRotations[index];
         }
 
+        public static CubeRotation ByName(string name)
+        {
+            return AllRotations.SingleOrDefault(r => r.Name == name);
+        }
+
         public static CubeRotation ByAxis(Axis axis, RotationDirection direction)
         {
-            return AllRotations.First(r => r.Axis == axis && r.Direction == direction);
+            return AllRotations.Single(r => r.Axis == axis && r.Direction == direction && r.Count == 1);
         }
 
         public static CubeRotation ByAxisTwice(Axis axis)
         {
-            return AllRotations.First(r => r.Axis == axis && r.Count == 2);
+            return AllRotations.Single(r => r.Axis == axis && r.Count == 2);
         }
     }
 }

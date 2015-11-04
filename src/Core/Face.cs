@@ -70,16 +70,26 @@ namespace NCubeSolvers.Core
 
         public T[] GetEdge(Edge edge)
         {
+            return GetEdge(0, edge);
+        }
+
+        public T[] GetEdge(int indexFromEdge, Edge edge)
+        {
+            if (indexFromEdge >= m_size)
+            {
+                throw new ArgumentOutOfRangeException("The index from edge value must be less than the size of the face");
+            }
+
             switch (edge)
             {
                 case Edge.Top:
-                    return GetTop();
+                    return GetTop(indexFromEdge);
                 case Edge.Bottom:
-                    return GetBottom();
+                    return GetBottom(indexFromEdge);
                 case Edge.Left:
-                    return GetLeft();
+                    return GetLeft(indexFromEdge);
                 case Edge.Right:
-                    return GetRight();
+                    return GetRight(indexFromEdge);
                 default:
                     throw new ArgumentException("Invalid edge specified", "edge");
             }
@@ -87,114 +97,108 @@ namespace NCubeSolvers.Core
 
         public void SetEdge(Edge edge, T[] array)
         {
+            SetEdge(0, edge, array);
+        }
+
+        public void SetEdge(int indexFromEdge, Edge edge, T[] array)
+        {
+            if (array.Length != m_size)
+            {
+                throw new ArgumentException("Array should only contain " + m_size + " elements", "array");
+            }
+            if (indexFromEdge >= m_size)
+            {
+                throw new ArgumentOutOfRangeException("The index from edge value must be less than the size of the face");
+            }
+
             switch (edge)
             {
                 case Edge.Top:
-                    SetTop(array);
+                    SetTop(array, indexFromEdge);
                     break;
                 case Edge.Bottom:
-                    SetBottom(array);
+                    SetBottom(array, indexFromEdge);
                     break;
                 case Edge.Left:
-                    SetLeft(array);
+                    SetLeft(array, indexFromEdge);
                     break;
                 case Edge.Right:
-                    SetRight(array);
+                    SetRight(array, indexFromEdge);
                     break;
                 default:
                     throw new ArgumentException("Invalid edge specified", "edge");
             }
         }
 
-        private T[] GetRight()
+        private T[] GetRight(int indexFromEdge = 0)
         {
             var array = new T[m_size];
             for (int i = 0; i < m_size; i++)
             {
-                array[i] = Items[i, m_size - 1];
+                array[i] = Items[i, m_size - (indexFromEdge + 1)];
             }
             return array;
         }
 
-        private void SetRight(T[] array)
+        private void SetRight(T[] array, int indexFromEdge = 0)
         {
-            if (array.Length != m_size)
-            {
-                throw new ArgumentException("Array should only contain " + m_size + " elements", "array");
-            }
-
             for (int i = 0; i < array.Length; i++)
             {
-                Items[i, m_size - 1] = array[i];
+                Items[i, m_size - indexFromEdge - 1] = array[i];
             }
         }
 
-        private T[] GetLeft()
+        private T[] GetLeft(int indexFromEdge = 0)
         {
             var array = new T[m_size];
             for (int i = 0; i < m_size; i++)
             {
-                array[i] = Items[i, 0];
+                array[i] = Items[i, indexFromEdge];
             }
             return array;
         }
 
-        private void SetLeft(T[] array)
+        private void SetLeft(T[] array, int indexFromEdge = 0)
         {
-            if (array.Length != m_size)
-            {
-                throw new ArgumentException("Array should only contain " + m_size + " elements", "array");
-            }
-
             for (int i = 0; i < array.Length; i++)
             {
-                Items[i, 0] = array[i];
+                Items[i, indexFromEdge] = array[i];
             }
         }
 
-        private T[] GetTop()
+        private T[] GetTop(int indexFromEdge = 0)
         {
             var array = new T[m_size];
             for (int i = 0; i < m_size; i++)
             {
-                array[i] = Items[0, i];
+                array[i] = Items[indexFromEdge, i];
             }
             return array;
         }
 
-        private void SetTop(T[] array)
+        private void SetTop(T[] array, int indexFromEdge = 0)
         {
-            if (array.Length != m_size)
-            {
-                throw new ArgumentException("Array should only contain " + m_size + " elements", "array");
-            }
-
             for (int i = 0; i < array.Length; i++)
             {
-                Items[0, i] = array[i];
+                Items[indexFromEdge, i] = array[i];
             }
         }
 
-        private T[] GetBottom()
+        private T[] GetBottom(int indexFromEdge = 0)
         {
             var array = new T[m_size];
             for (int i = 0; i < m_size; i++)
             {
-                array[i] = Items[m_size - 1, i];
+                array[i] = Items[m_size - 1 - indexFromEdge, i];
             }
             return array;
         }
 
-        private void SetBottom(T[] array)
+        private void SetBottom(T[] array, int indexFromEdge = 0)
         {
-            if (array.Length != m_size)
-            {
-                throw new ArgumentException("Array should only contain " + m_size + " elements", "array");
-            }
-
             for (int i = 0; i < array.Length; i++)
             {
-                Items[m_size - 1, i] = array[i];
+                Items[m_size - 1 - indexFromEdge, i] = array[i];
             }
         }
 

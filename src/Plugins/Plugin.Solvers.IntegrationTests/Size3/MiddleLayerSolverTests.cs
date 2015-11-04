@@ -21,7 +21,7 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size3
             new BottomLayerSolver().Solve(configuration).Wait();
             var solver = new MiddleLayerSolver();
 
-            solver.Solve(configuration).Wait();
+            solver.Solve(configuration).Wait(TestRunner.Timeout);
 
             CubeConfigurationAssert.MiddleLayerIsCorrect(configuration);
         }
