@@ -5,7 +5,18 @@
         public Axis Axis { get; set; }
         public override IRotation Reverse()
         {
-            return new CubeRotation { Axis = Axis, Direction = RotationDirectionEx.Reverse(Direction), Count = Count, Name = ReverseName(Name) };
+            if (Count == 2)
+            {
+                return this;
+            }
+
+            return new CubeRotation
+            {
+                Axis = Axis,
+                Direction = RotationDirectionEx.Reverse(Direction), 
+                Count = Count, 
+                Name = ReverseName(Name)
+            };
         }
     }
 }

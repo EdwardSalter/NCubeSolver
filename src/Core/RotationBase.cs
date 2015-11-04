@@ -16,7 +16,7 @@ namespace NCubeSolvers.Core
         protected string ReverseName(string name)
         {
             var indexOfReverse = name.IndexOf('\'');
-            return indexOfReverse >= 0 ? name.Substring(0, indexOfReverse - 1) : name + "'";
+            return indexOfReverse >= 0 ? name.Replace("'", string.Empty) : name + "'";
         }
 
         public override string ToString()

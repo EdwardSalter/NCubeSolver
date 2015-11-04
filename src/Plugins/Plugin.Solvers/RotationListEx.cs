@@ -6,8 +6,27 @@ namespace NCubeSolver.Plugins.Solvers
 {
     static class RotationListEx
     {
-        public static IList<IRotation> Condense(this IList<IRotation> list)
+        public static IEnumerable<IRotation> ParseInstructionList(string s)
         {
+            foreach (var s1 in s.Split(' '))
+            {
+                var cubeRotation = CubeRotations.ByName(s1);
+                if (cubeRotation != null)
+                {
+                    yield return cubeRotation;
+                }
+
+                var faceRotation = Rotations.ByName(s1);
+                if (faceRotation != null)
+                {
+                    yield return faceRotation;
+                }
+            } 
+        }
+
+        public static IEnumerable<IRotation> Condense(this IEnumerable<IRotation> inList)
+        {
+            var list = inList.ToList();
             if (!list.Any()) return list;
 
             var returning = new List<IRotation>(list.Count);
@@ -66,7 +85,7 @@ namespace NCubeSolver.Plugins.Solvers
 
         private static IEnumerable<FaceRotation> CondenseDoubleRotations(FaceRotation current, FaceRotation previous)
         {
-            if (current.Face == previous.Face)
+            if (current.Face == previous.Face && current.LayerNumberFromFace == previous.LayerNumberFromFace)
             {
                 var currentMultiplier = current.Direction == RotationDirection.Clockwise ? 1 : -1;
                 var previousMultiplier = previous.Direction == RotationDirection.Clockwise ? 1 : -1;
@@ -74,9 +93,9 @@ namespace NCubeSolver.Plugins.Solvers
                 var totalTimes = currentMultiplier * current.Count + previousMultiplier * previous.Count;
 
                 if (totalTimes % 4 == 0) return new List<FaceRotation>();
-                if (totalTimes % 2 == 0) return new List<FaceRotation> { Rotations.ByFaceTwice(current.Face) };
-                if (totalTimes % 3 == 0) return new List<FaceRotation> { Rotations.ByFace(current.Face, RotationDirection.AntiClockwise) };
-                if (totalTimes == 1) return new List<FaceRotation> { Rotations.ByFace(current.Face, RotationDirection.Clockwise) };
+                if (totalTimes % 2 == 0) return new List<FaceRotation> { Rotations.ByFaceTwice(current.Face, current.LayerNumberFromFace) };
+                if (totalTimes % 3 == 0) return new List<FaceRotation> { Rotations.ByFace(current.Face, RotationDirection.AntiClockwise, current.LayerNumberFromFace) };
+                if (totalTimes == 1) return new List<FaceRotation> { Rotations.ByFace(current.Face, RotationDirection.Clockwise, current.LayerNumberFromFace) };
             }
 
             return new List<FaceRotation> { previous, current };

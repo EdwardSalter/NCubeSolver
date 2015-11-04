@@ -61,27 +61,30 @@ namespace NCubeSolvers.Core
 
             for (int i = 0; i < rotation.Count; i++)
             {
-                Faces[faceType].Rotate(direction);
+                if (rotation.LayerNumberFromFace == 0)
+                {
+                    Faces[faceType].Rotate(direction);
+                }
 
                 switch (faceType)
                 {
                     case FaceType.Upper:
-                        RotateTop(direction);
+                        RotateTop(direction, rotation.LayerNumberFromFace);
                         break;
                     case FaceType.Down:
-                        RotateBottom(direction);
+                        RotateBottom(direction, rotation.LayerNumberFromFace);
                         break;
                     case FaceType.Left:
-                        RotateLeft(direction);
+                        RotateLeft(direction, rotation.LayerNumberFromFace);
                         break;
                     case FaceType.Right:
-                        RotateRight(direction);
+                        RotateRight(direction, rotation.LayerNumberFromFace);
                         break;
                     case FaceType.Front:
-                        RotateFront(direction);
+                        RotateFront(direction, rotation.LayerNumberFromFace);
                         break;
                     case FaceType.Back:
-                        RotateBack(direction);
+                        RotateBack(direction, rotation.LayerNumberFromFace);
                         break;
                 }
             }
@@ -177,7 +180,7 @@ namespace NCubeSolvers.Core
             Faces[curFace] = new Face<T>(Faces[curFace].Id, items);
         }
 
-        private void RotateBack(RotationDirection direction)
+        private void RotateBack(RotationDirection direction, int layerNumber)
         {
             var faces = new[] { Faces[FaceType.Left], Faces[FaceType.Upper], Faces[FaceType.Right], Faces[FaceType.Down] };
 
@@ -201,7 +204,7 @@ namespace NCubeSolvers.Core
             }
         }
 
-        private void RotateFront(RotationDirection direction)
+        private void RotateFront(RotationDirection direction, int layerNumber)
         {
             var faces = new[] { Faces[FaceType.Left], Faces[FaceType.Down], Faces[FaceType.Right], Faces[FaceType.Upper] };
 
@@ -225,7 +228,7 @@ namespace NCubeSolvers.Core
             }
         }
 
-        private void RotateLeft(RotationDirection direction)
+        private void RotateLeft(RotationDirection direction, int layerNumber)
         {
             var faces = new[] { Faces[FaceType.Front], Faces[FaceType.Upper], Faces[FaceType.Back], Faces[FaceType.Down] };
 
@@ -264,21 +267,21 @@ namespace NCubeSolvers.Core
             }
         }
 
-        private void RotateBottom(RotationDirection direction)
+        private void RotateBottom(RotationDirection direction, int layerNumber)
         {
             var faces = new[] { Faces[FaceType.Front], Faces[FaceType.Left], Faces[FaceType.Back], Faces[FaceType.Right] };
 
-            RotateFaces(faces, Edge.Bottom, direction);
+            RotateFaces(faces, Edge.Bottom, direction, layerNumber);
         }
 
-        private void RotateTop(RotationDirection direction)
+        private void RotateTop(RotationDirection direction, int layerNumber)
         {
             var faces = new[] { Faces[FaceType.Front], Faces[FaceType.Right], Faces[FaceType.Back], Faces[FaceType.Left] };
 
-            RotateFaces(faces, Edge.Top, direction);
+            RotateFaces(faces, Edge.Top, direction, layerNumber);
         }
 
-        private void RotateRight(RotationDirection direction)
+        private void RotateRight(RotationDirection direction, int layerNumber)
         {
             var faces = new[] { Faces[FaceType.Upper], Faces[FaceType.Front], Faces[FaceType.Down], Faces[FaceType.Back] };
 
@@ -312,7 +315,7 @@ namespace NCubeSolvers.Core
             }
         }
 
-        private static void RotateFaces(IList<Face<T>> faces, Edge edge, RotationDirection direction)
+        private static void RotateFaces(IList<Face<T>> faces, Edge edge, RotationDirection direction, int layerNumber)
         {
             if (faces.Count != 4)
             {

@@ -19,7 +19,7 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size3
             var configuration = ConfigurationGenerator.GenerateRandomConfiguration(3, 50);
             var solver = new BottomLayerSolver();
 
-            solver.Solve(configuration).Wait();
+            solver.Solve(configuration).Wait(TestRunner.Timeout);
 
             CubeConfigurationAssert.BottomLayerCornersAreCorrect(configuration);
         }

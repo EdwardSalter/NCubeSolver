@@ -6,7 +6,8 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests
 {
     static class TestRunner
     {
-        public const int MultipleTimesToRun = 100;
+        public const int MultipleTimesToRun = 10;
+        public const int Timeout = 50;
 
         public static void RunTestMultipleTimes(int timesToRun, Action test)
         {
@@ -19,8 +20,10 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests
                 }
                 catch
                 {
+                    Debug.WriteLine("Test Failed");
                     timesFailed ++;
                 }
+                Debug.WriteLine("");
             }
 
             var percent = ((double)timesToRun - timesFailed) / timesToRun;

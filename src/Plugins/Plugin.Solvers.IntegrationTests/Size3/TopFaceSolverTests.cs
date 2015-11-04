@@ -17,7 +17,7 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size3
                 var configuration = CreateSolvedTopCrossConfiguration(50);
                 var solver = new TopFaceSolver();
 
-                solver.Solve(configuration).Wait();
+                solver.Solve(configuration).Wait(TestRunner.Timeout);
 
                 CubeConfigurationAssert.FaceIsColour(configuration, FaceType.Upper, FaceColour.Yellow);
                 CubeConfigurationAssert.TopLayerCrossIsCorrect(configuration);
@@ -27,10 +27,10 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size3
         private static CubeConfiguration<FaceColour> CreateSolvedTopCrossConfiguration(int numberOfRotations)
         {
             var configuration = ConfigurationGenerator.GenerateRandomConfiguration(3, numberOfRotations);
-            new BottomCrossSolver().Solve(configuration).Wait();
-            new BottomLayerSolver().Solve(configuration).Wait();
-            new MiddleLayerSolver().Solve(configuration).Wait();
-            new TopCrossSolver().Solve(configuration).Wait();
+            new BottomCrossSolver().Solve(configuration).Wait(TestRunner.Timeout);
+            new BottomLayerSolver().Solve(configuration).Wait(TestRunner.Timeout);
+            new MiddleLayerSolver().Solve(configuration).Wait(TestRunner.Timeout);
+            new TopCrossSolver().Solve(configuration).Wait(TestRunner.Timeout);
             return configuration;
         }
     }
