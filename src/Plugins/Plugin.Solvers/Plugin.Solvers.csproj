@@ -56,6 +56,8 @@
     <Compile Include="Size3\TopCrossSolver.cs" />
     <Compile Include="Size3\TopFaceSolver.cs" />
     <Compile Include="Size3\TopLayerSolver.cs" />
+    <Compile Include="Size5\BottomCrossSolver.cs" />
+    <Compile Include="Size5\SimpleSolver.cs" />
     <Compile Include="SolverBase.cs" />
   </ItemGroup>
   <ItemGroup>

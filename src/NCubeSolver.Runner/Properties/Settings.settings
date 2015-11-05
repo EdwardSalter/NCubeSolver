@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Runner.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="NCubeSolver.Runner.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="DisplayPluginName" Type="System.String" Scope="User">
@@ -9,7 +9,7 @@
       <Value Profile="(Default)">Random</Value>
     </Setting>
     <Setting Name="SolverPluginName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">BeginerMethod</Value>
+      <Value Profile="(Default)">Simple 5x5x5 Solver</Value>
     </Setting>
     <Setting Name="CelebratorPluginName" Type="System.String" Scope="User">
       <Value Profile="(Default)">TimeDelayCelebrator</Value>

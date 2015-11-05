@@ -49,7 +49,7 @@ namespace NCubeSolver.Runner.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("BeginerMethod")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Simple 5x5x5 Solver")]
         public string SolverPluginName {
             get {
                 return ((string)(this["SolverPluginName"]));
