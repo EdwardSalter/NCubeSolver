@@ -7,7 +7,6 @@ namespace NCubeSolver.Plugins.Solvers.Size5
     public class SimpleSolver : SolverBase
     {
         private CubeConfiguration<FaceColour> m_configuration;
-        private readonly BottomCrossSolver m_bottomCrossSolver = new BottomCrossSolver();
 
         public override IEnumerable<int> ForCubeSizes
         {
@@ -26,12 +25,31 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             if (cubeRotation != null)
                 solution.Add(cubeRotation);
 
-            var stepsToSolveBottomCross = await m_bottomCrossSolver.Solve(m_configuration);
-            solution.AddRange(stepsToSolveBottomCross);
-
+            await SolveCrosses(solution);
 
 
             return solution.Condense();
+        }
+
+        private async Task SolveCrosses(List<IRotation> solution)
+        {
+            var stepsToSolveCross = await new InnerCrossSolver(FaceColour.White).Solve(m_configuration);
+            solution.AddRange(stepsToSolveCross);
+
+            stepsToSolveCross = await new InnerCrossSolver(FaceColour.Red).Solve(m_configuration);
+            solution.AddRange(stepsToSolveCross);
+
+            stepsToSolveCross = await new InnerCrossSolver(FaceColour.Blue).Solve(m_configuration);
+            solution.AddRange(stepsToSolveCross);
+
+            stepsToSolveCross = await new InnerCrossSolver(FaceColour.Orange).Solve(m_configuration);
+            solution.AddRange(stepsToSolveCross);
+
+            stepsToSolveCross = await new InnerCrossSolver(FaceColour.Green).Solve(m_configuration);
+            solution.AddRange(stepsToSolveCross);
+
+            stepsToSolveCross = await new InnerCrossSolver(FaceColour.Yellow).Solve(m_configuration);
+            solution.AddRange(stepsToSolveCross);
         }
 
         public override string PluginName

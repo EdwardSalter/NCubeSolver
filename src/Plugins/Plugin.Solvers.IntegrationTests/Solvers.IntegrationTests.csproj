@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="ConfigurationGenerator.cs" />
     <Compile Include="RotationListExTests.cs" />
+    <Compile Include="Size5\InnerCrossSolverTests.cs" />
     <Compile Include="Size3\BeginerMethodTests.cs" />
     <Compile Include="Size3\TopCrossSolverTests.cs" />
     <Compile Include="Size3\MiddleLayerSolverTests.cs" />

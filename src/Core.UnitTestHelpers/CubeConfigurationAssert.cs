@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using NCubeSolvers.Core;
 using NUnit.Framework;
 
@@ -24,14 +25,15 @@ namespace NCubeSolver.Core.UnitTestHelpers
             Assert.AreEqual(FaceColour.Green, configuration.Faces[FaceType.Right].TopCentre());
         }
 
-        public static void FaceHasCrossOfColour(CubeConfiguration<FaceColour> configuration, FaceType face, FaceColour faceColour)
+        public static void FaceHasCrossOfColour(CubeConfiguration<FaceColour> configuration, FaceType faceType, FaceColour faceColour)
         {
-            var bottomFace = configuration.Faces[face];
-            Assert.AreEqual(faceColour, bottomFace.Centre);
-            Assert.AreEqual(faceColour, bottomFace.GetEdge(Edge.Right).Centre());
-            Assert.AreEqual(faceColour, bottomFace.GetEdge(Edge.Top).Centre());
-            Assert.AreEqual(faceColour, bottomFace.GetEdge(Edge.Bottom).Centre());
-            Assert.AreEqual(faceColour, bottomFace.GetEdge(Edge.Bottom).Centre());
+            int layer = Math.Max(configuration.Size - 4, 0);
+            var face = configuration.Faces[faceType];
+            Assert.AreEqual(faceColour, face.Centre);
+            Assert.AreEqual(faceColour, face.GetEdge(layer, Edge.Right).Centre());
+            Assert.AreEqual(faceColour, face.GetEdge(layer, Edge.Top).Centre());
+            Assert.AreEqual(faceColour, face.GetEdge(layer, Edge.Bottom).Centre());
+            Assert.AreEqual(faceColour, face.GetEdge(layer, Edge.Bottom).Centre());
         }
 
         public static void FaceIsColour(CubeConfiguration<FaceColour> configuration, FaceType face, FaceColour colour)
