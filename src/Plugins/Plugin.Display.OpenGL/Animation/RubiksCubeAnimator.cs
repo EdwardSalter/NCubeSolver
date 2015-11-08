@@ -43,12 +43,12 @@ namespace NCubeSolver.Plugins.Display.OpenGL.Animation
             get
             {
                 var faceRotation = m_currentRotation as FaceRotation;
-                var cubeRotation = m_currentRotation as CubeRotation;
-
                 if (faceRotation != null)
                 {
-                    return GetAnimatorsForFace(faceRotation.Face);
+                    return GetAnimatorsForFace(faceRotation.Face, faceRotation.LayerNumberFromFace);
                 }
+
+                var cubeRotation = m_currentRotation as CubeRotation;
                 if (cubeRotation != null)
                 {
                     return m_animators;
@@ -175,14 +175,15 @@ namespace NCubeSolver.Plugins.Display.OpenGL.Animation
             return StartRotating(rotation);
         }
 
-        private IEnumerable<CubieAnimator> GetAnimatorsForFace(FaceType faceType)
+        private IEnumerable<CubieAnimator> GetAnimatorsForFace(FaceType faceType, int layerNumberFromFace)
         {
-            var face = m_rubiksCube.CubeConfiguration.Faces[faceType];
+            var face = m_rubiksCube.CubeConfiguration.GetEdgesByLayer(faceType, layerNumberFromFace);
             var animators = m_animators.Where(animator => face.Contains(animator.Cubie)).ToList();
-            if (animators.Count != (int)Math.Pow(m_rubiksCube.Size, 2))
-            {
-                throw new Exception("Invalid number of rotating cubes");
-            }
+
+            //if (animators.Count != (int)Math.Pow(m_rubiksCube.Size, 2))
+            //{
+            //    throw new Exception("Invalid number of rotating cubes");
+            //}
 
             return animators;
         }

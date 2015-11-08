@@ -100,12 +100,12 @@ namespace NCubeSolvers.Core
                 switch (rotation.Axis)
                 {
                     case Axis.X:
-                        centralFaces = new[] {FaceType.Upper, FaceType.Front, FaceType.Down, FaceType.Back};
+                        centralFaces = new[] { FaceType.Upper, FaceType.Front, FaceType.Down, FaceType.Back };
                         RotateCube(centralFaces, FaceType.Left, FaceType.Right, rotation.Direction);
                         break;
 
                     case Axis.Y:
-                        centralFaces = new[] {FaceType.Front, FaceType.Right, FaceType.Back, FaceType.Left};
+                        centralFaces = new[] { FaceType.Front, FaceType.Right, FaceType.Back, FaceType.Left };
                         RotateCube(centralFaces, FaceType.Down, FaceType.Upper, rotation.Direction, false);
                         break;
 
@@ -367,6 +367,77 @@ namespace NCubeSolvers.Core
             {
                 face.CheckValidity();
             }
+        }
+
+        public IEnumerable<T> GetEdgesByLayer(FaceType faceType, int layerNumber)
+        {
+            List<T> returning = new List<T>();
+
+            if (layerNumber == 0)
+            {
+                var items = Faces[faceType].Items;
+                var length = items.GetLength(0);
+                for (int y = 0; y < length; y++)
+                {
+                    for (int x = 0; x < length; x++)
+                    {
+                        returning.Add(items[y, x]);
+                    }
+                }
+                return returning;
+            }
+
+            Face<T>[] faces;
+
+            switch (faceType)
+            {
+                case FaceType.Upper:
+                    faces = new[] { Faces[FaceType.Front], Faces[FaceType.Right], Faces[FaceType.Back], Faces[FaceType.Left] };
+                    returning = faces.SelectMany(f => f.GetEdge(layerNumber, Edge.Top)).ToList();
+                    break;
+
+                case FaceType.Down:
+                    faces = new[] { Faces[FaceType.Front], Faces[FaceType.Right], Faces[FaceType.Back], Faces[FaceType.Left] };
+                    returning = faces.SelectMany(f => f.GetEdge(layerNumber, Edge.Bottom)).ToList();
+                    break;
+
+                case FaceType.Back:
+                    returning.Clear();
+                    returning.AddRange(Faces[FaceType.Left].GetEdge(layerNumber, Edge.Left));
+                    returning.AddRange(Faces[FaceType.Upper].GetEdge(layerNumber, Edge.Top));
+                    returning.AddRange(Faces[FaceType.Right].GetEdge(layerNumber, Edge.Right));
+                    returning.AddRange(Faces[FaceType.Down].GetEdge(layerNumber, Edge.Bottom));
+                    break;
+
+                case FaceType.Front:
+                    returning.Clear();
+                    returning.AddRange(Faces[FaceType.Left].GetEdge(layerNumber, Edge.Right));
+                    returning.AddRange(Faces[FaceType.Upper].GetEdge(layerNumber, Edge.Bottom));
+                    returning.AddRange(Faces[FaceType.Right].GetEdge(layerNumber, Edge.Left));
+                    returning.AddRange(Faces[FaceType.Down].GetEdge(layerNumber, Edge.Top));
+                    break;
+
+                case FaceType.Left:
+                    returning.Clear();
+                    returning.AddRange(Faces[FaceType.Front].GetEdge(layerNumber, Edge.Left));
+                    returning.AddRange(Faces[FaceType.Upper].GetEdge(layerNumber, Edge.Left));
+                    returning.AddRange(Faces[FaceType.Back].GetEdge(layerNumber, Edge.Right));
+                    returning.AddRange(Faces[FaceType.Down].GetEdge(layerNumber, Edge.Left));
+                    break;
+
+                case FaceType.Right:
+                    returning.Clear();
+                    returning.AddRange(Faces[FaceType.Front].GetEdge(layerNumber, Edge.Right));
+                    returning.AddRange(Faces[FaceType.Upper].GetEdge(layerNumber, Edge.Right));
+                    returning.AddRange(Faces[FaceType.Back].GetEdge(layerNumber, Edge.Left));
+                    returning.AddRange(Faces[FaceType.Down].GetEdge(layerNumber, Edge.Right));
+                    break;
+
+                default:
+                    throw new InvalidOperationException("Unknown face type given");
+            }
+
+            return returning;
         }
     }
 }
