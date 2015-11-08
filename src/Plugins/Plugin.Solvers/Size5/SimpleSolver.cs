@@ -27,6 +27,10 @@ namespace NCubeSolver.Plugins.Solvers.Size5
 
             await SolveCrosses(solution);
 
+            var innerSquareSolver = new InnerSquareSolver();
+            var stepsToSolveSquares = await innerSquareSolver.Solve(m_configuration);
+            solution.AddRange(stepsToSolveSquares);
+
 
             return solution.Condense();
         }
