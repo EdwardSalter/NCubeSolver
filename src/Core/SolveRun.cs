@@ -29,7 +29,7 @@ namespace NCubeSolvers.Core
             Console.WriteLine("Creating cube configuration");
 
             // TODO: CONFIGURABLE
-            m_configuration = m_generator.GenerateConfiguration(5, 50);
+            m_configuration = m_generator.GenerateConfiguration(5, 100);
             if (m_display != null)
                 await m_display.SetCubeConfiguration(m_configuration);
 

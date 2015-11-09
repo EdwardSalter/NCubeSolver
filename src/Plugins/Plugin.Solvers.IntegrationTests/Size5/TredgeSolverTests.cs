@@ -21,8 +21,8 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size5
 
             solver.Solve(configuration).Wait(TestRunner.Timeout);
 
-            var frontColour = configuration.Faces[FaceType.Front].GetEdge(Edge.Left).Centre();
-            var leftColour = configuration.Faces[FaceType.Left].GetEdge(Edge.Right).Centre();
+            var frontColour = configuration.Faces[FaceType.Front].LeftCentre();
+            var leftColour = configuration.Faces[FaceType.Left].RightCentre();
             Assert.AreEqual(frontColour, configuration.Faces[FaceType.Front].GetEdge(Edge.Left)[1]);
             Assert.AreEqual(frontColour, configuration.Faces[FaceType.Front].GetEdge(Edge.Left)[3]);
             Assert.AreEqual(leftColour, configuration.Faces[FaceType.Left].GetEdge(Edge.Right)[1]);

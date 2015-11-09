@@ -33,13 +33,11 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                 await CheckUpperAndDownEdgesOnFace(configuration, solution, FaceType.Left);
                 await CheckUpperAndDownEdgesOnFace(configuration, solution, FaceType.Back);
                 await CheckUpperAndDownEdgesOnFace(configuration, solution, FaceType.Right);
-            } while (previousSolution.Count != solution.Count);
 
-            //await CheckMiddleLayersOnFace(configuration, solution, FaceType.Left);
-            await CheckMiddleLayersOnFace(configuration, solution, FaceType.Right);
-            await CheckMiddleLayersOnFace(configuration, solution, FaceType.Back);
-            await CheckMiddleLayersOnFace(configuration, solution, FaceType.Front);
-            // todo check other faces
+                await CheckMiddleLayersOnFace(configuration, solution, FaceType.Right);
+                await CheckMiddleLayersOnFace(configuration, solution, FaceType.Back);
+                await CheckMiddleLayersOnFace(configuration, solution, FaceType.Front);
+            } while (previousSolution.Count != solution.Count);
 
             return solution;
         }
@@ -64,10 +62,6 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                 (top == leftFaceColour && joingingFaceEdgeTop == frontFaceColour) ||
                 (bottom == leftFaceColour && joingingFaceEdgeBottom == frontFaceColour))
             {
-                var front = configuration.Faces[FaceType.Front].Items;
-                var left = configuration.Faces[FaceType.Left].Items;
-                var back = configuration.Faces[FaceType.Back].Items;
-                var right = configuration.Faces[FaceType.Right].Items;
                 var rotationToBringEdgeToFront = GetRotationToPutTredgeOnFront((top == frontFaceColour && joingingFaceEdgeTop == leftFaceColour) || (top == leftFaceColour && joingingFaceEdgeTop == frontFaceColour), face, 1);
                 await CommonActions.ApplyAndAddRotation(rotationToBringEdgeToFront, solution, configuration);
             }
@@ -132,7 +126,7 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                         return null;
                     case FaceType.Left:
                         return Rotations.ByFace(FaceType.Down, RotationDirection.Clockwise, layer);
-                        
+
                     case FaceType.Right:
                         return Rotations.ByFace(FaceType.Down, RotationDirection.AntiClockwise, layer);
                     case FaceType.Back:
