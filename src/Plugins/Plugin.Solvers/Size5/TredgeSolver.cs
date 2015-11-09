@@ -6,6 +6,15 @@ namespace NCubeSolver.Plugins.Solvers.Size5
 {
     internal class TredgeSolver : IPartialSolver
     {
+        private enum TredgeMatch
+        {
+            None = 0,
+            FrontLeftMatchesCenter,
+            FrontRightMatchesCenter,
+            UpperLeftMatchesCenter,
+            UpperRightMatchesCenter,
+        }
+
         public async Task<IEnumerable<IRotation>> Solve(CubeConfiguration<FaceColour> configuration)
         {
             var solution = new List<IRotation>();
@@ -19,21 +28,18 @@ namespace NCubeSolver.Plugins.Solvers.Size5
 
         private static async Task CheckFrontUpper(CubeConfiguration<FaceColour> configuration, List<IRotation> solution)
         {
-            var frontColour = configuration.Faces[FaceType.Front].LeftCentre();
-            var leftColour = configuration.Faces[FaceType.Left].RightCentre();
+            var frontFaceColour = configuration.Faces[FaceType.Front].LeftCentre();
+            var leftFaceColour = configuration.Faces[FaceType.Left].RightCentre();
+            var match = MatchColoursOnUpperFaceEdge(configuration, frontFaceColour, leftFaceColour, FaceType.Front);
+            if (match == TredgeMatch.None) return;
 
-            var frontTopLeft = configuration.Faces[FaceType.Front].GetEdge(Edge.Top)[1];
-            var frontTopRight = configuration.Faces[FaceType.Front].GetEdge(Edge.Top)[3];
-            var upperBottomLeft = configuration.Faces[FaceType.Upper].GetEdge(Edge.Bottom)[1];
-            var upperBottomRight = configuration.Faces[FaceType.Upper].GetEdge(Edge.Bottom)[3];
-            if ((frontTopLeft == frontColour && upperBottomLeft == leftColour) ||
-                (frontTopRight == frontColour && upperBottomRight == leftColour))
+            if (match == TredgeMatch.FrontLeftMatchesCenter || match == TredgeMatch.FrontRightMatchesCenter)
             {
                 await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration);
                 await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
                 await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration);
 
-                if (frontTopLeft == frontColour && upperBottomLeft == leftColour)
+                if (match == TredgeMatch.FrontLeftMatchesCenter)
                 {
                     await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownAntiClockwise, solution, configuration);
                 }
@@ -41,26 +47,51 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                 {
                     await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration);
                 }
+                return;
             }
-            // TODO: CHECK THIS
-            if ((frontTopLeft == leftColour && upperBottomLeft == frontColour) ||
-                (frontTopRight == leftColour && upperBottomRight == frontColour))
-            {
-                await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
-                await CommonActions.ApplyAndAddRotation(Rotations.FrontAntiClockwise, solution, configuration);
-                await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
-                await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration);
-                await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration);
 
-                if (frontTopLeft == leftColour && upperBottomLeft == frontColour)
-                {
-                    await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownAntiClockwise, solution, configuration);
-                }
-                else
-                {
-                    await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration);
-                }
+            // TODO: CHECK THIS
+            await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
+            await CommonActions.ApplyAndAddRotation(Rotations.FrontAntiClockwise, solution, configuration);
+            await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
+            await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration);
+            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration);
+
+            if (match == TredgeMatch.UpperLeftMatchesCenter)
+            {
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownAntiClockwise, solution, configuration);
             }
+            else
+            {
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration);
+            }
+        }
+
+        private static TredgeMatch MatchColoursOnUpperFaceEdge(CubeConfiguration<FaceColour> configuration, FaceColour frontFaceColour, FaceColour leftColour, FaceType face)
+        {
+            var frontTopLeft = configuration.Faces[face].GetEdge(Edge.Top)[1];
+            var upperBottomLeft = configuration.Faces[FaceType.Upper].GetEdge(Edge.Bottom)[1];
+            var frontTopRight = configuration.Faces[face].GetEdge(Edge.Top)[3];
+            var upperBottomRight = configuration.Faces[FaceType.Upper].GetEdge(Edge.Bottom)[3];
+            if (frontTopLeft == frontFaceColour && upperBottomLeft == leftColour)
+            {
+                return TredgeMatch.FrontLeftMatchesCenter;
+            }
+            if (frontTopRight == frontFaceColour && upperBottomRight == leftColour)
+            {
+                return TredgeMatch.FrontRightMatchesCenter;
+            }
+            
+            if (frontTopLeft == leftColour && upperBottomLeft == frontFaceColour)
+            {
+                return TredgeMatch.UpperLeftMatchesCenter;
+            }
+            if (frontTopRight == leftColour && upperBottomRight == frontFaceColour)
+            {
+                return TredgeMatch.UpperRightMatchesCenter;
+            }
+
+            return TredgeMatch.None;
         }
 
         private static async Task CheckFrontDown(CubeConfiguration<FaceColour> configuration, List<IRotation> solution)
