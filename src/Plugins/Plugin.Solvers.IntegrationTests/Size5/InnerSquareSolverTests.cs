@@ -18,12 +18,22 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size5
         {
             var configuration = ConfigurationGenerator.GenerateRandomConfiguration(5, 100);
             var solver = new InnerSquareSolver();
-            var colour = configuration.Faces[FaceType.Front].Centre;
 
             solver.Solve(configuration).Wait(TestRunner.Timeout);
 
-            var topEdge = configuration.Faces[FaceType.Front].GetEdge(1, Edge.Top);
-            var bottomEdge = configuration.Faces[FaceType.Front].GetEdge(1, Edge.Bottom);
+            AssertCornersAreCorrect(configuration, FaceType.Front);
+            AssertCornersAreCorrect(configuration, FaceType.Back);
+            AssertCornersAreCorrect(configuration, FaceType.Upper);
+            AssertCornersAreCorrect(configuration, FaceType.Down);
+            AssertCornersAreCorrect(configuration, FaceType.Left);
+            AssertCornersAreCorrect(configuration, FaceType.Right);
+        }
+
+        private static void AssertCornersAreCorrect(CubeConfiguration<FaceColour> configuration, FaceType faceType)
+        {
+            var colour = configuration.Faces[faceType].Centre;
+            var topEdge = configuration.Faces[faceType].GetEdge(1, Edge.Top);
+            var bottomEdge = configuration.Faces[faceType].GetEdge(1, Edge.Bottom);
             Assert.AreEqual(colour, topEdge[1]);
             Assert.AreEqual(colour, topEdge[3]);
             Assert.AreEqual(colour, bottomEdge[1]);

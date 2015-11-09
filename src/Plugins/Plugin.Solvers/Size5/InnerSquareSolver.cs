@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using NCubeSolvers.Core;
 
@@ -10,6 +11,29 @@ namespace NCubeSolver.Plugins.Solvers.Size5
         {
             var solution = new List<IRotation>();
 
+            var allColours = new[] { FaceColour.Red, FaceColour.Blue, FaceColour.Yellow, FaceColour.Orange, FaceColour.Green, FaceColour.White, };
+            var colourIndex = Array.IndexOf(allColours, configuration.Faces[FaceType.Front].Centre);
+            var startIndex = colourIndex;
+
+            await SolveFrontFace(configuration, solution);
+            do
+            {
+                colourIndex++;
+                if (colourIndex >= allColours.Length)
+                {
+                    colourIndex = 0;
+                }
+                var nextColour = allColours[colourIndex];
+                solution.Add(await CommonActions.PositionOnFront(configuration, nextColour));
+
+                await SolveFrontFace(configuration, solution);
+            } while (colourIndex != startIndex);
+
+            return solution;
+        }
+
+        private async Task SolveFrontFace(CubeConfiguration<FaceColour> configuration, List<IRotation> solution)
+        {
             await CheckUpperFace(configuration, solution);
             for (int i = 0; i <= 2; i++)
             {
@@ -18,8 +42,6 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             }
 
             await CheckBackFace(configuration, solution);
-
-            return solution;
         }
 
         private static async Task CheckUpperFace(CubeConfiguration<FaceColour> configuration, List<IRotation> solution)
