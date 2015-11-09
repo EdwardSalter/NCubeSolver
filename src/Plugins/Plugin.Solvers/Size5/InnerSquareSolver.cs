@@ -10,10 +10,11 @@ namespace NCubeSolver.Plugins.Solvers.Size5
         {
             var solution = new List<IRotation>();
 
-            for (int i = 0; i <= 3; i++)
+            await CheckUpperFace(configuration, solution);
+            for (int i = 0; i <= 2; i++)
             {
-                await CheckUpperFace(configuration, solution);
                 await CommonActions.ApplyAndAddRotation(CubeRotations.ZClockwise, solution, configuration);
+                await CheckUpperFace(configuration, solution);
             }
 
             await CheckBackFace(configuration, solution);
@@ -46,10 +47,10 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             {
                 previousSolution = new List<IRotation>(solution);
 
-                //await CheckBackTopLeft(configuration, solution, frontFaceColour);
-                //await CheckBackTopRight(configuration, solution, frontFaceColour);
+                await CheckBackTopLeft(configuration, solution, frontFaceColour);
+                await CheckBackTopRight(configuration, solution, frontFaceColour);
                 await CheckBackBottomRight(configuration, solution, frontFaceColour);
-                //await CheckBackBottomLeft(configuration, solution, frontFaceColour);
+                await CheckBackBottomLeft(configuration, solution, frontFaceColour);
             } while (solution.Count != previousSolution.Count);
         }
 
@@ -158,15 +159,19 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                 {
                     if (configuration.Faces[FaceType.Front].GetEdge(1, Edge.Bottom)[3] != frontFaceColour)
                     {
+                        var frontFace = configuration.Faces[FaceType.Front].Items;
+                        var backFace = configuration.Faces[FaceType.Back].Items;
                         await CommonActions.ApplyAndAddRotation(CubeRotations.XClockwise, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(CubeRotations.XAntiClockwise, solution, configuration);
+                        var frontFace2 = configuration.Faces[FaceType.Front].Items;
+                        var backFace2 = configuration.Faces[FaceType.Back].Items;
                         break;
                     }
 
@@ -185,16 +190,18 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                     if (configuration.Faces[FaceType.Front].GetEdge(1, Edge.Bottom)[1] != frontFaceColour)
                     {
                         var frontFace = configuration.Faces[FaceType.Front].Items;
+                        var backFace = configuration.Faces[FaceType.Back].Items;
                         await CommonActions.ApplyAndAddRotation(CubeRotations.XClockwise, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(CubeRotations.XAntiClockwise, solution, configuration);
                         var frontFace2 = configuration.Faces[FaceType.Front].Items;
+                        var backFace2 = configuration.Faces[FaceType.Back].Items;
                         break;
                     }
 
@@ -212,15 +219,19 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                 {
                     if (configuration.Faces[FaceType.Front].GetEdge(1, Edge.Top)[1] != frontFaceColour)
                     {
+                        var frontFace = configuration.Faces[FaceType.Front].Items;
+                        var backFace = configuration.Faces[FaceType.Back].Items;
                         await CommonActions.ApplyAndAddRotation(CubeRotations.XClockwise, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(CubeRotations.XAntiClockwise, solution, configuration);
+                        var frontFace2 = configuration.Faces[FaceType.Front].Items;
+                        var backFace2 = configuration.Faces[FaceType.Back].Items;
                         break;
                     }
 
@@ -238,15 +249,19 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                 {
                     if (configuration.Faces[FaceType.Front].GetEdge(1, Edge.Top)[3] != frontFaceColour)
                     {
+                        var frontFace = configuration.Faces[FaceType.Front].Items;
+                        var backFace = configuration.Faces[FaceType.Back].Items;
                         await CommonActions.ApplyAndAddRotation(CubeRotations.XClockwise, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(CubeRotations.XAntiClockwise, solution, configuration);
+                        var frontFace2 = configuration.Faces[FaceType.Front].Items;
+                        var backFace2 = configuration.Faces[FaceType.Back].Items;
                         break;
                     }
 
