@@ -35,25 +35,80 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                 await CheckUpperAndDownEdgesOnFace(configuration, solution, FaceType.Right);
             } while (previousSolution.Count != solution.Count);
 
-            await CheckMiddleLayersOnFace(configuration, solution, FaceType.Left);
+            //await CheckMiddleLayersOnFace(configuration, solution, FaceType.Left);
+            await CheckMiddleLayersOnFace(configuration, solution, FaceType.Right);
+            await CheckMiddleLayersOnFace(configuration, solution, FaceType.Back);
+            await CheckMiddleLayersOnFace(configuration, solution, FaceType.Front);
             // todo check other faces
 
             return solution;
         }
 
-        private Task CheckMiddleLayersOnFace(CubeConfiguration<FaceColour> configuration, List<IRotation> solution, FaceType face)
+        private async Task CheckMiddleLayersOnFace(CubeConfiguration<FaceColour> configuration, List<IRotation> solution, FaceType face)
         {
-            // TODO: DO THIS
-            //var rightEdgeOnFace = configuration.Faces[face].GetEdge(Edge.Right);
-            //var top = rightEdgeOnFace[1];
-            //var bottom = rightEdgeOnFace[3];
+            var frontFaceColour = configuration.Faces[FaceType.Front].LeftCentre();
+            var leftFaceColour = configuration.Faces[FaceType.Left].RightCentre();
 
-            //var leftEdgeOnJoiningFace = 
+            var rightEdgeOnFace = configuration.Faces[face].GetEdge(Edge.Right);
+            var top = rightEdgeOnFace[1];
+            var bottom = rightEdgeOnFace[3];
 
-            return TaskEx.Completed;
+            var joiningFace = FaceRules.FaceAtRelativePositionTo(face, RelativePosition.Right);
+            var leftEdgeOnJoiningFace = configuration.Faces[joiningFace].GetEdge(Edge.Left);
+            var joingingFaceEdgeTop = leftEdgeOnJoiningFace[1];
+            var joingingFaceEdgeBottom = leftEdgeOnJoiningFace[3];
+
+
+            if ((top == frontFaceColour && joingingFaceEdgeTop == leftFaceColour) ||
+                (bottom == frontFaceColour && joingingFaceEdgeBottom == leftFaceColour) ||
+                (top == leftFaceColour && joingingFaceEdgeTop == frontFaceColour) ||
+                (bottom == leftFaceColour && joingingFaceEdgeBottom == frontFaceColour))
+            {
+                var front = configuration.Faces[FaceType.Front].Items;
+                var left = configuration.Faces[FaceType.Left].Items;
+                var back = configuration.Faces[FaceType.Back].Items;
+                var right = configuration.Faces[FaceType.Right].Items;
+                var rotationToBringEdgeToFront = GetRotationToPutTredgeOnFront((top == frontFaceColour && joingingFaceEdgeTop == leftFaceColour) || (top == leftFaceColour && joingingFaceEdgeTop == frontFaceColour), face, 1);
+                await CommonActions.ApplyAndAddRotation(rotationToBringEdgeToFront, solution, configuration);
+            }
+
+            if ((top == frontFaceColour && joingingFaceEdgeTop == leftFaceColour) ||
+                (bottom == frontFaceColour && joingingFaceEdgeBottom == leftFaceColour))
+            {
+                await PerformFlip(solution, configuration);
+            }
+
+            rightEdgeOnFace = configuration.Faces[face].GetEdge(Edge.Right);
+            top = rightEdgeOnFace[1];
+            bottom = rightEdgeOnFace[3];
+
+            leftEdgeOnJoiningFace = configuration.Faces[joiningFace].GetEdge(Edge.Left);
+            joingingFaceEdgeTop = leftEdgeOnJoiningFace[1];
+            joingingFaceEdgeBottom = leftEdgeOnJoiningFace[3];
+
+
+            if (top == leftFaceColour && joingingFaceEdgeTop == frontFaceColour)
+            {
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration);
+            }
+            if (bottom == leftFaceColour && joingingFaceEdgeBottom == frontFaceColour)
+            {
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownAntiClockwise, solution, configuration);
+            }
         }
 
-        private static IRotation GetRotationToPutTredgeOnFront(bool upperLayer, FaceType face)
+        private async Task PerformFlip(List<IRotation> solution, CubeConfiguration<FaceColour> configuration)
+        {
+            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration);
+            await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
+            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration);
+            await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration);
+            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration);
+            await CommonActions.ApplyAndAddRotation(Rotations.FrontAntiClockwise, solution, configuration);
+            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration);
+        }
+
+        private static IRotation GetRotationToPutTredgeOnFront(bool upperLayer, FaceType face, int layer = 0)
         {
             if (upperLayer)
             {
@@ -62,11 +117,11 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                     case FaceType.Front:
                         return null;
                     case FaceType.Left:
-                        return Rotations.UpperAntiClockwise;
+                        return Rotations.ByFace(FaceType.Upper, RotationDirection.AntiClockwise, layer);
                     case FaceType.Right:
-                        return Rotations.UpperClockwise;
+                        return Rotations.ByFace(FaceType.Upper, RotationDirection.Clockwise, layer);
                     case FaceType.Back:
-                        return Rotations.Upper2;
+                        return Rotations.ByFaceTwice(FaceType.Upper, layer);
                 }
             }
             else
@@ -76,11 +131,12 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                     case FaceType.Front:
                         return null;
                     case FaceType.Left:
-                        return Rotations.DownClockwise;
+                        return Rotations.ByFace(FaceType.Down, RotationDirection.Clockwise, layer);
+                        
                     case FaceType.Right:
-                        return Rotations.DownAntiClockwise;
+                        return Rotations.ByFace(FaceType.Down, RotationDirection.AntiClockwise, layer);
                     case FaceType.Back:
-                        return Rotations.Down2;
+                        return Rotations.ByFaceTwice(FaceType.Down, layer);
                 }
             }
 
