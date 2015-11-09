@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using NCubeSolvers.Core;
-using NCubeSolvers.Core.Extensions;
 
 namespace NCubeSolver.Plugins.Solvers.Size5
 {
-    internal class TredgeSolver : IPartialSolver
+    internal class SingleTredgeSolver : IPartialSolver
     {
         private enum TredgeMatch
         {
@@ -23,7 +22,6 @@ namespace NCubeSolver.Plugins.Solvers.Size5
         public async Task<IEnumerable<IRotation>> Solve(CubeConfiguration<FaceColour> configuration)
         {
             var solution = new List<IRotation>();
-            solution.Add(await CommonActions.PositionOnBottom(configuration, FaceColour.Yellow));
             List<IRotation> previousSolution;
             do
             {

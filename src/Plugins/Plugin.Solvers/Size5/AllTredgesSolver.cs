@@ -1,0 +1,75 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using NCubeSolvers.Core;
+
+namespace NCubeSolver.Plugins.Solvers.Size5
+{
+    internal class AllTredgesSolver : IPartialSolver
+    {
+        private readonly SingleTredgeSolver m_solver;
+
+        public AllTredgesSolver()
+        {
+            m_solver = new SingleTredgeSolver();
+        }
+
+        public async Task<IEnumerable<IRotation>> Solve(CubeConfiguration<FaceColour> configuration)
+        {
+            var solution = new List<IRotation>();
+            solution.Add(await CommonActions.PositionOnBottom(configuration, FaceColour.Yellow));
+
+            for (int i = 0; i <= 3; i++)
+            {
+                var stepsToSolveTredge = await m_solver.Solve(configuration);
+                solution.AddRange(stepsToSolveTredge);
+                await MoveTredgeToUpperLayer(configuration, solution);
+            }
+            await CommonActions.ApplyAndAddRotation(CubeRotations.Z2, solution, configuration);
+            for (int i = 0; i <= 3; i++)
+            {
+                var stepsToSolveTredge = await m_solver.Solve(configuration);
+                solution.AddRange(stepsToSolveTredge);
+                await MoveTredgeToUpperLayer(configuration, solution);
+            }
+
+            return solution;
+        }
+
+        private async Task MoveTredgeToUpperLayer(CubeConfiguration<FaceColour> configuration, List<IRotation> solution)
+        {
+            await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration);
+
+            if (GetNumberOfCompletedTredgesOnTopLayer(configuration) == 3)
+            {
+                for (int i = 0; i <= 3; i++)
+                {
+                    if (Utilities.IsInnerEdgeComplete(FaceType.Right, FaceType.Upper, configuration))
+                    {
+                        break;
+                    }
+
+                    await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
+                }
+            }
+
+            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration);
+            for (int i = 0; i <= 3; i++)
+            {
+                await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
+
+                if (!Utilities.IsInnerEdgeComplete(FaceType.Right, FaceType.Upper, configuration))
+                {
+                    break;
+                }
+            }
+            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration);
+        }
+
+        private int GetNumberOfCompletedTredgesOnTopLayer(CubeConfiguration<FaceColour> configuration)
+        {
+            var allFaces = new[] { FaceType.Front, FaceType.Left, FaceType.Back, FaceType.Right };
+            return allFaces.Count(f => Utilities.IsInnerEdgeComplete(f, FaceType.Upper, configuration));
+        }
+    }
+}

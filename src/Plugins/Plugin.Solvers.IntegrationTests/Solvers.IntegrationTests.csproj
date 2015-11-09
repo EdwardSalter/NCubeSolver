@@ -56,7 +56,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Size3\TopFaceSolverTests.cs" />
     <Compile Include="Size3\TopLayerSolverTests.cs" />
-    <Compile Include="Size5\TredgeSolverTests.cs" />
+    <Compile Include="Size5\AllTredgesSolverTests.cs" />
+    <Compile Include="Size5\SingleTredgeSolverTests.cs" />
     <Compile Include="TestRunner.cs" />
   </ItemGroup>
   <ItemGroup>

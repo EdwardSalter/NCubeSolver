@@ -126,12 +126,12 @@ namespace NCubeSolvers.Core
             throw new Exception("Invalid face");
         }
 
-        public static Edge EdgeJoiningFaceToFace(FaceType face, FaceType joiningFace)
+        public static Edge EdgeJoiningFaceToFace(FaceType joiningFace, FaceType mainFace)
         {
-            switch (joiningFace)
+            switch (mainFace)
             {
                 case FaceType.Upper:
-                    switch (face)
+                    switch (joiningFace)
                     {
                         case FaceType.Right:
                             return Edge.Right;
@@ -145,7 +145,7 @@ namespace NCubeSolvers.Core
                     break;
 
                 case FaceType.Down:
-                    switch (face)
+                    switch (joiningFace)
                     {
                         case FaceType.Right:
                             return Edge.Right;
@@ -157,8 +157,62 @@ namespace NCubeSolvers.Core
                             return Edge.Bottom;
                     }
                     break;
-                    // TODO: MORE FACES
 
+                case FaceType.Left:
+                    switch (joiningFace)
+                    {
+                        case FaceType.Down:
+                            return Edge.Bottom;
+                        case FaceType.Upper:
+                            return Edge.Top;
+                        case FaceType.Front:
+                            return Edge.Right;
+                        case FaceType.Back:
+                            return Edge.Left;
+                    }
+                    break;
+
+                case FaceType.Right:
+                    switch (joiningFace)
+                    {
+                        case FaceType.Down:
+                            return Edge.Bottom;
+                        case FaceType.Upper:
+                            return Edge.Top;
+                        case FaceType.Front:
+                            return Edge.Left;
+                        case FaceType.Back:
+                            return Edge.Right;
+                    }
+                    break;
+
+                case FaceType.Front:
+                    switch (joiningFace)
+                    {
+                        case FaceType.Down:
+                            return Edge.Bottom;
+                        case FaceType.Upper:
+                            return Edge.Top;
+                        case FaceType.Left:
+                            return Edge.Left;
+                        case FaceType.Right:
+                            return Edge.Right;
+                    }
+                    break;
+
+                case FaceType.Back:
+                    switch (joiningFace)
+                    {
+                        case FaceType.Down:
+                            return Edge.Bottom;
+                        case FaceType.Upper:
+                            return Edge.Top;
+                        case FaceType.Left:
+                            return Edge.Right;
+                        case FaceType.Right:
+                            return Edge.Left;
+                    }
+                    break;
             }
 
             throw new Exception("Invalid face");

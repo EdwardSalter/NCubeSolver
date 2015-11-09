@@ -21,17 +21,17 @@ namespace NCubeSolver.Plugins.Solvers.Size5
 
             var solution = new List<IRotation>();
 
-            //var cubeRotation = await CommonActions.PositionOnBottom(m_configuration, FaceColour.White);
-            //if (cubeRotation != null)
-            //    solution.Add(cubeRotation);
+            var cubeRotation = await CommonActions.PositionOnBottom(m_configuration, FaceColour.White);
+            if (cubeRotation != null)
+                solution.Add(cubeRotation);
 
-            //await SolveCrosses(solution);
+            await SolveCrosses(solution);
 
-            //var innerSquareSolver = new InnerSquareSolver();
-            //var stepsToSolveSquares = await innerSquareSolver.Solve(m_configuration);
-            //solution.AddRange(stepsToSolveSquares);
+            var innerSquareSolver = new InnerSquareSolver();
+            var stepsToSolveSquares = await innerSquareSolver.Solve(m_configuration);
+            solution.AddRange(stepsToSolveSquares);
 
-            var tredgeSolver = new TredgeSolver();
+            var tredgeSolver = new AllTredgesSolver();
             var stepsToSolveTredges = await tredgeSolver.Solve(m_configuration);
             solution.AddRange(stepsToSolveTredges);
 

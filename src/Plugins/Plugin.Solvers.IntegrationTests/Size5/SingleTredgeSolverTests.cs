@@ -6,7 +6,7 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size5
 {
     [TestFixture]
     [Category("FullSolve")]
-    public class TredgeSolverTests
+    public class SingleTredgeSolverTests
     {
         [Test]
         public void Solve_GivenARandomConfiguration_ProducesASolvedTredge()
@@ -17,7 +17,7 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size5
         private static void Solve()
         {
             var configuration = ConfigurationGenerator.GenerateRandomConfiguration(5, 100);
-            var solver = new TredgeSolver();
+            var solver = new SingleTredgeSolver();
 
             solver.Solve(configuration).Wait(TestRunner.Timeout);
 
