@@ -164,7 +164,7 @@ namespace NCubeSolver.Plugins.Solvers.Size5
         private static TredgeMatch MatchColoursOnUpperFaceEdge(CubeConfiguration<FaceColour> configuration, FaceColour frontFaceColour, FaceColour leftColour, FaceType face)
         {
             var topEdge = configuration.Faces[face].GetEdge(Edge.Top);
-            if (face == FaceType.Back)
+            if (face == FaceType.Back || face == FaceType.Right)
             {
                 topEdge = topEdge.Reverse().ToArray();
             }
