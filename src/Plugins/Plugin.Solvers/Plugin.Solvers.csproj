@@ -59,6 +59,7 @@
     <Compile Include="Size5\InnerSquareSolver.cs" />
     <Compile Include="Size5\InnerCrossSolver.cs" />
     <Compile Include="Size5\SimpleSolver.cs" />
+    <Compile Include="Size5\TredgeSolver.cs" />
     <Compile Include="SolverBase.cs" />
   </ItemGroup>
   <ItemGroup>
