@@ -181,8 +181,6 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                 {
                     if (configuration.Faces[FaceType.Front].GetEdge(1, Edge.Bottom)[3] != frontFaceColour)
                     {
-                        var frontFace = configuration.Faces[FaceType.Front].Items;
-                        var backFace = configuration.Faces[FaceType.Back].Items;
                         await CommonActions.ApplyAndAddRotation(CubeRotations.XClockwise, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
@@ -192,8 +190,6 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                         await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(CubeRotations.XAntiClockwise, solution, configuration);
-                        var frontFace2 = configuration.Faces[FaceType.Front].Items;
-                        var backFace2 = configuration.Faces[FaceType.Back].Items;
                         break;
                     }
 
@@ -211,8 +207,6 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                 {
                     if (configuration.Faces[FaceType.Front].GetEdge(1, Edge.Bottom)[1] != frontFaceColour)
                     {
-                        var frontFace = configuration.Faces[FaceType.Front].Items;
-                        var backFace = configuration.Faces[FaceType.Back].Items;
                         await CommonActions.ApplyAndAddRotation(CubeRotations.XClockwise, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
@@ -222,8 +216,6 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                         await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(CubeRotations.XAntiClockwise, solution, configuration);
-                        var frontFace2 = configuration.Faces[FaceType.Front].Items;
-                        var backFace2 = configuration.Faces[FaceType.Back].Items;
                         break;
                     }
 
@@ -241,8 +233,6 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                 {
                     if (configuration.Faces[FaceType.Front].GetEdge(1, Edge.Top)[1] != frontFaceColour)
                     {
-                        var frontFace = configuration.Faces[FaceType.Front].Items;
-                        var backFace = configuration.Faces[FaceType.Back].Items;
                         await CommonActions.ApplyAndAddRotation(CubeRotations.XClockwise, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
@@ -252,8 +242,6 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                         await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(CubeRotations.XAntiClockwise, solution, configuration);
-                        var frontFace2 = configuration.Faces[FaceType.Front].Items;
-                        var backFace2 = configuration.Faces[FaceType.Back].Items;
                         break;
                     }
 
@@ -271,8 +259,6 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                 {
                     if (configuration.Faces[FaceType.Front].GetEdge(1, Edge.Top)[3] != frontFaceColour)
                     {
-                        var frontFace = configuration.Faces[FaceType.Front].Items;
-                        var backFace = configuration.Faces[FaceType.Back].Items;
                         await CommonActions.ApplyAndAddRotation(CubeRotations.XClockwise, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
@@ -282,8 +268,6 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                         await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(CubeRotations.XAntiClockwise, solution, configuration);
-                        var frontFace2 = configuration.Faces[FaceType.Front].Items;
-                        var backFace2 = configuration.Faces[FaceType.Back].Items;
                         break;
                     }
 
