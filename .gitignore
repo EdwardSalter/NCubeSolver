@@ -157,3 +157,4 @@ $RECYCLE.BIN/
 
 # Solution specifics files
 lib/
+node_modules
