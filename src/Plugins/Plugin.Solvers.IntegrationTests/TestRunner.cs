@@ -4,11 +4,23 @@ using NUnit.Framework;
 
 namespace NCubeSolver.Plugins.Solvers.IntegrationTests
 {
-    static class TestRunner
+    internal static class TestRunner
     {
-        // TODO: COULD READ THIS FROM TEST SETTINGS FILE OR ENVIRONTMENT VARIABLE OR SOMETHING?
-        public const int MultipleTimesToRun = 100;
+        public static readonly int MultipleTimesToRun = 100;
         public const int Timeout = 50;
+
+        static TestRunner()
+        {
+            var envVar = Environment.GetEnvironmentVariable("NCubeSolver_TestRunCount");
+            if (string.IsNullOrEmpty(envVar)) return;
+
+            int i;
+            if (int.TryParse(envVar, out i))
+            {
+                MultipleTimesToRun = i;
+                Debug.WriteLine("Found a test count override setting in environment variables. Mutliple test runs will be run {0} times.", MultipleTimesToRun);
+            }
+        }
 
         public static void RunTestMultipleTimes(int timesToRun, Action test)
         {
