@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using NCubeSolver.Plugins.Display.OpenGL;
 using NCubeSolver.Screensaver.Properties;
 using NCubeSolvers.Core.Plugins;
@@ -13,9 +14,21 @@ namespace NCubeSolver.Screensaver
         private readonly DisplayControl m_display;
         private readonly int m_oldSpeed;
 
+        public IEnumerable<SupportedCubeSize> SupportedCubeSizes { get; private set; }
+        public Settings Settings { get; private set; }
+
         public SettingsWindow(DisplayControl display = null)
         {
+            Settings = Settings.Default;
             m_display = display;
+
+            // TODO: USE REFLECTION / MEF TO FIND OUT WHAT IS AVAILABLE
+            SupportedCubeSizes = new[]
+            {
+                new SupportedCubeSize { Name = "Random", CubeSize = null },
+                new SupportedCubeSize { Name = "3x3x3", CubeSize = 3 },
+                new SupportedCubeSize { Name = "5x5x5", CubeSize = 5 }
+            };
 
             if (m_display != null)
             {
@@ -32,13 +45,13 @@ namespace NCubeSolver.Screensaver
                 m_display.Scene.AnimationLength = m_oldSpeed;
             }
 
-            Settings.Default.Reload();
+            Settings.Reload();
             Close();
         }
 
         private void Save_OnClick(object sender, RoutedEventArgs e)
         {
-            Settings.Default.Save();
+            Settings.Save();
             Close();
         }
 
@@ -49,5 +62,7 @@ namespace NCubeSolver.Screensaver
                 m_display.Scene.AnimationLength = (int)e.NewValue;
             }
         }
+
+        
     }
 }

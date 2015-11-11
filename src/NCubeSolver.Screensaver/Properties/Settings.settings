@@ -5,5 +5,8 @@
     <Setting Name="AnimationLength" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">20</Value>
     </Setting>
+    <Setting Name="CubeSize" Type="System.Nullable&lt;System.Int32&gt;" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

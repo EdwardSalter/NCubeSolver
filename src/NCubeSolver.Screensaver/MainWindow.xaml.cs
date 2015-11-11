@@ -38,11 +38,10 @@ namespace NCubeSolver.Screensaver
                 m_settingsJustShown = false;
                 return;
             }
-
+            
             var currentPos = e.GetPosition(this);
             if (m_lastMouse != null &&
-                (Math.Abs(currentPos.X - m_lastMouse.Value.X) > 1 || Math.Abs(currentPos.Y - m_lastMouse.Value.Y) > 1)
-                )
+                (Math.Abs(currentPos.X - m_lastMouse.Value.X) > 1 || Math.Abs(currentPos.Y - m_lastMouse.Value.Y) > 1))
                 Close();
             m_lastMouse = currentPos;
         }
@@ -67,8 +66,8 @@ namespace NCubeSolver.Screensaver
         public async Task StartAnimation()
         {
             var configurationGenerator = new RandomCubeConfigurationGenerator();
-            var solver3x3x3 = new BeginerMethod();
-            var solver5x5x5 = new SimpleSolver();
+            ISolver solver3x3x3 = new BeginerMethod();
+            ISolver solver5x5x5 = new SimpleSolver();
 
             var celebrator = new TimeDelayCelebrator(2000);
 
@@ -79,18 +78,31 @@ namespace NCubeSolver.Screensaver
 
             while (true)
             {
-                int cubeSize = 3;
-                ISolver solver = solver3x3x3;
-                if (random.NextDouble() < 0.25)
-                {
-                    cubeSize = 5;
-                    solver = solver5x5x5;
-                }
+                var cubeSize = GetCubeSize(random);
+
+                ISolver solver = cubeSize == 3 ? solver3x3x3 : solver5x5x5;
 
                 var run = new SolveRun(configurationGenerator, solver, DisplayControl, celebrator, cubeSize);
                 await run.Run();
             }
             // ReSharper disable once FunctionNeverReturns
+        }
+
+        private static int GetCubeSize(Random random)
+        {
+            int cubeSize = 3;
+            if (!Settings.Default.CubeSize.HasValue)
+            {
+                if (random.NextDouble() < 0.25)
+                {
+                    cubeSize = 5;
+                }
+            }
+            else
+            {
+                cubeSize = Settings.Default.CubeSize.Value;
+            }
+            return cubeSize;
         }
     }
 }
