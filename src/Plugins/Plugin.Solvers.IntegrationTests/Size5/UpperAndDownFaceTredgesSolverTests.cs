@@ -9,7 +9,7 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size5
 {
     [TestFixture]
     [Category("FullSolve")]
-    public class AllTredgesSolverTests
+    public class UpperAndDownFaceTredgesSolverTests
     {
         [Test]
         public void Solve_GivenARandomConfiguration_AllTredgesInTheTopAndBottomRowsAreSolved()
@@ -26,7 +26,7 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size5
         private static void Solve(Action<CubeConfiguration<FaceColour>> assertFunc, bool runAllStepsUpToThis = false)
         {
             var configuration = ConfigurationGenerator.GenerateRandomConfiguration(5, 100);
-            var solver = new AllTredgesSolver();
+            var solver = new UpperAndDownFaceTredgesSolver();
 
             try
             {

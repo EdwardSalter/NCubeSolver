@@ -33,9 +33,13 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             var stepsToSolveSquares = await innerSquareSolver.Solve(m_configuration);
             solution.AddRange(stepsToSolveSquares);
 
-            var tredgeSolver = new AllTredgesSolver();
+            var tredgeSolver = new UpperAndDownFaceTredgesSolver();
             var stepsToSolveTredges = await tredgeSolver.Solve(m_configuration);
             solution.AddRange(stepsToSolveTredges);
+
+            var middleTredgeSolver = new MiddleLayerTredgeSolver();
+            var stepsToSolveMiddleLayerTredges = await middleTredgeSolver.Solve(configuration);
+            solution.AddRange(stepsToSolveMiddleLayerTredges);
 
             return solution.Condense();
         }

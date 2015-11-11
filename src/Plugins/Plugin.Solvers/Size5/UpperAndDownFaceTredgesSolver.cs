@@ -5,11 +5,11 @@ using NCubeSolvers.Core;
 
 namespace NCubeSolver.Plugins.Solvers.Size5
 {
-    internal class AllTredgesSolver : IPartialSolver
+    internal class UpperAndDownFaceTredgesSolver : IPartialSolver
     {
         private readonly SingleTredgeSolver m_solver;
 
-        public AllTredgesSolver()
+        public UpperAndDownFaceTredgesSolver()
         {
             m_solver = new SingleTredgeSolver();
         }

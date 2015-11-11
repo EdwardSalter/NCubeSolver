@@ -57,8 +57,9 @@
     <Compile Include="Size3\TopFaceSolver.cs" />
     <Compile Include="Size3\TopLayerSolver.cs" />
     <Compile Include="Size5\AllInnerCrossesSolver.cs" />
-    <Compile Include="Size5\AllTredgesSolver.cs" />
+    <Compile Include="Size5\UpperAndDownFaceTredgesSolver.cs" />
     <Compile Include="Size5\InnerSquareSolver.cs" />
+    <Compile Include="Size5\MiddleLayerTredgeSolver.cs" />
     <Compile Include="Size5\SingleInnerCrossSolver.cs" />
     <Compile Include="Size5\SimpleSolver.cs" />
     <Compile Include="Size5\SingleTredgeSolver.cs" />
