@@ -57,6 +57,7 @@
     <Compile Include="Size3\TopFaceSolverTests.cs" />
     <Compile Include="Size3\TopLayerSolverTests.cs" />
     <Compile Include="Size5\MiddleLayerTredgeSolverTests.cs" />
+    <Compile Include="Size5\SimpleSolverTests.cs" />
     <Compile Include="Size5\UpperAndDownFaceTredgesSolverTests.cs" />
     <Compile Include="Size5\SingleTredgeSolverTests.cs" />
     <Compile Include="TestRunner.cs" />

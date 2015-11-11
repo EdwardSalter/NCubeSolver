@@ -41,6 +41,14 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             var stepsToSolveMiddleLayerTredges = await middleTredgeSolver.Solve(configuration);
             solution.AddRange(stepsToSolveMiddleLayerTredges);
 
+            // TODO: INJECT A 3x3x3 solver in here so different ones can be used
+            var threeByThreeByThreeSolver = new Size3.BeginerMethod
+            {
+                SkipChecks = true
+            };
+            var stepsToSolveReduced3X3X3 = await threeByThreeByThreeSolver.Solve(configuration);
+            solution.AddRange(stepsToSolveReduced3X3X3);
+
             return solution.Condense();
         }
 
