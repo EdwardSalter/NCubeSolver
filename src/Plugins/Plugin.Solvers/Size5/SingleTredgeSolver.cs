@@ -35,9 +35,29 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                 await CheckMiddleLayersOnFace(configuration, solution, FaceType.Right);
                 await CheckMiddleLayersOnFace(configuration, solution, FaceType.Back);
                 await CheckMiddleLayersOnFace(configuration, solution, FaceType.Front);
+                await CheckFlipped(configuration, solution);
             } while (previousSolution.Count != solution.Count);
 
             return solution;
+        }
+
+        private async Task CheckFlipped(CubeConfiguration<FaceColour> configuration, List<IRotation> solution)
+        {
+            var frontFaceEdge = configuration.Faces[FaceType.Front].GetEdge(Edge.Left);
+            var leftFaceEdge = configuration.Faces[FaceType.Left].GetEdge(Edge.Right);
+
+            var frontColour = frontFaceEdge.Centre();
+            var leftColour = leftFaceEdge.Centre();
+
+            if (frontFaceEdge[1] == leftColour && frontFaceEdge[3] == leftColour &&
+                leftFaceEdge[1] == frontColour && leftFaceEdge[3] == frontColour)
+            {
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperAntiClockwise, solution, configuration);
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownClockwise, solution, configuration);
+                await PerformFlip(solution, configuration);
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration);
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownAntiClockwise, solution, configuration);
+            }
         }
 
         private async Task CheckMiddleLayersOnFace(CubeConfiguration<FaceColour> configuration, List<IRotation> solution, FaceType face)
@@ -51,21 +71,21 @@ namespace NCubeSolver.Plugins.Solvers.Size5
 
             var joiningFace = FaceRules.FaceAtRelativePositionTo(face, RelativePosition.Right);
             var leftEdgeOnJoiningFace = configuration.Faces[joiningFace].GetEdge(Edge.Left);
-            var joingingFaceEdgeTop = leftEdgeOnJoiningFace[1];
-            var joingingFaceEdgeBottom = leftEdgeOnJoiningFace[3];
+            var joiningFaceEdgeTop = leftEdgeOnJoiningFace[1];
+            var joiningFaceEdgeBottom = leftEdgeOnJoiningFace[3];
 
 
-            if ((top == frontFaceColour && joingingFaceEdgeTop == leftFaceColour) ||
-                (bottom == frontFaceColour && joingingFaceEdgeBottom == leftFaceColour) ||
-                (top == leftFaceColour && joingingFaceEdgeTop == frontFaceColour) ||
-                (bottom == leftFaceColour && joingingFaceEdgeBottom == frontFaceColour))
+            if ((top == frontFaceColour && joiningFaceEdgeTop == leftFaceColour) ||
+                (bottom == frontFaceColour && joiningFaceEdgeBottom == leftFaceColour) ||
+                (top == leftFaceColour && joiningFaceEdgeTop == frontFaceColour) ||
+                (bottom == leftFaceColour && joiningFaceEdgeBottom == frontFaceColour))
             {
-                var rotationToBringEdgeToFront = GetRotationToPutTredgeOnFront((top == frontFaceColour && joingingFaceEdgeTop == leftFaceColour) || (top == leftFaceColour && joingingFaceEdgeTop == frontFaceColour), face, 1);
+                var rotationToBringEdgeToFront = GetRotationToPutTredgeOnFront((top == frontFaceColour && joiningFaceEdgeTop == leftFaceColour) || (top == leftFaceColour && joiningFaceEdgeTop == frontFaceColour), face, 1);
                 await CommonActions.ApplyAndAddRotation(rotationToBringEdgeToFront, solution, configuration);
             }
 
-            if ((top == frontFaceColour && joingingFaceEdgeTop == leftFaceColour) ||
-                (bottom == frontFaceColour && joingingFaceEdgeBottom == leftFaceColour))
+            if ((top == frontFaceColour && joiningFaceEdgeTop == leftFaceColour) ||
+                (bottom == frontFaceColour && joiningFaceEdgeBottom == leftFaceColour))
             {
                 await PerformFlip(solution, configuration);
             }
@@ -75,15 +95,15 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             bottom = rightEdgeOnFace[3];
 
             leftEdgeOnJoiningFace = configuration.Faces[joiningFace].GetEdge(Edge.Left);
-            joingingFaceEdgeTop = leftEdgeOnJoiningFace[1];
-            joingingFaceEdgeBottom = leftEdgeOnJoiningFace[3];
+            joiningFaceEdgeTop = leftEdgeOnJoiningFace[1];
+            joiningFaceEdgeBottom = leftEdgeOnJoiningFace[3];
 
 
-            if (top == leftFaceColour && joingingFaceEdgeTop == frontFaceColour)
+            if (top == leftFaceColour && joiningFaceEdgeTop == frontFaceColour)
             {
                 await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration);
             }
-            if (bottom == leftFaceColour && joingingFaceEdgeBottom == frontFaceColour)
+            if (bottom == leftFaceColour && joiningFaceEdgeBottom == frontFaceColour)
             {
                 await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownAntiClockwise, solution, configuration);
             }

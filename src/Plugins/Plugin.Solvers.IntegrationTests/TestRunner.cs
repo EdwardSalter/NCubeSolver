@@ -6,6 +6,7 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests
 {
     static class TestRunner
     {
+        // TODO: COULD READ THIS FROM TEST SETTINGS FILE OR ENVIRONTMENT VARIABLE OR SOMETHING?
         public const int MultipleTimesToRun = 100;
         public const int Timeout = 50;
 
