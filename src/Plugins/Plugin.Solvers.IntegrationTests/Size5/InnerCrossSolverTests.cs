@@ -23,7 +23,7 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size5
         private static void Solve(FaceColour crossColour)
         {
             var configuration = ConfigurationGenerator.GenerateRandomConfiguration(5, 100);
-            var solver = new InnerCrossSolver(crossColour);
+            var solver = new SingleInnerCrossSolver(crossColour);
 
             solver.Solve(configuration).Wait(TestRunner.Timeout);
 

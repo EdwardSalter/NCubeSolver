@@ -33,7 +33,56 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                 await MoveTredgeToUpperLayer(configuration, solution);
             }
 
+            await FixInnerSquare(solution, configuration);
             return solution;
+        }
+
+        private async Task FixInnerSquare(List<IRotation> solution, CubeConfiguration<FaceColour> configuration)
+        {
+            var upperColour = configuration.Faces[FaceType.Front].GetEdge(1, Edge.Top).Centre();
+            var downColour = configuration.Faces[FaceType.Front].GetEdge(1, Edge.Bottom).Centre();
+
+            var correctFaceForTopRow = FaceRules.GetFaceOfColour(upperColour, configuration);
+            var correctFaceForBottomRow = FaceRules.GetFaceOfColour(downColour, configuration);
+
+            await MoveRowToCorrectFace(correctFaceForTopRow, solution, configuration, true);
+            await MoveRowToCorrectFace(correctFaceForBottomRow, solution, configuration, false);
+        }
+
+        private async Task MoveRowToCorrectFace(FaceType faceToMoveToo, List<IRotation> solution, CubeConfiguration<FaceColour> configuration, bool upper)
+        {
+            // If we get an upper or down face it would imply that we do not have completed rows meaning we have probably skipped steps (some tests do this)
+            if (faceToMoveToo == FaceType.Upper || faceToMoveToo == FaceType.Down)
+            {
+                return;
+            }
+
+            IRotation rotation = null;
+            var face = upper ? FaceType.Upper : FaceType.Down;
+            RotationDirection direction;
+
+            var position = FaceRules.RelativePositionBetweenFaces(FaceType.Front, faceToMoveToo);
+            switch (position)
+            {
+                case RelativePosition.Left:
+                    direction = upper ? RotationDirection.Clockwise : RotationDirection.AntiClockwise;
+                    rotation = Rotations.ByFace(face, direction, 1);
+                    break;
+
+                case RelativePosition.Right:
+                    direction = !upper ? RotationDirection.Clockwise : RotationDirection.AntiClockwise;
+                    rotation = Rotations.ByFace(face, direction, 1);
+                    break;
+
+                case RelativePosition.Opposite:
+                    rotation = Rotations.ByFaceTwice(face, 1);
+                    break;
+            }
+
+            if (rotation != null)
+            {
+                await CommonActions.ApplyAndAddRotation(rotation, solution, configuration);
+            }
         }
 
         private async Task MoveTredgeToUpperLayer(CubeConfiguration<FaceColour> configuration, List<IRotation> solution)

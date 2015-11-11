@@ -25,7 +25,9 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             if (cubeRotation != null)
                 solution.Add(cubeRotation);
 
-            await SolveCrosses(solution);
+            var innerCrossesSolver = new AllInnerCrossesSolver();
+            var stepsToSolveCrosses = await innerCrossesSolver.Solve(m_configuration);
+            solution.AddRange(stepsToSolveCrosses);
 
             var innerSquareSolver = new InnerSquareSolver();
             var stepsToSolveSquares = await innerSquareSolver.Solve(m_configuration);
@@ -36,27 +38,6 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             solution.AddRange(stepsToSolveTredges);
 
             return solution.Condense();
-        }
-
-        private async Task SolveCrosses(List<IRotation> solution)
-        {
-            var stepsToSolveCross = await new InnerCrossSolver(FaceColour.White).Solve(m_configuration);
-            solution.AddRange(stepsToSolveCross);
-
-            stepsToSolveCross = await new InnerCrossSolver(FaceColour.Red).Solve(m_configuration);
-            solution.AddRange(stepsToSolveCross);
-
-            stepsToSolveCross = await new InnerCrossSolver(FaceColour.Blue).Solve(m_configuration);
-            solution.AddRange(stepsToSolveCross);
-
-            stepsToSolveCross = await new InnerCrossSolver(FaceColour.Orange).Solve(m_configuration);
-            solution.AddRange(stepsToSolveCross);
-
-            stepsToSolveCross = await new InnerCrossSolver(FaceColour.Green).Solve(m_configuration);
-            solution.AddRange(stepsToSolveCross);
-
-            stepsToSolveCross = await new InnerCrossSolver(FaceColour.Yellow).Solve(m_configuration);
-            solution.AddRange(stepsToSolveCross);
         }
 
         public override string PluginName

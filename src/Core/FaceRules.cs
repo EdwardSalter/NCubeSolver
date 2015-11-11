@@ -123,7 +123,7 @@ namespace NCubeSolvers.Core
                     break;
             }
 
-            throw new Exception("Invalid face");
+            throw new NotImplementedException("The relative position between " + primary + " and " + secondary + " has not been implemented yet");
         }
 
         public static Edge EdgeJoiningFaceToFace(FaceType joiningFace, FaceType mainFace)

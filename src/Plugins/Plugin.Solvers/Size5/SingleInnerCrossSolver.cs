@@ -4,11 +4,11 @@ using NCubeSolvers.Core;
 
 namespace NCubeSolver.Plugins.Solvers.Size5
 {
-    internal class InnerCrossSolver : IPartialSolver
+    internal class SingleInnerCrossSolver : IPartialSolver
     {
         private readonly FaceColour m_faceColour;
 
-        public InnerCrossSolver(FaceColour faceColour)
+        public SingleInnerCrossSolver(FaceColour faceColour)
         {
             m_faceColour = faceColour;
         }

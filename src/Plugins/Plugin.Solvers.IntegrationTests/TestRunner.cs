@@ -21,7 +21,7 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests
                 }
                 catch
                 {
-                    Debug.WriteLine("Test Failed");
+                    //Debug.WriteLine("Test Failed");
                     timesFailed ++;
                 }
                 Debug.WriteLine("");
