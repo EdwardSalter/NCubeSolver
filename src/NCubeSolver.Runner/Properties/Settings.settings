@@ -14,5 +14,8 @@
     <Setting Name="CelebratorPluginName" Type="System.String" Scope="User">
       <Value Profile="(Default)">TimeDelayCelebrator</Value>
     </Setting>
+    <Setting Name="CubeSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

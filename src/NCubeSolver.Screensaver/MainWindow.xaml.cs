@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using NCubeSolver.Plugins.Celebrators;
 using NCubeSolver.Plugins.ConfigurationGenerators;
 using NCubeSolver.Plugins.Solvers.Size3;
+using NCubeSolver.Plugins.Solvers.Size5;
 using NCubeSolver.Screensaver.Properties;
 using NCubeSolvers.Core;
+using NCubeSolvers.Core.Plugins;
 
 namespace NCubeSolver.Screensaver
 {
@@ -63,15 +67,27 @@ namespace NCubeSolver.Screensaver
         public async Task StartAnimation()
         {
             var configurationGenerator = new RandomCubeConfigurationGenerator();
-            var solver = new BeginerMethod();
+            var solver3x3x3 = new BeginerMethod();
+            var solver5x5x5 = new SimpleSolver();
+
             var celebrator = new TimeDelayCelebrator(2000);
 
             // TODO: LOAD ALL SOLVERS + GENERATORS, GENERATE A CONFIG WITH RANDOM SIZE, PICK A SOLVER BASED ON THE CONFIGURATION GIVEN
 
-            var run = new SolveRun(configurationGenerator, solver, DisplayControl, celebrator);
+            
+            var random = new Random();
 
             while (true)
             {
+                int cubeSize = 3;
+                ISolver solver = solver3x3x3;
+                if (random.NextDouble() < 0.25)
+                {
+                    cubeSize = 5;
+                    solver = solver5x5x5;
+                }
+
+                var run = new SolveRun(configurationGenerator, solver, DisplayControl, celebrator, cubeSize);
                 await run.Run();
             }
             // ReSharper disable once FunctionNeverReturns
