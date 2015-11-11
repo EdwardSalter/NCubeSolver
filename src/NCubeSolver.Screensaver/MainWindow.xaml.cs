@@ -51,7 +51,7 @@ namespace NCubeSolver.Screensaver
         {
             if (e.Key == Key.S)
             {
-                new SettingsWindow().ShowDialog();
+                new SettingsWindow(DisplayControl).ShowDialog();
                 m_settingsJustShown = true;
             }
             else

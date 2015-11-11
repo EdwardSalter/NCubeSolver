@@ -4,10 +4,11 @@
         xmlns:properties="clr-namespace:NCubeSolver.Screensaver.Properties"
         Title="SettingsWindows" Height="300" Width="300">
     <Grid DataContext="{x:Static properties:Settings.Default}">
-        <Slider HorizontalAlignment="Left" Margin="99,57,0,0" VerticalAlignment="Top" Width="143" Minimum="5" Maximum="50" LargeChange="5" SmallChange="2" Value="{Binding AnimationLength}"/>
+        <Slider HorizontalAlignment="Left" Margin="99,57,0,0" VerticalAlignment="Top" Width="143" Minimum="2" Maximum="40" LargeChange="5" SmallChange="2" Value="{Binding AnimationLength}" ValueChanged="Slider_ValueChanged"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,57,0,0" TextWrapping="Wrap" Text="Speed: " VerticalAlignment="Top"/>
-        <Button Content="Save" IsDefault="True" Click="Save_OnClick" HorizontalAlignment="Left" Margin="207,238,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Save" IsDefault="True" Click="Save_OnClick" HorizontalAlignment="Left" Margin="122,232,0,0" VerticalAlignment="Top" Width="75"/>
         <TextBlock HorizontalAlignment="Left" Margin="62,57,0,0" TextWrapping="Wrap" Text="Faster" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="247,57,0,0" TextWrapping="Wrap" Text="Slower" VerticalAlignment="Top"/>
+        <Button Content="Cancel" IsDefault="True" Click="Cancel_OnClick" HorizontalAlignment="Left" Margin="207,232,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </Window>
