@@ -49,6 +49,13 @@ namespace NCubeSolvers.Core
                 FaceColour.Blue, FaceColour.Green, FaceColour.Red, FaceColour.Orange);
         }
 
+        public int GetCentreLayer()
+        {
+            if (Size % 2 == 0) throw new InvalidOperationException("There is not a centre layer for an even number sized cube");
+
+            return (Size + 1) / 2 - 1;
+        }
+
         public IEnumerable<T> AllItems
         {
             get { return Faces.Values.SelectMany(face => face.Items.AsEnumerable()).Distinct(); }

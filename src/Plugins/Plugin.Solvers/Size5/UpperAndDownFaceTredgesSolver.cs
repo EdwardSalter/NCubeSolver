@@ -39,8 +39,8 @@ namespace NCubeSolver.Plugins.Solvers.Size5
 
         private async Task FixInnerSquare(List<IRotation> solution, CubeConfiguration<FaceColour> configuration)
         {
-            var upperColour = configuration.Faces[FaceType.Front].GetEdge(1, Edge.Top).Centre();
-            var downColour = configuration.Faces[FaceType.Front].GetEdge(1, Edge.Bottom).Centre();
+            var upperColour = configuration.Faces[FaceType.Front].GetEdge(configuration.InnerLayerIndex(), Edge.Top).Centre();
+            var downColour = configuration.Faces[FaceType.Front].GetEdge(configuration.InnerLayerIndex(), Edge.Bottom).Centre();
 
             var correctFaceForTopRow = FaceRules.GetFaceOfColour(upperColour, configuration);
             var correctFaceForBottomRow = FaceRules.GetFaceOfColour(downColour, configuration);
@@ -66,16 +66,16 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             {
                 case RelativePosition.Left:
                     direction = upper ? RotationDirection.Clockwise : RotationDirection.AntiClockwise;
-                    rotation = Rotations.ByFace(face, direction, 1);
+                    rotation = Rotations.ByFace(face, direction, configuration.InnerLayerIndex());
                     break;
 
                 case RelativePosition.Right:
                     direction = !upper ? RotationDirection.Clockwise : RotationDirection.AntiClockwise;
-                    rotation = Rotations.ByFace(face, direction, 1);
+                    rotation = Rotations.ByFace(face, direction, configuration.InnerLayerIndex());
                     break;
 
                 case RelativePosition.Opposite:
-                    rotation = Rotations.ByFaceTwice(face, 1);
+                    rotation = Rotations.ByFaceTwice(face, configuration.InnerLayerIndex());
                     break;
             }
 

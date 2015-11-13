@@ -7,6 +7,30 @@ namespace NCubeSolver.Core.UnitTests
     [TestFixture]
     public class CubeConfigurationTests
     {
+        [TestCase(2)]
+        [TestCase(4)]
+        [TestCase(6)]
+        public void GetCentreLayer_WhenConfigurationIsForAnEvenNumber_ThrowsInvalidOperationException(int size)
+        {
+            var configuration = new CubeConfiguration<int>(size);
+
+            TestDelegate testFunc = () => configuration.GetCentreLayer();
+
+            Assert.Throws<InvalidOperationException>(testFunc);
+        }
+
+        [TestCase(3, 1)]
+        [TestCase(5, 2)]
+        [TestCase(7, 3)]
+        public void GetCentreLayer_WhenConfigurationIsForAnOddNumber_ReturnsTheIndexOfTheCentreLayer(int size, int expected)
+        {
+            var configuration = new CubeConfiguration<int>(size);
+
+            var centreLayerIndex = configuration.GetCentreLayer();
+
+            Assert.AreEqual(expected, centreLayerIndex);
+        }
+
         #region Shared Object
 
         [Test]
