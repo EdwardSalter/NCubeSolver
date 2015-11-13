@@ -6,17 +6,17 @@ namespace NCubeSolvers.Core
 {
     public static class CubeRotations
     {
-        public static CubeRotation XClockwise = new CubeRotation { Axis = Axis.X, Name = "x" };
-        public static CubeRotation XAntiClockwise = new CubeRotation { Axis = Axis.X, Name = "x'", Direction = RotationDirection.AntiClockwise };
-        public static CubeRotation X2 = new CubeRotation { Axis = Axis.X, Name = "x2", Count = 2};
+        public static CubeRotation XClockwise = new CubeRotation { Axis = Axis.X};
+        public static CubeRotation XAntiClockwise = new CubeRotation { Axis = Axis.X, Direction = RotationDirection.AntiClockwise };
+        public static CubeRotation X2 = new CubeRotation { Axis = Axis.X, Count = 2};
 
-        public static CubeRotation YClockwise = new CubeRotation { Axis = Axis.Y, Name = "y" };
-        public static CubeRotation YAntiClockwise = new CubeRotation { Axis = Axis.Y, Name = "y'", Direction = RotationDirection.AntiClockwise };
-        public static CubeRotation Y2 = new CubeRotation { Axis = Axis.Y, Name = "y2", Count = 2 };
+        public static CubeRotation YClockwise = new CubeRotation { Axis = Axis.Y};
+        public static CubeRotation YAntiClockwise = new CubeRotation { Axis = Axis.Y, Direction = RotationDirection.AntiClockwise };
+        public static CubeRotation Y2 = new CubeRotation { Axis = Axis.Y, Count = 2 };
 
-        public static CubeRotation ZClockwise = new CubeRotation { Axis = Axis.Z, Name = "z" };
-        public static CubeRotation ZAntiClockwise = new CubeRotation { Axis = Axis.Z, Name = "z'", Direction = RotationDirection.AntiClockwise };
-        public static CubeRotation Z2 = new CubeRotation { Axis = Axis.Z, Name = "z2", Count = 2 };
+        public static CubeRotation ZClockwise = new CubeRotation { Axis = Axis.Z};
+        public static CubeRotation ZAntiClockwise = new CubeRotation { Axis = Axis.Z, Direction = RotationDirection.AntiClockwise };
+        public static CubeRotation Z2 = new CubeRotation { Axis = Axis.Z, Count = 2 };
 
         private static readonly List<CubeRotation> AllRotations = new List<CubeRotation>
         {
@@ -34,7 +34,7 @@ namespace NCubeSolvers.Core
 
         public static CubeRotation ByName(string name)
         {
-            return AllRotations.SingleOrDefault(r => r.Name == name);
+            return AllRotations.SingleOrDefault(r => r.GetName() == name);
         }
 
         public static CubeRotation ByAxis(Axis axis, RotationDirection direction)

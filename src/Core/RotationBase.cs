@@ -2,7 +2,6 @@ namespace NCubeSolvers.Core
 {
     public abstract class RotationBase : IRotation
     {
-        public string Name { get; set; }
         public RotationDirection Direction { get; set; }
         public int Count { get; set; }
         public abstract IRotation Reverse();
@@ -13,6 +12,24 @@ namespace NCubeSolvers.Core
             Direction = RotationDirection.Clockwise;
         }
 
+        protected abstract string GetNamePart();
+
+        public string GetName() {
+            string letter = GetNamePart();
+
+            if (Count > 1) {
+                letter += Count;
+            }
+
+            if (Direction == RotationDirection.AntiClockwise)
+            {
+                letter += "'";
+            }
+
+
+            return letter;
+        }
+
         protected string ReverseName(string name)
         {
             var indexOfReverse = name.IndexOf('\'');
@@ -21,7 +38,7 @@ namespace NCubeSolvers.Core
 
         public override string ToString()
         {
-            return Name;
+            return GetName();
         }
     }
 }

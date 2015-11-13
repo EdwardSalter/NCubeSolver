@@ -2,7 +2,7 @@
 {
     public interface IRotation
     {
-        string Name { get; set; }
+        string GetName();
         RotationDirection Direction { get; set; }
         int Count { get; set; }
         IRotation Reverse();

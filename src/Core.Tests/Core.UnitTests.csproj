@@ -43,6 +43,7 @@
     <Compile Include="ArrayRotaterTests.cs" />
     <Compile Include="CubeConfigurationTests.cs" />
     <Compile Include="EdgeMethodsTests.cs" />
+    <Compile Include="FaceRotationTests.cs" />
     <Compile Include="FaceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UtilitiesTests.cs" />

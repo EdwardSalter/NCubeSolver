@@ -3,6 +3,13 @@
     public class CubeRotation : RotationBase
     {
         public Axis Axis { get; set; }
+
+
+        protected override string GetNamePart()
+        {
+            return Axis.ToString().ToLower();
+        }
+
         public override IRotation Reverse()
         {
             if (Count == 2)
@@ -14,8 +21,7 @@
             {
                 Axis = Axis,
                 Direction = RotationDirectionEx.Reverse(Direction), 
-                Count = Count, 
-                Name = ReverseName(Name)
+                Count = Count
             };
         }
     }

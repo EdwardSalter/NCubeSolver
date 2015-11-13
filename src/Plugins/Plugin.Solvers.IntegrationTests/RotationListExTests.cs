@@ -24,8 +24,8 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests
                 var condensedRotations = rotations.Condense().ToList();
                 //Debug.WriteLine("Rotation list size: {0}\tCondensed list size: {1}", rotations.Count, condensedRotations.Count);
 
-                Console.WriteLine("NonCondensedRoations: {0}", string.Join(" ", rotations.Select(f => f.Name)));
-                Console.WriteLine("CondensedRoations: {0}", string.Join(" ", condensedRotations.Select(f => f.Name)));
+                Console.WriteLine("NonCondensedRoations: {0}", string.Join(" ", rotations.Select(f => f.GetName())));
+                Console.WriteLine("CondensedRoations: {0}", string.Join(" ", condensedRotations.Select(f => f.GetName())));
 
                 CommonActions.ApplyRotations(rotations, nonCondensedConfiguration);
                 CommonActions.ApplyRotations(condensedRotations, condensedConfiguration);

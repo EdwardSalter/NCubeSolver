@@ -261,11 +261,11 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests
         [Test]
         public void Condense_MixedRotations_RegressionTest1()
         {
-            var list = RotationListEx.ParseInstructionList("l2 y2 y2 y2 D' D' D' D' D D' U' U' l l' U' R R' D D D' D' D' x' x x' x' y2 b2 b2 z U U' U U' U U' f' f D' D' D y' y z2 z2 y' y D2 D2 D2");
+            var list = RotationListEx.ParseInstructionList("L₂2 y2 y2 y2 D' D' D' D' D D' U' U' L₂ L₂' U' R R' D D D' D' D' x' x x' x' y2 b2 b2 z U U' U U' U U' F₂' F₂ D' D' D y' y z2 z2 y' y D2 D2 D2");
 
             var condensed = list.Condense();
 
-            CollectionAssert.AreEqual(RotationListEx.ParseInstructionList("l2 y2 U D' x2 y2 z D").ToList(), condensed);
+            CollectionAssert.AreEqual(RotationListEx.ParseInstructionList("L₂2 y2 U D' x2 y2 z D").ToList(), condensed);
         }
 
         #endregion
