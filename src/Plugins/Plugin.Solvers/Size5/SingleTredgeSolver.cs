@@ -49,8 +49,8 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             var frontColour = frontFaceEdge.Centre();
             var leftColour = leftFaceEdge.Centre();
 
-            if (frontFaceEdge[configuration.InnerLayerIndex()] == leftColour && frontFaceEdge[configuration.InnerLayerIndex()+2] == leftColour &&
-                leftFaceEdge[configuration.InnerLayerIndex()] == frontColour && leftFaceEdge[configuration.InnerLayerIndex()+2] == frontColour)
+            if (frontFaceEdge[configuration.MinInnerLayerIndex()] == leftColour && frontFaceEdge[configuration.MaxInnerLayerIndex()] == leftColour &&
+                leftFaceEdge[configuration.MinInnerLayerIndex()] == frontColour && leftFaceEdge[configuration.MaxInnerLayerIndex()] == frontColour)
             {
                 await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperAntiClockwise, solution, configuration);
                 await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownClockwise, solution, configuration);
@@ -66,13 +66,13 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             var leftFaceColour = configuration.Faces[FaceType.Left].RightCentre();
 
             var rightEdgeOnFace = configuration.Faces[face].GetEdge(Edge.Right);
-            var top = rightEdgeOnFace[configuration.InnerLayerIndex()];
-            var bottom = rightEdgeOnFace[configuration.InnerLayerIndex()+2];
+            var top = rightEdgeOnFace[configuration.MinInnerLayerIndex()];
+            var bottom = rightEdgeOnFace[configuration.MaxInnerLayerIndex()];
 
             var joiningFace = FaceRules.FaceAtRelativePositionTo(face, RelativePosition.Right);
             var leftEdgeOnJoiningFace = configuration.Faces[joiningFace].GetEdge(Edge.Left);
-            var joiningFaceEdgeTop = leftEdgeOnJoiningFace[configuration.InnerLayerIndex()];
-            var joiningFaceEdgeBottom = leftEdgeOnJoiningFace[configuration.InnerLayerIndex()+2];
+            var joiningFaceEdgeTop = leftEdgeOnJoiningFace[configuration.MinInnerLayerIndex()];
+            var joiningFaceEdgeBottom = leftEdgeOnJoiningFace[configuration.MaxInnerLayerIndex()];
 
 
             if ((top == frontFaceColour && joiningFaceEdgeTop == leftFaceColour) ||
@@ -80,7 +80,7 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                 (top == leftFaceColour && joiningFaceEdgeTop == frontFaceColour) ||
                 (bottom == leftFaceColour && joiningFaceEdgeBottom == frontFaceColour))
             {
-                var rotationToBringEdgeToFront = GetRotationToPutTredgeOnFront((top == frontFaceColour && joiningFaceEdgeTop == leftFaceColour) || (top == leftFaceColour && joiningFaceEdgeTop == frontFaceColour), face, configuration.InnerLayerIndex());
+                var rotationToBringEdgeToFront = GetRotationToPutTredgeOnFront((top == frontFaceColour && joiningFaceEdgeTop == leftFaceColour) || (top == leftFaceColour && joiningFaceEdgeTop == frontFaceColour), face, configuration.MinInnerLayerIndex());
                 await CommonActions.ApplyAndAddRotation(rotationToBringEdgeToFront, solution, configuration);
             }
 
@@ -91,12 +91,12 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             }
 
             rightEdgeOnFace = configuration.Faces[face].GetEdge(Edge.Right);
-            top = rightEdgeOnFace[configuration.InnerLayerIndex()];
-            bottom = rightEdgeOnFace[configuration.InnerLayerIndex()+2];
+            top = rightEdgeOnFace[configuration.MinInnerLayerIndex()];
+            bottom = rightEdgeOnFace[configuration.MaxInnerLayerIndex()];
 
             leftEdgeOnJoiningFace = configuration.Faces[joiningFace].GetEdge(Edge.Left);
-            joiningFaceEdgeTop = leftEdgeOnJoiningFace[configuration.InnerLayerIndex()];
-            joiningFaceEdgeBottom = leftEdgeOnJoiningFace[configuration.InnerLayerIndex()+2];
+            joiningFaceEdgeTop = leftEdgeOnJoiningFace[configuration.MinInnerLayerIndex()];
+            joiningFaceEdgeBottom = leftEdgeOnJoiningFace[configuration.MaxInnerLayerIndex()];
 
 
             if (top == leftFaceColour && joiningFaceEdgeTop == frontFaceColour)
@@ -236,8 +236,8 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             {
                 topEdge = topEdge.Reverse().ToArray();
             }
-            var frontTopLeft = topEdge[configuration.InnerLayerIndex()];
-            var frontTopRight = topEdge[configuration.InnerLayerIndex()+2];
+            var frontTopLeft = topEdge[configuration.MinInnerLayerIndex()];
+            var frontTopRight = topEdge[configuration.MaxInnerLayerIndex()];
 
             Edge edge;
             switch (face)
@@ -254,8 +254,8 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                     throw new InvalidOperationException("Cannot get connecting edge as down layer does not connect to " + face);
             }
             var upperFaceEdge = configuration.Faces[FaceType.Upper].GetEdge(edge);
-            var upperBottomLeft = upperFaceEdge[configuration.InnerLayerIndex()];
-            var upperBottomRight = upperFaceEdge[configuration.InnerLayerIndex()+2];
+            var upperBottomLeft = upperFaceEdge[configuration.MinInnerLayerIndex()];
+            var upperBottomRight = upperFaceEdge[configuration.MaxInnerLayerIndex()];
 
             if (frontTopLeft == frontFaceColour && upperBottomLeft == leftColour)
             {
@@ -281,8 +281,8 @@ namespace NCubeSolver.Plugins.Solvers.Size5
         private static TredgeMatch MatchColoursOnDownFaceEdge(CubeConfiguration<FaceColour> configuration, FaceColour frontColour, FaceColour leftColour, FaceType face)
         {
             var bottomEdge = configuration.Faces[face].GetEdge(Edge.Bottom);
-            var frontBottomLeft = bottomEdge[configuration.InnerLayerIndex()];
-            var frontBottomRight = bottomEdge[configuration.InnerLayerIndex()+2];
+            var frontBottomLeft = bottomEdge[configuration.MinInnerLayerIndex()];
+            var frontBottomRight = bottomEdge[configuration.MaxInnerLayerIndex()];
 
             Edge edge;
             switch (face)
@@ -304,8 +304,8 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             {
                 downLayerEdge = downLayerEdge.Reverse().ToArray();
             }
-            var downTopLeft = downLayerEdge[configuration.InnerLayerIndex()];
-            var downTopRight = downLayerEdge[configuration.InnerLayerIndex()+2];
+            var downTopLeft = downLayerEdge[configuration.MinInnerLayerIndex()];
+            var downTopRight = downLayerEdge[configuration.MaxInnerLayerIndex()];
 
             if (frontBottomLeft == frontColour && downTopLeft == leftColour)
             {

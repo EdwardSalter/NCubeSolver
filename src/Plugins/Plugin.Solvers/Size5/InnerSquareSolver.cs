@@ -78,12 +78,12 @@ namespace NCubeSolver.Plugins.Solvers.Size5
 
         private static async Task CheckUpperBottomLeft(CubeConfiguration<FaceColour> configuration, List<IRotation> solution, FaceColour frontFaceColour)
         {
-            var bottomLeft = configuration.Faces[FaceType.Upper].GetEdge(configuration.InnerLayerIndex(), Edge.Bottom)[configuration.InnerLayerIndex()];
+            var bottomLeft = configuration.Faces[FaceType.Upper].GetEdge(configuration.MinInnerLayerIndex(), Edge.Bottom)[configuration.MinInnerLayerIndex()];
             if (bottomLeft == frontFaceColour)
             {
                 for (int i = 0; i <= 3; i++)
                 {
-                    if (configuration.Faces[FaceType.Front].GetEdge(configuration.InnerLayerIndex(), Edge.Top)[configuration.InnerLayerIndex()] != frontFaceColour)
+                    if (configuration.Faces[FaceType.Front].GetEdge(configuration.MinInnerLayerIndex(), Edge.Top)[configuration.MinInnerLayerIndex()] != frontFaceColour)
                     {
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeftAntiClockwise, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
@@ -102,12 +102,12 @@ namespace NCubeSolver.Plugins.Solvers.Size5
 
         private static async Task CheckUpperBottomRight(CubeConfiguration<FaceColour> configuration, List<IRotation> solution, FaceColour frontFaceColour)
         {
-            var topRight = configuration.Faces[FaceType.Upper].GetEdge(configuration.InnerLayerIndex(), Edge.Bottom)[configuration.InnerLayerIndex()+2];
+            var topRight = configuration.Faces[FaceType.Upper].GetEdge(configuration.MinInnerLayerIndex(), Edge.Bottom)[configuration.MaxInnerLayerIndex()];
             if (topRight == frontFaceColour)
             {
                 for (int i = 0; i <= 3; i++)
                 {
-                    if (configuration.Faces[FaceType.Front].GetEdge(configuration.InnerLayerIndex(), Edge.Top)[configuration.InnerLayerIndex()+2] != frontFaceColour)
+                    if (configuration.Faces[FaceType.Front].GetEdge(configuration.MinInnerLayerIndex(), Edge.Top)[configuration.MaxInnerLayerIndex()] != frontFaceColour)
                     {
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRightClockwise, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
@@ -126,12 +126,12 @@ namespace NCubeSolver.Plugins.Solvers.Size5
 
         private static async Task CheckUpperTopRight(CubeConfiguration<FaceColour> configuration, List<IRotation> solution, FaceColour frontFaceColour)
         {
-            var topRight = configuration.Faces[FaceType.Upper].GetEdge(configuration.InnerLayerIndex(), Edge.Top)[configuration.InnerLayerIndex()+2];
+            var topRight = configuration.Faces[FaceType.Upper].GetEdge(configuration.MinInnerLayerIndex(), Edge.Top)[configuration.MaxInnerLayerIndex()];
             if (topRight == frontFaceColour)
             {
                 for (int i = 0; i <= 3; i++)
                 {
-                    if (configuration.Faces[FaceType.Front].GetEdge(configuration.InnerLayerIndex(), Edge.Bottom)[configuration.InnerLayerIndex()+2] != frontFaceColour)
+                    if (configuration.Faces[FaceType.Front].GetEdge(configuration.MinInnerLayerIndex(), Edge.Bottom)[configuration.MaxInnerLayerIndex()] != frontFaceColour)
                     {
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRightClockwise, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
@@ -150,12 +150,12 @@ namespace NCubeSolver.Plugins.Solvers.Size5
 
         private static async Task CheckUpperTopLeft(CubeConfiguration<FaceColour> configuration, List<IRotation> solution, FaceColour frontFaceColour)
         {
-            var topLeft = configuration.Faces[FaceType.Upper].GetEdge(configuration.InnerLayerIndex(), Edge.Top)[configuration.InnerLayerIndex()];
+            var topLeft = configuration.Faces[FaceType.Upper].GetEdge(configuration.MinInnerLayerIndex(), Edge.Top)[configuration.MinInnerLayerIndex()];
             if (topLeft == frontFaceColour)
             {
                 for (int i = 0; i <= 3; i++)
                 {
-                    if (configuration.Faces[FaceType.Front].GetEdge(configuration.InnerLayerIndex(), Edge.Bottom)[configuration.InnerLayerIndex()] != frontFaceColour)
+                    if (configuration.Faces[FaceType.Front].GetEdge(configuration.MinInnerLayerIndex(), Edge.Bottom)[configuration.MinInnerLayerIndex()] != frontFaceColour)
                     {
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeftAntiClockwise, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
@@ -174,12 +174,12 @@ namespace NCubeSolver.Plugins.Solvers.Size5
 
         private static async Task CheckBackBottomLeft(CubeConfiguration<FaceColour> configuration, List<IRotation> solution, FaceColour frontFaceColour)
         {
-            var bottomLeft = configuration.Faces[FaceType.Back].GetEdge(configuration.InnerLayerIndex(), Edge.Bottom)[configuration.InnerLayerIndex()];
+            var bottomLeft = configuration.Faces[FaceType.Back].GetEdge(configuration.MinInnerLayerIndex(), Edge.Bottom)[configuration.MinInnerLayerIndex()];
             if (bottomLeft == frontFaceColour)
             {
                 for (int i = 0; i <= 3; i++)
                 {
-                    if (configuration.Faces[FaceType.Front].GetEdge(configuration.InnerLayerIndex(), Edge.Bottom)[configuration.InnerLayerIndex()+2] != frontFaceColour)
+                    if (configuration.Faces[FaceType.Front].GetEdge(configuration.MinInnerLayerIndex(), Edge.Bottom)[configuration.MaxInnerLayerIndex()] != frontFaceColour)
                     {
                         await CommonActions.ApplyAndAddRotation(CubeRotations.XClockwise, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration);
@@ -200,12 +200,12 @@ namespace NCubeSolver.Plugins.Solvers.Size5
 
         private static async Task CheckBackBottomRight(CubeConfiguration<FaceColour> configuration, List<IRotation> solution, FaceColour frontFaceColour)
         {
-            var topRight = configuration.Faces[FaceType.Back].GetEdge(configuration.InnerLayerIndex(), Edge.Bottom)[configuration.InnerLayerIndex()+2];
+            var topRight = configuration.Faces[FaceType.Back].GetEdge(configuration.MinInnerLayerIndex(), Edge.Bottom)[configuration.MaxInnerLayerIndex()];
             if (topRight == frontFaceColour)
             {
                 for (int i = 0; i <= 3; i++)
                 {
-                    if (configuration.Faces[FaceType.Front].GetEdge(configuration.InnerLayerIndex(), Edge.Bottom)[configuration.InnerLayerIndex()] != frontFaceColour)
+                    if (configuration.Faces[FaceType.Front].GetEdge(configuration.MinInnerLayerIndex(), Edge.Bottom)[configuration.MinInnerLayerIndex()] != frontFaceColour)
                     {
                         await CommonActions.ApplyAndAddRotation(CubeRotations.XClockwise, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration);
@@ -226,12 +226,12 @@ namespace NCubeSolver.Plugins.Solvers.Size5
 
         private static async Task CheckBackTopRight(CubeConfiguration<FaceColour> configuration, List<IRotation> solution, FaceColour frontFaceColour)
         {
-            var topRight = configuration.Faces[FaceType.Back].GetEdge(configuration.InnerLayerIndex(), Edge.Top)[configuration.InnerLayerIndex()+2];
+            var topRight = configuration.Faces[FaceType.Back].GetEdge(configuration.MinInnerLayerIndex(), Edge.Top)[configuration.MaxInnerLayerIndex()];
             if (topRight == frontFaceColour)
             {
                 for (int i = 0; i <= 3; i++)
                 {
-                    if (configuration.Faces[FaceType.Front].GetEdge(configuration.InnerLayerIndex(), Edge.Top)[configuration.InnerLayerIndex()] != frontFaceColour)
+                    if (configuration.Faces[FaceType.Front].GetEdge(configuration.MinInnerLayerIndex(), Edge.Top)[configuration.MinInnerLayerIndex()] != frontFaceColour)
                     {
                         await CommonActions.ApplyAndAddRotation(CubeRotations.XClockwise, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration);
@@ -252,12 +252,12 @@ namespace NCubeSolver.Plugins.Solvers.Size5
 
         private static async Task CheckBackTopLeft(CubeConfiguration<FaceColour> configuration, List<IRotation> solution, FaceColour frontFaceColour)
         {
-            var topLeft = configuration.Faces[FaceType.Back].GetEdge(configuration.InnerLayerIndex(), Edge.Top)[configuration.InnerLayerIndex()];
+            var topLeft = configuration.Faces[FaceType.Back].GetEdge(configuration.MinInnerLayerIndex(), Edge.Top)[configuration.MinInnerLayerIndex()];
             if (topLeft == frontFaceColour)
             {
                 for (int i = 0; i <= 3; i++)
                 {
-                    if (configuration.Faces[FaceType.Front].GetEdge(configuration.InnerLayerIndex(), Edge.Top)[configuration.InnerLayerIndex()+2] != frontFaceColour)
+                    if (configuration.Faces[FaceType.Front].GetEdge(configuration.MinInnerLayerIndex(), Edge.Top)[configuration.MaxInnerLayerIndex()] != frontFaceColour)
                     {
                         await CommonActions.ApplyAndAddRotation(CubeRotations.XClockwise, solution, configuration);
                         await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration);

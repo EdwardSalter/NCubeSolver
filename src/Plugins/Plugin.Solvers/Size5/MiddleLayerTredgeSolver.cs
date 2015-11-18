@@ -78,12 +78,12 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             var leftFaceColour = configuration.Faces[FaceType.Left].RightCentre();
 
             var rightEdgeOnFace = configuration.Faces[FaceType.Front].GetEdge(Edge.Right);
-            var frontFaceTop = rightEdgeOnFace[configuration.InnerLayerIndex()];
-            var frontFaceBottom = rightEdgeOnFace[configuration.InnerLayerIndex()+2];
+            var frontFaceTop = rightEdgeOnFace[configuration.MinInnerLayerIndex()];
+            var frontFaceBottom = rightEdgeOnFace[configuration.MaxInnerLayerIndex()];
 
             var leftEdgeOnRightFace = configuration.Faces[FaceType.Right].GetEdge(Edge.Left);
-            var rightFaceTop = leftEdgeOnRightFace[configuration.InnerLayerIndex()];
-            var rightFaceBottom = leftEdgeOnRightFace[configuration.InnerLayerIndex()+2];
+            var rightFaceTop = leftEdgeOnRightFace[configuration.MinInnerLayerIndex()];
+            var rightFaceBottom = leftEdgeOnRightFace[configuration.MaxInnerLayerIndex()];
 
             if (frontFaceTop == frontFaceColour && rightFaceTop == leftFaceColour)
             {
@@ -122,12 +122,12 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             var leftFaceColour = configuration.Faces[FaceType.Left].RightCentre();
 
             var rightEdgeOnFace = configuration.Faces[FaceType.Right].GetEdge(Edge.Right);
-            var rightFaceTop = rightEdgeOnFace[configuration.InnerLayerIndex()];
-            var rightFaceBottom = rightEdgeOnFace[configuration.InnerLayerIndex()+2];
+            var rightFaceTop = rightEdgeOnFace[configuration.MinInnerLayerIndex()];
+            var rightFaceBottom = rightEdgeOnFace[configuration.MaxInnerLayerIndex()];
 
             var leftEdgeOnBackFace = configuration.Faces[FaceType.Back].GetEdge(Edge.Left);
-            var backFaceTop = leftEdgeOnBackFace[configuration.InnerLayerIndex()];
-            var backFaceBottom = leftEdgeOnBackFace[configuration.InnerLayerIndex()+2];
+            var backFaceTop = leftEdgeOnBackFace[configuration.MinInnerLayerIndex()];
+            var backFaceBottom = leftEdgeOnBackFace[configuration.MaxInnerLayerIndex()];
 
             if ((rightFaceTop == frontFaceColour && backFaceTop == leftFaceColour) ||
                 (rightFaceBottom == frontFaceColour && backFaceBottom == leftFaceColour) ||
@@ -145,12 +145,12 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             var leftFaceColour = configuration.Faces[FaceType.Left].RightCentre();
 
             var rightEdgeOnFace = configuration.Faces[FaceType.Back].GetEdge(Edge.Right);
-            var backFaceTop = rightEdgeOnFace[configuration.InnerLayerIndex()];
-            var backFaceBottom = rightEdgeOnFace[configuration.InnerLayerIndex()+2];
+            var backFaceTop = rightEdgeOnFace[configuration.MinInnerLayerIndex()];
+            var backFaceBottom = rightEdgeOnFace[configuration.MaxInnerLayerIndex()];
 
             var leftEdgeOnLeftFace = configuration.Faces[FaceType.Left].GetEdge(Edge.Left);
-            var leftFaceTop = leftEdgeOnLeftFace[configuration.InnerLayerIndex()];
-            var leftFaceBottom = leftEdgeOnLeftFace[configuration.InnerLayerIndex()+2];
+            var leftFaceTop = leftEdgeOnLeftFace[configuration.MinInnerLayerIndex()];
+            var leftFaceBottom = leftEdgeOnLeftFace[configuration.MaxInnerLayerIndex()];
 
             if ((backFaceTop == frontFaceColour && leftFaceTop == leftFaceColour) ||
                 (backFaceBottom == frontFaceColour && leftFaceBottom == leftFaceColour) ||
@@ -169,12 +169,12 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             var leftFaceColour = configuration.Faces[FaceType.Left].RightCentre();
 
             var rightEdgeOnFace = configuration.Faces[FaceType.Left].GetEdge(Edge.Right);
-            var leftFaceTop = rightEdgeOnFace[configuration.InnerLayerIndex()];
-            var leftFaceBottom = rightEdgeOnFace[configuration.InnerLayerIndex()+2];
+            var leftFaceTop = rightEdgeOnFace[configuration.MinInnerLayerIndex()];
+            var leftFaceBottom = rightEdgeOnFace[configuration.MaxInnerLayerIndex()];
 
             var leftEdgeOnFrontFace = configuration.Faces[FaceType.Front].GetEdge(Edge.Left);
-            var frontFaceTop = leftEdgeOnFrontFace[configuration.InnerLayerIndex()];
-            var frontFaceBottom = leftEdgeOnFrontFace[configuration.InnerLayerIndex()+2];
+            var frontFaceTop = leftEdgeOnFrontFace[configuration.MinInnerLayerIndex()];
+            var frontFaceBottom = leftEdgeOnFrontFace[configuration.MaxInnerLayerIndex()];
 
             if (leftFaceTop == frontFaceColour && frontFaceTop == leftFaceColour)
             {

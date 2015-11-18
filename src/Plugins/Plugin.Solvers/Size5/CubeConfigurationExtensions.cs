@@ -1,17 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NCubeSolvers.Core;
+﻿using NCubeSolvers.Core;
 
 namespace NCubeSolver.Plugins.Solvers.Size5
 {
     internal static class CubeConfigurationExtensions
     {
-        public static int InnerLayerIndex<T>(this CubeConfiguration<T> configuration)
+        public static int MinInnerLayerIndex<T>(this CubeConfiguration<T> configuration)
         {
             return configuration.GetCentreLayer() - 1;
+        }
+
+        public static int MaxInnerLayerIndex<T>(this CubeConfiguration<T> configuration)
+        {
+            return configuration.GetCentreLayer() + 1;
+        }
+
+        public static int MinOuterLayerIndex<T>(this CubeConfiguration<T> configuration)
+        {
+            return configuration.GetCentreLayer() - 2;
+        }
+
+        public static int MaxOuterLayerIndex<T>(this CubeConfiguration<T> configuration)
+        {
+            return configuration.GetCentreLayer() + 2;
         }
     }
 }
