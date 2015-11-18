@@ -16,14 +16,14 @@ namespace NCubeSolver.Plugins.ConfigurationGenerators
         private CubeConfiguration<FaceColour> CreateRandomConfiguration(int size, int moves)
         {
             var cubeConfiguration = CubeConfiguration<FaceColour>.CreateStandardCubeConfiguration(size);
-            var rotations = GenerateRandomRotationList(moves);
+            var rotations = GenerateRandomRotationList(moves, size);
 
             CommonActions.ApplyRotations(rotations, cubeConfiguration);
 
             return cubeConfiguration;
         }
 
-        public List<IRotation> GenerateRandomRotationList(int moves)
+        public List<IRotation> GenerateRandomRotationList(int moves, int? size = null)
         {
             var rotations = new List<IRotation>();
 
@@ -31,7 +31,7 @@ namespace NCubeSolver.Plugins.ConfigurationGenerators
             {
                 if (m_random.Next(0, 2) == 1)
                 {
-                    rotations.Add(Rotations.Random());
+                    rotations.Add(Rotations.Random(size));
                 }
                 else
                 {

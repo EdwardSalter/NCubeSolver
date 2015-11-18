@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using NCubeSolvers.Core.Extensions;
 
 namespace NCubeSolvers.Core
 {
@@ -65,10 +67,24 @@ namespace NCubeSolvers.Core
         };
         private static readonly Random RandomGenerator = RandomFactory.CreateRandom();
 
-        public static FaceRotation Random()
+        public static FaceRotation Random(int? size = null)
         {
-            var index = RandomGenerator.Next(0, AllRotations.Count);
-            return AllRotations[index];
+            size = size ?? 3;
+            return new FaceRotation
+            {
+                Count = RandomGenerator.Next(1, 3),
+                Direction = GetRandomEnumValue<RotationDirection>(),
+                Face = GetRandomEnumValue<FaceType>(),
+                LayerNumberFromFace = RandomGenerator.Next(0, size.Value)
+            };
+        }
+
+        private static TEnum GetRandomEnumValue<TEnum>() where TEnum : IComparable, IConvertible, IFormattable
+        {
+            var min = Convert.ToInt32(EnumEx.GetMinValue<TEnum>());
+            var max = Convert.ToInt32(EnumEx.GetMaxValue<TEnum>());
+
+            return (TEnum)Enum.ToObject(typeof(TEnum), RandomGenerator.Next(min, max + 1));
         }
 
         public static FaceRotation ByName(string name)
@@ -78,12 +94,36 @@ namespace NCubeSolvers.Core
 
         public static FaceRotation ByFace(FaceType face, RotationDirection direction, int layerNumber = 0)
         {
-            return AllRotations.Single(r => r.Face == face && r.Direction == direction && r.LayerNumberFromFace == layerNumber && r.Count == 1);
+            var rotation = AllRotations.SingleOrDefault(r => r.Face == face && r.Direction == direction && r.LayerNumberFromFace == layerNumber && r.Count == 1);
+            if (rotation == null)
+            {
+                rotation = new FaceRotation
+                {
+                    Count = 1,
+                    Direction = direction,
+                    LayerNumberFromFace = layerNumber
+                };
+                AllRotations.Add(rotation);
+            }
+
+            return rotation;
         }
 
         public static FaceRotation ByFaceTwice(FaceType face, int layerNumber = 0)
         {
-            return AllRotations.Single(r => r.Face == face && r.Count == 2 && r.LayerNumberFromFace == layerNumber);
+            var rotation = AllRotations.SingleOrDefault(r => r.Face == face && r.Count == 2 && r.LayerNumberFromFace == layerNumber);
+            if (rotation == null)
+            {
+                rotation = new FaceRotation
+                {
+                    Count = 2,
+                    Direction = RotationDirection.Clockwise,
+                    LayerNumberFromFace = layerNumber
+                };
+                AllRotations.Add(rotation);
+            }
+
+            return rotation;
         }
     }
 }
