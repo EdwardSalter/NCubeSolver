@@ -101,7 +101,8 @@ namespace NCubeSolvers.Core
                 {
                     Count = 1,
                     Direction = direction,
-                    LayerNumberFromFace = layerNumber
+                    LayerNumberFromFace = layerNumber,
+                    Face = face
                 };
                 AllRotations.Add(rotation);
             }
@@ -118,7 +119,8 @@ namespace NCubeSolvers.Core
                 {
                     Count = 2,
                     Direction = RotationDirection.Clockwise,
-                    LayerNumberFromFace = layerNumber
+                    LayerNumberFromFace = layerNumber,
+                    Face = face
                 };
                 AllRotations.Add(rotation);
             }
