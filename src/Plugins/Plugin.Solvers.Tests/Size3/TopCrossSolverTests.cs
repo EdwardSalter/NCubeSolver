@@ -19,7 +19,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
 
             await solver.Solve(configuration);
 
-            CubeConfigurationAssert.FaceHasCrossOfColour(configuration, FaceType.Upper, FaceColour.Yellow);
+            CubeConfigurationAssert.FaceCentreColourMatchesCentresOfLayerNumber(configuration, FaceType.Upper, FaceColour.Yellow);
         }
 
         [Test]
@@ -32,7 +32,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
 
             await solver.Solve(configuration);
 
-            CubeConfigurationAssert.FaceHasCrossOfColour(configuration, FaceType.Upper, FaceColour.Yellow);
+            CubeConfigurationAssert.FaceCentreColourMatchesCentresOfLayerNumber(configuration, FaceType.Upper, FaceColour.Yellow);
         }
 
         [Test]
@@ -43,7 +43,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
 
             await solver.Solve(configuration);
 
-            CubeConfigurationAssert.FaceHasCrossOfColour(configuration, FaceType.Upper, FaceColour.Yellow);
+            CubeConfigurationAssert.FaceCentreColourMatchesCentresOfLayerNumber(configuration, FaceType.Upper, FaceColour.Yellow);
         }
 
         [Test]
@@ -55,7 +55,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
 
             await solver.Solve(configuration);
 
-            CubeConfigurationAssert.FaceHasCrossOfColour(configuration, FaceType.Upper, FaceColour.Yellow);
+            CubeConfigurationAssert.FaceCentreColourMatchesCentresOfLayerNumber(configuration, FaceType.Upper, FaceColour.Yellow);
         }
 
         [Test]
@@ -67,7 +67,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
 
             await solver.Solve(configuration);
 
-            CubeConfigurationAssert.FaceHasCrossOfColour(configuration, FaceType.Upper, FaceColour.Yellow);
+            CubeConfigurationAssert.FaceCentreColourMatchesCentresOfLayerNumber(configuration, FaceType.Upper, FaceColour.Yellow);
         }
 
         [Test]
@@ -79,7 +79,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
 
             await solver.Solve(configuration);
 
-            CubeConfigurationAssert.FaceHasCrossOfColour(configuration, FaceType.Upper, FaceColour.Yellow);
+            CubeConfigurationAssert.FaceCentreColourMatchesCentresOfLayerNumber(configuration, FaceType.Upper, FaceColour.Yellow);
         }
 
         [Test]
@@ -90,7 +90,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
 
             await solver.Solve(configuration);
 
-            CubeConfigurationAssert.FaceHasCrossOfColour(configuration, FaceType.Upper, FaceColour.Yellow);
+            CubeConfigurationAssert.FaceCentreColourMatchesCentresOfLayerNumber(configuration, FaceType.Upper, FaceColour.Yellow);
         }
 
         [Test]

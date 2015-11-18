@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using NCubeSolvers.Core;
 
-namespace NCubeSolver.Plugins.Solvers.Size5
+namespace NCubeSolver.Plugins.Solvers.Common
 {
     internal class SingleFaceCrossSolver : IPartialSolver
     {
@@ -22,7 +22,7 @@ namespace NCubeSolver.Plugins.Solvers.Size5
         {
             if (m_layer < 0)
             {
-                m_layer = configuration.MinInnerLayerIndex();
+                m_layer = configuration.GetCentreLayer() - 1;
             }
 
             var solution = new List<IRotation>();

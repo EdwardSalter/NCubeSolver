@@ -18,22 +18,22 @@ namespace NCubeSolver.Core.UnitTestHelpers
         public static void TopLayerCrossIsCorrect(CubeConfiguration<FaceColour> configuration)
         {
             CommonActions.ResetToDefaultPosition(configuration).Wait();
-            FaceHasCrossOfColour(configuration, FaceType.Upper, FaceColour.Yellow);
+            FaceCentreColourMatchesCentresOfLayerNumber(configuration, FaceType.Upper, FaceColour.Yellow);
             Assert.AreEqual(FaceColour.Red, configuration.Faces[FaceType.Front].TopCentre());
             Assert.AreEqual(FaceColour.Blue, configuration.Faces[FaceType.Left].TopCentre());
             Assert.AreEqual(FaceColour.Orange, configuration.Faces[FaceType.Back].TopCentre());
             Assert.AreEqual(FaceColour.Green, configuration.Faces[FaceType.Right].TopCentre());
         }
 
-        public static void FaceHasCrossOfColour(CubeConfiguration<FaceColour> configuration, FaceType faceType, FaceColour faceColour)
+        public static void FaceCentreColourMatchesCentresOfLayerNumber(CubeConfiguration<FaceColour> configuration, FaceType faceType, FaceColour faceColour, int? layer = null)
         {
-            int layer = Math.Max(configuration.Size - 4, 0);
+            layer = layer ?? configuration.GetCentreLayer() - 1;
             var face = configuration.Faces[faceType];
             Assert.AreEqual(faceColour, face.Centre);
-            Assert.AreEqual(faceColour, face.GetEdge(layer, Edge.Right).Centre());
-            Assert.AreEqual(faceColour, face.GetEdge(layer, Edge.Top).Centre());
-            Assert.AreEqual(faceColour, face.GetEdge(layer, Edge.Bottom).Centre());
-            Assert.AreEqual(faceColour, face.GetEdge(layer, Edge.Bottom).Centre());
+            Assert.AreEqual(faceColour, face.GetEdge(layer.Value, Edge.Right).Centre());
+            Assert.AreEqual(faceColour, face.GetEdge(layer.Value, Edge.Top).Centre());
+            Assert.AreEqual(faceColour, face.GetEdge(layer.Value, Edge.Bottom).Centre());
+            Assert.AreEqual(faceColour, face.GetEdge(layer.Value, Edge.Bottom).Centre());
         }
 
         public static void FaceIsColour(CubeConfiguration<FaceColour> configuration, FaceType face, FaceColour colour)

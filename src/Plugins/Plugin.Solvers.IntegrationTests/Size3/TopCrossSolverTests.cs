@@ -52,7 +52,7 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size3
 
                 solver.Solve(configuration).Wait();
 
-                CubeConfigurationAssert.FaceHasCrossOfColour(configuration, FaceType.Upper, FaceColour.Yellow);
+                CubeConfigurationAssert.FaceCentreColourMatchesCentresOfLayerNumber(configuration, FaceType.Upper, FaceColour.Yellow);
             });
         }
 

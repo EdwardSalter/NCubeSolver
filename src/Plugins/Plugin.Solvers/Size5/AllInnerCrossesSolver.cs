@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using NCubeSolver.Plugins.Solvers.Common;
 using NCubeSolvers.Core;
 
 namespace NCubeSolver.Plugins.Solvers.Size5

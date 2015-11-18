@@ -18,7 +18,7 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size5
         public void Solve_GivenARandomConfiguration_ProducesSolvedCross()
         {
             Test(configurationToTest =>
-                CubeConfigurationAssert.FaceHasCrossOfColour(configurationToTest, FaceType.Down, FaceColour.White));
+                CubeConfigurationAssert.FaceCentreColourMatchesCentresOfLayerNumber(configurationToTest, FaceType.Down, FaceColour.White));
         }
 
         [Test]
@@ -44,7 +44,7 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size5
         public void Solve_GivenARandomConfiguration_ProducesSolvedTopCross()
         {
             Test(configurationToTest =>
-                CubeConfigurationAssert.FaceHasCrossOfColour(configurationToTest, FaceType.Upper, FaceColour.Yellow));
+                CubeConfigurationAssert.FaceCentreColourMatchesCentresOfLayerNumber(configurationToTest, FaceType.Upper, FaceColour.Yellow));
         }
 
         [Test]

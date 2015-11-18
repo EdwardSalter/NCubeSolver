@@ -36,7 +36,7 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests
                     //Debug.WriteLine("Test Failed");
                     timesFailed ++;
                 }
-                Debug.WriteLine("");
+//                Debug.WriteLine("");
             }
 
             var percent = ((double)timesToRun - timesFailed) / timesToRun;
