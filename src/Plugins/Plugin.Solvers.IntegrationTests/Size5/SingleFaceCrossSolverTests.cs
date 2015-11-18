@@ -7,7 +7,7 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size5
 {
     [TestFixture]
     [Category("FullSolve")]
-    public class InnerCrossSolverTests
+    public class SingleFaceCrossSolverTests
     {
         [TestCase(FaceColour.White)]
         [TestCase(FaceColour.Red)]
@@ -23,7 +23,7 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size5
         private static void Solve(FaceColour crossColour)
         {
             var configuration = ConfigurationGenerator.GenerateRandomConfiguration(5, 100);
-            var solver = new SingleInnerCrossSolver(crossColour);
+            var solver = new SingleFaceCrossSolver(crossColour);
 
             solver.Solve(configuration).Wait(TestRunner.Timeout);
 

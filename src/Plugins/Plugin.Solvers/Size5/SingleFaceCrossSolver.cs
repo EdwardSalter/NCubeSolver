@@ -4,17 +4,27 @@ using NCubeSolvers.Core;
 
 namespace NCubeSolver.Plugins.Solvers.Size5
 {
-    internal class SingleInnerCrossSolver : IPartialSolver
+    internal class SingleFaceCrossSolver : IPartialSolver
     {
         private readonly FaceColour m_faceColour;
+        private int m_layer = -1;
 
-        public SingleInnerCrossSolver(FaceColour faceColour)
+        public SingleFaceCrossSolver(FaceColour faceColour, int? layer = null)
         {
+            if (layer.HasValue)
+            {
+                m_layer = layer.Value;
+            }
             m_faceColour = faceColour;
         }
 
         public async Task<IEnumerable<IRotation>> Solve(CubeConfiguration<FaceColour> configuration)
         {
+            if (m_layer < 0)
+            {
+                m_layer = configuration.MinInnerLayerIndex();
+            }
+
             var solution = new List<IRotation>();
 
             var rotationToBottom = await CommonActions.PositionOnFront(configuration, m_faceColour);
@@ -41,12 +51,12 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             await CheckEdgeOnFace(configuration, solution, checkFace, Edge.Right, isBack ? Edge.Left : Edge.Right, frontFace, FaceType.Right, !reverseDirection, doubleMoves);
 
             // TODO: THIS CAN BE IMPROVED, INSTEAD MOVE THE FRONT LAYER FIRST, YOU CAN CHOOSE EITHER THE LEFT OR RIGHT DEPENDING ON WHICH HOLDS THE EMPTY COLOUR
-            if (checkFace.GetEdge(configuration.MinInnerLayerIndex(), Edge.Top).Centre() == m_faceColour)
+            if (checkFace.GetEdge(m_layer, Edge.Top).Centre() == m_faceColour)
             {
                 await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceToCheck, RotationDirection.AntiClockwise), solution, configuration);
                 await CheckEdgeOnFace(configuration, solution, checkFace, !isBack ? Edge.Left : Edge.Right, Edge.Left, frontFace, !isBack ? FaceType.Left : FaceType.Right, reverseDirection, doubleMoves);
             }
-            if (checkFace.GetEdge(configuration.MinInnerLayerIndex(), Edge.Bottom).Centre() == m_faceColour)
+            if (checkFace.GetEdge(m_layer, Edge.Bottom).Centre() == m_faceColour)
             {
                 await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceToCheck, RotationDirection.AntiClockwise), solution, configuration);
                 await CheckEdgeOnFace(configuration, solution, checkFace, isBack ? Edge.Left : Edge.Right, Edge.Right, frontFace, !isBack ? FaceType.Right : FaceType.Left, reverseDirection, doubleMoves);
@@ -59,29 +69,29 @@ namespace NCubeSolver.Plugins.Solvers.Size5
         private async Task CheckEdgeOnFace(CubeConfiguration<FaceColour> configuration, List<IRotation> solution, Face<FaceColour> checkFace, Edge frontEdge, Edge checkEdge, Face<FaceColour> frontFace, FaceType movementFace, bool reverseDirection = false, bool doubleMoves = false)
         {
             var numMoves = doubleMoves ? 2 : 1;
-            var center = checkFace.GetEdge(configuration.MinInnerLayerIndex(), checkEdge).Centre();
+            var center = checkFace.GetEdge(m_layer, checkEdge).Centre();
             if (center == m_faceColour)
             {
                 for (int i = 0; i <= 3; i++)
                 {
-                    if (frontFace.GetEdge(configuration.MinInnerLayerIndex(), frontEdge).Centre() == m_faceColour) break;
+                    if (frontFace.GetEdge(m_layer, frontEdge).Centre() == m_faceColour) break;
 
                     await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration);
                 }
 
                 var direction = !reverseDirection ? RotationDirection.Clockwise : RotationDirection.AntiClockwise;
-                var rotation = numMoves == 1 ? Rotations.ByFace(movementFace, direction, configuration.MinInnerLayerIndex()) : Rotations.ByFaceTwice(movementFace, configuration.MinInnerLayerIndex());
+                var rotation = numMoves == 1 ? Rotations.ByFace(movementFace, direction, m_layer) : Rotations.ByFaceTwice(movementFace, m_layer);
                 await CommonActions.ApplyAndAddRotation(rotation, solution, configuration);
 
                 for (int i = 0; i <= 3; i++)
                 {
-                    if (frontFace.GetEdge(configuration.MinInnerLayerIndex(), frontEdge).Centre() != m_faceColour) break;
+                    if (frontFace.GetEdge(m_layer, frontEdge).Centre() != m_faceColour) break;
 
                     await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration);
                 }
 
                 direction = !reverseDirection ? RotationDirection.AntiClockwise : RotationDirection.Clockwise;
-                rotation = numMoves == 1 ? Rotations.ByFace(movementFace, direction, configuration.MinInnerLayerIndex()) : Rotations.ByFaceTwice(movementFace, configuration.MinInnerLayerIndex());
+                rotation = numMoves == 1 ? Rotations.ByFace(movementFace, direction, m_layer) : Rotations.ByFaceTwice(movementFace, m_layer);
                 await CommonActions.ApplyAndAddRotation(rotation, solution, configuration);
             }
         }
