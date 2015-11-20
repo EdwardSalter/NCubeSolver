@@ -9,37 +9,30 @@ namespace NCubeSolver.Plugins.Solvers.Size5
         public async Task<IEnumerable<IRotation>> Solve(CubeConfiguration<FaceColour> configuration)
         {
             var solution = new List<IRotation>();
-            List<IRotation> previousSolution;
-            do
+
+            await Repeat.SolvingUntilNoMovesCanBeMade(solution, async () =>
             {
-                previousSolution = new List<IRotation>(solution);
 
                 await CheckFrontRightEdge(configuration, solution);
                 await CheckRightBackEdge(configuration, solution);
                 await CheckBackLeftEdge(configuration, solution);
                 await CheckLeftFrontEdge(configuration, solution);
-            } while (previousSolution.Count != solution.Count);
+            });
 
             await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration);
 
-            do
-            {
-                previousSolution = new List<IRotation>(solution);
-
+            await Repeat.SolvingUntilNoMovesCanBeMade(solution, async () => {
                 await CheckFrontRightEdge(configuration, solution);
                 await CheckRightBackEdge(configuration, solution);
                 await CheckLeftFrontEdge(configuration, solution);
-            } while (previousSolution.Count != solution.Count);
+            });
 
             await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration);
 
-            do
-            {
-                previousSolution = new List<IRotation>(solution);
-
+           await Repeat.SolvingUntilNoMovesCanBeMade(solution, async () => {
                 await CheckFrontRightEdge(configuration, solution);
                 await CheckLeftFrontEdge(configuration, solution);
-            } while (previousSolution.Count != solution.Count);
+            });
 
             await SolveLastTredge(configuration, solution);
 

@@ -31,12 +31,11 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests
                 {
                     test();
                 }
-                catch
+                catch (Exception ex)
                 {
-                    //Debug.WriteLine("Test Failed");
+                    Debug.WriteLine(ex);
                     timesFailed ++;
                 }
-//                Debug.WriteLine("");
             }
 
             var percent = ((double)timesToRun - timesFailed) / timesToRun;

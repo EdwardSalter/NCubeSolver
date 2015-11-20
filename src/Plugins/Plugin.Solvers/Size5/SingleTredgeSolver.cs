@@ -23,10 +23,9 @@ namespace NCubeSolver.Plugins.Solvers.Size5
         {
             var solution = new List<IRotation>();
             List<IRotation> previousSolution;
-            do
-            {
-                previousSolution = new List<IRotation>(solution);
 
+            await Repeat.SolvingUntilNoMovesCanBeMade(solution, async () =>
+            {
                 await CheckUpperAndDownEdgesOnFace(configuration, solution, FaceType.Front);
                 await CheckUpperAndDownEdgesOnFace(configuration, solution, FaceType.Left);
                 await CheckUpperAndDownEdgesOnFace(configuration, solution, FaceType.Back);
@@ -36,7 +35,8 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                 await CheckMiddleLayersOnFace(configuration, solution, FaceType.Back);
                 await CheckMiddleLayersOnFace(configuration, solution, FaceType.Front);
                 await CheckFlipped(configuration, solution);
-            } while (previousSolution.Count != solution.Count);
+            });
+
 
             return solution;
         }

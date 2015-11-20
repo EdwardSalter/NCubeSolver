@@ -13,36 +13,6 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size3
     public class TopCrossSolverTests
     {
         [Test]
-        public void FindStuff_Action_Expected()
-        {
-            CubeConfiguration<FaceColour> configuration;
-            List<FaceRotation> rotations;
-            do
-            {
-                rotations = new List<FaceRotation>();
-                for (int i = 0; i < 2; i++)
-                {
-                    rotations.Add(Rotations.Random());
-                }
-
-                configuration = CubeConfiguration<FaceColour>.CreateStandardCubeConfiguration(3);
-                CommonActions.ApplyRotations(rotations, configuration);
-                new BottomCrossSolver().Solve(configuration).Wait();
-                new BottomLayerSolver().Solve(configuration).Wait();
-                new MiddleLayerSolver().Solve(configuration).Wait();
-                new TopCrossSolver().SolveCross(configuration, new List<IRotation>()).Wait();
-                CommonActions.ResetToDefaultPosition(configuration).Wait();
-            } while (!((configuration.Faces[FaceType.Front].TopCentre() == FaceColour.Red &&
-                     configuration.Faces[FaceType.Left].TopCentre() == FaceColour.Orange) &&
-                     configuration.Faces[FaceType.Right].TopCentre() == FaceColour.Blue &&
-                     configuration.Faces[FaceType.Back].TopCentre() == FaceColour.Green));
-
-            Console.WriteLine(string.Join(" ", rotations));
-        }
-
-
-
-        [Test]
         public void Solve_GivenARandomConfiguration_ProducesASolvedCross()
         {
             TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, () =>
