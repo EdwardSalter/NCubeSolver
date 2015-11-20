@@ -9,22 +9,18 @@ namespace NCubeSolver.Plugins.Solvers.Size3
         public async Task<IEnumerable<IRotation>> Solve(CubeConfiguration<FaceColour> configuration)
         {
             var solution = new List<IRotation>();
-            List<IRotation> previousSolution;
 
-            do
+            var rotationToBottom = await CommonActions.PositionOnBottom(configuration, FaceColour.White);
+            if (rotationToBottom != null) solution.Add(rotationToBottom);
+
+            await Repeat.SolvingUntilNoMovesCanBeMade(solution, async () =>
             {
-                previousSolution = new List<IRotation>(solution);
-
-                var rotationToBottom = await CommonActions.PositionOnBottom(configuration, FaceColour.White);
-                if (rotationToBottom != null) solution.Add(rotationToBottom);
-
                 await CheckTopFaceForWhite(configuration, solution);
                 await CheckTopLayerForWhite(configuration, solution);
                 await CheckMiddleLayerForWhite(configuration, solution);
                 await CheckBottomLayerForWhite(configuration, solution);
                 await CheckBottomFaceForWhite(configuration, solution);
-
-            } while (previousSolution.Count != solution.Count);
+            });
 
             return solution;
         }

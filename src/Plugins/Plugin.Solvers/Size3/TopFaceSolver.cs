@@ -9,18 +9,15 @@ namespace NCubeSolver.Plugins.Solvers.Size3
         public async Task<IEnumerable<IRotation>> Solve(CubeConfiguration<FaceColour> configuration)
         {
             var solution = new List<IRotation>();
-            List<IRotation> previousSolution;
 
-            do
+            await Repeat.SolvingUntilNoMovesCanBeMade(solution, async () =>
             {
-                previousSolution = new List<IRotation>(solution);
-
                 var faces = new List<FaceType> {FaceType.Right, FaceType.Back, FaceType.Front, FaceType.Left};
                 foreach (var face in faces)
                 {
                     await SortFace(face, configuration, solution);
                 }
-            } while (previousSolution.Count != solution.Count);
+            });
 
             await CorrectTopLayerRotation(solution, configuration);
 

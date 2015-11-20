@@ -69,14 +69,17 @@ namespace NCubeSolvers.Core
 
         public static FaceRotation Random(int? size = null)
         {
-            size = size ?? 3;
-            return new FaceRotation
-            {
-                Count = RandomGenerator.Next(1, 3),
-                Direction = GetRandomEnumValue<RotationDirection>(),
-                Face = GetRandomEnumValue<FaceType>(),
-                LayerNumberFromFace = RandomGenerator.Next(0, size.Value)
-            };
+            var index = RandomGenerator.Next(0, AllRotations.Count);
+            return AllRotations[index];
+
+            //size = size ?? 3;
+            //return new FaceRotation
+            //{
+            //    Count = RandomGenerator.Next(1, 3),
+            //    Direction = GetRandomEnumValue<RotationDirection>(),
+            //    Face = GetRandomEnumValue<FaceType>(),
+            //    LayerNumberFromFace = RandomGenerator.Next(0, size.Value)
+            //};
         }
 
         private static TEnum GetRandomEnumValue<TEnum>() where TEnum : IComparable, IConvertible, IFormattable

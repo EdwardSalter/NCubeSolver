@@ -16,6 +16,8 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             var startIndex = colourIndex;
 
             await SolveFrontFace(configuration, solution);
+
+            int count = 0;
             do
             {
                 colourIndex++;
@@ -27,6 +29,11 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                 solution.Add(await CommonActions.PositionOnFront(configuration, nextColour));
 
                 await SolveFrontFace(configuration, solution);
+
+                if (++count > 10)
+                {
+                    throw new SolveFailureException("Could not solve the inner square in 10 or less tries");
+                }
             } while (colourIndex != startIndex);
 
             return solution;
@@ -46,34 +53,28 @@ namespace NCubeSolver.Plugins.Solvers.Size5
 
         private static async Task CheckUpperFace(CubeConfiguration<FaceColour> configuration, List<IRotation> solution)
         {
-            List<IRotation> previousSolution;
             var frontFaceColour = configuration.Faces[FaceType.Front].Centre;
 
-            do
+            for (int i = 0; i < 4; i++)
             {
-                previousSolution = new List<IRotation>(solution);
-
                 await CheckUpperTopLeft(configuration, solution, frontFaceColour);
                 await CheckUpperTopRight(configuration, solution, frontFaceColour);
                 await CheckUpperBottomRight(configuration, solution, frontFaceColour);
                 await CheckUpperBottomLeft(configuration, solution, frontFaceColour);
-            } while (solution.Count != previousSolution.Count);
+            }
         }
 
         private static async Task CheckBackFace(CubeConfiguration<FaceColour> configuration, List<IRotation> solution)
         {
-            List<IRotation> previousSolution;
             var frontFaceColour = configuration.Faces[FaceType.Front].Centre;
 
-            do
+            for(int i = 0; i < 4; i++)
             {
-                previousSolution = new List<IRotation>(solution);
-
                 await CheckBackTopLeft(configuration, solution, frontFaceColour);
                 await CheckBackTopRight(configuration, solution, frontFaceColour);
                 await CheckBackBottomRight(configuration, solution, frontFaceColour);
                 await CheckBackBottomLeft(configuration, solution, frontFaceColour);
-            } while (solution.Count != previousSolution.Count);
+            }
         }
 
         private static async Task CheckUpperBottomLeft(CubeConfiguration<FaceColour> configuration, List<IRotation> solution, FaceColour frontFaceColour)

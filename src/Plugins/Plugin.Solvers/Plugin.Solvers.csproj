@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Repeat.cs" />
     <Compile Include="RotationListEx.cs" />
     <Compile Include="Size2\BottomFaceChooser.cs" />
     <Compile Include="Size2\FaceColourPair.cs" />

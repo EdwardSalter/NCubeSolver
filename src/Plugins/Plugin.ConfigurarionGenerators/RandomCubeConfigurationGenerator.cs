@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NCubeSolvers.Core;
 using NCubeSolvers.Core.Plugins;
 
@@ -6,7 +7,7 @@ namespace NCubeSolver.Plugins.ConfigurationGenerators
 {
     public class RandomCubeConfigurationGenerator : ICubeConfigurationGenerator
     {
-        private readonly System.Random m_random = new System.Random();
+        private readonly System.Random m_random = new System.Random(Guid.NewGuid().GetHashCode());
 
         public CubeConfiguration<FaceColour> GenerateConfiguration(int size, int numberOfRotations)
         {
