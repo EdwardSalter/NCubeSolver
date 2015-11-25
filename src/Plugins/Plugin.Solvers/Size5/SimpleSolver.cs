@@ -16,29 +16,35 @@ namespace NCubeSolver.Plugins.Solvers.Size5
         // TODO: MAYBE RETURN THINGS IN SECTIONS?
         public override async Task<IEnumerable<IRotation>> Solve(CubeConfiguration<FaceColour> configuration)
         {
-            await base.Solve(configuration);
+            await base.Solve(configuration).ConfigureAwait(false);
+
             m_configuration = configuration;
 
             var solution = new List<IRotation>();
 
-            var cubeRotation = await CommonActions.PositionOnBottom(m_configuration, FaceColour.White);
+            var cubeRotation = await CommonActions.PositionOnBottom(m_configuration, FaceColour.White).ConfigureAwait(false);
+
             if (cubeRotation != null)
                 solution.Add(cubeRotation);
 
             var innerCrossesSolver = new AllInnerCrossesSolver();
-            var stepsToSolveCrosses = await innerCrossesSolver.Solve(m_configuration);
+            var stepsToSolveCrosses = await innerCrossesSolver.Solve(m_configuration).ConfigureAwait(false);
+
             solution.AddRange(stepsToSolveCrosses);
 
             var innerSquareSolver = new InnerSquareSolver();
-            var stepsToSolveSquares = await innerSquareSolver.Solve(m_configuration);
+            var stepsToSolveSquares = await innerSquareSolver.Solve(m_configuration).ConfigureAwait(false);
+
             solution.AddRange(stepsToSolveSquares);
 
             var tredgeSolver = new UpperAndDownFaceTredgesSolver();
-            var stepsToSolveTredges = await tredgeSolver.Solve(m_configuration);
+            var stepsToSolveTredges = await tredgeSolver.Solve(m_configuration).ConfigureAwait(false);
+
             solution.AddRange(stepsToSolveTredges);
 
             var middleTredgeSolver = new MiddleLayerTredgeSolver();
-            var stepsToSolveMiddleLayerTredges = await middleTredgeSolver.Solve(configuration);
+            var stepsToSolveMiddleLayerTredges = await middleTredgeSolver.Solve(configuration).ConfigureAwait(false);
+
             solution.AddRange(stepsToSolveMiddleLayerTredges);
 
             // TODO: INJECT A 3x3x3 solver in here so different ones can be used
@@ -46,7 +52,8 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             {
                 SkipChecks = true
             };
-            var stepsToSolveReduced3X3X3 = await threeByThreeByThreeSolver.Solve(configuration);
+            var stepsToSolveReduced3X3X3 = await threeByThreeByThreeSolver.Solve(configuration).ConfigureAwait(false);
+
             solution.AddRange(stepsToSolveReduced3X3X3);
 
             return solution.Condense();

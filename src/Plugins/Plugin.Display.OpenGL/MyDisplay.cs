@@ -46,7 +46,7 @@ namespace NCubeSolver.Plugins.Display.OpenGL
             // Start the thread
             newWindowThread.Start();
 
-            await m_completionSource.Task;
+            await m_completionSource.Task.ConfigureAwait(true);
         }
 
         private void OnWindowClosed(object s, EventArgs e)
@@ -62,6 +62,11 @@ namespace NCubeSolver.Plugins.Display.OpenGL
         public Task SetCubeConfiguration(CubeConfiguration<FaceColour> configuration)
         {
             return m_window.DisplayControl.SetCubeConfiguration(configuration);
+        }
+
+        public void SetCancellation(CancellationTokenSource cancellationToken)
+        {
+            m_window.DisplayControl.SetCancellation(cancellationToken);
         }
 
         public Task Rotate(FaceRotation faceRotation)

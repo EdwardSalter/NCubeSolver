@@ -21,7 +21,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomFrontLeftIsCorrect(configuration);
         }
@@ -33,7 +34,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomFrontRightIsCorrect(configuration);
         }
@@ -45,7 +47,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomBackRightIsCorrect(configuration);
         }
@@ -57,7 +60,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomBackLeftIsCorrect(configuration);
         }
@@ -69,7 +73,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomFrontRightIsCorrect(configuration);
         }
@@ -81,7 +86,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomBackRightIsCorrect(configuration);
         }
@@ -93,7 +99,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomBackLeftIsCorrect(configuration);
         }
@@ -105,7 +112,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomFrontLeftIsCorrect(configuration);
         }
@@ -121,7 +129,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomFrontLeftIsCorrect(configuration);
         }
@@ -133,7 +142,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomFrontRightIsCorrect(configuration);
         }
@@ -145,7 +155,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomBackRightIsCorrect(configuration);
         }
@@ -157,7 +168,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomBackLeftIsCorrect(configuration);
         }
@@ -169,7 +181,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomFrontRightIsCorrect(configuration);
         }
@@ -181,7 +194,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomBackRightIsCorrect(configuration);
         }
@@ -193,7 +207,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomBackLeftIsCorrect(configuration);
         }
@@ -205,7 +220,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomFrontLeftIsCorrect(configuration);
         }
@@ -220,7 +236,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomFrontLeftIsCorrect(configuration);
         }
@@ -232,7 +249,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomFrontRightIsCorrect(configuration);
         }
@@ -244,7 +262,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomBackRightIsCorrect(configuration);
         }
@@ -256,7 +275,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomBackLeftIsCorrect(configuration);
         }
@@ -268,7 +288,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomFrontRightIsCorrect(configuration);
         }
@@ -280,7 +301,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomBackRightIsCorrect(configuration);
         }
@@ -292,7 +314,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomBackLeftIsCorrect(configuration);
         }
@@ -304,7 +327,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomFrontLeftIsCorrect(configuration);
         }
@@ -321,7 +345,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomFrontLeftIsCorrect(configuration);
         }
@@ -333,7 +358,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomFrontRightIsCorrect(configuration);
         }
@@ -345,7 +371,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomBackRightIsCorrect(configuration);
         }
@@ -357,7 +384,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomBackLeftIsCorrect(configuration);
         }
@@ -369,7 +397,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomFrontRightIsCorrect(configuration);
         }
@@ -381,7 +410,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomBackRightIsCorrect(configuration);
         }
@@ -393,7 +423,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomBackLeftIsCorrect(configuration);
         }
@@ -405,7 +436,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomFrontLeftIsCorrect(configuration);
         }
@@ -422,7 +454,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopFaceForWhite(configuration, solution);
+            await solver.CheckTopFaceForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomFrontLeftIsCorrect(configuration);
         }
@@ -434,7 +467,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopFaceForWhite(configuration, solution);
+            await solver.CheckTopFaceForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomBackLeftIsCorrect(configuration);
         }
@@ -446,7 +480,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopFaceForWhite(configuration, solution);
+            await solver.CheckTopFaceForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomFrontRightIsCorrect(configuration);
         }
@@ -458,7 +493,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopFaceForWhite(configuration, solution);
+            await solver.CheckTopFaceForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomFrontRightIsCorrect(configuration);
         }
@@ -470,7 +506,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopFaceForWhite(configuration, solution);
+            await solver.CheckTopFaceForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomBackRightIsCorrect(configuration);
         }
@@ -482,7 +519,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopFaceForWhite(configuration, solution);
+            await solver.CheckTopFaceForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomFrontLeftIsCorrect(configuration);
         }
@@ -494,7 +532,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopFaceForWhite(configuration, solution);
+            await solver.CheckTopFaceForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomBackRightIsCorrect(configuration);
         }
@@ -506,7 +545,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopFaceForWhite(configuration, solution);
+            await solver.CheckTopFaceForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomFrontRightIsCorrect(configuration);
         }
@@ -518,7 +558,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopFaceForWhite(configuration, solution);
+            await solver.CheckTopFaceForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomBackLeftIsCorrect(configuration);
         }
@@ -530,7 +571,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopFaceForWhite(configuration, solution);
+            await solver.CheckTopFaceForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomBackLeftIsCorrect(configuration);
         }
@@ -542,7 +584,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopFaceForWhite(configuration, solution);
+            await solver.CheckTopFaceForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomFrontLeftIsCorrect(configuration);
         }
@@ -554,7 +597,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckTopFaceForWhite(configuration, solution);
+            await solver.CheckTopFaceForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomBackRightIsCorrect(configuration);
         }
@@ -566,7 +610,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckBottomLayerForWhite(configuration, solution);
+            await solver.CheckBottomLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomBackRightIsCorrect(configuration);
         }
@@ -578,7 +623,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckBottomLayerForWhite(configuration, solution);
+            await solver.CheckBottomLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomBackLeftIsCorrect(configuration);
         }
@@ -590,7 +636,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckBottomLayerForWhite(configuration, solution);
+            await solver.CheckBottomLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomFrontLeftIsCorrect(configuration);
         }
@@ -602,7 +649,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckBottomLayerForWhite(configuration, solution);
+            await solver.CheckBottomLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomFrontRightIsCorrect(configuration);
         }
@@ -614,7 +662,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckBottomLayerForWhite(configuration, solution);
+            await solver.CheckBottomLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomBackLeftIsCorrect(configuration);
         }
@@ -626,7 +675,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckBottomLayerForWhite(configuration, solution);
+            await solver.CheckBottomLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomBackRightIsCorrect(configuration);
         }
@@ -638,7 +688,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckBottomLayerForWhite(configuration, solution);
+            await solver.CheckBottomLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomFrontRightIsCorrect(configuration);
         }
@@ -650,7 +701,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new BottomLayerSolver();
 
-            await solver.CheckBottomLayerForWhite(configuration, solution);
+            await solver.CheckBottomLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CornerAssert.BottomFrontLeftIsCorrect(configuration);
         }

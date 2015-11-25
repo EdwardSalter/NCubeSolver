@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -51,7 +52,7 @@ namespace NCubeSolver.Plugins.Display.OpenGL
         public readonly Scene Scene = new Scene();
         private readonly Camera m_camera = new Camera();
         private bool m_firstRun = true;
-        
+
         // TODO: MOVE THESE
         //  Constants that specify the attribute indexes.
         const uint AttributeIndexPosition = 0;
@@ -204,6 +205,11 @@ namespace NCubeSolver.Plugins.Display.OpenGL
             m_camera.SetZoomForConfigurationSize(configuration.Size);
             UpdateViewMatrix();
             return Scene.SetCubeConfiguration(configuration);
+        }
+
+        public void SetCancellation(CancellationTokenSource cancellationToken)
+        {
+            Scene.CancellationTokenSource = cancellationToken;
         }
 
         public string PluginName

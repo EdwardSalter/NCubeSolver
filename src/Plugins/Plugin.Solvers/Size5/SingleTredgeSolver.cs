@@ -26,16 +26,24 @@ namespace NCubeSolver.Plugins.Solvers.Size5
 
             await Repeat.SolvingUntilNoMovesCanBeMade(solution, async () =>
             {
-                await CheckUpperAndDownEdgesOnFace(configuration, solution, FaceType.Front);
-                await CheckUpperAndDownEdgesOnFace(configuration, solution, FaceType.Left);
-                await CheckUpperAndDownEdgesOnFace(configuration, solution, FaceType.Back);
-                await CheckUpperAndDownEdgesOnFace(configuration, solution, FaceType.Right);
+                await CheckUpperAndDownEdgesOnFace(configuration, solution, FaceType.Front).ConfigureAwait(false);
 
-                await CheckMiddleLayersOnFace(configuration, solution, FaceType.Right);
-                await CheckMiddleLayersOnFace(configuration, solution, FaceType.Back);
-                await CheckMiddleLayersOnFace(configuration, solution, FaceType.Front);
-                await CheckFlipped(configuration, solution);
-            });
+                await CheckUpperAndDownEdgesOnFace(configuration, solution, FaceType.Left).ConfigureAwait(false);
+
+                await CheckUpperAndDownEdgesOnFace(configuration, solution, FaceType.Back).ConfigureAwait(false);
+
+                await CheckUpperAndDownEdgesOnFace(configuration, solution, FaceType.Right).ConfigureAwait(false);
+
+
+                await CheckMiddleLayersOnFace(configuration, solution, FaceType.Right).ConfigureAwait(false);
+
+                await CheckMiddleLayersOnFace(configuration, solution, FaceType.Back).ConfigureAwait(false);
+
+                await CheckMiddleLayersOnFace(configuration, solution, FaceType.Front).ConfigureAwait(false);
+
+                await CheckFlipped(configuration, solution).ConfigureAwait(false);
+
+            }).ConfigureAwait(false);
 
 
             return solution;
@@ -52,11 +60,16 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             if (frontFaceEdge[configuration.MinInnerLayerIndex()] == leftColour && frontFaceEdge[configuration.MaxInnerLayerIndex()] == leftColour &&
                 leftFaceEdge[configuration.MinInnerLayerIndex()] == frontColour && leftFaceEdge[configuration.MaxInnerLayerIndex()] == frontColour)
             {
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperAntiClockwise, solution, configuration);
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownClockwise, solution, configuration);
-                await PerformFlip(solution, configuration);
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration);
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownAntiClockwise, solution, configuration);
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownClockwise, solution, configuration).ConfigureAwait(false);
+
+                await PerformFlip(solution, configuration).ConfigureAwait(false);
+
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration).ConfigureAwait(false);
+
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownAntiClockwise, solution, configuration).ConfigureAwait(false);
+
             }
         }
 
@@ -81,13 +94,15 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                 (bottom == leftFaceColour && joiningFaceEdgeBottom == frontFaceColour))
             {
                 var rotationToBringEdgeToFront = GetRotationToPutTredgeOnFront((top == frontFaceColour && joiningFaceEdgeTop == leftFaceColour) || (top == leftFaceColour && joiningFaceEdgeTop == frontFaceColour), face, configuration.MinInnerLayerIndex());
-                await CommonActions.ApplyAndAddRotation(rotationToBringEdgeToFront, solution, configuration);
+                await CommonActions.ApplyAndAddRotation(rotationToBringEdgeToFront, solution, configuration).ConfigureAwait(false);
+
             }
 
             if ((top == frontFaceColour && joiningFaceEdgeTop == leftFaceColour) ||
                 (bottom == frontFaceColour && joiningFaceEdgeBottom == leftFaceColour))
             {
-                await PerformFlip(solution, configuration);
+                await PerformFlip(solution, configuration).ConfigureAwait(false);
+
             }
 
             rightEdgeOnFace = configuration.Faces[face].GetEdge(Edge.Right);
@@ -101,23 +116,32 @@ namespace NCubeSolver.Plugins.Solvers.Size5
 
             if (top == leftFaceColour && joiningFaceEdgeTop == frontFaceColour)
             {
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration);
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration).ConfigureAwait(false);
+
             }
             if (bottom == leftFaceColour && joiningFaceEdgeBottom == frontFaceColour)
             {
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownAntiClockwise, solution, configuration);
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownAntiClockwise, solution, configuration).ConfigureAwait(false);
+
             }
         }
 
         private async Task PerformFlip(List<IRotation> solution, CubeConfiguration<FaceColour> configuration)
         {
-            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.FrontAntiClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration);
+            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.FrontAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration).ConfigureAwait(false);
+
         }
 
         private static IRotation GetRotationToPutTredgeOnFront(bool upperLayer, FaceType face, int layer = 0)
@@ -164,16 +188,20 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             if (match != TredgeMatch.None)
             {
                 var rotation = GetRotationToPutTredgeOnFront(true, faceToCheck);
-                await CommonActions.ApplyAndAddRotation(rotation, solution, configuration);
-                await CheckFrontUpper(configuration, solution, frontFaceColour, leftFaceColour);
+                await CommonActions.ApplyAndAddRotation(rotation, solution, configuration).ConfigureAwait(false);
+
+                await CheckFrontUpper(configuration, solution, frontFaceColour, leftFaceColour).ConfigureAwait(false);
+
             }
 
             match = MatchColoursOnDownFaceEdge(configuration, frontFaceColour, leftFaceColour, faceToCheck);
             if (match != TredgeMatch.None)
             {
                 var rotation = GetRotationToPutTredgeOnFront(false, faceToCheck);
-                await CommonActions.ApplyAndAddRotation(rotation, solution, configuration);
-                await CheckFrontDown(configuration, solution, frontFaceColour, leftFaceColour);
+                await CommonActions.ApplyAndAddRotation(rotation, solution, configuration).ConfigureAwait(false);
+
+                await CheckFrontDown(configuration, solution, frontFaceColour, leftFaceColour).ConfigureAwait(false);
+
             }
         }
 
@@ -182,7 +210,8 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             var match = MatchColoursOnDownFaceEdge(configuration, frontFaceColour, leftFaceColour, FaceType.Front);
             if (match != TredgeMatch.None)
             {
-                await MatchingTredgeIsOnDownFront(configuration, solution, match);
+                await MatchingTredgeIsOnDownFront(configuration, solution, match).ConfigureAwait(false);
+
             }
         }
 
@@ -191,7 +220,8 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             var match = MatchColoursOnUpperFaceEdge(configuration, frontFaceColour, leftFaceColour, FaceType.Front);
             if (match != TredgeMatch.None)
             {
-                await MatchingTredgeIsOnUpperFront(configuration, solution, match);
+                await MatchingTredgeIsOnUpperFront(configuration, solution, match).ConfigureAwait(false);
+
             }
         }
 
@@ -199,33 +229,44 @@ namespace NCubeSolver.Plugins.Solvers.Size5
         {
             if (match == TredgeMatch.FrontLeftMatchesCenter || match == TredgeMatch.FrontRightMatchesCenter)
             {
-                await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration);
-                await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
-                await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration);
+                await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration).ConfigureAwait(false);
+
+                await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration).ConfigureAwait(false);
+
 
                 if (match == TredgeMatch.FrontLeftMatchesCenter)
                 {
-                    await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownAntiClockwise, solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownAntiClockwise, solution, configuration).ConfigureAwait(false);
+
                 }
                 else
                 {
-                    await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration).ConfigureAwait(false);
+
                 }
                 return;
             }
 
-            await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.FrontAntiClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration);
+            await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.FrontAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration).ConfigureAwait(false);
+
 
             if (match == TredgeMatch.UpperLeftMatchesCenter)
             {
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration);
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration).ConfigureAwait(false);
+
             }
             else
             {
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownAntiClockwise, solution, configuration);
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownAntiClockwise, solution, configuration).ConfigureAwait(false);
+
             }
         }
 
@@ -332,33 +373,44 @@ namespace NCubeSolver.Plugins.Solvers.Size5
         {
             if (match == TredgeMatch.FrontLeftMatchesCenter || match == TredgeMatch.FrontRightMatchesCenter)
             {
-                await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration);
-                await CommonActions.ApplyAndAddRotation(Rotations.DownClockwise, solution, configuration);
-                await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration);
+                await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                await CommonActions.ApplyAndAddRotation(Rotations.DownClockwise, solution, configuration).ConfigureAwait(false);
+
+                await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration).ConfigureAwait(false);
+
 
                 if (match == TredgeMatch.FrontLeftMatchesCenter)
                 {
-                    await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration).ConfigureAwait(false);
+
                 }
                 else
                 {
-                    await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownAntiClockwise, solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownAntiClockwise, solution, configuration).ConfigureAwait(false);
+
                 }
                 return;
             }
 
-            await CommonActions.ApplyAndAddRotation(Rotations.DownClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.DownAntiClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.FrontAntiClockwise, solution, configuration);
+            await CommonActions.ApplyAndAddRotation(Rotations.DownClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.DownAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.FrontAntiClockwise, solution, configuration).ConfigureAwait(false);
+
 
             if (match == TredgeMatch.UpperLeftMatchesCenter)
             {
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownAntiClockwise, solution, configuration);
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownAntiClockwise, solution, configuration).ConfigureAwait(false);
+
             }
             else
             {
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration);
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration).ConfigureAwait(false);
+
             }
         }
     }

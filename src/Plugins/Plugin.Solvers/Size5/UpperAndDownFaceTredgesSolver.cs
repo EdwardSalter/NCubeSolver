@@ -17,23 +17,30 @@ namespace NCubeSolver.Plugins.Solvers.Size5
         public async Task<IEnumerable<IRotation>> Solve(CubeConfiguration<FaceColour> configuration)
         {
             var solution = new List<IRotation>();
-            solution.Add(await CommonActions.PositionOnBottom(configuration, FaceColour.Yellow));
+            solution.Add(await CommonActions.PositionOnBottom(configuration, FaceColour.Yellow).ConfigureAwait(false));
+
 
             for (int i = 0; i <= 3; i++)
             {
-                var stepsToSolveTredge = await m_solver.Solve(configuration);
+                var stepsToSolveTredge = await m_solver.Solve(configuration).ConfigureAwait(false);
+
                 solution.AddRange(stepsToSolveTredge);
-                await MoveTredgeToUpperLayer(configuration, solution);
+                await MoveTredgeToUpperLayer(configuration, solution).ConfigureAwait(false);
+
             }
-            await CommonActions.ApplyAndAddRotation(CubeRotations.Z2, solution, configuration);
+            await CommonActions.ApplyAndAddRotation(CubeRotations.Z2, solution, configuration).ConfigureAwait(false);
+
             for (int i = 0; i <= 3; i++)
             {
-                var stepsToSolveTredge = await m_solver.Solve(configuration);
+                var stepsToSolveTredge = await m_solver.Solve(configuration).ConfigureAwait(false);
+
                 solution.AddRange(stepsToSolveTredge);
-                await MoveTredgeToUpperLayer(configuration, solution);
+                await MoveTredgeToUpperLayer(configuration, solution).ConfigureAwait(false);
+
             }
 
-            await FixInnerSquare(solution, configuration);
+            await FixInnerSquare(solution, configuration).ConfigureAwait(false);
+
             return solution;
         }
 
@@ -45,8 +52,10 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             var correctFaceForTopRow = FaceRules.GetFaceOfColour(upperColour, configuration);
             var correctFaceForBottomRow = FaceRules.GetFaceOfColour(downColour, configuration);
 
-            await MoveRowToCorrectFace(correctFaceForTopRow, solution, configuration, true);
-            await MoveRowToCorrectFace(correctFaceForBottomRow, solution, configuration, false);
+            await MoveRowToCorrectFace(correctFaceForTopRow, solution, configuration, true).ConfigureAwait(false);
+
+            await MoveRowToCorrectFace(correctFaceForBottomRow, solution, configuration, false).ConfigureAwait(false);
+
         }
 
         private async Task MoveRowToCorrectFace(FaceType faceToMoveToo, List<IRotation> solution, CubeConfiguration<FaceColour> configuration, bool upper)
@@ -81,13 +90,15 @@ namespace NCubeSolver.Plugins.Solvers.Size5
 
             if (rotation != null)
             {
-                await CommonActions.ApplyAndAddRotation(rotation, solution, configuration);
+                await CommonActions.ApplyAndAddRotation(rotation, solution, configuration).ConfigureAwait(false);
+
             }
         }
 
         private async Task MoveTredgeToUpperLayer(CubeConfiguration<FaceColour> configuration, List<IRotation> solution)
         {
-            await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration);
+            await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration).ConfigureAwait(false);
+
 
             if (GetNumberOfCompletedTredgesOnTopLayer(configuration) == 3)
             {
@@ -98,21 +109,25 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                         break;
                     }
 
-                    await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
                 }
             }
 
-            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration);
+            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration).ConfigureAwait(false);
+
             for (int i = 0; i <= 3; i++)
             {
-                await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
+                await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
 
                 if (!Utilities.IsInnerEdgeComplete(FaceType.Right, FaceType.Upper, configuration))
                 {
                     break;
                 }
             }
-            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration);
+            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration).ConfigureAwait(false);
+
         }
 
         private int GetNumberOfCompletedTredgesOnTopLayer(CubeConfiguration<FaceColour> configuration)

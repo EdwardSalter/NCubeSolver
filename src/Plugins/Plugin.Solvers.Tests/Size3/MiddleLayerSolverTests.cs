@@ -18,7 +18,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
-            await solver.CheckTopFrontLayer(configuration, solution);
+            await solver.CheckTopFrontLayer(configuration, solution).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.MiddleFrontLeftIsCorrect(configuration);
         }
@@ -30,7 +31,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
-            await solver.CheckTopFrontLayer(configuration, solution);
+            await solver.CheckTopFrontLayer(configuration, solution).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.MiddleFrontRightIsCorrect(configuration);
         }
@@ -42,7 +44,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
-            await solver.CheckTopFrontLayer(configuration, solution);
+            await solver.CheckTopFrontLayer(configuration, solution).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.MiddleBackRightIsCorrect(configuration);
         }
@@ -54,7 +57,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
-            await solver.CheckTopFrontLayer(configuration, solution);
+            await solver.CheckTopFrontLayer(configuration, solution).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.MiddleBackLeftIsCorrect(configuration);
         }
@@ -66,7 +70,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
-            await solver.CheckTopFrontLayer(configuration, solution);
+            await solver.CheckTopFrontLayer(configuration, solution).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.MiddleBackLeftIsCorrect(configuration);
         }
@@ -78,7 +83,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
-            await solver.CheckTopLeftLayer(configuration, solution);
+            await solver.CheckTopLeftLayer(configuration, solution).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.MiddleFrontLeftIsCorrect(configuration);
         }
@@ -90,7 +96,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
-            await solver.CheckTopLeftLayer(configuration, solution);
+            await solver.CheckTopLeftLayer(configuration, solution).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.MiddleBackLeftIsCorrect(configuration);
         }
@@ -102,7 +109,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
-            await solver.CheckTopLeftLayer(configuration, solution);
+            await solver.CheckTopLeftLayer(configuration, solution).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.MiddleFrontLeftIsCorrect(configuration);
         }
@@ -114,7 +122,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
-            await solver.CheckTopLeftLayer(configuration, solution);
+            await solver.CheckTopLeftLayer(configuration, solution).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.MiddleBackLeftIsCorrect(configuration);
         }
@@ -126,7 +135,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
-            await solver.CheckTopLeftLayer(configuration, solution);
+            await solver.CheckTopLeftLayer(configuration, solution).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.MiddleFrontRightIsCorrect(configuration);
         }
@@ -138,7 +148,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
-            await solver.CheckTopBackLayer(configuration, solution);
+            await solver.CheckTopBackLayer(configuration, solution).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.MiddleBackLeftIsCorrect(configuration);
         }
@@ -150,7 +161,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
-            await solver.CheckTopBackLayer(configuration, solution);
+            await solver.CheckTopBackLayer(configuration, solution).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.MiddleBackRightIsCorrect(configuration);
         }
@@ -162,7 +174,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
-            await solver.CheckTopBackLayer(configuration, solution);
+            await solver.CheckTopBackLayer(configuration, solution).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.MiddleFrontLeftIsCorrect(configuration);
         }
@@ -174,7 +187,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
-            await solver.CheckTopBackLayer(configuration, solution);
+            await solver.CheckTopBackLayer(configuration, solution).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.MiddleFrontRightIsCorrect(configuration);
         }
@@ -186,7 +200,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
-            await solver.CheckTopBackLayer(configuration, solution);
+            await solver.CheckTopBackLayer(configuration, solution).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.MiddleFrontRightIsCorrect(configuration);
         }
@@ -198,7 +213,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
-            await solver.CheckTopRightLayer(configuration, solution);
+            await solver.CheckTopRightLayer(configuration, solution).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.MiddleBackRightIsCorrect(configuration);
         }
@@ -210,7 +226,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
-            await solver.CheckTopRightLayer(configuration, solution);
+            await solver.CheckTopRightLayer(configuration, solution).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.MiddleFrontRightIsCorrect(configuration);
         }
@@ -222,7 +239,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
-            await solver.CheckTopRightLayer(configuration, solution);
+            await solver.CheckTopRightLayer(configuration, solution).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.MiddleBackLeftIsCorrect(configuration);
         }
@@ -234,7 +252,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
-            await solver.CheckTopRightLayer(configuration, solution);
+            await solver.CheckTopRightLayer(configuration, solution).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.MiddleFrontRightIsCorrect(configuration);
         }
@@ -246,7 +265,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var solution = new List<IRotation>();
             var solver = new MiddleLayerSolver();
 
-            await solver.CheckTopRightLayer(configuration, solution);
+            await solver.CheckTopRightLayer(configuration, solution).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.MiddleFrontLeftIsCorrect(configuration);
         }

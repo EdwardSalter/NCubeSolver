@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.Composition;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace NCubeSolvers.Core.Plugins
@@ -10,5 +11,6 @@ namespace NCubeSolvers.Core.Plugins
         event EventHandler Closed;
         Task Initialise();
         Task SetCubeConfiguration(CubeConfiguration<FaceColour> configuration);
+        void SetCancellation(CancellationTokenSource cancellationToken);
     }
 }

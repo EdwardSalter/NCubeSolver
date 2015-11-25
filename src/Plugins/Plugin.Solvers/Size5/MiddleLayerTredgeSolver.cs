@@ -13,28 +13,42 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             await Repeat.SolvingUntilNoMovesCanBeMade(solution, async () =>
             {
 
-                await CheckFrontRightEdge(configuration, solution);
-                await CheckRightBackEdge(configuration, solution);
-                await CheckBackLeftEdge(configuration, solution);
-                await CheckLeftFrontEdge(configuration, solution);
-            });
+                await CheckFrontRightEdge(configuration, solution).ConfigureAwait(false);
 
-            await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration);
+                await CheckRightBackEdge(configuration, solution).ConfigureAwait(false);
 
-            await Repeat.SolvingUntilNoMovesCanBeMade(solution, async () => {
-                await CheckFrontRightEdge(configuration, solution);
-                await CheckRightBackEdge(configuration, solution);
-                await CheckLeftFrontEdge(configuration, solution);
-            });
+                await CheckBackLeftEdge(configuration, solution).ConfigureAwait(false);
 
-            await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration);
+                await CheckLeftFrontEdge(configuration, solution).ConfigureAwait(false);
 
-           await Repeat.SolvingUntilNoMovesCanBeMade(solution, async () => {
-                await CheckFrontRightEdge(configuration, solution);
-                await CheckLeftFrontEdge(configuration, solution);
-            });
+            }).ConfigureAwait(false);
 
-            await SolveLastTredge(configuration, solution);
+            await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration).ConfigureAwait(false);
+
+
+            await Repeat.SolvingUntilNoMovesCanBeMade(solution, async () =>
+            {
+                await CheckFrontRightEdge(configuration, solution).ConfigureAwait(false);
+
+                await CheckRightBackEdge(configuration, solution).ConfigureAwait(false);
+
+                await CheckLeftFrontEdge(configuration, solution).ConfigureAwait(false);
+
+            }).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration).ConfigureAwait(false);
+
+
+            await Repeat.SolvingUntilNoMovesCanBeMade(solution, async () =>
+            {
+                await CheckFrontRightEdge(configuration, solution).ConfigureAwait(false);
+
+                await CheckLeftFrontEdge(configuration, solution).ConfigureAwait(false);
+
+            }).ConfigureAwait(false);
+
+            await SolveLastTredge(configuration, solution).ConfigureAwait(false);
+
 
             return solution;
         }
@@ -46,23 +60,39 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                 return;
             }
 
-            await CommonActions.ApplyAndAddRotation(CubeRotations.ZAntiClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.Back2, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeftClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRightAntiClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRightClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.Front2, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRightClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.Front2, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeftAntiClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.Back2, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(CubeRotations.ZClockwise, solution, configuration); // OPTIONAL
+            await CommonActions.ApplyAndAddRotation(CubeRotations.ZAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.Back2, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeftClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRightAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRightClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.Front2, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRightClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.Front2, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeftAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.Back2, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(CubeRotations.ZClockwise, solution, configuration).ConfigureAwait(false); // OPTIONAL
         }
 
         private static async Task CheckFrontRightEdge(CubeConfiguration<FaceColour> configuration, List<IRotation> solution)
@@ -80,32 +110,46 @@ namespace NCubeSolver.Plugins.Solvers.Size5
 
             if (frontFaceTop == frontFaceColour && rightFaceTop == leftFaceColour)
             {
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownClockwise, solution, configuration);
-                await PerformFlip(solution, configuration);
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownAntiClockwise, solution, configuration);
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownClockwise, solution, configuration).ConfigureAwait(false);
+
+                await PerformFlip(solution, configuration).ConfigureAwait(false);
+
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownAntiClockwise, solution, configuration).ConfigureAwait(false);
+
             }
 
             if (frontFaceBottom == frontFaceColour && rightFaceBottom == leftFaceColour)
             {
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperAntiClockwise, solution, configuration);
-                await PerformFlip(solution, configuration);
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration);
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                await PerformFlip(solution, configuration).ConfigureAwait(false);
+
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration).ConfigureAwait(false);
+
             }
 
             if (frontFaceTop == leftFaceColour && rightFaceTop == frontFaceColour)
             {
-                await PerformFlip(solution, configuration);
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperAntiClockwise, solution, configuration);
-                await PerformFlip(solution, configuration);
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration);
+                await PerformFlip(solution, configuration).ConfigureAwait(false);
+
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                await PerformFlip(solution, configuration).ConfigureAwait(false);
+
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration).ConfigureAwait(false);
+
             }
 
             if (frontFaceBottom == leftFaceColour && rightFaceBottom == frontFaceColour)
             {
-                await PerformFlip(solution, configuration);
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperAntiClockwise, solution, configuration);
-                await PerformFlip(solution, configuration);
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration);
+                await PerformFlip(solution, configuration).ConfigureAwait(false);
+
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                await PerformFlip(solution, configuration).ConfigureAwait(false);
+
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration).ConfigureAwait(false);
+
             }
         }
 
@@ -127,8 +171,10 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                 (rightFaceTop == leftFaceColour && backFaceTop == frontFaceColour) ||
                 (rightFaceBottom == leftFaceColour && backFaceBottom == frontFaceColour))
             {
-                await CommonActions.ApplyAndAddRotation(Rotations.Right2, solution, configuration);
-                await CheckFrontRightEdge(configuration, solution);
+                await CommonActions.ApplyAndAddRotation(Rotations.Right2, solution, configuration).ConfigureAwait(false);
+
+                await CheckFrontRightEdge(configuration, solution).ConfigureAwait(false);
+
             }
         }
 
@@ -150,9 +196,12 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                 (backFaceTop == leftFaceColour && leftFaceTop == frontFaceColour) ||
                 (backFaceBottom == leftFaceColour && leftFaceBottom == frontFaceColour))
             {
-                await CommonActions.ApplyAndAddRotation(Rotations.Back2, solution, configuration);
-                await CommonActions.ApplyAndAddRotation(Rotations.Right2, solution, configuration);
-                await CheckFrontRightEdge(configuration, solution);
+                await CommonActions.ApplyAndAddRotation(Rotations.Back2, solution, configuration).ConfigureAwait(false);
+
+                await CommonActions.ApplyAndAddRotation(Rotations.Right2, solution, configuration).ConfigureAwait(false);
+
+                await CheckFrontRightEdge(configuration, solution).ConfigureAwait(false);
+
             }
         }
 
@@ -171,31 +220,46 @@ namespace NCubeSolver.Plugins.Solvers.Size5
 
             if (leftFaceTop == frontFaceColour && frontFaceTop == leftFaceColour)
             {
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperAntiClockwise, solution, configuration);
-                await PerformFlip(solution, configuration);
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration);
-                await CheckFrontRightEdge(configuration, solution);
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                await PerformFlip(solution, configuration).ConfigureAwait(false);
+
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration).ConfigureAwait(false);
+
+                await CheckFrontRightEdge(configuration, solution).ConfigureAwait(false);
+
             }
 
             if (leftFaceBottom == frontFaceColour && frontFaceBottom == leftFaceColour)
             {
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownClockwise, solution, configuration);
-                await PerformFlip(solution, configuration);
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownAntiClockwise, solution, configuration);
-                await CheckFrontRightEdge(configuration, solution);
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownClockwise, solution, configuration).ConfigureAwait(false);
+
+                await PerformFlip(solution, configuration).ConfigureAwait(false);
+
+                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                await CheckFrontRightEdge(configuration, solution).ConfigureAwait(false);
+
             }
         }
 
 
         private static async Task PerformFlip(List<IRotation> solution, CubeConfiguration<FaceColour> configuration)
         {
-            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.FrontAntiClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration);
+            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.FrontAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration).ConfigureAwait(false);
+
         }
     }
 }

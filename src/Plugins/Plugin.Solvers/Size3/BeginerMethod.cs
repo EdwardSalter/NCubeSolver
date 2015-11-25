@@ -22,31 +22,39 @@ namespace NCubeSolver.Plugins.Solvers.Size3
         // TODO: MAYBE RETURN THINGS IN SECTIONS?
         public override async Task<IEnumerable<IRotation>> Solve(CubeConfiguration<FaceColour> configuration)
         {
-            await base.Solve(configuration);
+            await base.Solve(configuration).ConfigureAwait(false);
+
             m_configuration = configuration;
 
             var solution = new List<IRotation>();
 
-            var cubeRotation = await CommonActions.PositionOnBottom(m_configuration, FaceColour.White);
+            var cubeRotation = await CommonActions.PositionOnBottom(m_configuration, FaceColour.White).ConfigureAwait(false);
+
             if (cubeRotation != null)
                 solution.Add(cubeRotation);
 
-            var stepsToSolveBottomCross = await m_bottomCrossSolver.Solve(m_configuration);
+            var stepsToSolveBottomCross = await m_bottomCrossSolver.Solve(m_configuration).ConfigureAwait(false);
+
             solution.AddRange(stepsToSolveBottomCross);
 
-            var stepsToSolveBottomLayer = await m_bottomLayerSolver.Solve(m_configuration);
+            var stepsToSolveBottomLayer = await m_bottomLayerSolver.Solve(m_configuration).ConfigureAwait(false);
+
             solution.AddRange(stepsToSolveBottomLayer);
 
-            var stepsToSolveMiddleLayer = await m_middleLayerSolver.Solve(m_configuration);
+            var stepsToSolveMiddleLayer = await m_middleLayerSolver.Solve(m_configuration).ConfigureAwait(false);
+
             solution.AddRange(stepsToSolveMiddleLayer);
 
-            var stepsToSolveTopCross = await m_topCrossSolver.Solve(m_configuration);
+            var stepsToSolveTopCross = await m_topCrossSolver.Solve(m_configuration).ConfigureAwait(false);
+
             solution.AddRange(stepsToSolveTopCross);
 
-            var stepsToSolveTopFace = await m_topFaceSolver.Solve(m_configuration);
+            var stepsToSolveTopFace = await m_topFaceSolver.Solve(m_configuration).ConfigureAwait(false);
+
             solution.AddRange(stepsToSolveTopFace);
 
-            var stepsToSolveTopLayer = await m_topLayerSolver.Solve(m_configuration);
+            var stepsToSolveTopLayer = await m_topLayerSolver.Solve(m_configuration).ConfigureAwait(false);
+
             solution.AddRange(stepsToSolveTopLayer);
 
             return solution.Condense();
