@@ -10,58 +10,84 @@ namespace NCubeSolver.Plugins.Solvers.Size3
         {
             var solution = new List<IRotation>();
 
-            var rotationToBottom = await CommonActions.PositionOnBottom(configuration, FaceColour.White);
+            var rotationToBottom = await CommonActions.PositionOnBottom(configuration, FaceColour.White).ConfigureAwait(false);
+
             if (rotationToBottom != null) solution.Add(rotationToBottom);
 
             await Repeat.SolvingUntilNoMovesCanBeMade(solution, async () =>
             {
-                await CheckTopFaceForWhite(configuration, solution);
-                await CheckTopLayerForWhite(configuration, solution);
-                await CheckMiddleLayerForWhite(configuration, solution);
-                await CheckBottomLayerForWhite(configuration, solution);
-                await CheckBottomFaceForWhite(configuration, solution);
-            });
+                await CheckTopFaceForWhite(configuration, solution).ConfigureAwait(false);
+
+                await CheckTopLayerForWhite(configuration, solution).ConfigureAwait(false);
+
+                await CheckMiddleLayerForWhite(configuration, solution).ConfigureAwait(false);
+
+                await CheckBottomLayerForWhite(configuration, solution).ConfigureAwait(false);
+
+                await CheckBottomFaceForWhite(configuration, solution).ConfigureAwait(false);
+
+            }).ConfigureAwait(false);
 
             return solution;
         }
 
         internal async Task CheckTopFaceForWhite(CubeConfiguration<FaceColour> configuration, List<IRotation> solution)
         {
-            await CheckTopFaceForWhite(configuration, FaceType.Left, solution);
-            await CheckTopFaceForWhite(configuration, FaceType.Right, solution);
-            await CheckTopFaceForWhite(configuration, FaceType.Front, solution);
-            await CheckTopFaceForWhite(configuration, FaceType.Back, solution);
+            await CheckTopFaceForWhite(configuration, FaceType.Left, solution).ConfigureAwait(false);
+
+            await CheckTopFaceForWhite(configuration, FaceType.Right, solution).ConfigureAwait(false);
+
+            await CheckTopFaceForWhite(configuration, FaceType.Front, solution).ConfigureAwait(false);
+
+            await CheckTopFaceForWhite(configuration, FaceType.Back, solution).ConfigureAwait(false);
+
         }
 
         internal async Task CheckTopLayerForWhite(CubeConfiguration<FaceColour> configuration, ICollection<IRotation> solution)
         {
-            await CheckTopLayerForWhite(configuration, configuration.Faces[FaceType.Left], FaceType.Left, solution);
-            await CheckTopLayerForWhite(configuration, configuration.Faces[FaceType.Right], FaceType.Right, solution);
-            await CheckTopLayerForWhite(configuration, configuration.Faces[FaceType.Front], FaceType.Front, solution);
-            await CheckTopLayerForWhite(configuration, configuration.Faces[FaceType.Back], FaceType.Back, solution);
+            await CheckTopLayerForWhite(configuration, configuration.Faces[FaceType.Left], FaceType.Left, solution).ConfigureAwait(false);
+
+            await CheckTopLayerForWhite(configuration, configuration.Faces[FaceType.Right], FaceType.Right, solution).ConfigureAwait(false);
+
+            await CheckTopLayerForWhite(configuration, configuration.Faces[FaceType.Front], FaceType.Front, solution).ConfigureAwait(false);
+
+            await CheckTopLayerForWhite(configuration, configuration.Faces[FaceType.Back], FaceType.Back, solution).ConfigureAwait(false);
+
         }
         internal async Task CheckMiddleLayerForWhite(CubeConfiguration<FaceColour> configuration, List<IRotation> solution)
         {
-            await CheckMiddleLayerForWhite(configuration, configuration.Faces[FaceType.Left], FaceType.Left, solution);
-            await CheckMiddleLayerForWhite(configuration, configuration.Faces[FaceType.Right], FaceType.Right, solution);
-            await CheckMiddleLayerForWhite(configuration, configuration.Faces[FaceType.Front], FaceType.Front, solution);
-            await CheckMiddleLayerForWhite(configuration, configuration.Faces[FaceType.Back], FaceType.Back, solution);
+            await CheckMiddleLayerForWhite(configuration, configuration.Faces[FaceType.Left], FaceType.Left, solution).ConfigureAwait(false);
+
+            await CheckMiddleLayerForWhite(configuration, configuration.Faces[FaceType.Right], FaceType.Right, solution).ConfigureAwait(false);
+
+            await CheckMiddleLayerForWhite(configuration, configuration.Faces[FaceType.Front], FaceType.Front, solution).ConfigureAwait(false);
+
+            await CheckMiddleLayerForWhite(configuration, configuration.Faces[FaceType.Back], FaceType.Back, solution).ConfigureAwait(false);
+
         }
 
         internal async Task CheckBottomLayerForWhite(CubeConfiguration<FaceColour> configuration, List<IRotation> solution)
         {
-            await CheckBottomLayerForWhite(configuration, FaceType.Left, solution);
-            await CheckBottomLayerForWhite(configuration, FaceType.Right, solution);
-            await CheckBottomLayerForWhite(configuration, FaceType.Front, solution);
-            await CheckBottomLayerForWhite(configuration, FaceType.Back, solution);
+            await CheckBottomLayerForWhite(configuration, FaceType.Left, solution).ConfigureAwait(false);
+
+            await CheckBottomLayerForWhite(configuration, FaceType.Right, solution).ConfigureAwait(false);
+
+            await CheckBottomLayerForWhite(configuration, FaceType.Front, solution).ConfigureAwait(false);
+
+            await CheckBottomLayerForWhite(configuration, FaceType.Back, solution).ConfigureAwait(false);
+
         }
 
         internal async Task CheckBottomFaceForWhite(CubeConfiguration<FaceColour> configuration, List<IRotation> solution)
         {
-            await CheckBottomFaceForWhite(configuration, FaceType.Left, solution);
-            await CheckBottomFaceForWhite(configuration, FaceType.Right, solution);
-            await CheckBottomFaceForWhite(configuration, FaceType.Front, solution);
-            await CheckBottomFaceForWhite(configuration, FaceType.Back, solution);
+            await CheckBottomFaceForWhite(configuration, FaceType.Left, solution).ConfigureAwait(false);
+
+            await CheckBottomFaceForWhite(configuration, FaceType.Right, solution).ConfigureAwait(false);
+
+            await CheckBottomFaceForWhite(configuration, FaceType.Front, solution).ConfigureAwait(false);
+
+            await CheckBottomFaceForWhite(configuration, FaceType.Back, solution).ConfigureAwait(false);
+
         }
 
         private static async Task CheckBottomFaceForWhite(CubeConfiguration<FaceColour> configuration, FaceType faceType, ICollection<IRotation> solution)
@@ -75,7 +101,8 @@ namespace NCubeSolver.Plugins.Solvers.Size3
             // If the colour does not match, put it on the top face
             if (joiningColour != joiningFace.Centre)
             {
-                await CommonActions.ApplyAndAddRotation(Rotations.ByFaceTwice(faceType), solution, configuration);
+                await CommonActions.ApplyAndAddRotation(Rotations.ByFaceTwice(faceType), solution, configuration).ConfigureAwait(false);
+
             }
         }
 
@@ -91,20 +118,29 @@ namespace NCubeSolver.Plugins.Solvers.Size3
             switch (relativePostion)
             {
                 case RelativePosition.Left:
-                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceType, RotationDirection.Clockwise), solution, configuration);
-                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceWithJoiningColour, RotationDirection.Clockwise), solution, configuration);
-                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceType, RotationDirection.AntiClockwise), solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceType, RotationDirection.Clockwise), solution, configuration).ConfigureAwait(false);
+
+                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceWithJoiningColour, RotationDirection.Clockwise), solution, configuration).ConfigureAwait(false);
+
+                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceType, RotationDirection.AntiClockwise), solution, configuration).ConfigureAwait(false);
+
                     break;
                 case RelativePosition.Right:
-                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceType, RotationDirection.AntiClockwise), solution, configuration);
-                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceWithJoiningColour, RotationDirection.AntiClockwise), solution, configuration);
-                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceType, RotationDirection.Clockwise), solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceType, RotationDirection.AntiClockwise), solution, configuration).ConfigureAwait(false);
+
+                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceWithJoiningColour, RotationDirection.AntiClockwise), solution, configuration).ConfigureAwait(false);
+
+                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceType, RotationDirection.Clockwise), solution, configuration).ConfigureAwait(false);
+
                     break;
                 case RelativePosition.Same:
                 case RelativePosition.Opposite:
-                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceType, RotationDirection.AntiClockwise), solution, configuration);
-                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceWithJoiningColour, RotationDirection.Clockwise), solution, configuration);
-                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceType, RotationDirection.Clockwise), solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceType, RotationDirection.AntiClockwise), solution, configuration).ConfigureAwait(false);
+
+                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceWithJoiningColour, RotationDirection.Clockwise), solution, configuration).ConfigureAwait(false);
+
+                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceType, RotationDirection.Clockwise), solution, configuration).ConfigureAwait(false);
+
                     break;
             }
         }
@@ -113,11 +149,13 @@ namespace NCubeSolver.Plugins.Solvers.Size3
         {
             if (face.GetEdge(Edge.Left).Centre() == FaceColour.White)
             {
-                await MoveWhiteFromMiddleLayer(configuration, faceType, solution, RelativePosition.Left, Edge.Right, RotationDirection.Clockwise);
+                await MoveWhiteFromMiddleLayer(configuration, faceType, solution, RelativePosition.Left, Edge.Right, RotationDirection.Clockwise).ConfigureAwait(false);
+
             }
             if (face.GetEdge(Edge.Right).Centre() == FaceColour.White)
             {
-                await MoveWhiteFromMiddleLayer(configuration, faceType, solution, RelativePosition.Right, Edge.Left, RotationDirection.AntiClockwise);
+                await MoveWhiteFromMiddleLayer(configuration, faceType, solution, RelativePosition.Right, Edge.Left, RotationDirection.AntiClockwise).ConfigureAwait(false);
+
             }
         }
 
@@ -132,17 +170,22 @@ namespace NCubeSolver.Plugins.Solvers.Size3
             switch (relativePostion)
             {
                 case RelativePosition.Same:
-                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(joiningFace, downDirection), solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(joiningFace, downDirection), solution, configuration).ConfigureAwait(false);
+
                     break;
 
                 case RelativePosition.Left:
                 case RelativePosition.Right:
                 case RelativePosition.Opposite:
                     // TODO: ROTATE SO THAT WE ARE ONLY DOING RIGHT... MOVES
-                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(joiningFace, RotationDirectionEx.Reverse(downDirection)), solution, configuration);
-                    await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
-                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(joiningFace, downDirection), solution, configuration);
-                    await CheckTopFaceForWhite(configuration, joiningFace, solution);
+                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(joiningFace, RotationDirectionEx.Reverse(downDirection)), solution, configuration).ConfigureAwait(false);
+
+                    await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(joiningFace, downDirection), solution, configuration).ConfigureAwait(false);
+
+                    await CheckTopFaceForWhite(configuration, joiningFace, solution).ConfigureAwait(false);
+
                     break;
             }
         }
@@ -178,8 +221,10 @@ namespace NCubeSolver.Plugins.Solvers.Size3
             }
 
             IRotation rotationToBottom = Rotations.ByFaceTwice(faceWithJoiningColour);
-            await CommonActions.ApplyAndAddRotation(topRotation, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(rotationToBottom, solution, configuration);
+            await CommonActions.ApplyAndAddRotation(topRotation, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(rotationToBottom, solution, configuration).ConfigureAwait(false);
+
         }
 
 
@@ -195,25 +240,35 @@ namespace NCubeSolver.Plugins.Solvers.Size3
             switch (relativePostion)
             {
                 case RelativePosition.Same:
-                    await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
-                    await CheckTopLayerForWhite(configuration, configuration.Faces[FaceType.Left], FaceType.Left, solution);
+                    await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
+                    await CheckTopLayerForWhite(configuration, configuration.Faces[FaceType.Left], FaceType.Left, solution).ConfigureAwait(false);
+
                     break;
 
                 case RelativePosition.Right:
-                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceType, RotationDirection.AntiClockwise), solution, configuration);
-                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceWithJoiningColour, RotationDirection.Clockwise), solution, configuration);
-                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceType, RotationDirection.Clockwise), solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceType, RotationDirection.AntiClockwise), solution, configuration).ConfigureAwait(false);
+
+                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceWithJoiningColour, RotationDirection.Clockwise), solution, configuration).ConfigureAwait(false);
+
+                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceType, RotationDirection.Clockwise), solution, configuration).ConfigureAwait(false);
+
                     break;
 
                 case RelativePosition.Opposite:
-                    await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
-                    await CheckTopLayerForWhite(configuration, configuration.Faces[FaceType.Left], FaceType.Left, solution);
+                    await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
+                    await CheckTopLayerForWhite(configuration, configuration.Faces[FaceType.Left], FaceType.Left, solution).ConfigureAwait(false);
+
                     break;
 
                 case RelativePosition.Left:
-                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceType, RotationDirection.Clockwise), solution, configuration);
-                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceWithJoiningColour, RotationDirection.AntiClockwise), solution, configuration);
-                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceType, RotationDirection.AntiClockwise), solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceType, RotationDirection.Clockwise), solution, configuration).ConfigureAwait(false);
+
+                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceWithJoiningColour, RotationDirection.AntiClockwise), solution, configuration).ConfigureAwait(false);
+
+                    await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceType, RotationDirection.AntiClockwise), solution, configuration).ConfigureAwait(false);
+
                     break;
             }
         }

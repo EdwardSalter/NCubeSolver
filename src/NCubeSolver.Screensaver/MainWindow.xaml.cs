@@ -83,7 +83,7 @@ namespace NCubeSolver.Screensaver
                 ISolver solver = cubeSize == 3 ? solver3x3x3 : solver5x5x5;
 
                 var run = new SolveRun(configurationGenerator, solver, DisplayControl, celebrator, cubeSize);
-                await run.Run();
+                await run.Run().ConfigureAwait(true);
             }
             // ReSharper disable once FunctionNeverReturns
         }

@@ -11,16 +11,21 @@ namespace NCubeSolver.Plugins.Solvers.Size3
         {
             var solution = new List<IRotation>();
 
-            var rotationToBottom = await CommonActions.PositionOnBottom(configuration, FaceColour.White);
+            var rotationToBottom = await CommonActions.PositionOnBottom(configuration, FaceColour.White).ConfigureAwait(false);
+
             if (rotationToBottom != null) solution.Add(rotationToBottom);
 
             await Repeat.SolvingUntilNoMovesCanBeMade(solution, async () =>
             {
-                await CheckTopLayerForWhite(configuration, solution);
-                await CheckTopFaceForWhite(configuration, solution);
-                await CheckBottomLayerForWhite(configuration, solution);
-                await CheckBottomFaceForWhite(configuration, solution);
-            });
+                await CheckTopLayerForWhite(configuration, solution).ConfigureAwait(false);
+
+                await CheckTopFaceForWhite(configuration, solution).ConfigureAwait(false);
+
+                await CheckBottomLayerForWhite(configuration, solution).ConfigureAwait(false);
+
+                await CheckBottomFaceForWhite(configuration, solution).ConfigureAwait(false);
+
+            }).ConfigureAwait(false);
 
             return solution;
         }
@@ -29,55 +34,78 @@ namespace NCubeSolver.Plugins.Solvers.Size3
         {
             if (configuration.Faces[FaceType.Down].TopRight() == FaceColour.White && configuration.Faces[FaceType.Front].BottomRight() != configuration.Faces[FaceType.Front].Centre)
             {
-                await SortBottom(configuration, solution);
+                await SortBottom(configuration, solution).ConfigureAwait(false);
+
             }
             if (configuration.Faces[FaceType.Down].TopLeft() == FaceColour.White && configuration.Faces[FaceType.Front].BottomLeft() != configuration.Faces[FaceType.Front].Centre)
             {
-                await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration);
-                await SortBottom(configuration, solution);
+                await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                await SortBottom(configuration, solution).ConfigureAwait(false);
+
             }
             if (configuration.Faces[FaceType.Down].BottomLeft() == FaceColour.White && configuration.Faces[FaceType.Back].BottomRight() != configuration.Faces[FaceType.Back].Centre)
             {
-                await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration);
-                await SortBottom(configuration, solution);
+                await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration).ConfigureAwait(false);
+
+                await SortBottom(configuration, solution).ConfigureAwait(false);
+
             }
             if (configuration.Faces[FaceType.Down].BottomRight() == FaceColour.White && configuration.Faces[FaceType.Back].BottomLeft() != configuration.Faces[FaceType.Back].Centre)
             {
-                await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration);
-                await SortBottom(configuration, solution);
+                await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration).ConfigureAwait(false);
+
+                await SortBottom(configuration, solution).ConfigureAwait(false);
+
             }
         }
 
         private static async Task SortBottom(CubeConfiguration<FaceColour> configuration, ICollection<IRotation> solution)
         {
-            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration);
-            await CheckTopLayerForWhite(configuration, solution, FaceType.Left, false, true);
+            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CheckTopLayerForWhite(configuration, solution, FaceType.Left, false, true).ConfigureAwait(false);
+
         }
 
         internal async Task CheckTopLayerForWhite(CubeConfiguration<FaceColour> configuration, List<IRotation> solution)
         {
-            await FrontTopLayer(configuration, solution);
-            await BackTopLayer(configuration, solution);
-            await RightTopLayer(configuration, solution);
-            await LeftTopLayer(configuration, solution);
+            await FrontTopLayer(configuration, solution).ConfigureAwait(false);
+
+            await BackTopLayer(configuration, solution).ConfigureAwait(false);
+
+            await RightTopLayer(configuration, solution).ConfigureAwait(false);
+
+            await LeftTopLayer(configuration, solution).ConfigureAwait(false);
+
         }
 
         internal async Task CheckTopFaceForWhite(CubeConfiguration<FaceColour> configuration, List<IRotation> solution)
         {
-            await BackLeftTopFace(configuration, solution);
-            await BackRightTopFace(configuration, solution);
-            await FrontRightTopFace(configuration, solution);
-            await FrontLeftTopFace(configuration, solution);
+            await BackLeftTopFace(configuration, solution).ConfigureAwait(false);
+
+            await BackRightTopFace(configuration, solution).ConfigureAwait(false);
+
+            await FrontRightTopFace(configuration, solution).ConfigureAwait(false);
+
+            await FrontLeftTopFace(configuration, solution).ConfigureAwait(false);
+
         }
 
         internal async Task CheckBottomLayerForWhite(CubeConfiguration<FaceColour> configuration, List<IRotation> solution)
         {
-            await BottomFrontLayer(configuration, solution);
-            await BottomRightLayer(configuration, solution);
-            await BottomBackLayer(configuration, solution);
-            await BottomLeftLayer(configuration, solution);
+            await BottomFrontLayer(configuration, solution).ConfigureAwait(false);
+
+            await BottomRightLayer(configuration, solution).ConfigureAwait(false);
+
+            await BottomBackLayer(configuration, solution).ConfigureAwait(false);
+
+            await BottomLeftLayer(configuration, solution).ConfigureAwait(false);
+
         }
 
         private static async Task FrontTopLayer(CubeConfiguration<FaceColour> configuration, ICollection<IRotation> solution)
@@ -90,24 +118,31 @@ namespace NCubeSolver.Plugins.Solvers.Size3
                 switch (joiningPosition)
                 {
                     case RelativePosition.Same:
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
                     case RelativePosition.Right:
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
 
                     case RelativePosition.Left:
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
 
                     case RelativePosition.Opposite:
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
                         break;
                 }
 
-                await TopLayerLeft(configuration, solution);
+                await TopLayerLeft(configuration, solution).ConfigureAwait(false);
+
             }
             if (configuration.Faces[FaceType.Front].TopRight() == FaceColour.White)
             {
@@ -118,22 +153,29 @@ namespace NCubeSolver.Plugins.Solvers.Size3
                 switch (relativePositionToUpperJoining)
                 {
                     case RelativePosition.Right:
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
 
                     case RelativePosition.Left:
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
 
                     case RelativePosition.Opposite:
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
                         break;
                 }
 
-                await TopLayerRight(configuration, solution);
+                await TopLayerRight(configuration, solution).ConfigureAwait(false);
+
             }
         }
 
@@ -147,24 +189,31 @@ namespace NCubeSolver.Plugins.Solvers.Size3
                 switch (joiningPosition)
                 {
                     case RelativePosition.Same:
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
                     case RelativePosition.Right:
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
 
                     case RelativePosition.Left:
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
 
                     case RelativePosition.Opposite:
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
                         break;
                 }
 
-                await TopLayerLeft(configuration, solution);
+                await TopLayerLeft(configuration, solution).ConfigureAwait(false);
+
             }
             if (configuration.Faces[FaceType.Back].TopRight() == FaceColour.White)
             {
@@ -175,24 +224,31 @@ namespace NCubeSolver.Plugins.Solvers.Size3
                 switch (relativePositionToUpperJoining)
                 {
                     case RelativePosition.Same:
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration).ConfigureAwait(false);
+
                         break;
                     case RelativePosition.Right:
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
 
                     case RelativePosition.Left:
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
 
                     case RelativePosition.Opposite:
-                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
                         break;
                 }
 
-                await TopLayerRight(configuration, solution);
+                await TopLayerRight(configuration, solution).ConfigureAwait(false);
+
             }
         }
 
@@ -208,22 +264,29 @@ namespace NCubeSolver.Plugins.Solvers.Size3
                     case RelativePosition.Same:
                         break;
                     case RelativePosition.Right:
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
 
                     case RelativePosition.Left:
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
 
                     case RelativePosition.Opposite:
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
                         break;
                 }
 
-                await TopLayerLeft(configuration, solution);
+                await TopLayerLeft(configuration, solution).ConfigureAwait(false);
+
             }
             if (configuration.Faces[FaceType.Right].TopRight() == FaceColour.White)
             {
@@ -234,25 +297,32 @@ namespace NCubeSolver.Plugins.Solvers.Size3
                 switch (relativePositionToUpperJoining)
                 {
                     case RelativePosition.Same:
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
 
                     case RelativePosition.Right:
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
 
                     case RelativePosition.Left:
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
 
                     case RelativePosition.Opposite:
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
                         break;
                 }
 
-                await TopLayerRight(configuration, solution);
+                await TopLayerRight(configuration, solution).ConfigureAwait(false);
+
             }
         }
 
@@ -266,24 +336,31 @@ namespace NCubeSolver.Plugins.Solvers.Size3
                 switch (joiningPosition)
                 {
                     case RelativePosition.Same:
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration).ConfigureAwait(false);
+
                         break;
                     case RelativePosition.Right:
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
 
                     case RelativePosition.Left:
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
 
                     case RelativePosition.Opposite:
-                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
                         break;
                 }
 
-                await TopLayerLeft(configuration, solution);
+                await TopLayerLeft(configuration, solution).ConfigureAwait(false);
+
             }
             if (configuration.Faces[FaceType.Left].TopRight() == FaceColour.White)
             {
@@ -294,41 +371,55 @@ namespace NCubeSolver.Plugins.Solvers.Size3
                 switch (relativePositionToUpperJoining)
                 {
                     case RelativePosition.Same:
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
 
                     case RelativePosition.Right:
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
 
                     case RelativePosition.Left:
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
 
                     case RelativePosition.Opposite:
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
                         break;
                 }
 
-                await TopLayerRight(configuration, solution);
+                await TopLayerRight(configuration, solution).ConfigureAwait(false);
+
             }
         }
 
         private static async Task TopLayerLeft(CubeConfiguration<FaceColour> configuration, ICollection<IRotation> solution)
         {
-            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration);
+            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration).ConfigureAwait(false);
+
         }
 
         private static async Task TopLayerRight(CubeConfiguration<FaceColour> configuration, ICollection<IRotation> solution)
         {
-            await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration);
+            await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration).ConfigureAwait(false);
+
         }
 
         private static async Task BottomFrontLayer(CubeConfiguration<FaceColour> configuration, ICollection<IRotation> solution)
@@ -336,14 +427,19 @@ namespace NCubeSolver.Plugins.Solvers.Size3
             var face = configuration.Faces[FaceType.Front];
             if (face.BottomRight() == FaceColour.White)
             {
-                await MoveCornerOffBottom(configuration, solution);
-                await FrontLeftTopFace(configuration, solution);
+                await MoveCornerOffBottom(configuration, solution).ConfigureAwait(false);
+
+                await FrontLeftTopFace(configuration, solution).ConfigureAwait(false);
+
             }
             else if (face.BottomLeft() == FaceColour.White)
             {
-                await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration);
-                await MoveCornerOffBottom(configuration, solution);
-                await CheckTopLayerForWhite(configuration, solution, FaceType.Front, false, true);
+                await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                await MoveCornerOffBottom(configuration, solution).ConfigureAwait(false);
+
+                await CheckTopLayerForWhite(configuration, solution, FaceType.Front, false, true).ConfigureAwait(false);
+
             }
         }
 
@@ -352,14 +448,19 @@ namespace NCubeSolver.Plugins.Solvers.Size3
             var face = configuration.Faces[FaceType.Right];
             if (face.BottomRight() == FaceColour.White)
             {
-                await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration);
-                await MoveCornerOffBottom(configuration, solution);
-                await FrontLeftTopFace(configuration, solution);
+                await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration).ConfigureAwait(false);
+
+                await MoveCornerOffBottom(configuration, solution).ConfigureAwait(false);
+
+                await FrontLeftTopFace(configuration, solution).ConfigureAwait(false);
+
             }
             else if (face.BottomLeft() == FaceColour.White)
             {
-                await MoveCornerOffBottom(configuration, solution);
-                await CheckTopLayerForWhite(configuration, solution, FaceType.Front, false, true);
+                await MoveCornerOffBottom(configuration, solution).ConfigureAwait(false);
+
+                await CheckTopLayerForWhite(configuration, solution, FaceType.Front, false, true).ConfigureAwait(false);
+
             }
         }
 
@@ -368,15 +469,21 @@ namespace NCubeSolver.Plugins.Solvers.Size3
             var face = configuration.Faces[FaceType.Left];
             if (face.BottomRight() == FaceColour.White)
             {
-                await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration);
-                await MoveCornerOffBottom(configuration, solution);
-                await FrontLeftTopFace(configuration, solution);
+                await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                await MoveCornerOffBottom(configuration, solution).ConfigureAwait(false);
+
+                await FrontLeftTopFace(configuration, solution).ConfigureAwait(false);
+
             }
             else if (face.BottomLeft() == FaceColour.White)
             {
-                await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration);
-                await MoveCornerOffBottom(configuration, solution);
-                await CheckTopLayerForWhite(configuration, solution, FaceType.Front, false, true);
+                await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration).ConfigureAwait(false);
+
+                await MoveCornerOffBottom(configuration, solution).ConfigureAwait(false);
+
+                await CheckTopLayerForWhite(configuration, solution, FaceType.Front, false, true).ConfigureAwait(false);
+
             }
         }
 
@@ -385,23 +492,32 @@ namespace NCubeSolver.Plugins.Solvers.Size3
             var face = configuration.Faces[FaceType.Back];
             if (face.BottomRight() == FaceColour.White)
             {
-                await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration);
-                await MoveCornerOffBottom(configuration, solution);
-                await FrontLeftTopFace(configuration, solution);
+                await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration).ConfigureAwait(false);
+
+                await MoveCornerOffBottom(configuration, solution).ConfigureAwait(false);
+
+                await FrontLeftTopFace(configuration, solution).ConfigureAwait(false);
+
             }
             else if (face.BottomLeft() == FaceColour.White)
             {
-                await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration);
-                await MoveCornerOffBottom(configuration, solution);
-                await CheckTopLayerForWhite(configuration, solution, FaceType.Front, false, true);
+                await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration).ConfigureAwait(false);
+
+                await MoveCornerOffBottom(configuration, solution).ConfigureAwait(false);
+
+                await CheckTopLayerForWhite(configuration, solution, FaceType.Front, false, true).ConfigureAwait(false);
+
             }
         }
 
         private static async Task MoveCornerOffBottom(IRotatable configuration, ICollection<IRotation> solution)
         {
-            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration);
+            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration).ConfigureAwait(false);
+
         }
 
         private static async Task FrontLeftTopFace(CubeConfiguration<FaceColour> configuration, ICollection<IRotation> solution)
@@ -415,21 +531,27 @@ namespace NCubeSolver.Plugins.Solvers.Size3
             switch (leftRelativePosition)
             {
                 case RelativePosition.Same:
-                    await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
-                    await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
+                    await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration).ConfigureAwait(false);
+
                     break;
 
                 case RelativePosition.Right:
-                    await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
-                    await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
+                    await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration).ConfigureAwait(false);
+
                     break;
 
                 case RelativePosition.Left:
-                    await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration).ConfigureAwait(false);
+
                     break;
             }
 
-            await MoveTopCornerToBottom(configuration, solution);
+            await MoveTopCornerToBottom(configuration, solution).ConfigureAwait(false);
+
         }
 
         private static async Task FrontRightTopFace(CubeConfiguration<FaceColour> configuration, ICollection<IRotation> solution)
@@ -442,20 +564,25 @@ namespace NCubeSolver.Plugins.Solvers.Size3
             switch (rightRelativePosition)
             {
                 case RelativePosition.Same:
-                    await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
-                    await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                    await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration).ConfigureAwait(false);
+
                     break;
 
                 case RelativePosition.Right:
                     break;
 
                 case RelativePosition.Left:
-                    await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
-                    await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
+                    await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration).ConfigureAwait(false);
+
                     break;
             }
 
-            await MoveTopCornerToBottom(configuration, solution);
+            await MoveTopCornerToBottom(configuration, solution).ConfigureAwait(false);
+
         }
 
         private static async Task BackRightTopFace(CubeConfiguration<FaceColour> configuration, ICollection<IRotation> solution)
@@ -468,20 +595,25 @@ namespace NCubeSolver.Plugins.Solvers.Size3
             switch (rightRelativePosition)
             {
                 case RelativePosition.Same:
-                    await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
                     break;
 
                 case RelativePosition.Right:
-                    await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
-                    await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
+                    await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration).ConfigureAwait(false);
+
                     break;
 
                 case RelativePosition.Left:
-                    await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration).ConfigureAwait(false);
+
                     break;
             }
 
-            await MoveTopCornerToBottom(configuration, solution);
+            await MoveTopCornerToBottom(configuration, solution).ConfigureAwait(false);
+
         }
 
         private static async Task BackLeftTopFace(CubeConfiguration<FaceColour> configuration, ICollection<IRotation> solution)
@@ -494,34 +626,46 @@ namespace NCubeSolver.Plugins.Solvers.Size3
             switch (leftRelativePosition)
             {
                 case RelativePosition.Same:
-                    await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
-                    await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                    await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration).ConfigureAwait(false);
+
                     break;
 
                 case RelativePosition.Right:
-                    await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration).ConfigureAwait(false);
+
                     break;
 
                 case RelativePosition.Left:
-                    await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
                     break;
             }
 
-            await MoveTopCornerToBottom(configuration, solution);
+            await MoveTopCornerToBottom(configuration, solution).ConfigureAwait(false);
+
         }
 
         private static async Task MoveTopCornerToBottom(IRotatable configuration, ICollection<IRotation> solution)
         {
             // Move into top layer
-            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
+            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
 
             // Move to bottom face
-            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration);
+            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration).ConfigureAwait(false);
+
         }
 
         private static async Task CheckTopLayerForWhite(CubeConfiguration<FaceColour> configuration, ICollection<IRotation> solution, FaceType face, bool leftIsLastInTopEdge = false, bool rightIsLastInTopEdge = false)
@@ -540,21 +684,27 @@ namespace NCubeSolver.Plugins.Solvers.Size3
                 switch (relativePositionToUpperJoining)
                 {
                     case RelativePosition.Right:
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
 
                     case RelativePosition.Left:
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
 
                     case RelativePosition.Opposite:
-                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
                         break;
                 }
 
-                await CommonActions.ApplyAndAddRotation(Rotations.ByFace(joiningUpperFace, RotationDirection.Clockwise), solution, configuration);
-                await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
-                await CommonActions.ApplyAndAddRotation(Rotations.ByFace(joiningUpperFace, RotationDirection.AntiClockwise), solution, configuration);
+                await CommonActions.ApplyAndAddRotation(Rotations.ByFace(joiningUpperFace, RotationDirection.Clockwise), solution, configuration).ConfigureAwait(false);
+
+                await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
+                await CommonActions.ApplyAndAddRotation(Rotations.ByFace(joiningUpperFace, RotationDirection.AntiClockwise), solution, configuration).ConfigureAwait(false);
+
             }
             else if (rotatingFace.TopRight() == FaceColour.White)
             {
@@ -565,22 +715,28 @@ namespace NCubeSolver.Plugins.Solvers.Size3
                 switch (relativePositionToUpperJoining)
                 {
                     case RelativePosition.Same:
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
 
                     case RelativePosition.Left:
-                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
                         break;
 
                     case RelativePosition.Opposite:
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
                 }
 
                 var faceToRotate = FaceRules.FaceAtRelativePositionTo(joiningUpperFace, RelativePosition.Right);
-                await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceToRotate, RotationDirection.Clockwise), solution, configuration);
-                await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
-                await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceToRotate, RotationDirection.AntiClockwise), solution, configuration);
+                await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceToRotate, RotationDirection.Clockwise), solution, configuration).ConfigureAwait(false);
+
+                await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                await CommonActions.ApplyAndAddRotation(Rotations.ByFace(faceToRotate, RotationDirection.AntiClockwise), solution, configuration).ConfigureAwait(false);
+
             }
         }
     }

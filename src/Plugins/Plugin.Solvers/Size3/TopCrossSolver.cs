@@ -11,21 +11,26 @@ namespace NCubeSolver.Plugins.Solvers.Size3
         {
             var solution = new List<IRotation>();
 
-            await SolveCross(configuration, solution);
-            await PermuteCorrectColours(configuration, solution);
+            await SolveCross(configuration, solution).ConfigureAwait(false);
+
+            await PermuteCorrectColours(configuration, solution).ConfigureAwait(false);
+
 
             return solution;
         }
 
         internal async Task SolveCross(CubeConfiguration<FaceColour> configuration, List<IRotation> solution)
         {
-            var solved = await LineOnTop(configuration, solution);
+            var solved = await LineOnTop(configuration, solution).ConfigureAwait(false);
+
             if (!solved)
             {
-                solved = await LShapeOnTop(configuration, solution);
+                solved = await LShapeOnTop(configuration, solution).ConfigureAwait(false);
+
                 if (!solved)
                 {
-                    await DotOnTop(configuration, solution);
+                    await DotOnTop(configuration, solution).ConfigureAwait(false);
+
                 }
             }
         }
@@ -35,15 +40,18 @@ namespace NCubeSolver.Plugins.Solvers.Size3
             var relations = CrossRelativePositions(configuration);
 
             // All the same, just needs rotating
-            var solved = await PermuteAllSame(relations, configuration, solution);
+            var solved = await PermuteAllSame(relations, configuration, solution).ConfigureAwait(false);
+
             // 1 set of opposite sides are in the wrong place or both sets of diagonal sides
             if (!solved)
             {
-                solved = await PermuteDiagonal(relations, configuration, solution);
+                solved = await PermuteDiagonal(relations, configuration, solution).ConfigureAwait(false);
+
 
                 if (!solved)
                 {
-                    await PermuteSingleDiagonal(relations, configuration, solution);
+                    await PermuteSingleDiagonal(relations, configuration, solution).ConfigureAwait(false);
+
                 }
             }
         }
@@ -60,34 +68,50 @@ namespace NCubeSolver.Plugins.Solvers.Size3
             if (!(relations[FaceType.Front] == relations[FaceType.Back] && relations[FaceType.Right] == relations[FaceType.Left]))
                 return false;
 
-            await PermuteClockwise(configuration, solution);
+            await PermuteClockwise(configuration, solution).ConfigureAwait(false);
+
             // TODO: STOP PASSING ROUND RELATIONS. USE AS A PROPERTY
             relations = CrossRelativePositions(configuration);
-            await PermuteSingleDiagonal(relations, configuration, solution);
+            await PermuteSingleDiagonal(relations, configuration, solution).ConfigureAwait(false);
+
 
             return true;
         }
 
         private static async Task PermuteAntiClockwise(IRotatable configuration, ICollection<IRotation> solution)
         {
-            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration);
+            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration).ConfigureAwait(false);
+
         }
 
         private static async Task PermuteClockwise(IRotatable configuration, ICollection<IRotation> solution)
         {
-            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration);
+            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration).ConfigureAwait(false);
+
         }
 
         private static async Task PermuteSingleDiagonal(Dictionary<FaceType, RelativePosition> relations, CubeConfiguration<FaceColour> configuration, ICollection<IRotation> solution)
@@ -100,9 +124,11 @@ namespace NCubeSolver.Plugins.Solvers.Size3
                 {
                     case 2:
                     case 4:
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
                         relations = CrossRelativePositions(configuration);
-                        await PermuteSingleDiagonal(relations, configuration, solution);
+                        await PermuteSingleDiagonal(relations, configuration, solution).ConfigureAwait(false);
+
                         return;
                 }
             }
@@ -112,26 +138,31 @@ namespace NCubeSolver.Plugins.Solvers.Size3
             if (sameRelation == null) return;
             if (sameRelation.Count() > 1)
             {
-                await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
+                await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
                 relations = CrossRelativePositions(configuration);
-                await PermuteSingleDiagonal(relations, configuration, solution);
+                await PermuteSingleDiagonal(relations, configuration, solution).ConfigureAwait(false);
+
                 return;
             }
 
             var faceType = sameRelation.First().Key;
 
             var faceColour = configuration.Faces[faceType].TopCentre();
-            var cubeRotation = await CommonActions.PositionOnFront(configuration, faceColour);
+            var cubeRotation = await CommonActions.PositionOnFront(configuration, faceColour).ConfigureAwait(false);
+
             if (cubeRotation != null)
                 solution.Add(cubeRotation);
 
             if (oppositeRelation.First().Key == FaceRules.FaceAtRelativePositionTo(faceType, RelativePosition.Right))
             {
-                await PermuteClockwise(configuration, solution);
+                await PermuteClockwise(configuration, solution).ConfigureAwait(false);
+
             }
             else
             {
-                await PermuteAntiClockwise(configuration, solution);
+                await PermuteAntiClockwise(configuration, solution).ConfigureAwait(false);
+
             }
         }
 
@@ -151,15 +182,18 @@ namespace NCubeSolver.Plugins.Solvers.Size3
             switch (first)
             {
                 case RelativePosition.Right:
-                    await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
                     break;
 
                 case RelativePosition.Left:
-                    await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
                     break;
 
                 case RelativePosition.Opposite:
-                    await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
                     break;
             }
 
@@ -175,8 +209,10 @@ namespace NCubeSolver.Plugins.Solvers.Size3
 
         internal async Task DotOnTop(CubeConfiguration<FaceColour> configuration, List<IRotation> solution)
         {
-            await HorizontalLineToCross(configuration, solution);
-            await LShapeOnTop(configuration, solution);
+            await HorizontalLineToCross(configuration, solution).ConfigureAwait(false);
+
+            await LShapeOnTop(configuration, solution).ConfigureAwait(false);
+
         }
 
         internal async Task<bool> LShapeOnTop(CubeConfiguration<FaceColour> configuration, List<IRotation> solution)
@@ -187,7 +223,8 @@ namespace NCubeSolver.Plugins.Solvers.Size3
                 configuration.Faces[FaceType.Upper].TopCentre() == FaceColour.Yellow &&
                 configuration.Faces[FaceType.Upper].BottomCentre() != FaceColour.Yellow)
             {
-                await LShapeToCross(configuration, solution);
+                await LShapeToCross(configuration, solution).ConfigureAwait(false);
+
                 return true;
             }
 
@@ -197,8 +234,10 @@ namespace NCubeSolver.Plugins.Solvers.Size3
                 configuration.Faces[FaceType.Upper].TopCentre() == FaceColour.Yellow &&
                 configuration.Faces[FaceType.Upper].BottomCentre() != FaceColour.Yellow)
             {
-                await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration);
-                await LShapeToCross(configuration, solution);
+                await CommonActions.ApplyAndAddRotation(CubeRotations.YAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                await LShapeToCross(configuration, solution).ConfigureAwait(false);
+
                 return true;
             }
 
@@ -208,8 +247,10 @@ namespace NCubeSolver.Plugins.Solvers.Size3
                 configuration.Faces[FaceType.Upper].TopCentre() != FaceColour.Yellow &&
                 configuration.Faces[FaceType.Upper].BottomCentre() == FaceColour.Yellow)
             {
-                await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration);
-                await LShapeToCross(configuration, solution);
+                await CommonActions.ApplyAndAddRotation(CubeRotations.Y2, solution, configuration).ConfigureAwait(false);
+
+                await LShapeToCross(configuration, solution).ConfigureAwait(false);
+
                 return true;
             }
 
@@ -219,8 +260,10 @@ namespace NCubeSolver.Plugins.Solvers.Size3
                 configuration.Faces[FaceType.Upper].TopCentre() != FaceColour.Yellow &&
                 configuration.Faces[FaceType.Upper].BottomCentre() == FaceColour.Yellow)
             {
-                await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration);
-                await LShapeToCross(configuration, solution);
+                await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration).ConfigureAwait(false);
+
+                await LShapeToCross(configuration, solution).ConfigureAwait(false);
+
                 return true;
             }
 
@@ -229,15 +272,15 @@ namespace NCubeSolver.Plugins.Solvers.Size3
 
         private static async Task LShapeToCross(IRotatable configuration, ICollection<IRotation> solution)
         {
-            await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.FrontAntiClockwise, solution, configuration);
+            await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration).ConfigureAwait(false);
+            await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration).ConfigureAwait(false);
+            await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration).ConfigureAwait(false);
+            await CommonActions.ApplyAndAddRotation(Rotations.FrontAntiClockwise, solution, configuration).ConfigureAwait(false);
         }
 
-        internal async Task<bool> LineOnTop(CubeConfiguration<FaceColour> configuration, List<IRotation> solution)
+        private async Task<bool> LineOnTop(CubeConfiguration<FaceColour> configuration, List<IRotation> solution)
         {
             // Horizontal
             if (configuration.Faces[FaceType.Upper].LeftCentre() == FaceColour.Yellow &&
@@ -245,7 +288,7 @@ namespace NCubeSolver.Plugins.Solvers.Size3
                 configuration.Faces[FaceType.Upper].TopCentre() != FaceColour.Yellow &&
                 configuration.Faces[FaceType.Upper].BottomCentre() != FaceColour.Yellow)
             {
-                await HorizontalLineToCross(configuration, solution);
+                await HorizontalLineToCross(configuration, solution).ConfigureAwait(false);
                 return true;
             }
 
@@ -255,8 +298,8 @@ namespace NCubeSolver.Plugins.Solvers.Size3
                 configuration.Faces[FaceType.Upper].TopCentre() == FaceColour.Yellow &&
                 configuration.Faces[FaceType.Upper].BottomCentre() == FaceColour.Yellow)
             {
-                await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
-                await HorizontalLineToCross(configuration, solution);
+                await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+                await HorizontalLineToCross(configuration, solution).ConfigureAwait(false);
                 return true;
             }
 
@@ -265,12 +308,12 @@ namespace NCubeSolver.Plugins.Solvers.Size3
 
         private static async Task HorizontalLineToCross(IRotatable configuration, ICollection<IRotation> solution)
         {
-            await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
-            await CommonActions.ApplyAndAddRotation(Rotations.FrontAntiClockwise, solution, configuration);
+            await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration).ConfigureAwait(false);
+            await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration).ConfigureAwait(false);
+            await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+            await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration).ConfigureAwait(false);
+            await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+            await CommonActions.ApplyAndAddRotation(Rotations.FrontAntiClockwise, solution, configuration).ConfigureAwait(false);
         }
     }
 }

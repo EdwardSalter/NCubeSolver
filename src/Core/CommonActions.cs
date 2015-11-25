@@ -40,7 +40,7 @@ namespace NCubeSolvers.Core
                     throw new Exception("Unknown face");
             }
 
-            await config.RotateCube(cubeRotation);
+            await config.RotateCube(cubeRotation).ConfigureAwait(false);
             return cubeRotation;
         }
 
@@ -84,7 +84,7 @@ namespace NCubeSolvers.Core
                     throw new Exception("Unknown face");
             }
 
-            await config.RotateCube(cubeRotation);
+            await config.RotateCube(cubeRotation).ConfigureAwait(false);
             return cubeRotation;
         }
 
@@ -103,18 +103,20 @@ namespace NCubeSolvers.Core
             var faceRotation = rotation as FaceRotation;
             if (cubeRotation != null)
             {
-                await configuration.RotateCube(cubeRotation);
+                await configuration.RotateCube(cubeRotation).ConfigureAwait(false);
             }
             if (faceRotation != null)
             {
-                await configuration.Rotate(faceRotation);
+                await configuration.Rotate(faceRotation).ConfigureAwait(false);
             }
         }
 
         public static async Task ResetToDefaultPosition(CubeConfiguration<FaceColour> configuration)
         {
-            await PositionOnBottom(configuration, FaceColour.White);
-            await PositionOnFront(configuration, FaceColour.Red);
+            await PositionOnBottom(configuration, FaceColour.White).ConfigureAwait(false);
+
+            await PositionOnFront(configuration, FaceColour.Red).ConfigureAwait(false);
+
         }
 
         public static void ApplyRotations(IEnumerable<IRotation> rotations, CubeConfiguration<FaceColour> configuration)

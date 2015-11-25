@@ -33,22 +33,26 @@ namespace NCubeSolvers.Core
             var numRotations = (int)(Math.Pow(m_cubeSize, 3) * 2);
             m_configuration = m_generator.GenerateConfiguration(m_cubeSize, numRotations);
             if (m_display != null)
-                await m_display.SetCubeConfiguration(m_configuration);
+                await m_display.SetCubeConfiguration(m_configuration).ConfigureAwait(true);
+
 
             // TODO: PAUSES?
             Console.WriteLine("Solving");
             try
             {
-                var solution = (await m_solver.Solve(m_configuration)).ToList();
+                var solution = (await m_solver.Solve(m_configuration).ConfigureAwait(true)).ToList();
+
                 Console.WriteLine("Solution ({0} steps): {1}", solution.Count, string.Join(" ", solution));
 
                 m_currentStep = 0;
                 foreach (var step in solution)
                 {
-                    await RunStep(step, solution.Count);
+                    await RunStep(step, solution.Count).ConfigureAwait(true);
+
                 }
 
-                await m_celebrator.Celebrate();
+                await m_celebrator.Celebrate().ConfigureAwait(true);
+
             }
             catch (SolveFailureException)
             {
@@ -78,7 +82,8 @@ namespace NCubeSolvers.Core
                     tasks.Add(m_display.Rotate(faceRotation));
             }
 
-            await Task.WhenAll(tasks);
+            await Task.WhenAll(tasks).ConfigureAwait(true);
+
         }
     }
 }

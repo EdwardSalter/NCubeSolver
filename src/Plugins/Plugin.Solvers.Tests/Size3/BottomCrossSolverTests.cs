@@ -17,7 +17,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.Left2 }, 3);
             var solution = new List<IRotation>();
 
-            await solver.CheckTopFaceForWhite(configuration, solution);
+            await solver.CheckTopFaceForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.BottomLeftCentreIsCorrect(configuration);
         }
@@ -29,7 +30,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.Left2, Rotations.UpperClockwise }, 3);
             var solution = new List<IRotation>();
 
-            await solver.CheckTopFaceForWhite(configuration, solution);
+            await solver.CheckTopFaceForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.BottomLeftCentreIsCorrect(configuration);
         }
@@ -41,7 +43,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.Right2, Rotations.UpperClockwise }, 3);
             var solution = new List<IRotation>();
 
-            await solver.CheckTopFaceForWhite(configuration, solution);
+            await solver.CheckTopFaceForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.BottomRightCentreIsCorrect(configuration);
         }
@@ -53,7 +56,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.RightClockwise, Rotations.FrontAntiClockwise }, 3);
             var solution = new List<IRotation>();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.BottomRightCentreIsCorrect(configuration);
         }
@@ -65,7 +69,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.LeftAntiClockwise, Rotations.FrontClockwise }, 3);
             var solution = new List<IRotation>();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.BottomLeftCentreIsCorrect(configuration);
         }
@@ -77,7 +82,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.BackClockwise, Rotations.RightAntiClockwise, Rotations.UpperClockwise }, 3);
             var solution = new List<IRotation>();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.BottomBackCentreIsCorrect(configuration);
         }
@@ -89,7 +95,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.FrontClockwise, Rotations.LeftAntiClockwise, Rotations.UpperAntiClockwise }, 3);
             var solution = new List<IRotation>();
 
-            await solver.CheckTopLayerForWhite(configuration, solution);
+            await solver.CheckTopLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.BottomFrontCentreIsCorrect(configuration);
         }
@@ -101,7 +108,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.LeftAntiClockwise, Rotations.Front2 }, 3);
             var solution = new List<IRotation>();
 
-            await solver.CheckMiddleLayerForWhite(configuration, solution);
+            await solver.CheckMiddleLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CollectionAssert.IsSubsetOf(new[] { Rotations.RightClockwise, Rotations.UpperAntiClockwise, Rotations.RightAntiClockwise }, solution);
         }
@@ -113,7 +121,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.RightClockwise, Rotations.Front2 }, 3);
             var solution = new List<IRotation>();
 
-            await solver.CheckMiddleLayerForWhite(configuration, solution);
+            await solver.CheckMiddleLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CollectionAssert.IsSubsetOf(new[] { Rotations.LeftAntiClockwise, Rotations.UpperAntiClockwise, Rotations.LeftClockwise }, solution);
         }
@@ -125,7 +134,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.LeftAntiClockwise}, 3);
             var solution = new List<IRotation>();
 
-            await solver.CheckMiddleLayerForWhite(configuration, solution);
+            await solver.CheckMiddleLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CollectionAssert.IsSubsetOf(new[] { Rotations.LeftClockwise }, solution);
         }
@@ -137,7 +147,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.RightClockwise, Rotations.FrontClockwise }, 3);
             var solution = new List<IRotation>();
 
-            await solver.CheckBottomLayerForWhite(configuration, solution);
+            await solver.CheckBottomLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CollectionAssert.IsSubsetOf(new[] { Rotations.FrontAntiClockwise, Rotations.RightAntiClockwise, Rotations.FrontClockwise }, solution);
         }
@@ -149,7 +160,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var configuration = UnitTests.Helpers.CreateConfiguration(new[] { Rotations.LeftAntiClockwise, Rotations.FrontAntiClockwise }, 3);
             var solution = new List<IRotation>();
 
-            await solver.CheckBottomLayerForWhite(configuration, solution);
+            await solver.CheckBottomLayerForWhite(configuration, solution).ConfigureAwait(true);
+
 
             CollectionAssert.IsSubsetOf(new[] { Rotations.FrontClockwise, Rotations.LeftClockwise, Rotations.FrontAntiClockwise }, solution);
         }

@@ -17,7 +17,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var configuration = CreateConfigurationWithHorizontalLine();
             var solver = new TopCrossSolver();
 
-            await solver.Solve(configuration);
+            await solver.Solve(configuration).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.FaceHasCrossOfColour(configuration, FaceType.Upper, FaceColour.Yellow);
         }
@@ -26,11 +27,13 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         public async Task LineOnTop_GivenVerticalLine_CreatesACrossOnTop()
         {
             var config = Helpers.CreateSolvedMiddleLayerConfiguration(new[] { Rotations.Right2, Rotations.FrontAntiClockwise });
-            await config.Rotate(Rotations.UpperClockwise);
+            await config.Rotate(Rotations.UpperClockwise).ConfigureAwait(true);
+
             var configuration = config;
             var solver = new TopCrossSolver();
 
-            await solver.Solve(configuration);
+            await solver.Solve(configuration).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.FaceHasCrossOfColour(configuration, FaceType.Upper, FaceColour.Yellow);
         }
@@ -41,7 +44,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var configuration = CreateConfigurationWithLOnBackAndLeft();
             var solver = new TopCrossSolver();
 
-            await solver.Solve(configuration);
+            await solver.Solve(configuration).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.FaceHasCrossOfColour(configuration, FaceType.Upper, FaceColour.Yellow);
         }
@@ -50,10 +54,12 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         public async Task LineOnTop_GivenLShapeOnBackRight_CreatesACrossOnTop()
         {
             var configuration = CreateConfigurationWithLOnBackAndLeft();
-            await configuration.Rotate(Rotations.UpperClockwise);
+            await configuration.Rotate(Rotations.UpperClockwise).ConfigureAwait(true);
+
             var solver = new TopCrossSolver();
 
-            await solver.Solve(configuration);
+            await solver.Solve(configuration).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.FaceHasCrossOfColour(configuration, FaceType.Upper, FaceColour.Yellow);
         }
@@ -62,10 +68,12 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         public async Task LineOnTop_GivenLShapeOnFrontRight_CreatesACrossOnTop()
         {
             var configuration = CreateConfigurationWithLOnBackAndLeft();
-            await configuration.Rotate(Rotations.Upper2);
+            await configuration.Rotate(Rotations.Upper2).ConfigureAwait(true);
+
             var solver = new TopCrossSolver();
 
-            await solver.Solve(configuration);
+            await solver.Solve(configuration).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.FaceHasCrossOfColour(configuration, FaceType.Upper, FaceColour.Yellow);
         }
@@ -74,10 +82,12 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         public async Task LineOnTop_GivenLShapeOnFrontLeft_CreatesACrossOnTop()
         {
             var configuration = CreateConfigurationWithLOnBackAndLeft();
-            await configuration.Rotate(Rotations.UpperAntiClockwise);
+            await configuration.Rotate(Rotations.UpperAntiClockwise).ConfigureAwait(true);
+
             var solver = new TopCrossSolver();
 
-            await solver.Solve(configuration);
+            await solver.Solve(configuration).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.FaceHasCrossOfColour(configuration, FaceType.Upper, FaceColour.Yellow);
         }
@@ -88,7 +98,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var configuration = CreateConfigurationWithDot();
             var solver = new TopCrossSolver();
 
-            await solver.Solve(configuration);
+            await solver.Solve(configuration).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.FaceHasCrossOfColour(configuration, FaceType.Upper, FaceColour.Yellow);
         }
@@ -97,10 +108,12 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         public async Task Permute_GivenAnAlreadySolvedCrossRotatedClockwise_CompletesSolvedCross()
         {
             var configuration = CreateConfigurationWithSolvedCross();
-            await configuration.Rotate(Rotations.UpperClockwise);
+            await configuration.Rotate(Rotations.UpperClockwise).ConfigureAwait(true);
+
             var solver = new TopCrossSolver();
 
-            await solver.Solve(configuration);
+            await solver.Solve(configuration).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.TopLayerCrossIsCorrect(configuration);
         }
@@ -109,10 +122,12 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         public async Task Permute_GivenAnAlreadySolvedCrossRotatedAntiClockwise_CompletesSolvedCross()
         {
             var configuration = CreateConfigurationWithSolvedCross();
-            await configuration.Rotate(Rotations.UpperAntiClockwise);
+            await configuration.Rotate(Rotations.UpperAntiClockwise).ConfigureAwait(true);
+
             var solver = new TopCrossSolver();
 
-            await solver.Solve(configuration);
+            await solver.Solve(configuration).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.TopLayerCrossIsCorrect(configuration);
         }
@@ -121,10 +136,12 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         public async Task Permute_GivenAnAlreadySolvedCrossRotatedTwice_CompletesSolvedCross()
         {
             var configuration = CreateConfigurationWithSolvedCross();
-            await configuration.Rotate(Rotations.Upper2);
+            await configuration.Rotate(Rotations.Upper2).ConfigureAwait(true);
+
             var solver = new TopCrossSolver();
 
-            await solver.Solve(configuration);
+            await solver.Solve(configuration).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.TopLayerCrossIsCorrect(configuration);
         }
@@ -135,7 +152,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var configuration = CreateConfigurationWithSolvedCross();
             var solver = new TopCrossSolver();
 
-            await solver.Solve(configuration);
+            await solver.Solve(configuration).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.TopLayerCrossIsCorrect(configuration);
         }
@@ -146,7 +164,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var configuration = CreateConfigurationWithCrossWithOneOpposingEdge();
             var solver = new TopCrossSolver();
 
-            await solver.Solve(configuration);
+            await solver.Solve(configuration).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.TopLayerCrossIsCorrect(configuration);
         }
@@ -155,10 +174,12 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         public async Task Permute_GivenCrossWithDiagonalsReversed_CompletesSolvedCross()
         {
             var configuration = CreateConfigurationWithCrossWithOneOpposingEdge();
-            await configuration.Rotate(Rotations.UpperClockwise);
+            await configuration.Rotate(Rotations.UpperClockwise).ConfigureAwait(true);
+
             var solver = new TopCrossSolver();
 
-            await solver.Solve(configuration);
+            await solver.Solve(configuration).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.TopLayerCrossIsCorrect(configuration);
         }
@@ -169,7 +190,8 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
             var configuration = Helpers.CreateSolvedMiddleLayerConfiguration(new[] { Rotations.DownAntiClockwise, Rotations.BackClockwise });
             var solver = new TopCrossSolver();
 
-            await solver.Solve(configuration);
+            await solver.Solve(configuration).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.TopLayerCrossIsCorrect(configuration);
         }
@@ -179,10 +201,13 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests.Size3
         {
             var configuration = Helpers.CreateSolvedMiddleLayerConfiguration(new[] { Rotations.DownAntiClockwise, Rotations.BackClockwise });
             var solver = new TopCrossSolver();
-            await solver.SolveCross(configuration, new List<IRotation>());
-            await configuration.Rotate(Rotations.Upper2);
+            await solver.SolveCross(configuration, new List<IRotation>()).ConfigureAwait(true);
 
-            await solver.Solve(configuration);
+            await configuration.Rotate(Rotations.Upper2).ConfigureAwait(true);
+
+
+            await solver.Solve(configuration).ConfigureAwait(true);
+
 
             CubeConfigurationAssert.TopLayerCrossIsCorrect(configuration);
         }

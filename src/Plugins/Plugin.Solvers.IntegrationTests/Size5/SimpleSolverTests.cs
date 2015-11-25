@@ -75,7 +75,8 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size5
                 CommonActions.ApplyRotations(rotations, initialConfiguration);
                 var solver = new SimpleSolver();
 
-                var solution = await solver.Solve(initialConfiguration);
+                var solution = await solver.Solve(initialConfiguration).ConfigureAwait(true);
+
                 var configurationToTest = CubeConfiguration<FaceColour>.CreateStandardCubeConfiguration(5);
                 CommonActions.ApplyRotations(rotations, initialConfiguration);
                 CommonActions.ApplyRotations(solution, configurationToTest);

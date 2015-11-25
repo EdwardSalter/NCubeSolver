@@ -15,7 +15,8 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             var colourIndex = Array.IndexOf(allColours, configuration.Faces[FaceType.Front].Centre);
             var startIndex = colourIndex;
 
-            await SolveFrontFace(configuration, solution);
+            await SolveFrontFace(configuration, solution).ConfigureAwait(false);
+
 
             int count = 0;
             do
@@ -26,9 +27,11 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                     colourIndex = 0;
                 }
                 var nextColour = allColours[colourIndex];
-                solution.Add(await CommonActions.PositionOnFront(configuration, nextColour));
+                solution.Add(await CommonActions.PositionOnFront(configuration, nextColour).ConfigureAwait(false));
 
-                await SolveFrontFace(configuration, solution);
+
+                await SolveFrontFace(configuration, solution).ConfigureAwait(false);
+
 
                 if (++count > 10)
                 {
@@ -41,14 +44,18 @@ namespace NCubeSolver.Plugins.Solvers.Size5
 
         private async Task SolveFrontFace(CubeConfiguration<FaceColour> configuration, List<IRotation> solution)
         {
-            await CheckUpperFace(configuration, solution);
+            await CheckUpperFace(configuration, solution).ConfigureAwait(false);
+
             for (int i = 0; i <= 2; i++)
             {
-                await CommonActions.ApplyAndAddRotation(CubeRotations.ZClockwise, solution, configuration);
-                await CheckUpperFace(configuration, solution);
+                await CommonActions.ApplyAndAddRotation(CubeRotations.ZClockwise, solution, configuration).ConfigureAwait(false);
+
+                await CheckUpperFace(configuration, solution).ConfigureAwait(false);
+
             }
 
-            await CheckBackFace(configuration, solution);
+            await CheckBackFace(configuration, solution).ConfigureAwait(false);
+
         }
 
         private static async Task CheckUpperFace(CubeConfiguration<FaceColour> configuration, List<IRotation> solution)
@@ -57,10 +64,14 @@ namespace NCubeSolver.Plugins.Solvers.Size5
 
             for (int i = 0; i < 4; i++)
             {
-                await CheckUpperTopLeft(configuration, solution, frontFaceColour);
-                await CheckUpperTopRight(configuration, solution, frontFaceColour);
-                await CheckUpperBottomRight(configuration, solution, frontFaceColour);
-                await CheckUpperBottomLeft(configuration, solution, frontFaceColour);
+                await CheckUpperTopLeft(configuration, solution, frontFaceColour).ConfigureAwait(false);
+
+                await CheckUpperTopRight(configuration, solution, frontFaceColour).ConfigureAwait(false);
+
+                await CheckUpperBottomRight(configuration, solution, frontFaceColour).ConfigureAwait(false);
+
+                await CheckUpperBottomLeft(configuration, solution, frontFaceColour).ConfigureAwait(false);
+
             }
         }
 
@@ -70,10 +81,14 @@ namespace NCubeSolver.Plugins.Solvers.Size5
 
             for(int i = 0; i < 4; i++)
             {
-                await CheckBackTopLeft(configuration, solution, frontFaceColour);
-                await CheckBackTopRight(configuration, solution, frontFaceColour);
-                await CheckBackBottomRight(configuration, solution, frontFaceColour);
-                await CheckBackBottomLeft(configuration, solution, frontFaceColour);
+                await CheckBackTopLeft(configuration, solution, frontFaceColour).ConfigureAwait(false);
+
+                await CheckBackTopRight(configuration, solution, frontFaceColour).ConfigureAwait(false);
+
+                await CheckBackBottomRight(configuration, solution, frontFaceColour).ConfigureAwait(false);
+
+                await CheckBackBottomLeft(configuration, solution, frontFaceColour).ConfigureAwait(false);
+
             }
         }
 
@@ -86,17 +101,25 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                 {
                     if (configuration.Faces[FaceType.Front].GetEdge(configuration.MinInnerLayerIndex(), Edge.Top)[configuration.MinInnerLayerIndex()] != frontFaceColour)
                     {
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeftAntiClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeftClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeftAntiClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeftClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeftAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeftClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeftAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeftClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
                     }
 
-                    await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration).ConfigureAwait(false);
+
                 }
             }
         }
@@ -110,17 +133,25 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                 {
                     if (configuration.Faces[FaceType.Front].GetEdge(configuration.MinInnerLayerIndex(), Edge.Top)[configuration.MaxInnerLayerIndex()] != frontFaceColour)
                     {
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRightClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRightAntiClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRightClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRightAntiClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRightClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRightAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRightClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRightAntiClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
                     }
 
-                    await CommonActions.ApplyAndAddRotation(Rotations.FrontAntiClockwise, solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.FrontAntiClockwise, solution, configuration).ConfigureAwait(false);
+
                 }
             }
         }
@@ -134,17 +165,25 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                 {
                     if (configuration.Faces[FaceType.Front].GetEdge(configuration.MinInnerLayerIndex(), Edge.Bottom)[configuration.MaxInnerLayerIndex()] != frontFaceColour)
                     {
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRightClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRightAntiClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRightClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRightAntiClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRightClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRightAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRightClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRightAntiClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
                     }
 
-                    await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration).ConfigureAwait(false);
+
                 }
             }
         }
@@ -158,17 +197,25 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                 {
                     if (configuration.Faces[FaceType.Front].GetEdge(configuration.MinInnerLayerIndex(), Edge.Bottom)[configuration.MinInnerLayerIndex()] != frontFaceColour)
                     {
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeftAntiClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeftClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeftAntiClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeftClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeftAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeftClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeftAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeftClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
                     }
 
-                    await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration).ConfigureAwait(false);
+
                 }
             }
         }
@@ -182,19 +229,29 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                 {
                     if (configuration.Faces[FaceType.Front].GetEdge(configuration.MinInnerLayerIndex(), Edge.Bottom)[configuration.MaxInnerLayerIndex()] != frontFaceColour)
                     {
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.XClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.XAntiClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.XClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.XAntiClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
                     }
 
-                    await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration).ConfigureAwait(false);
+
                 }
             }
         }
@@ -208,19 +265,29 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                 {
                     if (configuration.Faces[FaceType.Front].GetEdge(configuration.MinInnerLayerIndex(), Edge.Bottom)[configuration.MinInnerLayerIndex()] != frontFaceColour)
                     {
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.XClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.XAntiClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.XClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.XAntiClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
                     }
 
-                    await CommonActions.ApplyAndAddRotation(Rotations.FrontAntiClockwise, solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.FrontAntiClockwise, solution, configuration).ConfigureAwait(false);
+
                 }
             }
         }
@@ -234,19 +301,29 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                 {
                     if (configuration.Faces[FaceType.Front].GetEdge(configuration.MinInnerLayerIndex(), Edge.Top)[configuration.MinInnerLayerIndex()] != frontFaceColour)
                     {
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.XClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.XAntiClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.XClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerLeft2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.XAntiClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
                     }
 
-                    await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration).ConfigureAwait(false);
+
                 }
             }
         }
@@ -260,19 +337,29 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                 {
                     if (configuration.Faces[FaceType.Front].GetEdge(configuration.MinInnerLayerIndex(), Edge.Top)[configuration.MaxInnerLayerIndex()] != frontFaceColour)
                     {
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.XClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration);
-                        await CommonActions.ApplyAndAddRotation(CubeRotations.XAntiClockwise, solution, configuration);
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.XClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.Upper2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerRight2, solution, configuration).ConfigureAwait(false);
+
+                        await CommonActions.ApplyAndAddRotation(CubeRotations.XAntiClockwise, solution, configuration).ConfigureAwait(false);
+
                         break;
                     }
 
-                    await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration);
+                    await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration).ConfigureAwait(false);
+
                 }
             }
         }

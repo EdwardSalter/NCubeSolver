@@ -19,7 +19,8 @@ namespace NCubeSolver.Plugins.Solvers
             {
                 prevSolutionSize = solution.Count();
 
-                await action.Invoke();
+                await action.Invoke().ConfigureAwait(false);
+
 
                 count++;
             } while (prevSolutionSize != solution.Count() && count < maxTries);
