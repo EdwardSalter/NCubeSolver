@@ -30,12 +30,14 @@ namespace NCubeSolver.Plugins.Display.OpenGL
                         Dispatcher.CurrentDispatcher));
 
                 m_window = new MainWindow();
-                m_window.DisplayControl.Ready += (sender, args) => m_completionSource.SetResult(true);
 
                 // When the window closes, shut down the dispatcher
                 m_window.Closed += OnWindowClosed;
 
                 m_window.Show();
+                m_window.Activate();
+
+                m_window.DisplayControl.Ready += (sender, args) => m_completionSource.SetResult(true);
                 // Start the Dispatcher Processing
                 Dispatcher.Run();
             });
@@ -67,6 +69,11 @@ namespace NCubeSolver.Plugins.Display.OpenGL
         public void SetCancellation(CancellationTokenSource cancellationToken)
         {
             m_window.DisplayControl.SetCancellation(cancellationToken);
+        }
+
+        public void WriteText(string text)
+        {
+            m_window.DisplayControl.WriteText(text);
         }
 
         public Task Rotate(FaceRotation faceRotation)
