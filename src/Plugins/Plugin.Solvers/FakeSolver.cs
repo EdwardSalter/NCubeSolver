@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using NCubeSolver.Plugins.Solvers.Size3;
 using NCubeSolvers.Core;
@@ -20,9 +18,9 @@ namespace NCubeSolver.Plugins.Solvers
             get { return new[] { 2, 3 }; }
         }
 
-        public override async Task<IEnumerable<IRotation>> SolveAsync(CubeConfiguration<FaceColour> configuration, CancellationToken cancel)
+        public override Task<IEnumerable<IRotation>> Solve(CubeConfiguration<FaceColour> configuration)
         {
-            await base.SolveAsync(configuration, cancel).ConfigureAwait(false);
+            base.Solve(configuration).Wait();
             var solution = new List<IRotation>();
 
             for (int i = 0; i < 40; i++)
@@ -39,7 +37,7 @@ namespace NCubeSolver.Plugins.Solvers
                 }
             }
 
-            return solution;
+            return Task.FromResult<IEnumerable<IRotation>>(solution);
         }
 
         private FaceRotation GenerateRandomRotation()

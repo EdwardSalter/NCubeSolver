@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 using NCubeSolvers.Core;
 using NUnit.Framework;
 
@@ -31,7 +30,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests
             var solver = new TestableSolver();
             var config = CreateConfigOfSize(ValidSize);
 
-            Assert.DoesNotThrow(() => solver.SolveAsync(config, CancellationToken.None));
+            Assert.DoesNotThrow(() => solver.Solve(config));
         }
 
         [Test]
@@ -40,7 +39,7 @@ namespace NCubeSolver.Plugins.Solvers.UnitTests
             var solver = new TestableSolver();
             var config = CreateConfigOfSize(3);
 
-            Assert.Throws<Exception>(() => solver.SolveAsync(config, CancellationToken.None));
+            Assert.Throws<Exception>(() => solver.Solve(config));
         }
 
         private static CubeConfiguration<FaceColour> CreateConfigOfSize(int size)

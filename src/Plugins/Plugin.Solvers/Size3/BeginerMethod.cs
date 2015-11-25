@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using NCubeSolvers.Core;
 
@@ -21,9 +20,9 @@ namespace NCubeSolver.Plugins.Solvers.Size3
         }
 
         // TODO: MAYBE RETURN THINGS IN SECTIONS?
-        public override async Task<IEnumerable<IRotation>> SolveAsync(CubeConfiguration<FaceColour> configuration, CancellationToken cancel)
+        public override async Task<IEnumerable<IRotation>> Solve(CubeConfiguration<FaceColour> configuration)
         {
-            await base.SolveAsync(configuration, CancellationToken.None).ConfigureAwait(false);
+            await base.Solve(configuration).ConfigureAwait(false);
 
             m_configuration = configuration;
 

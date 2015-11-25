@@ -47,7 +47,7 @@ namespace NCubeSolvers.Core
             Console.WriteLine("Solving");
             try
             {
-                var solution = (await m_solver.SolveAsync(m_configuration, m_cancellationToken.Token).ConfigureAwait(true)).ToList();
+                var solution = (await m_solver.Solve(m_configuration).ConfigureAwait(true)).ToList();
 
                 Console.WriteLine("Solution ({0} steps): {1}", solution.Count, string.Join(" ", solution));
 

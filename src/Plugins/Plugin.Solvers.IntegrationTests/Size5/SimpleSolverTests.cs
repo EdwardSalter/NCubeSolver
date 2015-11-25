@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using NCubeSolver.Core.UnitTestHelpers;
 using NCubeSolver.Plugins.Solvers.Size5;
@@ -76,7 +75,7 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size5
                 CommonActions.ApplyRotations(rotations, initialConfiguration);
                 var solver = new SimpleSolver();
 
-                var solution = await solver.SolveAsync(initialConfiguration, CancellationToken.None).ConfigureAwait(true);
+                var solution = await solver.Solve(initialConfiguration).ConfigureAwait(true);
 
                 var configurationToTest = CubeConfiguration<FaceColour>.CreateStandardCubeConfiguration(5);
                 CommonActions.ApplyRotations(rotations, initialConfiguration);
