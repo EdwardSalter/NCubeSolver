@@ -1,4 +1,5 @@
-﻿using NCubeSolvers.Core.Extensions;
+﻿using System.Resources;
+using NCubeSolvers.Core.Extensions;
 using OpenTK;
 
 namespace NCubeSolver.Plugins.Display.OpenGL
@@ -51,6 +52,13 @@ namespace NCubeSolver.Plugins.Display.OpenGL
         public void ZoomIn(float delta)
         {
             Zoom -= delta * ZoomSpeed;
+        }
+
+        public void SetZoomForConfigurationSize(int size)
+        {
+            // Reset the zoom level to default and then adjust by 2x the difference in cube size from a size 3
+            Zoom = 8;
+            ZoomIn((size - 3) * -120);
         }
     }
 }

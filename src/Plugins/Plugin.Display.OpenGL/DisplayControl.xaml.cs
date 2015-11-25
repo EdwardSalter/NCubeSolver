@@ -201,6 +201,8 @@ namespace NCubeSolver.Plugins.Display.OpenGL
 
         public Task SetCubeConfiguration(CubeConfiguration<FaceColour> configuration)
         {
+            m_camera.SetZoomForConfigurationSize(configuration.Size);
+            UpdateViewMatrix();
             return Scene.SetCubeConfiguration(configuration);
         }
 

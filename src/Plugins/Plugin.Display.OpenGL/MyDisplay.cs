@@ -19,11 +19,6 @@ namespace NCubeSolver.Plugins.Display.OpenGL
         private readonly TaskCompletionSource<bool> m_completionSource = new TaskCompletionSource<bool>();
         private MainWindow m_window;
 
-        private Scene Scene
-        {
-            get { return m_window.DisplayControl.Scene; }
-        }
-
         public async Task Initialise()
         {
             // Create a thread
@@ -66,17 +61,17 @@ namespace NCubeSolver.Plugins.Display.OpenGL
 
         public Task SetCubeConfiguration(CubeConfiguration<FaceColour> configuration)
         {
-            return Scene.SetCubeConfiguration(configuration);
+            return m_window.DisplayControl.SetCubeConfiguration(configuration);
         }
 
         public Task Rotate(FaceRotation faceRotation)
         {
-            return Scene.Rotate(faceRotation);
+            return m_window.DisplayControl.Rotate(faceRotation);
         }
 
         public Task RotateCube(CubeRotation rotation)
         {
-            return Scene.RotateCube(rotation);
+            return m_window.DisplayControl.RotateCube(rotation);
         }
     }
 }
