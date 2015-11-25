@@ -45,5 +45,17 @@ namespace NCubeSolver.Screensaver.Properties {
                 this["CubeSize"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowText {
+            get {
+                return ((bool)(this["ShowText"]));
+            }
+            set {
+                this["ShowText"] = value;
+            }
+        }
     }
 }

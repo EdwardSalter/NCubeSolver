@@ -29,6 +29,7 @@ namespace NCubeSolver.Screensaver
             DisplayControl.Scene.ShowAxes = false;
             DisplayControl.Scene.AnimationLength = Settings.Default.AnimationLength;
             DisplayControl.ShowFPS = false;
+            DisplayControl.ShowConsoleText = Settings.Default.ShowText;
         }
 
         private void MainWindow_OnMouseMove(object sender, MouseEventArgs e)

@@ -8,5 +8,8 @@
     <Setting Name="CubeSize" Type="System.Nullable&lt;System.Int32&gt;" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="ShowText" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

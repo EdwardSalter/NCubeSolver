@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows;
 using NCubeSolver.Plugins.Display.OpenGL;
 using NCubeSolver.Screensaver.Properties;
@@ -63,6 +65,12 @@ namespace NCubeSolver.Screensaver
             }
         }
 
-        
+        private void ToggleButton_OnChange(object sender, RoutedEventArgs e)
+        {
+            if (m_display != null)
+            {
+                m_display.ShowConsoleText = Settings.ShowText;
+            }
+        }
     }
 }

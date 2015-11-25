@@ -126,6 +126,7 @@ namespace NCubeSolver.Plugins.Display.OpenGL
             }
         }
 
+        // TODO: HANDLE UNICODE / REPLACE CHARS
         private void RenderText(SharpGL.OpenGL gl)
         {
             var numFit = ((int)ActualHeight - 30) / 15;
