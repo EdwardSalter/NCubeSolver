@@ -129,9 +129,11 @@ namespace NCubeSolver.Plugins.Display.OpenGL
         // TODO: HANDLE UNICODE / REPLACE CHARS
         private void RenderText(SharpGL.OpenGL gl)
         {
-            var numFit = ((int)ActualHeight - 30) / 15;
-
             int y = (int)ActualHeight - 15;
+            int padding = ShowFPS ? 15 : 0;
+            var numFit = (y - padding) / 15;
+
+            
             var textToDisplay = m_displayText.Reverse().Take(numFit).Reverse();
             foreach (var text in textToDisplay)
             {
