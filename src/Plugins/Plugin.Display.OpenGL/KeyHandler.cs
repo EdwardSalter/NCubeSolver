@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Threading;
+using System.Windows;
 using System.Windows.Input;
 
 namespace NCubeSolver.Plugins.Display.OpenGL
@@ -34,6 +35,10 @@ namespace NCubeSolver.Plugins.Display.OpenGL
 
                 case Key.K:
                     m_scene.SlowDownAnimation();
+                    break;
+
+                case Key.R:
+                    m_scene.CancellationTokenSource.Cancel();
                     break;
 
                 case Key.Enter:

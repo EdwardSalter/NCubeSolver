@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using NCubeSolver.Plugins.Display.OpenGL.Animation;
 using NCubeSolver.Plugins.Display.OpenGL.Models;
 using NCubeSolvers.Core;
@@ -23,6 +24,7 @@ namespace NCubeSolver.Plugins.Display.OpenGL
         }
 
         public bool ShowAxes { get; set; }
+        public CancellationTokenSource CancellationTokenSource { get; set; }
 
         public Scene()
         {
@@ -39,6 +41,12 @@ namespace NCubeSolver.Plugins.Display.OpenGL
 
         public void Render(SharpGL.OpenGL gl, ShaderWrapper shader)
         {
+             if (CancellationTokenSource != null && CancellationTokenSource.IsCancellationRequested)
+            {
+                m_cubeAnimator.AnimationFinished();
+                return;
+            }
+
             if (ShowAxes)
                 m_axes.Render(gl, shader);
 

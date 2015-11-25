@@ -16,7 +16,7 @@ namespace NCubeSolvers.Core
         private CubeConfiguration<FaceColour> m_configuration;
         private int m_currentStep;
         private readonly int m_cubeSize;
-        private CancellationToken m_cancellationToken;
+        private CancellationTokenSource m_cancellationToken;
 
         public SolveRun(ICubeConfigurationGenerator generator, ISolver solver, IDisplay display, ICelebrator celebrator, int cubeSize)
         {
@@ -32,27 +32,35 @@ namespace NCubeSolvers.Core
             // TODO: USE NLOG
             Console.WriteLine("Creating cube configuration");
 
-            m_cancellationToken = new CancellationToken(false);
+            m_cancellationToken = new CancellationTokenSource();
 
             var numRotations = (int)(Math.Pow(m_cubeSize, 3) * 2);
             m_configuration = m_generator.GenerateConfiguration(m_cubeSize, numRotations);
             if (m_display != null)
+            {
                 await m_display.SetCubeConfiguration(m_configuration).ConfigureAwait(true);
+                m_display.SetCancellation(m_cancellationToken);
+            }
 
 
             // TODO: PAUSES?
             Console.WriteLine("Solving");
             try
             {
-                var solution = (await m_solver.SolveAsync(m_configuration, m_cancellationToken).ConfigureAwait(true)).ToList();
+                var solution = (await m_solver.SolveAsync(m_configuration, m_cancellationToken.Token).ConfigureAwait(true)).ToList();
 
                 Console.WriteLine("Solution ({0} steps): {1}", solution.Count, string.Join(" ", solution));
 
                 m_currentStep = 0;
                 foreach (var step in solution)
                 {
+                    if (m_cancellationToken.IsCancellationRequested)
+                    {
+                        Console.WriteLine("Cancellation Requested");
+                        return;
+                    }
                     await RunStep(step, solution.Count).ConfigureAwait(true);
-
+                    
                 }
 
                 await m_celebrator.Celebrate().ConfigureAwait(true);

@@ -64,6 +64,11 @@ namespace NCubeSolver.Plugins.Display.OpenGL
             return m_window.DisplayControl.SetCubeConfiguration(configuration);
         }
 
+        public void SetCancellation(CancellationTokenSource cancellationToken)
+        {
+            m_window.DisplayControl.SetCancellation(cancellationToken);
+        }
+
         public Task Rotate(FaceRotation faceRotation)
         {
             return m_window.DisplayControl.Rotate(faceRotation);
