@@ -58,7 +58,7 @@ namespace NCubeSolver.Plugins.Display.OpenGL
         {
             // Reset the zoom level to default and then adjust by 2x the difference in cube size from a size 3
             Zoom = 8;
-            ZoomIn(size - 3);
+            ZoomIn((size - 3) * -120);
         }
     }
 }
