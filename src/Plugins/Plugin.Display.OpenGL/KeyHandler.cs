@@ -6,14 +6,15 @@ namespace NCubeSolver.Plugins.Display.OpenGL
 {
     class KeyHandler
     {
-        private readonly Scene m_scene;
+
         private readonly Window m_owner;
         private bool m_fullscreen;
+        private readonly DisplayControl m_display;
 
-        public KeyHandler(Window owner, Scene scene)
+        public KeyHandler(Window owner, DisplayControl display)
         {
+            m_display = display;
             m_owner = owner;
-            m_scene = scene;
         }
 
         public void OnKeyDown(object sender, KeyEventArgs e)
@@ -22,23 +23,27 @@ namespace NCubeSolver.Plugins.Display.OpenGL
             switch (key)
             {
                 case Key.Space:
-                    m_scene.ToggleAnimation();
+                    m_display.Scene.ToggleAnimation();
                     break;
 
                 case Key.H:
-                    m_scene.ToggleAnimationHighlights();
+                    m_display.Scene.ToggleAnimationHighlights();
                     break;
 
                 case Key.L:
-                    m_scene.SpeedUpAnimation();
+                    m_display.Scene.SpeedUpAnimation();
                     break;
 
                 case Key.K:
-                    m_scene.SlowDownAnimation();
+                    m_display.Scene.SlowDownAnimation();
                     break;
 
                 case Key.R:
-                    m_scene.CancellationTokenSource.Cancel();
+                    m_display.Scene.CancellationTokenSource.Cancel();
+                    break;
+
+                case Key.T:
+                    m_display.ToggleConsoleText();
                     break;
 
                 case Key.Enter:

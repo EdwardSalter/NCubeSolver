@@ -9,7 +9,7 @@
         {
             InitializeComponent();
 
-            var keyHandler = new KeyHandler(this, DisplayControl.Scene);
+            var keyHandler = new KeyHandler(this, DisplayControl);
             KeyDown += keyHandler.OnKeyDown;
         }
     }

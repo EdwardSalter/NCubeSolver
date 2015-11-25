@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -52,11 +54,13 @@ namespace NCubeSolver.Plugins.Display.OpenGL
         public readonly Scene Scene = new Scene();
         private readonly Camera m_camera = new Camera();
         private bool m_firstRun = true;
+        private readonly Queue<string> m_displayText = new Queue<string>(DisplayTextCapacity);
 
         // TODO: MOVE THESE
         //  Constants that specify the attribute indexes.
         const uint AttributeIndexPosition = 0;
         const uint AttributeIndexColour = 1;
+        private const int DisplayTextCapacity = 100;
 
         public bool IsInDesignMode
         {
@@ -69,6 +73,25 @@ namespace NCubeSolver.Plugins.Display.OpenGL
             set { GlControl.DrawFPS = value; }
         }
 
+        /// <summary>
+        /// The DrawFPS property.
+        /// </summary>
+        private static readonly DependencyProperty ShowConsoleTextProperty =
+          DependencyProperty.Register("ShowConsoleText", typeof(bool), typeof(DisplayControl),
+          new PropertyMetadata(false, null));
+
+        /// <summary>
+        /// Gets or sets a value indicating whether to draw FPS.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if draw FPS; otherwise, <c>false</c>.
+        /// </value>
+        public bool ShowConsoleText
+        {
+            get { return (bool)GetValue(ShowConsoleTextProperty); }
+            set { SetValue(ShowConsoleTextProperty, value); }
+        }
+
         private void OpenGLControl_OpenGLDraw(object sender, OpenGLEventArgs args)
         {
             SharpGL.OpenGL gl = args.OpenGL;
@@ -76,6 +99,11 @@ namespace NCubeSolver.Plugins.Display.OpenGL
             // Clear The Screen And The Depth Buffer
             gl.Clear(SharpGL.OpenGL.GL_COLOR_BUFFER_BIT | SharpGL.OpenGL.GL_DEPTH_BUFFER_BIT);
 
+            if (ShowConsoleText)
+            {
+                RenderText(gl);
+            }
+                
             //  Bind the shader, set the matrices.
             m_shader.Bind();
             m_shader.SetProjectionMatrix(m_projectionMatrix);
@@ -95,6 +123,19 @@ namespace NCubeSolver.Plugins.Display.OpenGL
                 {
                     Ready.Invoke(this, EventArgs.Empty);
                 }
+            }
+        }
+
+        private void RenderText(SharpGL.OpenGL gl)
+        {
+            var numFit = ((int)ActualHeight - 30) / 15;
+
+            int y = (int)ActualHeight - 15;
+            var textToDisplay = m_displayText.Reverse().Take(numFit).Reverse();
+            foreach (var text in textToDisplay)
+            {
+                gl.DrawText(5, y, 1.0f, 1.0f, 1.0f, "Consolas", 12.0f, text);
+                y -= 15;
             }
         }
 
@@ -179,9 +220,10 @@ namespace NCubeSolver.Plugins.Display.OpenGL
             CreateProjectionMatrix((float)GlControl.ActualWidth, (float)GlControl.ActualHeight);
         }
 
-        
-
-
+        public void ToggleConsoleText()
+        {
+            ShowConsoleText = !ShowConsoleText;
+        }
 
         #region IDisplay
         public Task Rotate(FaceRotation rotation)
@@ -210,6 +252,15 @@ namespace NCubeSolver.Plugins.Display.OpenGL
         public void SetCancellation(CancellationTokenSource cancellationToken)
         {
             Scene.CancellationTokenSource = cancellationToken;
+        }
+
+        public void WriteText(string text)
+        {
+            if (m_displayText.Count >= DisplayTextCapacity)
+            {
+                m_displayText.Dequeue();
+            }
+            m_displayText.Enqueue(text);
         }
 
         public string PluginName

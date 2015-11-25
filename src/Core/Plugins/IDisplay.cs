@@ -12,5 +12,6 @@ namespace NCubeSolvers.Core.Plugins
         Task Initialise();
         Task SetCubeConfiguration(CubeConfiguration<FaceColour> configuration);
         void SetCancellation(CancellationTokenSource cancellationToken);
+        void WriteText(string text);
     }
 }

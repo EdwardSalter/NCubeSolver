@@ -30,7 +30,7 @@ namespace NCubeSolvers.Core
         public async Task Run()
         {
             // TODO: USE NLOG
-            Console.WriteLine("Creating cube configuration");
+            WriteLine("Creating new cube configuration");
 
             m_cancellationToken = new CancellationTokenSource();
 
@@ -44,7 +44,7 @@ namespace NCubeSolvers.Core
 
 
             // TODO: PAUSES?
-            Console.WriteLine("Solving");
+            //WriteLine("Solving");
             try
             {
                 var solution = (await m_solver.Solve(m_configuration).ConfigureAwait(true)).ToList();
@@ -56,7 +56,7 @@ namespace NCubeSolvers.Core
                 {
                     if (m_cancellationToken.IsCancellationRequested)
                     {
-                        Console.WriteLine("Cancellation Requested");
+                        WriteLine("Cancellation Requested");
                         return;
                     }
                     await RunStep(step, solution.Count).ConfigureAwait(true);
@@ -68,13 +68,23 @@ namespace NCubeSolvers.Core
             }
             catch (SolveFailureException)
             {
-                Console.WriteLine("Failed to find a solution.");
+                WriteLine("Failed to find a solution.");
+            }
+        }
+
+        private void WriteLine(string text, params object[] args)
+        {
+            var fullText = string.Format(text, args);
+            Console.WriteLine(fullText);
+            if (m_display != null)
+            {
+                m_display.WriteText(fullText);
             }
         }
 
         private async Task RunStep(IRotation rotation, int solutionCount)
         {
-            Console.WriteLine("Executing step {0}/{1}: {2}", ++m_currentStep, solutionCount, rotation);
+            WriteLine("Executing step {0}/{1}: {2}", ++m_currentStep, solutionCount, rotation);
 
             var cubeRotation = rotation as CubeRotation;
             var faceRotation = rotation as FaceRotation;
@@ -95,7 +105,6 @@ namespace NCubeSolvers.Core
             }
 
             await Task.WhenAll(tasks).ConfigureAwait(true);
-
         }
     }
 }
