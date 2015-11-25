@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using NCubeSolvers.Core;
 
@@ -14,9 +15,9 @@ namespace NCubeSolver.Plugins.Solvers.Size5
         }
 
         // TODO: MAYBE RETURN THINGS IN SECTIONS?
-        public override async Task<IEnumerable<IRotation>> Solve(CubeConfiguration<FaceColour> configuration)
+        public override async Task<IEnumerable<IRotation>> SolveAsync(CubeConfiguration<FaceColour> configuration, CancellationToken cancel)
         {
-            await base.Solve(configuration).ConfigureAwait(false);
+            await base.SolveAsync(configuration, cancel).ConfigureAwait(false);
 
             m_configuration = configuration;
 
@@ -52,7 +53,7 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             {
                 SkipChecks = true
             };
-            var stepsToSolveReduced3X3X3 = await threeByThreeByThreeSolver.Solve(configuration).ConfigureAwait(false);
+            var stepsToSolveReduced3X3X3 = await threeByThreeByThreeSolver.SolveAsync(configuration, cancel).ConfigureAwait(false);
 
             solution.AddRange(stepsToSolveReduced3X3X3);
 

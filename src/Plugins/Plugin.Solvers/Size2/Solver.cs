@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using NCubeSolvers.Core;
 
@@ -16,7 +17,7 @@ namespace NCubeSolver.Plugins.Solvers.Size2
             get { return new[] { 2 }; }
         }
 
-        public override async Task<IEnumerable<IRotation>> Solve(CubeConfiguration<FaceColour> configuration)
+        public override async Task<IEnumerable<IRotation>> SolveAsync(CubeConfiguration<FaceColour> configuration, CancellationToken cancel)
         {
             return null;
         }

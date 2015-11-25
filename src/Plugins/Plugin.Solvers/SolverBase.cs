@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using NCubeSolvers.Core;
 using NCubeSolvers.Core.Plugins;
@@ -19,7 +20,7 @@ namespace NCubeSolver.Plugins.Solvers
 
         public bool SkipChecks { get; set; }
 
-        public virtual Task<IEnumerable<IRotation>> Solve(CubeConfiguration<FaceColour> configuration)
+        public virtual Task<IEnumerable<IRotation>> SolveAsync(CubeConfiguration<FaceColour> configuration, CancellationToken cancel)
         {
             if (!SkipChecks)
             {
