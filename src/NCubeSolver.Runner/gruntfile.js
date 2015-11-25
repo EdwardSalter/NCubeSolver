@@ -25,7 +25,8 @@ module.exports = function (grunt) {
                 tasks: ['newer:copy:plugins'],
                 options: {
                     spawn: false,
-					interrupt: true
+					interrupt: true,
+					atBegin: true
                 }
             }
         }

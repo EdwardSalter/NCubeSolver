@@ -9,13 +9,13 @@
       <Value Profile="(Default)">Random</Value>
     </Setting>
     <Setting Name="SolverPluginName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Simple 5x5x5 Solver</Value>
+      <Value Profile="(Default)">Simple 7x7x7 Solver</Value>
     </Setting>
     <Setting Name="CelebratorPluginName" Type="System.String" Scope="User">
       <Value Profile="(Default)">TimeDelayCelebrator</Value>
     </Setting>
     <Setting Name="CubeSize" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">5</Value>
+      <Value Profile="(Default)">7</Value>
     </Setting>
   </Settings>
 </SettingsFile>
