@@ -29,7 +29,7 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0" Grid.Column="0"  TextWrapping="Wrap" VerticalAlignment="Center" Text="Cube Size: " />
-            <ComboBox Grid.Row="0" Grid.Column="1" Margin="10,0,0,0" HorizontalAlignment="Stretch" ItemsSource="{Binding SupportedCubeSizes}" DisplayMemberPath="Name" SelectedValuePath="CubeSize" SelectedValue="{Binding Settings.CubeSize}" />
+            <ComboBox Grid.Row="0" Grid.Column="1" Margin="10,0,0,0" HorizontalAlignment="Stretch" ItemsSource="{Binding SupportedCubeSizes}" DisplayMemberPath="Name" SelectedValuePath="CubeSize" SelectedValue="{Binding Settings.CubeSize}" SelectionChanged="ComboBox_SelectionChanged" />
 
             <TextBlock Grid.Row="2" HorizontalAlignment="Left" Grid.Column="0" TextWrapping="Wrap" Text="Speed: " VerticalAlignment="Center"/>
             <DockPanel Grid.Row="2" Margin="10,0,0,0" LastChildFill="True" Grid.Column="1" HorizontalAlignment="Stretch">

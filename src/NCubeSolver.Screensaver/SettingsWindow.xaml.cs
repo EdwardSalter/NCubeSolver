@@ -72,5 +72,10 @@ namespace NCubeSolver.Screensaver
                 m_display.ShowConsoleText = Settings.ShowText;
             }
         }
+
+        private void ComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            m_display.Scene.CancellationTokenSource.Cancel();
+        }
     }
 }
