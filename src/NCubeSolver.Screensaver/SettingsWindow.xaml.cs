@@ -75,7 +75,10 @@ namespace NCubeSolver.Screensaver
 
         private void ComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            m_display.Scene.CancellationTokenSource.Cancel();
+            if (m_display != null)
+            {
+                m_display.Scene.CancellationTokenSource.Cancel();
+            }
         }
     }
 }
