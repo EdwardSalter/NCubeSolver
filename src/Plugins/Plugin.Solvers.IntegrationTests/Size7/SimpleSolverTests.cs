@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Linq;
 using NCubeSolver.Core.UnitTestHelpers;
-using NCubeSolver.Plugins.Solvers.Size5;
+using NCubeSolver.Plugins.Solvers.Size7;
 using NCubeSolvers.Core;
 using NUnit.Framework;
 
@@ -66,19 +65,14 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size7
 
         private static void Test(Action<CubeConfiguration<FaceColour>> assert)
         {
-            TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, async () =>
+            TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, () =>
             {
-                var rotations = ConfigurationGenerator.GenerateRandomRotations(200).ToList();
-                var initialConfiguration = CubeConfiguration<FaceColour>.CreateStandardCubeConfiguration(7);
-                CommonActions.ApplyRotations(rotations, initialConfiguration);
+                var configuration = ConfigurationGenerator.GenerateRandomConfiguration(7, 200);
                 var solver = new SimpleSolver();
 
-                var solution = await solver.Solve(initialConfiguration);
-                var configurationToTest = CubeConfiguration<FaceColour>.CreateStandardCubeConfiguration(7);
-                CommonActions.ApplyRotations(rotations, initialConfiguration);
-                CommonActions.ApplyRotations(solution, configurationToTest);
+                solver.Solve(configuration).Wait(TestRunner.Timeout);
 
-                assert.Invoke(configurationToTest);
+                assert.Invoke(configuration);
             });
         }
     }

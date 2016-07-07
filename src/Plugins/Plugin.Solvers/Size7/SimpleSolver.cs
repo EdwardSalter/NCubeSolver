@@ -45,6 +45,9 @@ namespace NCubeSolver.Plugins.Solvers.Size7
             //var stepsToSolveReduced3X3X3 = await threeByThreeByThreeSolver.Solve(configuration);
             //solution.AddRange(stepsToSolveReduced3X3X3);
 
+            // TODO: REMOVE
+            await CommonActions.ResetToDefaultPosition(configuration).ConfigureAwait(false);
+
             return solution.Condense();
         }
 

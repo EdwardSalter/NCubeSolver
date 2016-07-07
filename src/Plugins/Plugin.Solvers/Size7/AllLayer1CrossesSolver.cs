@@ -29,8 +29,6 @@ namespace NCubeSolver.Plugins.Solvers.Size7
                 }
             }
 
-
-
             return solution;
         }
     }
