@@ -1,4 +1,4 @@
-﻿using NCubeSolver.Core;
+﻿using System.Threading.Tasks;
 using NCubeSolver.Core.UnitTestHelpers;
 using NCubeSolver.Plugins.Solvers.Size3;
 using NCubeSolvers.Core;
@@ -11,17 +11,17 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size3
     public class BottomCrossSolverTests
     {
         [Test]
-        public void Solve_GivenARandomConfiguration_ProducesASolvedCross()
+        public async Task Solve_GivenARandomConfiguration_ProducesASolvedCross()
         {
-            TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, Solve);
+            await TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, Solve).ConfigureAwait(false);
         }
 
-        private static void Solve()
+        private static async Task Solve()
         {
             var configuration = ConfigurationGenerator.GenerateRandomConfiguration(3, 50);
             var solver = new BottomCrossSolver();
 
-            solver.Solve(configuration).Wait(TestRunner.Timeout);
+            await solver.Solve(configuration).ConfigureAwait(false);
 
             CubeConfigurationAssert.FaceCentreColourMatchesCentresOfLayerNumber(configuration, FaceType.Down, FaceColour.White);
         }

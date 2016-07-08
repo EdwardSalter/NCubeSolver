@@ -1,4 +1,5 @@
-﻿using NCubeSolver.Plugins.Solvers.Size5;
+﻿using System.Threading.Tasks;
+using NCubeSolver.Plugins.Solvers.Size5;
 using NCubeSolvers.Core;
 using NUnit.Framework;
 
@@ -9,17 +10,17 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size5
     public class SingleTredgeSolverTests
     {
         [Test]
-        public void Solve_GivenARandomConfiguration_ProducesASolvedTredge()
+        public async Task Solve_GivenARandomConfiguration_ProducesASolvedTredge()
         {
-            TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, Solve);
+            await TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, Solve).ConfigureAwait(false);
         }
 
-        private static void Solve()
+        private static async Task Solve()
         {
             var configuration = ConfigurationGenerator.GenerateRandomConfiguration(5, 100);
             var solver = new SingleTredgeSolver();
 
-            solver.Solve(configuration).Wait(TestRunner.Timeout);
+            await solver.Solve(configuration).ConfigureAwait(false);
 
             try
             {

@@ -16,25 +16,25 @@ namespace NCubeSolver.Plugins.Solvers.Size7
         // TODO: MAYBE RETURN THINGS IN SECTIONS?
         public override async Task<IEnumerable<IRotation>> Solve(CubeConfiguration<FaceColour> configuration)
         {
-            await base.Solve(configuration);
+            await base.Solve(configuration).ConfigureAwait(false);
             m_configuration = configuration;
 
             var solution = new List<IRotation>();
 
-            var cubeRotation = await CommonActions.PositionOnBottom(m_configuration, FaceColour.White);
+            var cubeRotation = await CommonActions.PositionOnBottom(m_configuration, FaceColour.White).ConfigureAwait(false);
             if (cubeRotation != null)
                 solution.Add(cubeRotation);
 
             var innerCrossesSolver = new Size5.AllInnerCrossesSolver();
-            var stepsToSolveCrosses = await innerCrossesSolver.Solve(m_configuration);
+            var stepsToSolveCrosses = await innerCrossesSolver.Solve(m_configuration).ConfigureAwait(false);
             solution.AddRange(stepsToSolveCrosses);
 
             var innerSquareSolver = new Size5.InnerSquareSolver();
-            var stepsToSolveSquares = await innerSquareSolver.Solve(m_configuration);
+            var stepsToSolveSquares = await innerSquareSolver.Solve(m_configuration).ConfigureAwait(false);
             solution.AddRange(stepsToSolveSquares);
 
             var layer1CenterSolver = new AllLayer1CrossesSolver();
-            var stepsToSolveLayer1Centers = await layer1CenterSolver.Solve(m_configuration);
+            var stepsToSolveLayer1Centers = await layer1CenterSolver.Solve(m_configuration).ConfigureAwait(false);
             solution.AddRange(stepsToSolveLayer1Centers);
 
             //// TODO: INJECT A 3x3x3 solver in here so different ones can be used

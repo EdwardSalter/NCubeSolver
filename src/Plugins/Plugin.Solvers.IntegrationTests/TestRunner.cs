@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace NCubeSolver.Plugins.Solvers.IntegrationTests
@@ -22,21 +25,23 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests
             }
         }
 
-        public static void RunTestMultipleTimes(int timesToRun, Action test)
+        public static async Task RunTestMultipleTimes(int timesToRun, Func<Task> test)
         {
-            int timesFailed = 0;
+            var tasks = new List<Task>();
             for (int i = 0; i < timesToRun; i++)
             {
-                try
-                {
-                    test();
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex);
-                    timesFailed ++;
-                }
+                tasks.Add(test());
             }
+
+            try
+            {
+                await Task.WhenAll(tasks).ConfigureAwait(false);
+            }
+            catch
+            {
+            }
+
+            var timesFailed = tasks.Count(t => t.IsFaulted);
 
             var percent = ((double)timesToRun - timesFailed) / timesToRun;
 

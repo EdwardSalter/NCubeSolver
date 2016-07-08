@@ -107,7 +107,6 @@ namespace NCubeSolvers.Core
                     LayerNumberFromFace = layerNumber,
                     Face = face
                 };
-                AllRotations.Add(rotation);
             }
 
             return rotation;
@@ -125,7 +124,6 @@ namespace NCubeSolvers.Core
                     LayerNumberFromFace = layerNumber,
                     Face = face
                 };
-                AllRotations.Add(rotation);
             }
 
             return rotation;

@@ -1,4 +1,4 @@
-﻿using NCubeSolver.Core;
+﻿using System.Threading.Tasks;
 using NCubeSolver.Core.UnitTestHelpers;
 using NCubeSolver.Plugins.Solvers.Size3;
 using NCubeSolvers.Core;
@@ -10,17 +10,17 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size3
     public class TopLayerSolverTests
     {
         [Test]
-        public void Solve_GivenARandomConfiguration_ProducesSolvedCube()
+        public async Task Solve_GivenARandomConfiguration_ProducesSolvedCube()
         {
-            TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, () =>
+            await TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, async () =>
             {
                 var configuration = CreateSolvedTopFaceConfiguration(50);
                 var solver = new TopLayerSolver();
 
-                solver.Solve(configuration).Wait(TestRunner.Timeout);
+                await solver.Solve(configuration).ConfigureAwait(false);
 
                 CubeConfigurationAssert.CubeIsCorrect(configuration);
-            });
+            }).ConfigureAwait(false);
         }
 
         private static CubeConfiguration<FaceColour> CreateSolvedTopFaceConfiguration(int numberOfRotations)

@@ -1,4 +1,4 @@
-﻿using NCubeSolver.Core;
+﻿using System.Threading.Tasks;
 using NCubeSolver.Core.UnitTestHelpers;
 using NCubeSolver.Plugins.Solvers.Size3;
 using NCubeSolvers.Core;
@@ -10,18 +10,18 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size3
     public class TopFaceSolverTests
     {
         [Test]
-        public void Solve_GivenARandomConfiguration_ProducesACorrectlySolvedTopFace()
+        public async Task Solve_GivenARandomConfiguration_ProducesACorrectlySolvedTopFace()
         {
-            TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, () =>
+            await TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, async () =>
             {
                 var configuration = CreateSolvedTopCrossConfiguration(50);
                 var solver = new TopFaceSolver();
 
-                solver.Solve(configuration).Wait(TestRunner.Timeout);
+                await solver.Solve(configuration).ConfigureAwait(false);
 
                 CubeConfigurationAssert.FaceIsColour(configuration, FaceType.Upper, FaceColour.Yellow);
                 CubeConfigurationAssert.TopLayerCrossIsCorrect(configuration);
-            });
+            }).ConfigureAwait(false);
         }
 
         private static CubeConfiguration<FaceColour> CreateSolvedTopCrossConfiguration(int numberOfRotations)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using NCubeSolver.Plugins.Solvers.Size5;
 using NCubeSolvers.Core;
 using NUnit.Framework;
@@ -10,30 +11,30 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size5
     public class MiddleLayerTredgeSolverTests
     {
         [Test]
-        public void Solve_GivenARandomConfiguration_ProducesSolvedTredge()
+        public async Task Solve_GivenARandomConfiguration_ProducesSolvedTredge()
         {
-            TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, () => Solve(AssertOneTredgeIsComplete));
+            await TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, () => Solve(AssertOneTredgeIsComplete)).ConfigureAwait(false);
         }
 
         [Test]
-        public void Solve_GivenARandomConfiguration_ProducesTwoSolvedTredges()
+        public async Task Solve_GivenARandomConfiguration_ProducesTwoSolvedTredges()
         {
-            TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, () => Solve(AssertTwoTredgesAreComplete));
+            await TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, () => Solve(AssertTwoTredgesAreComplete)).ConfigureAwait(false);
         }
 
         [Test]
-        public void Solve_GivenARandomConfiguration_ProducesThreeSolvedTredges()
+        public async Task Solve_GivenARandomConfiguration_ProducesThreeSolvedTredges()
         {
-            TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, () => Solve(AssertThreeTredgesAreComplete));
+            await TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, () => Solve(AssertThreeTredgesAreComplete)).ConfigureAwait(false);
         }
 
         [Test]
-        public void Solve_GivenARandomConfiguration_ProducesFourSolvedTredges()
+        public async Task Solve_GivenARandomConfiguration_ProducesFourSolvedTredges()
         {
-            TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, () => Solve(AssertAllTredgesAreComplete));
+            await TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, () => Solve(AssertAllTredgesAreComplete)).ConfigureAwait(false);
         }
 
-        private static void Solve(Action<CubeConfiguration<FaceColour>> assertFunc)
+        private static async Task Solve(Action<CubeConfiguration<FaceColour>> assertFunc)
         {
             var configuration = ConfigurationGenerator.GenerateRandomConfiguration(5, 100);
             new AllInnerCrossesSolver().Solve(configuration).Wait(TestRunner.Timeout);
@@ -41,7 +42,7 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size5
             new UpperAndDownFaceTredgesSolver().Solve(configuration).Wait(TestRunner.Timeout);
             var solver = new MiddleLayerTredgeSolver();
 
-            solver.Solve(configuration).Wait(TestRunner.Timeout);
+            await solver.Solve(configuration).ConfigureAwait(false);
 
             assertFunc(configuration);
         }

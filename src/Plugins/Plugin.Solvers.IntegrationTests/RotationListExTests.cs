@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using NCubeSolver.Core;
+using System.Threading.Tasks;
 using NCubeSolvers.Core;
 using NUnit.Framework;
 
@@ -14,9 +13,9 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests
         private static readonly Random Random = RandomFactory.CreateRandom();
 
         [Test]
-        public void Condense_CalledOnAListRandomListOfRotations_ConfigurationsAppliedWithAndWithoutCondensedListAreTheSame()
+        public async Task Condense_CalledOnAListRandomListOfRotations_ConfigurationsAppliedWithAndWithoutCondensedListAreTheSame()
         {
-            TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, () =>
+            await TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, async () =>
             {
                 var nonCondensedConfiguration = CubeConfiguration<FaceColour>.CreateStandardCubeConfiguration(3);
                 var condensedConfiguration = CubeConfiguration<FaceColour>.CreateStandardCubeConfiguration(3);
@@ -27,11 +26,11 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests
                 Console.WriteLine("NonCondensedRoations: {0}", string.Join(" ", rotations.Select(f => f.GetName())));
                 Console.WriteLine("CondensedRoations: {0}", string.Join(" ", condensedRotations.Select(f => f.GetName())));
 
-                CommonActions.ApplyRotations(rotations, nonCondensedConfiguration);
-                CommonActions.ApplyRotations(condensedRotations, condensedConfiguration);
+                await CommonActions.ApplyRotations(rotations, nonCondensedConfiguration).ConfigureAwait(false);
+                await CommonActions.ApplyRotations(condensedRotations, condensedConfiguration).ConfigureAwait(false);
 
                 AssertConfigurationsAreEqual(nonCondensedConfiguration, condensedConfiguration);
-            });
+            }).ConfigureAwait(false);
         }
 
         private static void AssertConfigurationsAreEqual(CubeConfiguration<FaceColour> configuration1, CubeConfiguration<FaceColour> configuration2)

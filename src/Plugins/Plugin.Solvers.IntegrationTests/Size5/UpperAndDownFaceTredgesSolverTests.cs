@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using NCubeSolver.Plugins.Solvers.Size5;
 using NCubeSolvers.Core;
 using NUnit.Framework;
@@ -12,18 +13,18 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size5
     public class UpperAndDownFaceTredgesSolverTests
     {
         [Test]
-        public void Solve_GivenARandomConfiguration_AllTredgesInTheTopAndBottomRowsAreSolved()
+        public async Task Solve_GivenARandomConfiguration_AllTredgesInTheTopAndBottomRowsAreSolved()
         {
-            TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, () => Solve(AssertTredgesInUpperAndDownLayersAreSolved));
+            await TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, () => Solve(AssertTredgesInUpperAndDownLayersAreSolved)).ConfigureAwait(false);
         }
 
         [Test]
-        public void Solve_GivenARandomConfiguration_TheInnerSquareIsIntactForAllFaces()
+        public async Task Solve_GivenARandomConfiguration_TheInnerSquareIsIntactForAllFaces()
         {
-            TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, () => Solve(AssertInnerSquareIsCorrectOnAllFaces, true));
+            await TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, () => Solve(AssertInnerSquareIsCorrectOnAllFaces, true)).ConfigureAwait(false);
         }
 
-        private static void Solve(Action<CubeConfiguration<FaceColour>> assertFunc, bool runAllStepsUpToThis = false)
+        private static async Task Solve(Action<CubeConfiguration<FaceColour>> assertFunc, bool runAllStepsUpToThis = false)
         {
             var configuration = ConfigurationGenerator.GenerateRandomConfiguration(5, 100);
             var solver = new UpperAndDownFaceTredgesSolver();
@@ -32,11 +33,11 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size5
             {
                 if (runAllStepsUpToThis)
                 {
-                    new AllInnerCrossesSolver().Solve(configuration).Wait();
-                    new InnerSquareSolver().Solve(configuration).Wait();
+                    await new AllInnerCrossesSolver().Solve(configuration).ConfigureAwait(false);
+                    await new InnerSquareSolver().Solve(configuration).ConfigureAwait(false);
                 }
 
-                solver.Solve(configuration).Wait(TestRunner.Timeout);
+                await solver.Solve(configuration).ConfigureAwait(false);
                 assertFunc(configuration);
             }
             catch

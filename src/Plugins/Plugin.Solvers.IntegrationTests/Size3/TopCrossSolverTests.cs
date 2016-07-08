@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using NCubeSolver.Core;
+﻿using System.Threading.Tasks;
 using NCubeSolver.Core.UnitTestHelpers;
 using NCubeSolver.Plugins.Solvers.Size3;
 using NCubeSolvers.Core;
@@ -13,31 +11,31 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size3
     public class TopCrossSolverTests
     {
         [Test]
-        public void Solve_GivenARandomConfiguration_ProducesASolvedCross()
+        public async Task Solve_GivenARandomConfiguration_ProducesASolvedCross()
         {
-            TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, () =>
+            await TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, async () =>
             {
                 var configuration = CreateSolvedMiddleLayerConfiguration(50);
                 var solver = new TopCrossSolver();
 
-                solver.Solve(configuration).Wait();
+                await solver.Solve(configuration).ConfigureAwait(false);
 
                 CubeConfigurationAssert.FaceCentreColourMatchesCentresOfLayerNumber(configuration, FaceType.Upper, FaceColour.Yellow);
-            });
+            }).ConfigureAwait(false);
         }
 
         [Test]
-        public void Solve_GivenARandomConfiguration_ProducesACorrectlyPermutedCross()
+        public async Task Solve_GivenARandomConfiguration_ProducesACorrectlyPermutedCross()
         {
-            TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, () =>
+            await TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, async () =>
             {
                 var configuration = CreateSolvedMiddleLayerConfiguration(50);
                 var solver = new TopCrossSolver();
 
-                solver.Solve(configuration).Wait();
+                await solver.Solve(configuration).ConfigureAwait(false);
 
                 CubeConfigurationAssert.TopLayerCrossIsCorrect(configuration);
-            });
+            }).ConfigureAwait(false);
         }
 
         private static CubeConfiguration<FaceColour> CreateSolvedMiddleLayerConfiguration(int numberOfRotations)
