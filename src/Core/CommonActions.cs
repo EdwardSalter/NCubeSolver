@@ -127,5 +127,13 @@ namespace NCubeSolvers.Core
                 }
             }
         }
+
+        public static async Task ApplyAndAddRotations(IEnumerable<IRotation> rotations, ICollection<IRotation> solution, IRotatable configuration)
+        {
+            foreach (var rotation in rotations)
+            {
+                await ApplyAndAddRotation(rotation, solution, configuration).ConfigureAwait(false);
+            }
+        }
     }
 }

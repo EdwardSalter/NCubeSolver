@@ -66,6 +66,7 @@
     <Compile Include="Size5\SimpleSolver.cs" />
     <Compile Include="Size5\SingleTredgeSolver.cs" />
     <Compile Include="Size7\AllLayer1CrossesSolver.cs" />
+    <Compile Include="Size7\Layer1EdgeSolver.cs" />
     <Compile Include="Size7\SimpleSolver.cs" />
     <Compile Include="SolverBase.cs" />
   </ItemGroup>

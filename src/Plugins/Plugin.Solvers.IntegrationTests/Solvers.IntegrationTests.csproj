@@ -62,6 +62,7 @@
     <Compile Include="Size5\SimpleSolverTests.cs" />
     <Compile Include="Size5\UpperAndDownFaceTredgesSolverTests.cs" />
     <Compile Include="Size5\SingleTredgeSolverTests.cs" />
+    <Compile Include="Size7\Layer1EdgeSolverTests.cs" />
     <Compile Include="Size7\SimpleSolverTests.cs" />
     <Compile Include="TestRunner.cs" />
   </ItemGroup>
