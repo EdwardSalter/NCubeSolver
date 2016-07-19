@@ -19,7 +19,7 @@ namespace NCubeSolver.Plugins.Solvers.Size7
             for (; count > 0; count--)
             {
                 var faceColour = allColours[colourIndex];
-                var stepsToSolveCross = await new SingleFaceCrossSolver(faceColour, 1).Solve(configuration);
+                var stepsToSolveCross = await new SingleFaceCrossSolver(faceColour, 1).Solve(configuration).ConfigureAwait(false);
                 solution.AddRange(stepsToSolveCross);
 
                 colourIndex++;

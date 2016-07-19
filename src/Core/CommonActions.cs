@@ -99,16 +99,7 @@ namespace NCubeSolvers.Core
 
             rotations.Add(rotation);
 
-            var cubeRotation = rotation as CubeRotation;
-            var faceRotation = rotation as FaceRotation;
-            if (cubeRotation != null)
-            {
-                await configuration.RotateCube(cubeRotation).ConfigureAwait(false);
-            }
-            if (faceRotation != null)
-            {
-                await configuration.Rotate(faceRotation).ConfigureAwait(false);
-            }
+            await ApplyRotations(new[] { rotation }, configuration).ConfigureAwait(false);
         }
 
         public static async Task ResetToDefaultPosition(CubeConfiguration<FaceColour> configuration)
@@ -119,7 +110,7 @@ namespace NCubeSolvers.Core
 
         }
 
-        public static async Task ApplyRotations(IEnumerable<IRotation> rotations, CubeConfiguration<FaceColour> configuration)
+        public static async Task ApplyRotations(IEnumerable<IRotation> rotations, IRotatable configuration)
         {
             foreach (var rotation in rotations)
             {
