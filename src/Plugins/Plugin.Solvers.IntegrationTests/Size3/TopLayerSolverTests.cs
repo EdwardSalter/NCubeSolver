@@ -14,7 +14,7 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size3
         {
             await TestRunner.RunTestMultipleTimes(TestRunner.MultipleTimesToRun, async () =>
             {
-                var configuration = CreateSolvedTopFaceConfiguration(50);
+                var configuration = await CreateSolvedTopFaceConfiguration(50).ConfigureAwait(false);
                 var solver = new TopLayerSolver();
 
                 await solver.Solve(configuration).ConfigureAwait(false);
@@ -23,14 +23,14 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size3
             }).ConfigureAwait(false);
         }
 
-        private static CubeConfiguration<FaceColour> CreateSolvedTopFaceConfiguration(int numberOfRotations)
+        private static async Task<CubeConfiguration<FaceColour>> CreateSolvedTopFaceConfiguration(int numberOfRotations)
         {
             var configuration = ConfigurationGenerator.GenerateRandomConfiguration(3, numberOfRotations);
-            new BottomCrossSolver().Solve(configuration).Wait(TestRunner.Timeout);
-            new BottomLayerSolver().Solve(configuration).Wait(TestRunner.Timeout);
-            new MiddleLayerSolver().Solve(configuration).Wait(TestRunner.Timeout);
-            new TopCrossSolver().Solve(configuration).Wait(TestRunner.Timeout);
-            new TopFaceSolver().Solve(configuration).Wait(TestRunner.Timeout);
+            await new BottomCrossSolver().Solve(configuration).ConfigureAwait(false);
+            await new BottomLayerSolver().Solve(configuration).ConfigureAwait(false);
+            await new MiddleLayerSolver().Solve(configuration).ConfigureAwait(false);
+            await new TopCrossSolver().Solve(configuration).ConfigureAwait(false);
+            await new TopFaceSolver().Solve(configuration).ConfigureAwait(false);
             return configuration;
         }
     }

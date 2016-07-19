@@ -37,9 +37,9 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size5
         private static async Task Solve(Action<CubeConfiguration<FaceColour>> assertFunc)
         {
             var configuration = ConfigurationGenerator.GenerateRandomConfiguration(5, 100);
-            new AllInnerCrossesSolver().Solve(configuration).Wait(TestRunner.Timeout);
-            new InnerSquareSolver().Solve(configuration).Wait(TestRunner.Timeout);
-            new UpperAndDownFaceTredgesSolver().Solve(configuration).Wait(TestRunner.Timeout);
+            await new AllInnerCrossesSolver().Solve(configuration).ConfigureAwait(false);
+            await new InnerSquareSolver().Solve(configuration).ConfigureAwait(false);
+            await new UpperAndDownFaceTredgesSolver().Solve(configuration).ConfigureAwait(false);
             var solver = new MiddleLayerTredgeSolver();
 
             await solver.Solve(configuration).ConfigureAwait(false);

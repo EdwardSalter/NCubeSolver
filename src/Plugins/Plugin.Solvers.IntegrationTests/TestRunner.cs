@@ -10,7 +10,7 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests
     internal static class TestRunner
     {
         public static readonly int MultipleTimesToRun = 100;
-        public const int Timeout = 50;
+        private const int Timeout = 5000;
 
         static TestRunner()
         {
@@ -28,17 +28,25 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests
         public static async Task RunTestMultipleTimes(int timesToRun, Func<Task> test)
         {
             var tasks = new List<Task>();
+            Exception exception = null;
             for (int i = 0; i < timesToRun; i++)
             {
-                tasks.Add(test());
+                tasks.Add(Task.Run(test));
             }
 
             try
             {
-                await Task.WhenAll(tasks).ConfigureAwait(false);
+                var allTasks = Task.WhenAll(tasks);
+                var timeoutTask = Task.Delay(Timeout);
+                var completed = await Task.WhenAny(allTasks, timeoutTask).ConfigureAwait(false);
+                if (completed == timeoutTask)
+                {
+                    throw new TimeoutException("Timed out running test");
+                }
             }
-            catch
+            catch (Exception ex)
             {
+                exception = ex;
             }
 
             var timesFailed = tasks.Count(t => t.IsFaulted);
@@ -46,7 +54,16 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests
             var percent = ((double)timesToRun - timesFailed) / timesToRun;
 
             Debug.WriteLine("Ran test {0} times with a success rate of {1:0%} ({2} failures)", timesToRun, percent, timesFailed);
-            Assert.AreEqual(1, percent);
+
+            try
+            {
+                Assert.AreEqual(1, percent);
+            }
+            finally
+            {
+                if (exception != null)
+                    throw exception;
+            }
         }
     }
 }
