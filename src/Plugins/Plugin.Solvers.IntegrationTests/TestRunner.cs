@@ -61,8 +61,11 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests
             }
             finally
             {
-                if (exception != null)
-                    throw exception;
+                var execptions = tasks.Where(t => t.Exception != null).SelectMany(t => t.Exception.InnerExceptions).ToList();
+                if (execptions.Any())
+                {
+                    throw new AggregateException(execptions);
+                }
             }
         }
     }

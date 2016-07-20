@@ -21,7 +21,7 @@ namespace NCubeSolver.Plugins.Solvers.Size7
             await CheckFront(configuration, solution, wantedColour).ConfigureAwait(false);
             await CommonActions.ApplyAndAddRotation(CubeRotations.YClockwise, solution, configuration).ConfigureAwait(false);
             await CheckFront(configuration, solution, wantedColour).ConfigureAwait(false);
-
+            await CheckBottom(configuration, solution, wantedColour).ConfigureAwait(false);
             return solution;
         }
 
@@ -34,9 +34,69 @@ namespace NCubeSolver.Plugins.Solvers.Size7
                 left = await CheckFrontLeft(configuration, solution, wantedColour).ConfigureAwait(false);
                 right = await CheckFrontRight(configuration, solution, wantedColour).ConfigureAwait(false);
                 timesInvoked++;
-            } while (!left && !right);
+            } while (!left && !right && timesInvoked < 8);
 
             return timesInvoked > 1;
+        }
+
+        private static async Task<bool> CheckBottom(CubeConfiguration<FaceColour> configuration, ICollection<IRotation> solution, FaceColour wantedColour)
+        {
+            bool left, right;
+            int timesInvoked = 0;
+            do
+            {
+                left = await CheckBottomLeft(configuration, solution, wantedColour).ConfigureAwait(false);
+                right = await CheckBottomRight(configuration, solution, wantedColour).ConfigureAwait(false);
+                timesInvoked++;
+            } while (!left && !right && timesInvoked < 8);
+
+            return timesInvoked > 1;
+        }
+
+        private static async Task<bool> CheckBottomLeft(CubeConfiguration<FaceColour> configuration, ICollection<IRotation> solution, FaceColour wantedColour)
+        {
+            var hasColour = await RotateFaceUntilLayer1OffsetIsColour(configuration, FaceType.Down, wantedColour, Edge.Left, solution).ConfigureAwait(false);
+            if (!hasColour) return false;
+
+            var layerIsNotSolved = await RotateFaceUntilLayer1OffsetIsNotColour(configuration, FaceType.Upper, wantedColour, Edge.Left, solution).ConfigureAwait(false);
+            if (!layerIsNotSolved) throw new SolveFailureException("Layer 1 is expected to be unsolved in this case");
+
+            var rotationsToAdd = new[]
+            {
+                Rotations.ByFaceTwice(FaceType.Left, 2),
+                Rotations.UpperClockwise,
+                Rotations.SecondLayerRight2,
+                Rotations.UpperAntiClockwise,
+                Rotations.ByFaceTwice(FaceType.Left, 2),
+                Rotations.UpperClockwise,
+                Rotations.SecondLayerRight2,
+            };
+            await CommonActions.ApplyAndAddRotations(rotationsToAdd, solution, configuration).ConfigureAwait(false);
+
+            return true;
+        }
+
+        private static async Task<bool> CheckBottomRight(CubeConfiguration<FaceColour> configuration, ICollection<IRotation> solution, FaceColour wantedColour)
+        {
+            var hasColour = await RotateFaceUntilLayer1OffsetIsColour(configuration, FaceType.Down, wantedColour, Edge.Right, solution).ConfigureAwait(false);
+            if (!hasColour) return false;
+
+            var layerIsNotSolved = await RotateFaceUntilLayer1OffsetIsNotColour(configuration, FaceType.Upper, wantedColour, Edge.Right, solution).ConfigureAwait(false);
+            if (!layerIsNotSolved) throw new SolveFailureException("Layer 1 is expected to be unsolved in this case");
+
+            var rotationsToAdd = new[]
+            {
+                Rotations.ByFaceTwice(FaceType.Right, 2),
+                Rotations.UpperAntiClockwise,
+                Rotations.SecondLayerLeft2,
+                Rotations.UpperClockwise,
+                Rotations.ByFaceTwice(FaceType.Right, 2),
+                Rotations.UpperAntiClockwise,
+                Rotations.SecondLayerLeft2,
+            };
+            await CommonActions.ApplyAndAddRotations(rotationsToAdd, solution, configuration).ConfigureAwait(false);
+
+            return true;
         }
 
         private static async Task<bool> CheckFrontLeft(CubeConfiguration<FaceColour> configuration, ICollection<IRotation> solution, FaceColour wantedColour)

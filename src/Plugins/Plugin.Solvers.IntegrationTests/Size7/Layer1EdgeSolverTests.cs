@@ -19,14 +19,14 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size7
                 await solver.Solve(configuration).ConfigureAwait(false);
 
                 var upperFace = configuration.Faces[FaceType.Upper];
-                Assert.AreEqual(upperFace.Centre, upperFace.GetEdge(2, Edge.Top));
-                Assert.AreEqual(upperFace.Centre, upperFace.GetEdge(4, Edge.Top));
-                Assert.AreEqual(upperFace.Centre, upperFace.GetEdge(2, Edge.Bottom));
-                Assert.AreEqual(upperFace.Centre, upperFace.GetEdge(4, Edge.Bottom));
-                Assert.AreEqual(upperFace.Centre, upperFace.GetEdge(2, Edge.Left));
-                Assert.AreEqual(upperFace.Centre, upperFace.GetEdge(4, Edge.Left));
-                Assert.AreEqual(upperFace.Centre, upperFace.GetEdge(2, Edge.Right));
-                Assert.AreEqual(upperFace.Centre, upperFace.GetEdge(4, Edge.Right));
+                Assert.AreEqual(upperFace.Centre, upperFace.GetEdge(1, Edge.Top)[2]);
+                Assert.AreEqual(upperFace.Centre, upperFace.GetEdge(1, Edge.Top)[4]);
+                Assert.AreEqual(upperFace.Centre, upperFace.GetEdge(1, Edge.Bottom)[2]);
+                Assert.AreEqual(upperFace.Centre, upperFace.GetEdge(1, Edge.Bottom)[4]);
+                Assert.AreEqual(upperFace.Centre, upperFace.GetEdge(1, Edge.Left)[2]);
+                Assert.AreEqual(upperFace.Centre, upperFace.GetEdge(1, Edge.Left)[4]);
+                Assert.AreEqual(upperFace.Centre, upperFace.GetEdge(1, Edge.Right)[2]);
+                Assert.AreEqual(upperFace.Centre, upperFace.GetEdge(1, Edge.Right)[4]);
             }).ConfigureAwait(false);
         }
     }
