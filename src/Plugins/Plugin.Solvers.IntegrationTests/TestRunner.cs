@@ -53,7 +53,7 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests
 
             var percent = ((double)timesToRun - timesFailed) / timesToRun;
 
-            Debug.WriteLine("Ran test {0} times with a success rate of {1:0%} ({2} failures)", timesToRun, percent, timesFailed);
+            Debug.WriteLine("Ran test {0} times with a success rate of {1:0.00%} ({2} failures)", timesToRun, percent, timesFailed);
 
             try
             {

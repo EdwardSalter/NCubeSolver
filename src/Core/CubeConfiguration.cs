@@ -376,6 +376,16 @@ namespace NCubeSolvers.Core
             }
         }
 
+        public void Debug()
+        {
+            var upper = Faces[FaceType.Upper].Items;
+            var front = Faces[FaceType.Front].Items;
+            var left = Faces[FaceType.Left].Items;
+            var back = Faces[FaceType.Back].Items;
+            var right = Faces[FaceType.Right].Items;
+            var down = Faces[FaceType.Down].Items;
+        }
+
         public IEnumerable<T> GetEdgesByLayer(FaceType faceType, int layerNumber)
         {
             List<T> returning = new List<T>();
