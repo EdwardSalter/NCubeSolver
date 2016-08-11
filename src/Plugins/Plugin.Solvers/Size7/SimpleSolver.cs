@@ -37,6 +37,10 @@ namespace NCubeSolver.Plugins.Solvers.Size7
             var stepsToSolveLayer1Centers = await layer1CenterSolver.Solve(m_configuration).ConfigureAwait(false);
             solution.AddRange(stepsToSolveLayer1Centers);
 
+            var layer1EdgeSolver = new AllLayer1EdgeSolver();
+            var stepsToSolveLayer1Edges = await layer1EdgeSolver.Solve(m_configuration).ConfigureAwait(false);
+            solution.AddRange(stepsToSolveLayer1Edges);
+
             //// TODO: INJECT A 3x3x3 solver in here so different ones can be used
             //var threeByThreeByThreeSolver = new Size3.BeginerMethod
             //{
