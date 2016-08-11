@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using NCubeSolver.Plugins.Solvers.Common;
 using NCubeSolver.Plugins.Solvers.Size5;
 using NCubeSolvers.Core;
 using NUnit.Framework;
@@ -34,7 +35,7 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size5
                 if (runAllStepsUpToThis)
                 {
                     await new AllInnerCrossesSolver().Solve(configuration).ConfigureAwait(false);
-                    await new InnerSquareSolver().Solve(configuration).ConfigureAwait(false);
+                    await new InnerSquareSolver(configuration.MinInnerLayerIndex(), configuration.MaxInnerLayerIndex()).Solve(configuration).ConfigureAwait(false);
                 }
 
                 await solver.Solve(configuration).ConfigureAwait(false);

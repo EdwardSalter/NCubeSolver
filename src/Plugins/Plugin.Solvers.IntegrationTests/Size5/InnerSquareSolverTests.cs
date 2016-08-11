@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using NCubeSolver.Plugins.Solvers.Common;
 using NCubeSolver.Plugins.Solvers.Size5;
 using NCubeSolvers.Core;
 using NUnit.Framework;
@@ -18,7 +19,7 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size5
         private static async Task Solve()
         {
             var configuration = ConfigurationGenerator.GenerateRandomConfiguration(5, 100);
-            var solver = new InnerSquareSolver();
+            var solver = new InnerSquareSolver(configuration.MinInnerLayerIndex(), configuration.MaxInnerLayerIndex());
 
             await solver.Solve(configuration).ConfigureAwait(false);
 

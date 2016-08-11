@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using NCubeSolver.Plugins.Solvers.Common;
 using NCubeSolvers.Core;
 
 namespace NCubeSolver.Plugins.Solvers.Size7
@@ -29,7 +30,7 @@ namespace NCubeSolver.Plugins.Solvers.Size7
             var stepsToSolveCrosses = await innerCrossesSolver.Solve(m_configuration).ConfigureAwait(false);
             solution.AddRange(stepsToSolveCrosses);
 
-            var innerSquareSolver = new Size5.InnerSquareSolver();
+            var innerSquareSolver = new InnerSquareSolver(configuration.GetCentreLayer() - 1, configuration.GetCentreLayer() + 1);
             var stepsToSolveSquares = await innerSquareSolver.Solve(m_configuration).ConfigureAwait(false);
             solution.AddRange(stepsToSolveSquares);
 
@@ -40,6 +41,10 @@ namespace NCubeSolver.Plugins.Solvers.Size7
             var layer1EdgeSolver = new AllLayer1EdgeSolver();
             var stepsToSolveLayer1Edges = await layer1EdgeSolver.Solve(m_configuration).ConfigureAwait(false);
             solution.AddRange(stepsToSolveLayer1Edges);
+
+            var outerSquareSolver = new InnerSquareSolver(configuration.GetCentreLayer() - 2, configuration.GetCentreLayer() + 2);
+            var stepsToSolveOuterSquare = await outerSquareSolver.Solve(m_configuration).ConfigureAwait(false);
+            solution.AddRange(stepsToSolveOuterSquare);
 
             //// TODO: INJECT A 3x3x3 solver in here so different ones can be used
             //var threeByThreeByThreeSolver = new Size3.BeginerMethod

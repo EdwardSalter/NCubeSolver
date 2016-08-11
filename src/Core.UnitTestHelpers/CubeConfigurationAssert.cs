@@ -36,6 +36,21 @@ namespace NCubeSolver.Core.UnitTestHelpers
             Assert.AreEqual(faceColour, face.GetEdge(layer.Value, Edge.Bottom).Centre());
         }
 
+        public static void FaceHasSolvedInnerSquare(CubeConfiguration<FaceColour> configuration, FaceType faceType, int? sizeOfSquare)
+        {
+            sizeOfSquare = sizeOfSquare ?? configuration.Size - 2;
+            var startIndex = configuration.GetCentreLayer() - (sizeOfSquare.Value + 1) / 2 + 1;
+            var endIndex = startIndex + sizeOfSquare.Value - 1;
+
+            var face = configuration.Faces[faceType];
+            var centre = face.Centre;
+            for (int i = startIndex; i < endIndex; i++)
+            for (int j = startIndex; j < endIndex; j++)
+            {
+                Assert.AreEqual(centre, face.Items[j,i]);
+            }
+        }
+
         public static void FaceIsColour(CubeConfiguration<FaceColour> configuration, FaceType face, FaceColour colour)
         {
             Assert.IsTrue(configuration.Faces[face].Items.AsEnumerable().All(c => c == colour));

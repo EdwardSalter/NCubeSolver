@@ -25,6 +25,32 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size7
                 CubeConfigurationAssert.FaceCentreColourMatchesCentresOfLayerNumber(configurationToTest, FaceType.Down, FaceColour.White, 1)).ConfigureAwait(false);
         }
 
+        [Test]
+        public async Task Solve_GivenARandomConfiguration_ProducesSolved3x3Square()
+        {
+            await Test(configurationToTest => {
+                CubeConfigurationAssert.FaceHasSolvedInnerSquare(configurationToTest, FaceType.Down, 3);
+                CubeConfigurationAssert.FaceHasSolvedInnerSquare(configurationToTest, FaceType.Upper, 3);
+                CubeConfigurationAssert.FaceHasSolvedInnerSquare(configurationToTest, FaceType.Front, 3);
+                CubeConfigurationAssert.FaceHasSolvedInnerSquare(configurationToTest, FaceType.Back, 3);
+                CubeConfigurationAssert.FaceHasSolvedInnerSquare(configurationToTest, FaceType.Left, 3);
+                CubeConfigurationAssert.FaceHasSolvedInnerSquare(configurationToTest, FaceType.Right, 3);
+            }).ConfigureAwait(false);
+        }
+
+        [Test]
+        public async Task Solve_GivenARandomConfiguration_ProducesSolved5x5Square()
+        {
+            await Test(configurationToTest => {
+                CubeConfigurationAssert.FaceHasSolvedInnerSquare(configurationToTest, FaceType.Down, 5);
+                CubeConfigurationAssert.FaceHasSolvedInnerSquare(configurationToTest, FaceType.Upper, 5);
+                CubeConfigurationAssert.FaceHasSolvedInnerSquare(configurationToTest, FaceType.Front, 5);
+                CubeConfigurationAssert.FaceHasSolvedInnerSquare(configurationToTest, FaceType.Back, 5);
+                CubeConfigurationAssert.FaceHasSolvedInnerSquare(configurationToTest, FaceType.Left, 5);
+                CubeConfigurationAssert.FaceHasSolvedInnerSquare(configurationToTest, FaceType.Right, 5);
+            }).ConfigureAwait(false);
+        }
+
         //[Test]
         //public async Task Solve_GivenARandomConfiguration_ProducesSolvedBottomLayer()
         //{

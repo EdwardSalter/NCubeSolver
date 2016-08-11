@@ -14,6 +14,13 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests
 
         static TestRunner()
         {
+            if (Debugger.IsAttached)
+            {
+                MultipleTimesToRun = 1;
+                Debug.WriteLine("Debugger is attached. Tests will only be run once.");
+                return;
+            }
+
             var envVar = Environment.GetEnvironmentVariable("NCubeSolver_TestRunCount");
             if (string.IsNullOrEmpty(envVar)) return;
 

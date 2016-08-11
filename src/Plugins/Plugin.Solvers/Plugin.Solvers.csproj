@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\InnerSquareSolver.cs" />
     <Compile Include="Repeat.cs" />
     <Compile Include="RotationListEx.cs" />
     <Compile Include="Size2\BottomFaceChooser.cs" />
@@ -60,7 +61,6 @@
     <Compile Include="Size5\AllInnerCrossesSolver.cs" />
     <Compile Include="Size5\CubeConfigurationExtensions.cs" />
     <Compile Include="Size5\UpperAndDownFaceTredgesSolver.cs" />
-    <Compile Include="Size5\InnerSquareSolver.cs" />
     <Compile Include="Size5\MiddleLayerTredgeSolver.cs" />
     <Compile Include="Common\SingleFaceCrossSolver.cs" />
     <Compile Include="Size5\SimpleSolver.cs" />

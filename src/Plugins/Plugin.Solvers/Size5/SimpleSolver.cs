@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using NCubeSolver.Plugins.Solvers.Common;
 using NCubeSolvers.Core;
 
 namespace NCubeSolver.Plugins.Solvers.Size5
@@ -32,7 +33,7 @@ namespace NCubeSolver.Plugins.Solvers.Size5
 
             solution.AddRange(stepsToSolveCrosses);
 
-            var innerSquareSolver = new InnerSquareSolver();
+            var innerSquareSolver = new InnerSquareSolver(m_configuration.MinInnerLayerIndex(), m_configuration.MaxInnerLayerIndex());
             var stepsToSolveSquares = await innerSquareSolver.Solve(m_configuration).ConfigureAwait(false);
 
             solution.AddRange(stepsToSolveSquares);
