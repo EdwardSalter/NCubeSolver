@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using NCubeSolver.Core.UnitTestHelpers;
 using NCubeSolver.Plugins.Solvers.Size7;
@@ -48,6 +49,19 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size7
                 CubeConfigurationAssert.FaceHasSolvedInnerSquare(configurationToTest, FaceType.Back, 5);
                 CubeConfigurationAssert.FaceHasSolvedInnerSquare(configurationToTest, FaceType.Left, 5);
                 CubeConfigurationAssert.FaceHasSolvedInnerSquare(configurationToTest, FaceType.Right, 5);
+            }).ConfigureAwait(false);
+        }
+
+        [Test]
+        public async Task Solve_GivenARandomConfiguration_ProducesASingleSolvedTredge()
+        {
+            await Test(configurationToTest =>
+            {
+                var front = configurationToTest.Faces[FaceType.Front];
+                var frontTredge = front.GetEdge(Edge.Left).Skip(1).Take(configurationToTest.Size - 2).ToArray();
+                var frontTredgeColour = frontTredge.Centre();
+                Assert.IsTrue(frontTredge.All(c => c == frontTredgeColour));
+
             }).ConfigureAwait(false);
         }
 

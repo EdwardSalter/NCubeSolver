@@ -76,7 +76,7 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             var centreLayer = configuration.GetCentreLayer();
             for (int layer = 1; layer < centreLayer; layer++)
             {
-                var outerLayer = configuration.GetCentreLayer() + (configuration.GetCentreLayer() - layer);
+                var outerLayer = centreLayer + (centreLayer - layer);
 
                 var rightEdgeOnFace = configuration.Faces[face].GetEdge(Edge.Right);
                 var top = rightEdgeOnFace[layer];
