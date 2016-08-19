@@ -22,34 +22,24 @@ namespace NCubeSolver.Plugins.Solvers.Size5
         public async Task<IEnumerable<IRotation>> Solve(CubeConfiguration<FaceColour> configuration)
         {
             var solution = new List<IRotation>();
-            List<IRotation> previousSolution;
 
             await Repeat.SolvingUntilNoMovesCanBeMade(solution, async () =>
             {
                 await CheckUpperAndDownEdgesOnFace(configuration, solution, FaceType.Front).ConfigureAwait(false);
-
                 await CheckUpperAndDownEdgesOnFace(configuration, solution, FaceType.Left).ConfigureAwait(false);
-
                 await CheckUpperAndDownEdgesOnFace(configuration, solution, FaceType.Back).ConfigureAwait(false);
-
                 await CheckUpperAndDownEdgesOnFace(configuration, solution, FaceType.Right).ConfigureAwait(false);
-
-
                 await CheckMiddleLayersOnFace(configuration, solution, FaceType.Right).ConfigureAwait(false);
-
                 await CheckMiddleLayersOnFace(configuration, solution, FaceType.Back).ConfigureAwait(false);
-
                 await CheckMiddleLayersOnFace(configuration, solution, FaceType.Front).ConfigureAwait(false);
-
                 await CheckFlipped(configuration, solution).ConfigureAwait(false);
-
             }).ConfigureAwait(false);
 
 
             return solution;
         }
 
-        private async Task CheckFlipped(CubeConfiguration<FaceColour> configuration, List<IRotation> solution)
+        private static async Task CheckFlipped(CubeConfiguration<FaceColour> configuration, ICollection<IRotation> solution)
         {
             var frontFaceEdge = configuration.Faces[FaceType.Front].GetEdge(Edge.Left);
             var leftFaceEdge = configuration.Faces[FaceType.Left].GetEdge(Edge.Right);
@@ -57,91 +47,95 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             var frontColour = frontFaceEdge.Centre();
             var leftColour = leftFaceEdge.Centre();
 
-            if (frontFaceEdge[configuration.MinInnerLayerIndex()] == leftColour && frontFaceEdge[configuration.MaxInnerLayerIndex()] == leftColour &&
-                leftFaceEdge[configuration.MinInnerLayerIndex()] == frontColour && leftFaceEdge[configuration.MaxInnerLayerIndex()] == frontColour)
+            var centreLayer = configuration.GetCentreLayer();
+            for (int layer = 1; layer < centreLayer; layer++)
             {
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperAntiClockwise, solution, configuration).ConfigureAwait(false);
+                var outerLayer = centreLayer + (centreLayer - layer);
 
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownClockwise, solution, configuration).ConfigureAwait(false);
+                if (frontFaceEdge[layer] == leftColour && frontFaceEdge[outerLayer] == leftColour &&
+                    leftFaceEdge[layer] == frontColour && leftFaceEdge[outerLayer] == frontColour)
+                {
+                    var upperRotation = Rotations.ByFace(FaceType.Upper, RotationDirection.AntiClockwise, layer);
+                    var downRotation = Rotations.ByFace(FaceType.Down, RotationDirection.Clockwise, layer);
 
-                await PerformFlip(solution, configuration).ConfigureAwait(false);
+                    await CommonActions.ApplyAndAddRotation(upperRotation, solution, configuration).ConfigureAwait(false);
+                    await CommonActions.ApplyAndAddRotation(downRotation, solution, configuration).ConfigureAwait(false);
+                    await PerformFlip(solution, configuration).ConfigureAwait(false);
+                    await CommonActions.ApplyAndAddRotation(upperRotation.Reverse(), solution, configuration).ConfigureAwait(false);
+                    await CommonActions.ApplyAndAddRotation(downRotation.Reverse(), solution, configuration).ConfigureAwait(false);
 
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration).ConfigureAwait(false);
-
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownAntiClockwise, solution, configuration).ConfigureAwait(false);
-
+                }
             }
         }
 
-        private async Task CheckMiddleLayersOnFace(CubeConfiguration<FaceColour> configuration, List<IRotation> solution, FaceType face)
+        private static async Task CheckMiddleLayersOnFace(CubeConfiguration<FaceColour> configuration, ICollection<IRotation> solution, FaceType face)
         {
             var frontFaceColour = configuration.Faces[FaceType.Front].LeftCentre();
             var leftFaceColour = configuration.Faces[FaceType.Left].RightCentre();
 
-            var rightEdgeOnFace = configuration.Faces[face].GetEdge(Edge.Right);
-            var top = rightEdgeOnFace[configuration.MinInnerLayerIndex()];
-            var bottom = rightEdgeOnFace[configuration.MaxInnerLayerIndex()];
-
-            var joiningFace = FaceRules.FaceAtRelativePositionTo(face, RelativePosition.Right);
-            var leftEdgeOnJoiningFace = configuration.Faces[joiningFace].GetEdge(Edge.Left);
-            var joiningFaceEdgeTop = leftEdgeOnJoiningFace[configuration.MinInnerLayerIndex()];
-            var joiningFaceEdgeBottom = leftEdgeOnJoiningFace[configuration.MaxInnerLayerIndex()];
-
-
-            if ((top == frontFaceColour && joiningFaceEdgeTop == leftFaceColour) ||
-                (bottom == frontFaceColour && joiningFaceEdgeBottom == leftFaceColour) ||
-                (top == leftFaceColour && joiningFaceEdgeTop == frontFaceColour) ||
-                (bottom == leftFaceColour && joiningFaceEdgeBottom == frontFaceColour))
+            var centreLayer = configuration.GetCentreLayer();
+            for (int layer = 1; layer < centreLayer; layer++)
             {
-                var rotationToBringEdgeToFront = GetRotationToPutTredgeOnFront((top == frontFaceColour && joiningFaceEdgeTop == leftFaceColour) || (top == leftFaceColour && joiningFaceEdgeTop == frontFaceColour), face, configuration.MinInnerLayerIndex());
-                await CommonActions.ApplyAndAddRotation(rotationToBringEdgeToFront, solution, configuration).ConfigureAwait(false);
+                var outerLayer = configuration.GetCentreLayer() + (configuration.GetCentreLayer() - layer);
 
-            }
+                var rightEdgeOnFace = configuration.Faces[face].GetEdge(Edge.Right);
+                var top = rightEdgeOnFace[layer];
+                var bottom = rightEdgeOnFace[outerLayer];
 
-            if ((top == frontFaceColour && joiningFaceEdgeTop == leftFaceColour) ||
-                (bottom == frontFaceColour && joiningFaceEdgeBottom == leftFaceColour))
-            {
-                await PerformFlip(solution, configuration).ConfigureAwait(false);
-
-            }
-
-            rightEdgeOnFace = configuration.Faces[face].GetEdge(Edge.Right);
-            top = rightEdgeOnFace[configuration.MinInnerLayerIndex()];
-            bottom = rightEdgeOnFace[configuration.MaxInnerLayerIndex()];
-
-            leftEdgeOnJoiningFace = configuration.Faces[joiningFace].GetEdge(Edge.Left);
-            joiningFaceEdgeTop = leftEdgeOnJoiningFace[configuration.MinInnerLayerIndex()];
-            joiningFaceEdgeBottom = leftEdgeOnJoiningFace[configuration.MaxInnerLayerIndex()];
+                var joiningFace = FaceRules.FaceAtRelativePositionTo(face, RelativePosition.Right);
+                var leftEdgeOnJoiningFace = configuration.Faces[joiningFace].GetEdge(Edge.Left);
+                var joiningFaceEdgeTop = leftEdgeOnJoiningFace[layer];
+                var joiningFaceEdgeBottom = leftEdgeOnJoiningFace[outerLayer];
 
 
-            if (top == leftFaceColour && joiningFaceEdgeTop == frontFaceColour)
-            {
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration).ConfigureAwait(false);
+                if ((top == frontFaceColour && joiningFaceEdgeTop == leftFaceColour) ||
+                    (bottom == frontFaceColour && joiningFaceEdgeBottom == leftFaceColour) ||
+                    (top == leftFaceColour && joiningFaceEdgeTop == frontFaceColour) ||
+                    (bottom == leftFaceColour && joiningFaceEdgeBottom == frontFaceColour))
+                {
+                    var rotationToBringEdgeToFront = GetRotationToPutTredgeOnFront((top == frontFaceColour && joiningFaceEdgeTop == leftFaceColour) || (top == leftFaceColour && joiningFaceEdgeTop == frontFaceColour), face, layer);
+                    await CommonActions.ApplyAndAddRotation(rotationToBringEdgeToFront, solution, configuration).ConfigureAwait(false);
 
-            }
-            if (bottom == leftFaceColour && joiningFaceEdgeBottom == frontFaceColour)
-            {
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownAntiClockwise, solution, configuration).ConfigureAwait(false);
+                }
 
+                if ((top == frontFaceColour && joiningFaceEdgeTop == leftFaceColour) ||
+                    (bottom == frontFaceColour && joiningFaceEdgeBottom == leftFaceColour))
+                {
+                    await PerformFlip(solution, configuration).ConfigureAwait(false);
+
+                }
+
+                rightEdgeOnFace = configuration.Faces[face].GetEdge(Edge.Right);
+                top = rightEdgeOnFace[layer];
+                bottom = rightEdgeOnFace[outerLayer];
+
+                leftEdgeOnJoiningFace = configuration.Faces[joiningFace].GetEdge(Edge.Left);
+                joiningFaceEdgeTop = leftEdgeOnJoiningFace[layer];
+                joiningFaceEdgeBottom = leftEdgeOnJoiningFace[outerLayer];
+
+
+                if (top == leftFaceColour && joiningFaceEdgeTop == frontFaceColour)
+                {
+                    var rotation = Rotations.ByFace(FaceType.Upper, RotationDirection.Clockwise, layer);
+                    await CommonActions.ApplyAndAddRotation(rotation, solution, configuration).ConfigureAwait(false);
+                }
+                if (bottom == leftFaceColour && joiningFaceEdgeBottom == frontFaceColour)
+                {
+                    var rotation = Rotations.ByFace(FaceType.Down, RotationDirection.AntiClockwise, layer);
+                    await CommonActions.ApplyAndAddRotation(rotation, solution, configuration).ConfigureAwait(false);
+                }
             }
         }
 
-        private async Task PerformFlip(List<IRotation> solution, CubeConfiguration<FaceColour> configuration)
+        private static async Task PerformFlip(ICollection<IRotation> solution, IRotatable configuration)
         {
             await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration).ConfigureAwait(false);
-
             await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
-
             await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration).ConfigureAwait(false);
-
             await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration).ConfigureAwait(false);
-
             await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration).ConfigureAwait(false);
-
             await CommonActions.ApplyAndAddRotation(Rotations.FrontAntiClockwise, solution, configuration).ConfigureAwait(false);
-
             await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration).ConfigureAwait(false);
-
         }
 
         private static IRotation GetRotationToPutTredgeOnFront(bool upperLayer, FaceType face, int layer = 0)
@@ -184,101 +178,96 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             var frontFaceColour = configuration.Faces[FaceType.Front].LeftCentre();
             var leftFaceColour = configuration.Faces[FaceType.Left].RightCentre();
 
-            var match = MatchColoursOnUpperFaceEdge(configuration, frontFaceColour, leftFaceColour, faceToCheck);
-            if (match != TredgeMatch.None)
+            var centreLayer = configuration.GetCentreLayer();
+            for (int layer = 1; layer < centreLayer; layer++)
             {
-                var rotation = GetRotationToPutTredgeOnFront(true, faceToCheck);
-                await CommonActions.ApplyAndAddRotation(rotation, solution, configuration).ConfigureAwait(false);
+                var match = MatchColoursOnUpperFaceEdge(configuration, frontFaceColour, leftFaceColour, faceToCheck, layer);
+                if (match != TredgeMatch.None)
+                {
+                    var rotation = GetRotationToPutTredgeOnFront(true, faceToCheck);
+                    await CommonActions.ApplyAndAddRotation(rotation, solution, configuration).ConfigureAwait(false);
 
-                await CheckFrontUpper(configuration, solution, frontFaceColour, leftFaceColour).ConfigureAwait(false);
+                    await CheckFrontUpper(configuration, solution, frontFaceColour, leftFaceColour, layer).ConfigureAwait(false);
+                }
 
-            }
+                match = MatchColoursOnDownFaceEdge(configuration, frontFaceColour, leftFaceColour, faceToCheck, layer);
+                if (match != TredgeMatch.None)
+                {
+                    var rotation = GetRotationToPutTredgeOnFront(false, faceToCheck);
+                    await CommonActions.ApplyAndAddRotation(rotation, solution, configuration).ConfigureAwait(false);
 
-            match = MatchColoursOnDownFaceEdge(configuration, frontFaceColour, leftFaceColour, faceToCheck);
-            if (match != TredgeMatch.None)
-            {
-                var rotation = GetRotationToPutTredgeOnFront(false, faceToCheck);
-                await CommonActions.ApplyAndAddRotation(rotation, solution, configuration).ConfigureAwait(false);
-
-                await CheckFrontDown(configuration, solution, frontFaceColour, leftFaceColour).ConfigureAwait(false);
-
+                    await CheckFrontDown(configuration, solution, frontFaceColour, leftFaceColour, layer).ConfigureAwait(false);
+                }
             }
         }
 
-        private static async Task CheckFrontDown(CubeConfiguration<FaceColour> configuration, List<IRotation> solution, FaceColour frontFaceColour, FaceColour leftFaceColour)
+        private static async Task CheckFrontDown(CubeConfiguration<FaceColour> configuration, List<IRotation> solution, FaceColour frontFaceColour, FaceColour leftFaceColour, int layer)
         {
-            var match = MatchColoursOnDownFaceEdge(configuration, frontFaceColour, leftFaceColour, FaceType.Front);
+            var match = MatchColoursOnDownFaceEdge(configuration, frontFaceColour, leftFaceColour, FaceType.Front, layer);
             if (match != TredgeMatch.None)
             {
-                await MatchingTredgeIsOnDownFront(configuration, solution, match).ConfigureAwait(false);
-
+                await MatchingTredgeIsOnDownFront(configuration, solution, match, layer).ConfigureAwait(false);
             }
         }
 
-        private static async Task CheckFrontUpper(CubeConfiguration<FaceColour> configuration, List<IRotation> solution, FaceColour frontFaceColour, FaceColour leftFaceColour)
+        private static async Task CheckFrontUpper(CubeConfiguration<FaceColour> configuration, ICollection<IRotation> solution, FaceColour frontFaceColour, FaceColour leftFaceColour, int layer)
         {
-            var match = MatchColoursOnUpperFaceEdge(configuration, frontFaceColour, leftFaceColour, FaceType.Front);
+            var match = MatchColoursOnUpperFaceEdge(configuration, frontFaceColour, leftFaceColour, FaceType.Front, layer);
             if (match != TredgeMatch.None)
             {
-                await MatchingTredgeIsOnUpperFront(configuration, solution, match).ConfigureAwait(false);
-
+                await MatchingTredgeIsOnUpperFront(configuration, solution, match, layer).ConfigureAwait(false);
             }
         }
 
-        private static async Task MatchingTredgeIsOnUpperFront(CubeConfiguration<FaceColour> configuration, List<IRotation> solution, TredgeMatch match)
+        private static async Task MatchingTredgeIsOnUpperFront(IRotatable configuration, ICollection<IRotation> solution, TredgeMatch match, int layer)
         {
             if (match == TredgeMatch.FrontLeftMatchesCenter || match == TredgeMatch.FrontRightMatchesCenter)
             {
                 await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration).ConfigureAwait(false);
-
                 await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
-
                 await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration).ConfigureAwait(false);
 
 
                 if (match == TredgeMatch.FrontLeftMatchesCenter)
                 {
-                    await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownAntiClockwise, solution, configuration).ConfigureAwait(false);
-
+                    var rotation = Rotations.ByFace(FaceType.Down, RotationDirection.AntiClockwise, layer);
+                    await CommonActions.ApplyAndAddRotation(rotation, solution, configuration).ConfigureAwait(false);
                 }
                 else
                 {
-                    await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration).ConfigureAwait(false);
-
+                    var rotation = Rotations.ByFace(FaceType.Upper, RotationDirection.Clockwise, layer);
+                    await CommonActions.ApplyAndAddRotation(rotation, solution, configuration).ConfigureAwait(false);
                 }
                 return;
             }
 
             await CommonActions.ApplyAndAddRotation(Rotations.UpperAntiClockwise, solution, configuration).ConfigureAwait(false);
-
             await CommonActions.ApplyAndAddRotation(Rotations.FrontAntiClockwise, solution, configuration).ConfigureAwait(false);
-
             await CommonActions.ApplyAndAddRotation(Rotations.UpperClockwise, solution, configuration).ConfigureAwait(false);
-
             await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration).ConfigureAwait(false);
-
 
             if (match == TredgeMatch.UpperLeftMatchesCenter)
             {
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration).ConfigureAwait(false);
-
+                var rotation = Rotations.ByFace(FaceType.Upper, RotationDirection.Clockwise, layer);
+                await CommonActions.ApplyAndAddRotation(rotation, solution, configuration).ConfigureAwait(false);
             }
             else
             {
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownAntiClockwise, solution, configuration).ConfigureAwait(false);
-
+                var rotation = Rotations.ByFace(FaceType.Down, RotationDirection.AntiClockwise, layer);
+                await CommonActions.ApplyAndAddRotation(rotation, solution, configuration).ConfigureAwait(false);
             }
         }
 
-        private static TredgeMatch MatchColoursOnUpperFaceEdge(CubeConfiguration<FaceColour> configuration, FaceColour frontFaceColour, FaceColour leftColour, FaceType face)
+        private static TredgeMatch MatchColoursOnUpperFaceEdge(CubeConfiguration<FaceColour> configuration, FaceColour frontFaceColour, FaceColour leftColour, FaceType face, int layer)
         {
+            var outerLayer = configuration.GetCentreLayer() + (configuration.GetCentreLayer() - layer);
             var topEdge = configuration.Faces[face].GetEdge(Edge.Top);
             if (face == FaceType.Back || face == FaceType.Right)
             {
                 topEdge = topEdge.Reverse().ToArray();
             }
-            var frontTopLeft = topEdge[configuration.MinInnerLayerIndex()];
-            var frontTopRight = topEdge[configuration.MaxInnerLayerIndex()];
+            var frontTopLeft = topEdge[layer];
+            var frontTopRight = topEdge[outerLayer];
 
             Edge edge;
             switch (face)
@@ -295,8 +284,8 @@ namespace NCubeSolver.Plugins.Solvers.Size5
                     throw new InvalidOperationException("Cannot get connecting edge as down layer does not connect to " + face);
             }
             var upperFaceEdge = configuration.Faces[FaceType.Upper].GetEdge(edge);
-            var upperBottomLeft = upperFaceEdge[configuration.MinInnerLayerIndex()];
-            var upperBottomRight = upperFaceEdge[configuration.MaxInnerLayerIndex()];
+            var upperBottomLeft = upperFaceEdge[layer];
+            var upperBottomRight = upperFaceEdge[outerLayer];
 
             if (frontTopLeft == frontFaceColour && upperBottomLeft == leftColour)
             {
@@ -319,11 +308,12 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             return TredgeMatch.None;
         }
 
-        private static TredgeMatch MatchColoursOnDownFaceEdge(CubeConfiguration<FaceColour> configuration, FaceColour frontColour, FaceColour leftColour, FaceType face)
+        private static TredgeMatch MatchColoursOnDownFaceEdge(CubeConfiguration<FaceColour> configuration, FaceColour frontColour, FaceColour leftColour, FaceType face, int layer)
         {
+            var outerLayer = configuration.GetCentreLayer() + (configuration.GetCentreLayer() - layer);
             var bottomEdge = configuration.Faces[face].GetEdge(Edge.Bottom);
-            var frontBottomLeft = bottomEdge[configuration.MinInnerLayerIndex()];
-            var frontBottomRight = bottomEdge[configuration.MaxInnerLayerIndex()];
+            var frontBottomLeft = bottomEdge[layer];
+            var frontBottomRight = bottomEdge[outerLayer];
 
             Edge edge;
             switch (face)
@@ -345,8 +335,8 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             {
                 downLayerEdge = downLayerEdge.Reverse().ToArray();
             }
-            var downTopLeft = downLayerEdge[configuration.MinInnerLayerIndex()];
-            var downTopRight = downLayerEdge[configuration.MaxInnerLayerIndex()];
+            var downTopLeft = downLayerEdge[layer];
+            var downTopRight = downLayerEdge[outerLayer];
 
             if (frontBottomLeft == frontColour && downTopLeft == leftColour)
             {
@@ -369,48 +359,41 @@ namespace NCubeSolver.Plugins.Solvers.Size5
             return TredgeMatch.None;
         }
 
-        private static async Task MatchingTredgeIsOnDownFront(CubeConfiguration<FaceColour> configuration, List<IRotation> solution, TredgeMatch match)
+        private static async Task MatchingTredgeIsOnDownFront(IRotatable configuration, ICollection<IRotation> solution, TredgeMatch match, int layer)
         {
             if (match == TredgeMatch.FrontLeftMatchesCenter || match == TredgeMatch.FrontRightMatchesCenter)
             {
                 await CommonActions.ApplyAndAddRotation(Rotations.RightAntiClockwise, solution, configuration).ConfigureAwait(false);
-
                 await CommonActions.ApplyAndAddRotation(Rotations.DownClockwise, solution, configuration).ConfigureAwait(false);
-
                 await CommonActions.ApplyAndAddRotation(Rotations.RightClockwise, solution, configuration).ConfigureAwait(false);
-
 
                 if (match == TredgeMatch.FrontLeftMatchesCenter)
                 {
-                    await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration).ConfigureAwait(false);
-
+                    var rotation = Rotations.ByFace(FaceType.Upper, RotationDirection.Clockwise, layer);
+                    await CommonActions.ApplyAndAddRotation(rotation, solution, configuration).ConfigureAwait(false);
                 }
                 else
                 {
-                    await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownAntiClockwise, solution, configuration).ConfigureAwait(false);
-
+                    var rotation = Rotations.ByFace(FaceType.Down, RotationDirection.AntiClockwise, layer);
+                    await CommonActions.ApplyAndAddRotation(rotation, solution, configuration).ConfigureAwait(false);
                 }
                 return;
             }
 
             await CommonActions.ApplyAndAddRotation(Rotations.DownClockwise, solution, configuration).ConfigureAwait(false);
-
             await CommonActions.ApplyAndAddRotation(Rotations.FrontClockwise, solution, configuration).ConfigureAwait(false);
-
             await CommonActions.ApplyAndAddRotation(Rotations.DownAntiClockwise, solution, configuration).ConfigureAwait(false);
-
             await CommonActions.ApplyAndAddRotation(Rotations.FrontAntiClockwise, solution, configuration).ConfigureAwait(false);
-
 
             if (match == TredgeMatch.UpperLeftMatchesCenter)
             {
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerDownAntiClockwise, solution, configuration).ConfigureAwait(false);
-
+                var rotation = Rotations.ByFace(FaceType.Down, RotationDirection.AntiClockwise, layer);
+                await CommonActions.ApplyAndAddRotation(rotation, solution, configuration).ConfigureAwait(false);
             }
             else
             {
-                await CommonActions.ApplyAndAddRotation(Rotations.SecondLayerUpperClockwise, solution, configuration).ConfigureAwait(false);
-
+                var rotation = Rotations.ByFace(FaceType.Upper, RotationDirection.Clockwise, layer);
+                await CommonActions.ApplyAndAddRotation(rotation, solution, configuration).ConfigureAwait(false);
             }
         }
     }
