@@ -51,6 +51,7 @@
     <Compile Include="CubeRotation.cs" />
     <Compile Include="Edge.cs" />
     <Compile Include="EdgeMethods.cs" />
+    <Compile Include="Extensions\CubeConfigurationExtensions.cs" />
     <Compile Include="Extensions\EnumEx.cs" />
     <Compile Include="Face.cs" />
     <Compile Include="FaceColour.cs" />

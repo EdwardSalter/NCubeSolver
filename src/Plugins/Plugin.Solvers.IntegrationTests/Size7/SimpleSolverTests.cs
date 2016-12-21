@@ -58,11 +58,15 @@ namespace NCubeSolver.Plugins.Solvers.IntegrationTests.Size7
             await Test(configurationToTest =>
             {
                 var front = configurationToTest.Faces[FaceType.Front];
-                var frontTredge = front.GetEdge(Edge.Left).Skip(1).Take(configurationToTest.Size - 2).ToArray();
-                var frontTredgeColour = frontTredge.Centre();
-                Assert.IsTrue(frontTredge.All(c => c == frontTredgeColour));
+                var frontLeftEdge = front.GetEdge(Edge.Left);
+                var frontTredgeColour = frontLeftEdge.Centre();
 
-            }).ConfigureAwait(false);
+                for (int i = 1; i < configurationToTest.Size - 2; i++)
+                {
+                    Assert.AreEqual(frontTredgeColour, frontLeftEdge[i]);
+                }
+
+            }).ConfigureAwait(true);
         }
 
         //[Test]

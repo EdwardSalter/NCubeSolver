@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using NCubeSolver.Plugins.Solvers.Common;
 using NCubeSolver.Plugins.Solvers.Size5;
 using NCubeSolvers.Core;
+using NCubeSolvers.Core.Extensions;
 
 namespace NCubeSolver.Plugins.Solvers.Size7
 {
@@ -47,9 +48,9 @@ namespace NCubeSolver.Plugins.Solvers.Size7
             var stepsToSolveOuterSquare = await outerSquareSolver.Solve(m_configuration).ConfigureAwait(false);
             solution.AddRange(stepsToSolveOuterSquare);
 
-            //var tredgeSolver = new SingleTredgeSolver();
-            //var stepsToSolveTredges = await tredgeSolver.Solve(m_configuration).ConfigureAwait(false);
-            //solution.AddRange(stepsToSolveTredges);
+            var tredgeSolver = new SingleTredgeSolver();
+            var stepsToSolveTredges = await tredgeSolver.Solve(m_configuration).ConfigureAwait(false);
+            solution.AddRange(stepsToSolveTredges);
 
             //// TODO: INJECT A 3x3x3 solver in here so different ones can be used
             //var threeByThreeByThreeSolver = new Size3.BeginerMethod
@@ -61,6 +62,8 @@ namespace NCubeSolver.Plugins.Solvers.Size7
 
             // TODO: REMOVE
             await CommonActions.ResetToDefaultPosition(configuration).ConfigureAwait(false);
+
+            configuration.PrintConfiguration();
 
             return solution.Condense();
         }
